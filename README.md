@@ -13,4 +13,5 @@ git clone --bare <git-repo-url> $HOME/.cfg
 config update-index --assume-unchanged
 config config --local status.showUntrackedFiles no
 config checkout
+config submodule init
 ```
