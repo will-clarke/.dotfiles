@@ -1,0 +1,9 @@
+alias l  $*
+alias ga git add $*
+alias gco git checkout $*
+alias ff find-file $1
+alias gs git status $*
+alias gd git diff $*
+alias ... cd ../..
+alias be bundle exec $*
+alias .... ../../..
