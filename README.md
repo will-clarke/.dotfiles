@@ -11,7 +11,8 @@ cd
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 echo "*" >> .gitignore
 git clone --recurse-submodules --bare git@gitlab.com:will-clarke/mac-config.git $HOME/.cfg
-config update-index --assume-unchanged
+config update-index --assume-unchanged README.md
+rm README.md
 config config --local status.showUntrackedFiles no
 ```
 
