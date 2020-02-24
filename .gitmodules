@@ -1,0 +1,6 @@
+[submodule ".password-store"]
+	path = .password-store
+	url = git@gitlab.com:will-clarke/pass.git
+[submodule "org"]
+	path = org
+	url = git@gitlab.com:will-clarke/org.git
