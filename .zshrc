@@ -1,5 +1,6 @@
 alias config='/usr/bin/git --git-dir=/Users/wmmc/.cfg/ --work-tree=/Users/wmmc'
 export PATH=~/bin:$PATH
+export PATH=~/go/bin:$PATH
 
 export GO111MODULE=on
 alias gomodon="export GO111MODULE=on"
