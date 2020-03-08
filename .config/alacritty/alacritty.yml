@@ -522,6 +522,9 @@ key_bindings:
   #- { key: H,      mods: Command,         action: Hide             }
   #- { key: Q,      mods: Command,         action: Quit             }
   #- { key: W,      mods: Command,         action: Quit             }
+  - { key: H,      mods: Command,         action: ResetFontSize    }
+  - { key: Q,      mods: Command,         action: ResetFontSize    }
+  - { key: W,      mods: Command,         action: ResetFontSize    }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
   - { key: Paste,                   action: Paste                            }

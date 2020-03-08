@@ -627,12 +627,18 @@ before packages are loaded."
 
   ;; ############ qqqqqqqqqqqq
 
+  ;; possibly stops annoying
+  ;; ...emacs.d/.cache/recentf locked: (s, q, p, ?)?
+  ;; errors:
+  (cancel-timer recentf-auto-save-timer)
+
   ;; (setq large-file-warning-threshold nil)
   ;; (setq tags-add-tables nil)
 
   ;; (require 'inf-haskell)
   (require 'haskell-interactive-mode)
   ;; (define-key evil-insert-state-map (kbd "C-n" ) 'nil)
+
 
   (define-key haskell-interactive-mode-map (kbd "C-j") #'haskell-interactive-mode-history-next)
   (define-key haskell-interactive-mode-map (kbd "C-k") #'haskell-interactive-mode-history-previous)
