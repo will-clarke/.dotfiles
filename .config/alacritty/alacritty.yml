@@ -527,6 +527,9 @@ key_bindings:
   - { key: W,      mods: Command,         action: ResetFontSize    }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
+  # add hash key to osx:
+  - { key: Key3,     mods: Alt,     chars: "\x23"                            }
+
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
   - { key: L,        mods: Control, action: ClearLogNotice                   }

@@ -22,5 +22,9 @@ if [ -e "/usr/local/share/antigen/antigen.zsh" ]; then
     antigen bundle command-not-found
     antigen bundle agkozak/zsh-z
     antigen theme https://github.com/denysdovhan/spaceship-zsh-theme
+    # if [[ "$OSTYPE" == "darwin"* ]]; then
+    #     antigen bundle osx
+    # fi
+
     antigen apply
 fi
