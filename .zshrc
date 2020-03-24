@@ -28,3 +28,9 @@ if [ -e "/usr/local/share/antigen/antigen.zsh" ]; then
 
     antigen apply
 fi
+
+# Rails 6.0.2 doesn't play well with ruby 2.7.0
+export RUBYOPT='-W:no-deprecated -W:no-experimental'
+
+
+alias gs="git status"
