@@ -34,3 +34,4 @@ export RUBYOPT='-W:no-deprecated -W:no-experimental'
 
 
 alias gs="git status"
+export PATH="/usr/local/sbin:$PATH"
