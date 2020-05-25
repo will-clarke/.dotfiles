@@ -7,3 +7,6 @@
 [submodule "/Users/wmmc/.emacs.d"]
 	path = /Users/wmmc/.emacs.d
 	url = https://github.com/syl20bnr/spacemacs
+[submodule ".doom.d"]
+	path = .doom.d
+	url = git@gitlab.com:will-clarke/doom.d.git

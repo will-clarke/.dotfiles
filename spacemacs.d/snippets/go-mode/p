@@ -2,4 +2,4 @@
 # name: p
 # key: p
 # --
-fmt.Printf("$1: %+v\n", $1);
+fmt.Println("$1");
