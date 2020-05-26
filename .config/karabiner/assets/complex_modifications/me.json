@@ -109,24 +109,53 @@
     },
 
     {
-      "description": "hyper-q to alacritty",
+      "description": "hyper-z to zulip",
       "manipulators": [
         {
           "from": {
-            "key_code": "q",
-            "mandatory": [
-              "command",
-              "shift",
-              "control",
-              "option"
-            ],
-            "optional": [
-              "caps_lock"
-            ]
+            "key_code": "z",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
           },
           "to": [
             {
-              "shell_command": "open -a alacritty"
+              "shell_command": "open -a \"zulip\""
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "hyper-w to wally",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "w",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a \"wally\""
             }
           ],
           "type": "basic"
@@ -139,24 +168,27 @@
         {
           "from": {
             "key_code": "a",
-            "mandatory": [
-              "command",
-              "shift",
-              "control",
-              "option"
-            ],
-            "optional": [
-              "caps_lock"
-            ]
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
           },
           "to": [
             {
-              "shell_command": "open -a alacritty"
+              "shell_command": "open -a \"alacritty\""
             }
           ],
           "type": "basic"
         }
       ]
     }
+
   ]
 }

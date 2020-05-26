@@ -66,28 +66,6 @@
                         ]
                     },
                     {
-                        "description": "hyper-q to alacritty",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "q",
-                                    "mandatory": [
-                                        "command",
-                                        "shift",
-                                        "control",
-                                        "option"
-                                    ]
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a alacritty"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "hyper-c to chrome",
                         "manipulators": [
                             {
@@ -115,24 +93,53 @@
                         ]
                     },
                     {
-                        "description": "hyper-q to alacritty",
+                        "description": "hyper-w to wally",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "q",
-                                    "mandatory": [
-                                        "command",
-                                        "shift",
-                                        "control",
-                                        "option"
-                                    ],
-                                    "optional": [
-                                        "caps_lock"
-                                    ]
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a alacritty"
+                                        "shell_command": "open -a \"wally\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "hyper-a to alacritty",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a \"alacritty\""
                                     }
                                 ],
                                 "type": "basic"
