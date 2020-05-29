@@ -215,6 +215,88 @@
         }
       ]
     },
+    {
+      "description": "hyper-t to table",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "hyper-h to happy",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript ~/bin/insert_argument.scpt \"ʘ‿ʘ\""
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "hyper-s to shrug",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript ~/bin/insert_shrug.scpt"
+            }
+            
+          ],
+          "type": "basic"
+        }
+      ]
+    },
 
     {
       "description": "hyper-a to alacritty",
