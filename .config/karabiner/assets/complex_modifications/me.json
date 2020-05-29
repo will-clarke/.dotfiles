@@ -28,6 +28,30 @@
       ]
     },
     {
+      "description": "hyper-space to emacs",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "shift",
+                "control",
+                "option",
+                "command"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a emacs"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
       "description": "command-space to emacs",
       "manipulators": [
         {
@@ -109,20 +133,17 @@
     },
 
     {
-      "description": "hyper-z to zulip",
+      "description": "hyper-q to zulip",
       "manipulators": [
         {
           "from": {
-            "key_code": "z",
+            "key_code": "q",
             "modifiers": {
               "mandatory": [
                 "command",
                 "shift",
                 "control",
                 "option"
-              ],
-              "optional": [
-                "caps_lock"
               ]
             }
           },
@@ -143,6 +164,10 @@
             "key_code": "w",
             "modifiers": {
               "mandatory": [
+                "left_alt",
+                "left_control",
+                "left_gui",
+                "left_shift",
                 "command",
                 "shift",
                 "control",
@@ -162,6 +187,35 @@
         }
       ]
     },
+
+    {
+      "description": "hyper-v to zoom (video)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "v",
+            "modifiers": {
+              "mandatory": [
+                "command",
+                "shift",
+                "control",
+                "option"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a \"zoom.us\""
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
     {
       "description": "hyper-a to alacritty",
       "manipulators": [
