@@ -42,17 +42,17 @@
                         ]
                     },
                     {
-                        "description": "command-space to emacs",
+                        "description": "hyper-space to emacs",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "spacebar",
                                     "modifiers": {
                                         "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option",
                                             "command"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
                                         ]
                                     }
                                 },
@@ -120,95 +120,17 @@
                         ]
                     },
                     {
-                        "description": "hyper-w to wally",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "w",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a \"wally\""
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "hyper-a to alacritty",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a \"alacritty\""
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "hyper-space to emacs",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "shift",
-                                            "control",
-                                            "option",
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a emacs"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "hyper-z to zulip",
+                        "description": "hyper-q to zulip",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": {
                                         "mandatory": [
-                                            "left_alt",
-                                            "left_control",
-                                            "left_gui",
-                                            "left_shift"
+                                            "command",
+                                            "shift",
+                                            "control",
+                                            "option"
                                         ]
                                     }
                                 },
@@ -222,16 +144,21 @@
                         ]
                     },
                     {
-                        "description": "Open Google Chrome",
+                        "description": "hyper-w to wally",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "g",
+                                    "key_code": "w",
                                     "modifiers": {
                                         "mandatory": [
+                                            "left_alt",
+                                            "left_control",
+                                            "left_gui",
+                                            "left_shift",
+                                            "command",
                                             "shift",
-                                            "option",
-                                            "control"
+                                            "control",
+                                            "option"
                                         ],
                                         "optional": [
                                             "caps_lock"
@@ -240,7 +167,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a 'Google Chrome.app'"
+                                        "shell_command": "open -a \"wally\""
                                     }
                                 ],
                                 "type": "basic"
@@ -275,14 +202,456 @@
                         ]
                     },
                     {
-                        "description": "hyper-s to shrug",
+                        "description": "hyper-a to alacritty",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a \"alacritty\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-p to facepalm",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"🤦\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-r to rolleyes",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"🙄\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-j to joy",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"😂\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-t to thinking",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"🤔\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-u to thumb up",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"👍\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-d to thumb up",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"👎\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-f to flip",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-f to flip",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-! to middle finger",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "1",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"╭∩╮（︶_︶）╭∩╮\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-b to bang",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"( う-´)づ︻╦̵̵̿╤──   \\(˚☐˚”)/\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-c to ( ༎ຶ ۝ ༎ຶ ) cry ",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"( ༎ຶ ۝ ༎ຶ )\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-~ to sparkles",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "`",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-a to angry - (ง'̀-'́)ง",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"(ง'̀-'́)ง\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-l to love (heart)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"❤\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-g to sunglasses",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-h to ❤️ heart",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"❤️\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-s to shrug",
                         "manipulators": [
                             {
                                 "from": {
                                     "key_code": "s",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
                                             "shift",
                                             "control",
                                             "option"
@@ -302,53 +671,20 @@
                         ]
                     },
                     {
-                        "description": "hyper-h to happy",
+                        "description": "space to emacs",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "h",
+                                    "key_code": "spacebar",
                                     "modifiers": {
                                         "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
+                                            "command"
                                         ]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"ʘ‿ʘ\""
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "hyper-t to table",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "t",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command",
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                                        "shell_command": "open -a emacs"
                                     }
                                 ],
                                 "type": "basic"

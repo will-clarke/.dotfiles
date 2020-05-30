@@ -1,0 +1,448 @@
+{
+    "title": "!meh keys",
+    "rules": [
+        {
+            "description": "meh-p to facepalm",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "p",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"🤦\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-r to rolleyes",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "r",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"🙄\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-j to joy",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "j",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"😂\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-t to thinking",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "t",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"🤔\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-u to thumb up",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "u",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"👍\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-d to thumb up",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "d",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"👎\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-f to flip",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-f to flip",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-! to middle finger",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "1",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"╭∩╮（︶_︶）╭∩╮\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-b to bang",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"( う-´)づ︻╦̵̵̿╤──   \\(˚☐˚”)/\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-c to ( ༎ຶ ۝ ༎ຶ ) cry ",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "c",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"( ༎ຶ ۝ ༎ຶ )\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-~ to sparkles",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "`",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-a to angry - (ง'̀-'́)ง",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "a",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"(ง'̀-'́)ง\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-l to love (heart)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"❤\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-g to sunglasses",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "g",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-h to ❤️ heart",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "h",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"❤️\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-s to shrug",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "s",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_shrug.scpt"
+                        }
+
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}

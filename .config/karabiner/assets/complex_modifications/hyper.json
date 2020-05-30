@@ -1,32 +1,6 @@
 {
-  "title": "!OSX application launcher",
+  "title": "!hyper launcher",
   "rules": [
-    {
-      "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "caps_lock",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "left_control"
-            }
-          ],
-          "to_if_alone": [
-            {
-              "key_code": "escape"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
     {
       "description": "hyper-space to emacs",
       "manipulators": [
@@ -39,30 +13,6 @@
                 "control",
                 "option",
                 "command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open -a emacs"
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "command-space to emacs",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "spacebar",
-            "modifiers": {
-              "mandatory": [
-                "command"
-              ],
-              "optional": [
-                "caps_lock"
               ]
             }
           },
@@ -102,8 +52,6 @@
         }
       ]
     },
-
-
     {
       "description": "hyper-c to chrome",
       "manipulators": [
@@ -187,7 +135,6 @@
         }
       ]
     },
-
     {
       "description": "hyper-v to zoom (video)",
       "manipulators": [
@@ -216,89 +163,6 @@
       ]
     },
     {
-      "description": "hyper-t to table",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "t",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift",
-                "control",
-                "option"
-              ],
-              "optional": [
-                "caps_lock"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "hyper-h to happy",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "h",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift",
-                "control",
-                "option"
-              ],
-              "optional": [
-                "caps_lock"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "osascript ~/bin/insert_argument.scpt \"ʘ‿ʘ\""
-            }
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-    {
-      "description": "hyper-s to shrug",
-      "manipulators": [
-        {
-          "from": {
-            "key_code": "s",
-            "modifiers": {
-              "mandatory": [
-                "command",
-                "shift",
-                "control",
-                "option"
-              ],
-              "optional": [
-                "caps_lock"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "osascript ~/bin/insert_shrug.scpt"
-            }
-            
-          ],
-          "type": "basic"
-        }
-      ]
-    },
-
-    {
       "description": "hyper-a to alacritty",
       "manipulators": [
         {
@@ -325,6 +189,5 @@
         }
       ]
     }
-
   ]
 }
