@@ -132,7 +132,7 @@
             ]
         },
         {
-            "description": "meh-d to thumb up",
+            "description": "meh-d to thumb down",
             "manipulators": [
                 {
                     "from": {
@@ -151,32 +151,6 @@
                     "to": [
                         {
                             "shell_command": "osascript ~/bin/insert_argument.scpt \"👎\""
-                        }
-                    ],
-                    "type": "basic"
-                }
-            ]
-        },
-        {
-            "description": "meh-f to flip",
-            "manipulators": [
-                {
-                    "from": {
-                        "key_code": "f",
-                        "modifiers": {
-                            "mandatory": [
-                                "shift",
-                                "control",
-                                "option"
-                            ],
-                            "optional": [
-                                "caps_lock"
-                            ]
-                        }
-                    },
-                    "to": [
-                        {
-                            "shell_command": "osascript ~/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
                         }
                     ],
                     "type": "basic"
@@ -236,6 +210,32 @@
             ]
         },
         {
+            "description": "meh-q to ᕕ( ᐛ )ᕗ",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "q",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"ᕕ( ᐛ )ᕗ\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
             "description": "meh-b to bang",
             "manipulators": [
                 {
@@ -262,7 +262,7 @@
             ]
         },
         {
-            "description": "meh-c to ( ༎ຶ ۝ ༎ຶ ) cry ",
+            "description": "meh-c to \\( ﾟ◡ﾟ)/ celebrate",
             "manipulators": [
                 {
                     "from": {
@@ -280,7 +280,7 @@
                     },
                     "to": [
                         {
-                            "shell_command": "osascript ~/bin/insert_argument.scpt \"( ༎ຶ ۝ ༎ຶ )\""
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"\\( ﾟ◡ﾟ)/\""
                         }
                     ],
                     "type": "basic"
@@ -292,7 +292,7 @@
             "manipulators": [
                 {
                     "from": {
-                        "key_code": "`",
+                        "key_code": "~",
                         "modifiers": {
                             "mandatory": [
                                 "shift",
@@ -385,6 +385,32 @@
                     "to": [
                         {
                             "shell_command": "osascript ~/bin/insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "meh-w to wahoo ٩◔̯◔۶",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "w",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"٩◔̯◔۶️\""
                         }
                     ],
                     "type": "basic"

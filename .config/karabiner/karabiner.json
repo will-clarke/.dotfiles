@@ -489,58 +489,6 @@
                         ]
                     },
                     {
-                        "description": "meh-c to ( ༎ຶ ۝ ༎ຶ ) cry ",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "c",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"( ༎ຶ ۝ ༎ຶ )\""
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "meh-~ to sparkles",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "`",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "shift",
-                                            "control",
-                                            "option"
-                                        ],
-                                        "optional": [
-                                            "caps_lock"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "meh-a to angry - (ง'̀-'́)ง",
                         "manipulators": [
                             {
@@ -685,6 +633,110 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a emacs"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-w to wahoo ٩◔̯◔۶",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "w",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"٩◔̯◔۶️\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-~ to sparkles",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "~",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-c to \\( ﾟ◡ﾟ)/ celebrate",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"\\( ﾟ◡ﾟ)/\""
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "meh-q to ᕕ( ᐛ )ᕗ",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/bin/insert_argument.scpt \"ᕕ( ᐛ )ᕗ\""
                                     }
                                 ],
                                 "type": "basic"
