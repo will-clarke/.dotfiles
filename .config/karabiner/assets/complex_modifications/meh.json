@@ -28,6 +28,32 @@
             ]
         },
         {
+            "description": "meh-x to fingerscrossed🤞",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "x",
+                        "modifiers": {
+                            "mandatory": [
+                                "shift",
+                                "control",
+                                "option"
+                            ],
+                            "optional": [
+                                "caps_lock"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "shell_command": "osascript ~/bin/insert_argument.scpt \"🤞\""
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
             "description": "meh-r to rolleyes",
             "manipulators": [
                 {
