@@ -1,6 +1,10 @@
 alias config='/usr/bin/git --git-dir=/Users/wmmc/.cfg/ --work-tree=/Users/wmmc'
 export PATH=~/bin:$PATH
 export PATH=~/go/bin:$PATH
+export PATH=~/.cargo/bin:$PATH
+export PATH=~/.emacs.d/bin:$PATH
+
+export RUST_SRC_PATH="$HOME/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"
 
 export GO111MODULE=on
 alias gomodon="export GO111MODULE=on"
@@ -41,3 +45,11 @@ makeopts(){
 }
 
 [[ -s "/Users/wmmc/.gvm/scripts/gvm" ]] && source "/Users/wmmc/.gvm/scripts/gvm"
+
+export PERLLIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERLLIB
+
+
+
+# mkdir ~/docker
+# docker create -v ~/docker/ubuntu-data-volume --name ubuntu-data-volume ubuntu
+alias ubuntu="docker run -t -i --volumes-from ubuntu-data-volume ubuntu /bin/bash"
