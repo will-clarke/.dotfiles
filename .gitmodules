@@ -4,8 +4,8 @@
 [submodule "org"]
 	path = org
 	url = git@gitlab.com:will-clarke/org.git
-[submodule "/Users/wmmc/.emacs.d"]
-	path = /Users/wmmc/.emacs.d
+[submodule ".emacs.d"]
+	path = .emacs.d
 	url = https://github.com/hlissner/doom-emacs.git
 [submodule ".doom.d"]
 	path = .doom.d
