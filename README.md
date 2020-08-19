@@ -23,3 +23,43 @@ config checkout
 
 config submodule init
 ```
+
+
+How I installed this on a new mac 08/20:
+
+```
+# get homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+brew cask install flux
+brew cask install karabiner-elements
+brew install pass
+
+# install emacs gui for osx
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+ln -s /usr/local/opt/emacs-plus/Emacs.app /Applications/Emacs.app
+brew services start d12frosted/emacs-plus/emacs-plus@27
+
+
+** ON OTHER COMPUTER **
+1. copy ~/.ssh/id_rsa & id_rsa.pub file (preferably by physical storage)
+2. If copying SSH key over electronically, remember to use gpg symmetrically:
+        gpg --output clevername.gpg ~/.ssh/id_rsa --symmetric
+
+** BACK ON NEW COMPUTER **
+brew install gpg
+gpg --decrypt clevername.gpg > ~/.ssh/id_rsa
+chmod  400 ~/.ssh/id_rsa
+
+# set up "config" to work - needs ssh key first
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+echo "*" >> .gitignore
+git clone --recurse-submodules --bare git@gitlab.com:will-clarke/mac-config.git $HOME/.cfg
+config config --local status.showUntrackedFiles no
+
+config submodule init
+config submodule update
+
+~/.emacs.d/bin/doom upgrade # will take ages
+```
