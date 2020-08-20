@@ -49,6 +49,11 @@ brew services start d12frosted/emacs-plus/emacs-plus@27
 1. copy ~/.ssh/id_rsa & id_rsa.pub file (preferably by physical storage)
 2. If copying SSH key over electronically, remember to use gpg symmetrically:
         gpg --output clevername.gpg ~/.ssh/id_rsa --symmetric
+3. Maybe add gpg keys too:
+gpg --export-secret-keys  wmmclarke@gmail.com > private-gpg-key
+gpg --armor --output public-key.gpg --export wmmclarke@gmail.com
+zip wow.zip private-gpg-key public-key.gpg
+gpg --output omgomg.gpg --symmetric wow.zip
 
 ** BACK ON NEW COMPUTER **
 brew install gpg
@@ -65,4 +70,15 @@ config submodule init
 config submodule update
 
 ~/.emacs.d/bin/doom upgrade # will take ages
+
+gpg wow.zip
+unzip wow
+gpg --list-keys
+gpg --list-secret-keys
+gpg --import public-key.gpg
+gpg --import private-gpg-key
+gpg --list-keys
+gpg --list-secret-keys
+pass list
+
 ```
