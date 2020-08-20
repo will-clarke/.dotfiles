@@ -53,3 +53,5 @@ export PERLLIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERL
 # mkdir ~/docker
 # docker create -v ~/docker/ubuntu-data-volume --name ubuntu-data-volume ubuntu
 alias ubuntu="docker run -t -i --volumes-from ubuntu-data-volume ubuntu /bin/bash"
+
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

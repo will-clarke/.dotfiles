@@ -33,7 +33,10 @@ How I installed this on a new mac 08/20:
 
 brew cask install flux
 brew cask install karabiner-elements
+brew cask install shiftit
+brew cask install alacritty
 brew install pass
+brew install cmake
 
 # install emacs gui for osx
 brew tap d12frosted/emacs-plus
