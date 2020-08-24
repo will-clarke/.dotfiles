@@ -94,3 +94,6 @@ go get -u github.com/fatih/gomodifytags
 go get -u github.com/golang/mock/mockgen@v1.4.3
 
 brew install ripgrep
+
+curl -fsSL https://starship.rs/install.sh | bash
+

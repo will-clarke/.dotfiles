@@ -55,3 +55,7 @@ export PERLLIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERL
 alias ubuntu="docker run -t -i --volumes-from ubuntu-data-volume ubuntu /bin/bash"
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+if [ -x "$(command -v starship)" ]; then
+    eval "$(starship init zsh)"
+fi
