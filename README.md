@@ -93,7 +93,21 @@ go get -u github.com/cweill/gotests/...
 go get -u github.com/fatih/gomodifytags
 go get -u github.com/golang/mock/mockgen@v1.4.3
 
-brew install ripgrep
 
 curl -fsSL https://starship.rs/install.sh | bash
 
+brew install ripgrep
+brew install tmux
+brew install fd
+brew install coreutils
+brew install graphviz
+brew install jq
+brew install shellcheck
+brew cask install macdown
+brew install markdown
+
+brew install node
+npm -g install js-beautify
+npm -g install stylelint
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
