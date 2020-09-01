@@ -105,6 +105,7 @@ brew install jq
 brew install shellcheck
 brew cask install macdown
 brew install markdown
+brew install rust-analyzer
 
 brew install node
 npm -g install js-beautify
