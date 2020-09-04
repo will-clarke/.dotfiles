@@ -106,6 +106,8 @@ brew install shellcheck
 brew cask install macdown
 brew install markdown
 brew install rust-analyzer
+brew install michaeleisel/zld/zld # for rust performance
+
 
 brew install node
 npm -g install js-beautify
