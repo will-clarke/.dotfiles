@@ -108,6 +108,16 @@ brew install markdown
 brew install rust-analyzer
 brew install michaeleisel/zld/zld # for rust performance
 
+brew install exercism
+
+
+# haskell
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+<!-- brew install cabal-install ghc -->
+<!-- brew install haskell-stack -->
+<!-- stack setup -->
+<!-- stack install ghc-mod -->
+<!-- stack install hoogle -->
 
 brew install node
 npm -g install js-beautify
