@@ -1,6 +1,4 @@
-My Mac Config Dotfiles
-======================
-
+# My Mac Config Dotfiles
 
 Maybe do some of this stuff with a new mac:
 (cribbed from https://www.atlassian.com/git/tutorials/dotfiles)
@@ -23,7 +21,6 @@ config checkout
 
 config submodule init
 ```
-
 
 How I installed this on a new mac 08/20:
 
@@ -82,6 +79,7 @@ gpg --list-secret-keys
 pass list
 
 ```
+
 go get golang.org/x/tools/gopls@latest
 go get -u github.com/motemen/gore/cmd/gore
 go get -u github.com/stamblerre/gocode
@@ -92,7 +90,6 @@ go get -u golang.org/x/tools/cmd/guru
 go get -u github.com/cweill/gotests/...
 go get -u github.com/fatih/gomodifytags
 go get -u github.com/golang/mock/mockgen@v1.4.3
-
 
 curl -fsSL https://starship.rs/install.sh | bash
 
@@ -109,10 +106,23 @@ brew install rust-analyzer
 brew install michaeleisel/zld/zld # for rust performance
 
 brew install exercism
-
+brew install prettier
 
 # haskell
+
 curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+curl -sSL https://get.haskellstack.org/ | sh
+
+git clone https://github.com/haskell/haskell-ide-engine --recurse-submodules ~/code/tmp/haskell-ide-engine
+cd ~/code/tmp/haskell-ide-engine
+stack ./install.hs help # will take bloody ages
+stack ./install.hs hie
+
+stack install brittany
+stack install hoogle
+stack install ghcid
+stack install hlint
+
 <!-- brew install cabal-install ghc -->
 <!-- brew install haskell-stack -->
 <!-- stack setup -->
