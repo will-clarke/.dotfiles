@@ -62,4 +62,6 @@ if [ -x "$(command -v starship)" ]; then
 fi
 
 alias git-root='cd $(git rev-parse --show-cdup)'
-[ -f "/Users/itwc1/.ghcup/env" ] && source "/Users/itwc1/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
+export PATH="$HOME/.local/bin:$PATH"
