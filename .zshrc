@@ -67,18 +67,19 @@ if [ -x "$(command -v starship)" ]; then
 fi
 
 alias git-root='cd $(git rev-parse --show-cdup)'
+
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 export PATH="$HOME/.local/bin:$PATH"
 
 # some oracle rubbish
 export LD_LIBRARY_PATH=$HOME/oracle/instantclient/12.2.0.1
-export PKG_CONFIG_PATH=$HOME/oracle/instantclient/12.2.0.1
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/oracle/instantclient/12.2.0.1
 
 # some zlib compiler rubbish
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include"
-export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/zlib/lib/pkgconfig"
 # ???? Is MacOS rubbish??
 export CPATH=`xcrun --show-sdk-path`/usr/include
 
