@@ -73,8 +73,8 @@ alias git-root='cd $(git rev-parse --show-cdup)'
 export PATH="$HOME/.local/bin:$PATH"
 
 # some oracle rubbish
-export LD_LIBRARY_PATH=$HOME/oracle/instantclient/12.2.0.1
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/oracle/instantclient/12.2.0.1
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/oracle/instantclient/12.2.0.1"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$HOME/oracle/instantclient/12.2.0.1"
 
 # some zlib compiler rubbish
 export LDFLAGS="-L/usr/local/opt/zlib/lib"
@@ -84,3 +84,6 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/zlib/lib/pkgconfig"
 export CPATH=`xcrun --show-sdk-path`/usr/include
 
 alias e="emacsclient -nc"
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export AWS_SESSION_TOKEN_TTL=12h
