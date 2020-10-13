@@ -87,3 +87,6 @@ alias e="emacsclient -nc"
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export AWS_SESSION_TOKEN_TTL=12h
+
+# m == make but for anywhere in the directory
+function m(){(cd $(git rev-parse --show-toplevel) && make "$*")}
