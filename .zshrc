@@ -42,6 +42,7 @@ export RUBYOPT='-W:no-deprecated -W:no-experimental'
 
 
 alias gs="git status"
+alias gd="git diff"
 alias gco="git checkout"
 
 export PATH="/usr/local/sbin:$PATH"
@@ -89,4 +90,6 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc
 export AWS_SESSION_TOKEN_TTL=12h
 
 # m == make but for anywhere in the directory
-function m(){(cd $(git rev-parse --show-toplevel) && make "$*")}
+function m(){
+    (cd $(git rev-parse --show-toplevel) && make "$*")
+}

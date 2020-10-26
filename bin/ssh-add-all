@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+for key in ~/.ssh/*
+do
+    if [[ "$key" =~ id_rsa$  ]] || [[ "$key" =~ \.pem ]]; then
+        ssh-add "$key"
+    fi
+done
