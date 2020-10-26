@@ -91,5 +91,11 @@ export AWS_SESSION_TOKEN_TTL=12h
 
 # m == make but for anywhere in the directory
 function m(){
-    (cd $(git rev-parse --show-toplevel) && make "$*")
+    if [[ "$#" == 0 ]]
+    then
+        cmd="make"
+    else
+        cmd="make $*"
+    fi
+    (cd "$(git rev-parse --show-toplevel)" && eval "$cmd")
 }
