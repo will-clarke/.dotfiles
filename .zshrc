@@ -99,3 +99,8 @@ function m(){
     fi
     (cd "$(git rev-parse --show-toplevel)" && eval "$cmd")
 }
+if [ -e /Users/itwc1/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/itwc1/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook zsh)"
+fi
