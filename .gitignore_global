@@ -62,3 +62,8 @@ GPATH
 GRTAGS
 GTAGS
 .byebug_history
+
+.git
+
+.secret_script.sh
+.secret_folder/*
