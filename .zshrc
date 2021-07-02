@@ -105,3 +105,5 @@ if [ -e /Users/itwc1/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/itwc1/.n
 if [ -x "$(command -v direnv)" ]; then
     eval "$(direnv hook zsh)"
 fi
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/opt/go@1.15/bin:$PATH"
