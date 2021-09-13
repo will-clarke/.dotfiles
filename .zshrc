@@ -85,7 +85,6 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/opt/zlib/lib/pkgconfig"
 # ???? Is MacOS rubbish??
 export CPATH=`xcrun --show-sdk-path`/usr/include
 
-alias e="emacsclient -nc"
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 export AWS_SESSION_TOKEN_TTL=12h
@@ -107,3 +106,5 @@ if [ -x "$(command -v direnv)" ]; then
 fi
 export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 export PATH="/usr/local/opt/go@1.15/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

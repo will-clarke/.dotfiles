@@ -67,3 +67,4 @@ GTAGS
 
 .secret_script.sh
 .secret_folder/*
+*DS_Store

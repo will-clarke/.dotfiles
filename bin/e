@@ -14,7 +14,7 @@ if [[ $socket_file == "" ]]; then
 
     # or on OSX
 
-    /Application/Emacs.app/Contents/MacOS/Emacs $@ &
+    # /Application/Emacs.app/Contents/MacOS/Emacs $@ &
 
 else
 
