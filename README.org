@@ -1,0 +1,28 @@
+* My Mac Config Dotfiles
+
+** Installation
+Grab a copy of [[http://www.gnu.org/software/stow/][GNU Stow]]
+  - ~sudo apt-get install git stow~
+  - ~sudo pacman -S git stow~
+  - ~brew install stow~
+
+GNU Stow is super cool. You should use it too.
+
+bin
+config
+emacs
+git
+org
+pass
+tmux
+
+
+git submodule init
+
+** TL;DR
+#+begin_src sh
+cd $HOME
+git clone git@git.sr.ht:~will-clarke/.dotfiles
+git submodule init
+stow bin config emacs git org pass tmux
+#+end_src

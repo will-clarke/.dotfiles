@@ -1,34 +1,25 @@
-[advice]
-	pushNonFastForward = false
-	statusHints = false
-	commitBeforeMerge = false
-	detachedHead = false
-[push]
-	default = current
 [color]
 	ui = auto
 [alias]
+	s = status
+	d = diff
+	dc = diff --cached
 	aa = add --all
 	ap = add --patch
 	ca = commit --amend
 	ci = commit -v
 	co = checkout
 	open = !sh -c "ls > /dev/null;open `git remote -v | grep fetch | awk '{print $2}' | sed 's|git@|http://|' | sed 's|com:|com/|' | head -n1`"
-	co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
 	create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
 	ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 	delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
 	merge-branch = !git checkout master && git merge @{-1}
-	pr = !gh pull-request
-	st = status
 	up = !git fetch origin && git rebase origin/master
 	update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
-[merge]
-	ff = only
 [fetch]
 	prune = true
 [user]
@@ -40,24 +31,5 @@
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
-[include]
-	path = /Users/wmmc/.gitconfig.local
-[hub]
-	protocol = https
-[magithub]
-	online = false
-[magithub "status"]
-	includeStatusHeader = false
-	includePullRequestsSection = false
-	includeIssuesSection = false
 [github]
 	user = will-clarke
-[pager]
-	branch = false
-	tag = false
-[credential]
-	helper = osxkeychain
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-[pull]
-	rebase = false

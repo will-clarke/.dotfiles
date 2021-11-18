@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: William Clarke
-# name: puts
-# key: p
-# --
-puts "$1: #{$1}"
