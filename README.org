@@ -19,13 +19,14 @@ org
 pass
 tmux
 
+remember there are submodules
 
 git submodule init
 
 ** TL;DR
 #+begin_src sh
 cd $HOME
-git clone git@git.sr.ht:~will-clarke/.dotfiles
-git submodule init
+git clone git@git.sr.ht:~will-clarke/.dotfiles --recursive
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 stow bin config emacs git org pass tmux
 #+end_src

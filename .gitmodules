@@ -4,9 +4,6 @@
 [submodule "org/org"]
 	path = org
 	url = git@git.sr.ht:~will-clarke/org
-[submodule "emacs/.emacs.d"]
-	path = emacs/.emacs.d
-	url = https://github.com/hlissner/doom-emacs.git
 [submodule "emacs/.doom.d"]
 	path = emacs/.doom.d
 	url = git@gitlab.com:will-clarke/doom.d.git
