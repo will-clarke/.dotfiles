@@ -1,9 +1,9 @@
 [submodule "pass/.password-store"]
 	path = pass/.password-store
-	url = git@gitlab.com:will-clarke/pass.git
+	url = git@git.sr.ht:~will-clarke/.password-store
 [submodule "org/org"]
 	path = org
-	url = git@gitlab.com:will-clarke/org.git
+	url = git@git.sr.ht:~will-clarke/org
 [submodule "emacs/.emacs.d"]
 	path = emacs/.emacs.d
 	url = https://github.com/hlissner/doom-emacs.git

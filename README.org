@@ -1,4 +1,7 @@
-* My Mac Config Dotfiles
+* My Super Cool Dotfiles ʘ‿ʘ
+
+The aim is these should work both on MacOS & Linux
+Mainly emacs & command-line utilities...
 
 ** Installation
 Grab a copy of [[http://www.gnu.org/software/stow/][GNU Stow]]
