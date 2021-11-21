@@ -5,6 +5,7 @@ Mainly emacs & command-line utilities...
 
 ## Installation
 Grab a copy of [[http://www.gnu.org/software/stow/][GNU Stow]]
+One of these should work:
   - ~sudo apt-get install git stow~
   - ~sudo pacman -S git stow~
   - ~brew install stow~
@@ -28,5 +29,13 @@ Since MacOS and Linux have slightly different systems, I've got two sets of exec
 cd $HOME
 git clone git@git.sr.ht:~will-clarke/.dotfiles --recursive
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-stow bin-{mac,linux} config emacs git org pass tmux
+stow bin-{mac,linux} config emacs git org pass tmux stories
+```
+
+may need to reinstall fisher:
+```
+fisher list > pkgs.txt
+fisher remove < pkgs.txt
+fisher install < pkgs.txt
+rm pkgs.txt
 ```
