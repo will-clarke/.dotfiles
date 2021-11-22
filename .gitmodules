@@ -2,17 +2,11 @@
 	path = pass/.password-store
 	url = git@git.sr.ht:~will-clarke/.password-store
 [submodule "org/org"]
-	path = org
+	path = org/org
 	url = git@git.sr.ht:~will-clarke/org
 [submodule "emacs/.doom.d"]
 	path = emacs/.doom.d
 	url = git@gitlab.com:will-clarke/doom.d.git
-[submodule "doom-emacs"]
-	path = doom-emacs
-	url = https://github.com/hlissner/doom-emacs
-[submodule "emacs/.emacs.d"]
-	path = emacs/.emacs.d
-	url = https://github.com/hlissner/doom-emacs
 [submodule "stories/stories"]
 	path = stories/stories
 	url = git@git.sr.ht:~will-clarke/stories
