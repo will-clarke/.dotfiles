@@ -1,12 +1,12 @@
 [submodule "pass/.password-store"]
 	path = pass/.password-store
 	url = git@git.sr.ht:~will-clarke/.password-store
-[submodule "org/org"]
-	path = org/org
-	url = git@git.sr.ht:~will-clarke/org
 [submodule "emacs/.doom.d"]
 	path = emacs/.doom.d
 	url = git@gitlab.com:will-clarke/doom.d.git
 [submodule "stories/stories"]
 	path = stories/stories
 	url = git@git.sr.ht:~will-clarke/stories
+[submodule "org/org"]
+	path = org/org
+	url = git@git.sr.ht:~will-clarke/org
