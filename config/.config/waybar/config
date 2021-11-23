@@ -27,11 +27,13 @@
         "sway/window"
     ],
     "modules-right": [
-        "network",
+        // "network",
         "memory",
         "cpu",
         "temperature",
-        "custom/keyboard-layout",
+        "disk",
+        "backlight",
+        // "custom/keyboard-layout",
         "battery",
         "tray",
         "clock#date",
@@ -44,7 +46,7 @@
     // -------------------------------------------------------------------------
 
     "battery": {
-        "interval": 10,
+        "interval": 30,
         "states": {
             "warning": 30,
             "critical": 15
@@ -63,36 +65,58 @@
         "tooltip": true
     },
 
+    "disk": {
+        "interval": 30,
+        "format": "[disk free {percentage_free}%]",
+        "path": "/",
+        "tooltip": true
+    },
+
+    "backlight": {
+        "device": "acpi_video0",
+        "format": "[backlight {percent}% {icon}]",
+        "format-icons": ["", ""],
+        // may have to add light to NOPASSWD sudoers
+        // eg.
+        // *username* ALL=(ALL) NOPASSWD: /usr/bin/light
+        "on-click": "sudo light -s sysfs/backlight/acpi_video0 -A 10",
+        "on-click-right": "sudo light -s sysfs/backlight/acpi_video0 -U 10",
+    },
+
     "clock#time": {
         "interval": 1,
         "format": "{:%H:%M:%S}",
-        "tooltip": false
+        "tooltip": false,
+        // note this also does light stuff
+        "on-click": "sudo light -s sysfs/backlight/acpi_video0 -A 10",
+        "on-click-right": "sudo light -s sysfs/backlight/acpi_video0 -U 10"
     },
 
     "clock#date": {
-      "interval": 10,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
-      "tooltip-format": "{:%e %B %Y}"
+        "interval": 10,
+        "format": "  {:%a %e %b %Y}", // Icon: calendar-alt
+        "tooltip-format": "{:%e %B %Y}"
     },
 
     "cpu": {
-        "interval": 5,
+        "interval": 30,
         "format": "  {usage}% ({load})", // Icon: microchip
         "states": {
-          "warning": 70,
-          "critical": 90
-        }
+            "warning": 70,
+            "critical": 90
+        },
+        "tooltip": true
     },
 
-    "custom/keyboard-layout": {
-      "exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
-      // Interval set only as a fallback, as the value is updated by signal
-      "interval": 30,
-      "format": "  {}", // Icon: keyboard
-      // Signal sent by Sway key binding (~/.config/sway/key-bindings)
-      "signal": 1, // SIGHUP
-      "tooltip": false
-    },
+    //"custom/keyboard-layout": {
+    //"exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
+    //// Interval set only as a fallback, as the value is updated by signal
+    //"interval": 30,
+    //"format": "  {}", // Icon: keyboard
+    //// Signal sent by Sway key binding (~/.config/sway/key-bindings)
+    //"signal": 1, // SIGHUP
+    //"tooltip": false
+    //},
 
     "memory": {
         "interval": 5,
@@ -100,16 +124,17 @@
         "states": {
             "warning": 70,
             "critical": 90
-        }
+        },
+        "tooltip": true
     },
 
-    "network": {
-        "interval": 5,
-        "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
-    },
+    // "network": {
+    // "interval": 5,
+    // "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
+    // "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+    // "format-disconnected": "⚠  Disconnected",
+    // "tooltip-format": "{ifname}: {ipaddr}"
+    // },
 
     "sway/mode": {
         "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
@@ -118,59 +143,82 @@
 
     "sway/window": {
         "format": "{}",
-        "max-length": 120
+        "max-length": 50,
+    "rewrite": {
+       "(.*)Mozilla Firefox": "🌎 $1",
+       "(.*)vim": " $1",
+       "(.*)zsh": " [$1]",
+       "(.*)Doom Emacs": " $1"
+    }
     },
 
+    // "sway/workspaces": {
+    //     "all-outputs": false,
+    //     "disable-scroll": true,
+    //     "format": "{icon} {name}",
+    //     "format-icons": {
+    //         "1:www": "龜", // Icon: firefox-browser
+    //         "2:mail": "", // Icon: mail
+    //         "3:editor": "", // Icon: code
+    //         "4:terminals": "", // Icon: terminal
+    //         "5:portal": "", // Icon: terminal
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
     "sway/workspaces": {
-        "all-outputs": false,
         "disable-scroll": true,
-        "format": "{icon} {name}",
+        "all-outputs": true,
+        "format": "{name}: {icon}",
         "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
             "urgent": "",
             "focused": "",
             "default": ""
         }
-    },
-
-    //"pulseaudio": {
-    //    //"scroll-step": 1,
-    //    "format": "{icon}  {volume}%",
-    //    "format-bluetooth": "{icon}  {volume}%",
-    //    "format-muted": "",
-    //    "format-icons": {
-    //        "headphones": "",
-    //        "handsfree": "",
-    //        "headset": "",
-    //        "phone": "",
-    //        "portable": "",
-    //        "car": "",
-    //        "default": ["", ""]
-    //    },
-    //    "on-click": "pavucontrol"
-    //},
-
-    "temperature": {
-      "critical-threshold": 80,
-      "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
-      "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
-      ],
-      "tooltip": true
-    },
-
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
     }
+
+
+},
+
+//"pulseaudio": {
+//    //"scroll-step": 1,
+//    "format": "{icon}  {volume}%",
+//    "format-bluetooth": "{icon}  {volume}%",
+//    "format-muted": "",
+//    "format-icons": {
+//        "headphones": "",
+//        "handsfree": "",
+//        "headset": "",
+//        "phone": "",
+//        "portable": "",
+//        "car": "",
+//        "default": ["", ""]
+//    },
+//    "on-click": "pavucontrol"
+//},
+
+"temperature": {
+    "critical-threshold": 80,
+    "interval": 5,
+    "format": "{icon}  {temperatureC}°C",
+    "format-icons": [
+        "", // Icon: temperature-empty
+        "", // Icon: temperature-quarter
+        "", // Icon: temperature-half
+        "", // Icon: temperature-three-quarters
+        ""  // Icon: temperature-full
+    ],
+    "tooltip": true
+},
+
+"tray": {
+    "icon-size": 21,
+    "spacing": 10
+}
 
 }
