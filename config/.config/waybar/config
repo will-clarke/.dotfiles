@@ -17,7 +17,7 @@
     "position": "top",
 
     // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
+    "height": 25,
 
     "modules-left": [
         "sway/workspaces",
@@ -67,14 +67,14 @@
 
     "disk": {
         "interval": 30,
-        "format": "[disk free {percentage_free}%]",
+        "format": " {percentage_free}% ",
         "path": "/",
         "tooltip": true
     },
 
     "backlight": {
         "device": "acpi_video0",
-        "format": "[backlight {percent}% {icon}]",
+        "format": "  {icon} {percent}%  ",
         "format-icons": ["", ""],
         // may have to add light to NOPASSWD sudoers
         // eg.
@@ -84,8 +84,8 @@
     },
 
     "clock#time": {
-        "interval": 1,
-        "format": "{:%H:%M:%S}",
+        "interval": 60,
+        "format": "{:%H:%M}",
         "tooltip": false,
         // note this also does light stuff
         "on-click": "sudo light -s sysfs/backlight/acpi_video0 -A 10",
@@ -93,7 +93,7 @@
     },
 
     "clock#date": {
-        "interval": 10,
+        "interval": 360,
         "format": "  {:%a %e %b %Y}", // Icon: calendar-alt
         "tooltip-format": "{:%e %B %Y}"
     },
