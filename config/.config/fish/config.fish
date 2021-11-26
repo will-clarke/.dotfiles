@@ -1,3 +1,7 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    abbr --add --global gco git checkout
+    abbr --add --global ga git add
+    abbr --add --global gd git diff
+    abbr --add --global gs git status
+    abbr --add --global gdc git diff --cached
 end
