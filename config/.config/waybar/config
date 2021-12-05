@@ -35,7 +35,6 @@
         "backlight",
         // "custom/keyboard-layout",
         "battery",
-        "tray",
         "clock#date",
         "clock#time"
     ],
@@ -141,16 +140,16 @@
         "tooltip": false
     },
 
-    "sway/window": {
-        "format": "{}",
-        "max-length": 50,
-    "rewrite": {
-       "(.*)Mozilla Firefox": "🌎 $1",
-       "(.*)vim": " $1",
-       "(.*)zsh": " [$1]",
-       "(.*)Doom Emacs": " $1"
-    }
-    },
+   // "sway/window": {
+   //     "format": "{}",
+   //     "max-length": 50,
+   // "rewrite": {
+   //    "(.*)Mozilla Firefox": "🌎 $1",
+   //    "(.*)vim": " $1",
+   //    "(.*)zsh": " [$1]",
+   //    "(.*)Doom Emacs": " $1"
+   // }
+   // },
 
     // "sway/workspaces": {
     //     "all-outputs": false,
@@ -216,9 +215,9 @@
     "tooltip": true
 },
 
-"tray": {
-    "icon-size": 21,
-    "spacing": 10
-}
+// "tray": {
+//     "icon-size": 21,
+//     "spacing": 10
+// }
 
 }
