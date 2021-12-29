@@ -2,16 +2,17 @@
 
 The aim is these should work both on MacOS & Linux.
 
-I try to keep my tools simple. At the moment I use Doom emacs, tmux, some shell utilities.
+I try to keep my tools simple. At the moment I like Doom emacs, the fish shell & tmux.
+On Linux I like Arch & Sway as a window manager.
 
 ## Installation
 
 Grab a copy of [[http://www.gnu.org/software/stow/][GNU Stow]]
 One of these should work:
 
-- ~sudo apt-get install git stow~
-- ~sudo pacman -S git stow~
-- ~brew install stow~
+- `sudo apt-get install git stow`
+- `sudo pacman -S git stow`
+- `brew install stow`
 
 Then
 
@@ -27,7 +28,7 @@ You may not have access to everything here.
 
 ## Different Binaries
 
-Since MacOS and Linux have slightly different systems, I've got two sets of executables.
+Since MacOS and Linux are slightly different, I've got two sets of executables.
 
 ## TL;DR
 
