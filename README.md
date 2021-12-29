@@ -1,13 +1,14 @@
-# Will's Dotfiles
+# 🖥 My Dotfiles 🖥 
 
 The aim is these should work both on MacOS & Linux.
 
 I try to keep my tools simple. At the moment I like Doom emacs, the fish shell & tmux.
+On MacOS, I use Karabiner for some better shortcuts / customisability.
 On Linux I like Arch & Sway as a window manager.
 
-## Installation
+## 🛠 Installation 🛠 
 
-Grab a copy of [[http://www.gnu.org/software/stow/][GNU Stow]]
+Grab a copy of [GNU Stow](http://www.gnu.org/software/stow/)
 One of these should work:
 
 - `sudo apt-get install git stow`
@@ -21,7 +22,7 @@ Then
 3. install doom emacs
 4. `stow tmux` and anything else you may want
 
-## Git Submodule Alert! :rotating_light:
+## 🚨 Git Submodule Alert! 🚨
 
 There are some submodules attached which may live in private repos.
 You may not have access to everything here.
@@ -30,7 +31,7 @@ You may not have access to everything here.
 
 Since MacOS and Linux are slightly different, I've got two sets of executables.
 
-## TL;DR
+## ⚡ TL;DR ⚡ 
 
 ```
 cd $HOME
