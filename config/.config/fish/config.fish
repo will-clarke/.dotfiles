@@ -6,3 +6,8 @@ if status is-interactive
     abbr --add --global gdc git diff --cached
     fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
 end
+
+if [ -z $DISPLAY ] && [ (tty) = "/dev/tty1" ]
+  exec sway
+end
+
