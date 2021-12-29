@@ -1,7 +1,8 @@
-# My Super Cool Dotfiles ʘ‿ʘ
+# Will's Dotfiles
 
-The aim is these should work both on MacOS & Linux
-Mainly emacs & command-line utilities...
+The aim is these should work both on MacOS & Linux.
+
+I try to keep my tools simple. At the moment I use Doom emacs, tmux, some shell utilities.
 
 ## Installation
 
@@ -12,7 +13,6 @@ One of these should work:
 - ~sudo pacman -S git stow~
 - ~brew install stow~
 
-GNU Stow is super cool. You should use it too.
 Then
 
 1. `git clone` this repo
@@ -38,13 +38,9 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 stow bin-{mac,linux} config emacs git org pass tmux stories
 ```
 
-may need to reinstall fisher:
+You may need to reinstall `fisher` packages to get `fish` working properly.
 
 ```
-fisher list > pkgs.txt
-fisher remove < pkgs.txt
-fisher install < pkgs.txt
-rm pkgs.txt
+fisher remove < ~/.dotfiles/config/.config/fish/fish_plugins
+fisher install < ~/.dotfiles/config/.config/fish/fish_plugins
 ```
-
-(fisher packages listed ~/.dotfiles/config/.config/fish/fish_plugins)
