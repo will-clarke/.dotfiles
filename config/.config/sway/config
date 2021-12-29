@@ -224,3 +224,6 @@ bar {
 }
 
 include /etc/sway/config.d/*
+
+bindsym $mod+Control+e exec sswitch emacs
+bindsym $mod+Control+d exec sswitch qutebrowser
