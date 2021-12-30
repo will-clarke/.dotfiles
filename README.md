@@ -1,4 +1,4 @@
-# 🖥 My Dotfiles 🖥 
+# 🖥 My Dotfiles 🖥
 
 The aim is these should work both on MacOS & Linux.
 
@@ -6,12 +6,12 @@ I try to keep my tools simple. At the moment I like Doom emacs, the fish shell &
 On MacOS, I use Karabiner for some better shortcuts / customisability.
 On Linux I like Arch & Sway as a window manager.
 
-## 🛠 Installation 🛠 
+## 🛠 Installation 🛠
 
 Grab a copy of [GNU Stow](http://www.gnu.org/software/stow/)
 One of these should work:
 
-- `sudo apt-get install git stow`
+- `sudo apt install git stow`
 - `sudo pacman -S git stow`
 - `brew install stow`
 
@@ -31,7 +31,7 @@ You may not have access to everything here.
 
 Since MacOS and Linux are slightly different, I've got two sets of executables.
 
-## ⚡ TL;DR ⚡ 
+## ⚡ TL;DR ⚡
 
 ```
 cd $HOME
@@ -45,4 +45,27 @@ You may need to reinstall `fisher` packages to get `fish` working properly.
 ```
 fisher remove < ~/.dotfiles/config/.config/fish/fish_plugins
 fisher install < ~/.dotfiles/config/.config/fish/fish_plugins
+```
+
+# Some repos that may be useful
+
+```sh
+openssh-server
+tailscale
+tmux
+htop
+bat
+ripgrep
+postgresql
+postgresql-contrib
+git
+curl
+fish
+stow
+pass
+pass-extension-otp
+
+# if dealing with Ubuntu and dodgy wifi firmware
+linux-headers-$(uname -r)
+broadcom-sta-*
 ```
