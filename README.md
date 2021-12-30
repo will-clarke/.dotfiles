@@ -43,13 +43,19 @@ stow bin-{mac,linux} config emacs git org pass tmux stories
 You may need to reinstall `fisher` packages to get `fish` working properly.
 
 ```
-fisher remove < ~/.dotfiles/config/.config/fish/fish_plugins
-fisher install < ~/.dotfiles/config/.config/fish/fish_plugins
+cp  ~/.dotfiles/config/.config/fish/fish_plugins plugins-tmp
+fish -c 'fisher remove < plugins-tmp'
+fish -c 'fisher install < plugins-tmp'
+# May help..... $ fish -c 'fisher install IlanCosman/tide@v5'
 ```
 
-# Some repos that may be useful
+# This may help if installing Ubuntu
 
 ```sh
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt upgrade
+
 openssh-server
 tailscale
 tmux
@@ -59,6 +65,7 @@ ripgrep
 postgresql
 postgresql-contrib
 git
+fd-find
 curl
 fish
 stow
