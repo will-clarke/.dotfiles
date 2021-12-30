@@ -3,7 +3,7 @@
 	url = git@git.sr.ht:~will-clarke/.password-store
 [submodule "emacs/.doom.d"]
 	path = emacs/.doom.d
-	url = git@gitlab.com:will-clarke/doom.d.git
+	url = git@git.sr.ht:~will-clarke/.doom.d
 [submodule "org/org"]
 	path = org/org
 	url = git@git.sr.ht:~will-clarke/org
