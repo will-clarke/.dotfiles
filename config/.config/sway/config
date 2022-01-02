@@ -228,3 +228,16 @@ include /etc/sway/config.d/*
 bindsym $mod+Control+e exec sswitch emacs
 bindsym $mod+Control+d exec sswitch qutebrowser
 bindsym $mod+Control+f exec sswitch Alacritty
+
+# bindsym control+semicolon exec sh -c "wtype `date '+%Y-%m-%d'`"
+bindsym control+shift+1 exec sh -c "wtype -P f1"
+bindsym control+shift+2 exec sh -c "wtype -P f2"
+bindsym control+shift+3 exec sh -c "wtype -P f3"
+bindsym control+shift+4 exec sh -c "wtype -P f4"
+bindsym control+shift+5 exec sh -c "wtype -P f5"
+bindsym control+shift+6 exec sh -c "wtype -P f6"
+bindsym control+shift+7 exec sh -c "wtype -P f7"
+bindsym control+shift+8 exec sh -c "wtype -P f8"
+bindsym control+shift+9 exec sh -c "wtype -P f9"
+bindsym control+shift+0 exec sh -c "wtype -P f10"
+# bindsym Control+Shift+1 exec ydotool set F1
