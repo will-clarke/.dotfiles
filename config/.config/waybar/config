@@ -31,6 +31,7 @@
         "memory",
         "cpu",
         "temperature",
+        "pulseaudio",
         "disk",
         "backlight",
         // "custom/keyboard-layout",
@@ -140,16 +141,16 @@
         "tooltip": false
     },
 
-   // "sway/window": {
-   //     "format": "{}",
-   //     "max-length": 50,
-   // "rewrite": {
-   //    "(.*)Mozilla Firefox": "🌎 $1",
-   //    "(.*)vim": " $1",
-   //    "(.*)zsh": " [$1]",
-   //    "(.*)Doom Emacs": " $1"
-   // }
-   // },
+    // "sway/window": {
+    //     "format": "{}",
+    //     "max-length": 50,
+    // "rewrite": {
+    //    "(.*)Mozilla Firefox": "🌎 $1",
+    //    "(.*)vim": " $1",
+    //    "(.*)zsh": " [$1]",
+    //    "(.*)Doom Emacs": " $1"
+    // }
+    // },
 
     // "sway/workspaces": {
     //     "all-outputs": false,
@@ -184,22 +185,22 @@
 
 },
 
-//"pulseaudio": {
-//    //"scroll-step": 1,
-//    "format": "{icon}  {volume}%",
-//    "format-bluetooth": "{icon}  {volume}%",
-//    "format-muted": "",
-//    "format-icons": {
-//        "headphones": "",
-//        "handsfree": "",
-//        "headset": "",
-//        "phone": "",
-//        "portable": "",
-//        "car": "",
-//        "default": ["", ""]
-//    },
-//    "on-click": "pavucontrol"
-//},
+"pulseaudio": {
+    //"scroll-step": 1,
+    "format": "{icon}  {volume} VOLUME %",
+    "format-bluetooth": " {icon}  {volume}%",
+    "format-muted": "",
+    "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+    },
+    "on-click": "pavucontrol"
+},
 
 "temperature": {
     "critical-threshold": 80,
