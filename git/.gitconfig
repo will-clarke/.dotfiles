@@ -37,3 +37,5 @@
 	rebase = false
 [init]
 	defaultBranch = master
+[includeIf "gitdir:~/code/infosum/"]
+    path = ~/code/infosum/.gitconfig
