@@ -7,6 +7,3 @@
 [submodule "org/org"]
 	path = org/org
 	url = git@git.sr.ht:~will-clarke/org
-[submodule "stories/stories"]
-	path = stories/stories
-	url = git@git.sr.ht:~will-clarke/stories
