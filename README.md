@@ -37,7 +37,7 @@ Since MacOS and Linux are slightly different, I've got two sets of executables.
 cd $HOME
 git clone git@git.sr.ht:~will-clarke/.dotfiles --recursive
 git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-stow bin-{mac,linux} config emacs git org pass tmux stories
+stow bin-{mac,linux} config emacs git org pass tmux stories wclarke.net
 ```
 
 You may need to reinstall `fisher` packages to get `fish` working properly.
