@@ -12,3 +12,8 @@ end
 if [ -z $DISPLAY ] && [ (tty) = /dev/tty1 ]
     exec sway
 end
+
+# Created by `pipx` on 2022-03-30 10:24:16
+set PATH $PATH /Users/wmmc/.local/bin
+
+set -x RIPGREP_CONFIG_PATH ~/.ripgrep/rc
