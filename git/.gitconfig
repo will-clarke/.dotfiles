@@ -17,6 +17,20 @@
 	up = !git fetch origin && git rebase origin/master
 	update-from = "!f() { git fetch $1 --prune; git merge --ff-only $1/$2 || git rebase --preserve-merges $1/$2; }; f"
 	ignored = !git ls-files -v | grep "^[[:lower:]]"
+	sw = switch
+	re = restore
+	br = branch
+	ci = commit
+	st = status
+	pushf = push --force-with-lease
+	pushb = !git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`
+	amend = commit --amend --no-edit
+	rebase-onto-master = !git fetch origin master:master && git rebase master && git push --force-with-lease
+	hist = log --graph --date=short --decorate -n 10
+	undo = ! git revert $(git rev-parse HEAD) --no-edit
+	removebranches = !git fetch -p origin && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+	done = !git checkout master && git pull && git removebranches
+	wip = for-each-ref --sort='-authordate:iso8601' --count 20 --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
