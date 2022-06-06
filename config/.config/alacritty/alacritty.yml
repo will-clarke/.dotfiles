@@ -834,6 +834,10 @@ key_bindings:
   - { key: Down, mods: Alt, chars: "\x1b[1;3B" }
   - { key: Down, chars: "\x1b[B", mode: ~AppCursor }
   - { key: Down, chars: "\x1bOB", mode: AppCursor }
+
+  - { key: Q, mods: Control, chars: "\x11" }
+  - { key: F, mods: Alt, chars: "\x1bf" }
+  - { key: B, mods: Alt, chars: "\x1bb" }
 #- { key: Paste,                                       action: Paste          }
 #- { key: Copy,                                        action: Copy           }
 #- { key: L,         mods: Control,                    action: ClearLogNotice }

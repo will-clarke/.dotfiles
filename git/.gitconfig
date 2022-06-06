@@ -51,5 +51,9 @@
 	rebase = false
 [init]
 	defaultBranch = master
-[includeIf "gitdir:~/code/infosum/"]
+[includeIf "gitdir:~/"]
     path = ~/code/infosum/.gitconfig
+[browseAtRemote]
+	type = infosum
+[push]
+	default = current
