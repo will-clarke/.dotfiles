@@ -42,7 +42,7 @@
                         ]
                     },
                     {
-                        "description": "hyper-space to emacs",
+                        "description": "hyper-space to nvim",
                         "manipulators": [
                             {
                                 "from": {
@@ -58,7 +58,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": " open /Applications/Emacs.app"
+                                        "shell_command": "open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
@@ -670,7 +670,7 @@
                         ]
                     },
                     {
-                        "description": "space to emacs",
+                        "description": "space to nvim",
                         "manipulators": [
                             {
                                 "from": {
@@ -683,7 +683,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": " open /Applications/Emacs.app"
+                                        "shell_command": "open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
@@ -821,7 +821,7 @@
                         ]
                     },
                     {
-                        "description": "hyper-e to emacs",
+                        "description": "hyper-e to nvim",
                         "manipulators": [
                             {
                                 "from": {
@@ -840,7 +840,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": " open /Applications/Emacs.app"
+                                        "shell_command": "open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
@@ -848,7 +848,7 @@
                         ]
                     },
                     {
-                        "description": "hyper-y to emacs everywhere",
+                        "description": "hyper-y to nvim everywhere",
                         "manipulators": [
                             {
                                 "from": {
@@ -867,7 +867,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/emacsclient --eval '(emacs-everywhere)'"
+                                        "shell_command": "open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
