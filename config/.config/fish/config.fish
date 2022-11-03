@@ -17,3 +17,4 @@ status --is-interactive; and source (goenv init -|psub)
     # zoxide init fish | source
 # end
 
+set -U -x fisher_path ~/.config/fisher
