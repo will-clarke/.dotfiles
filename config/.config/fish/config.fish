@@ -17,4 +17,11 @@ status --is-interactive; and source (goenv init -|psub)
     # zoxide init fish | source
 # end
 
+# fisher should be separate & not checked into git
 set -U -x fisher_path ~/.config/fisher
+set -p fish_complete_path ~/.config/fisher/completions
+set -p fish_function_path ~/.config/fisher/functions
+for f in  ~/.config/fisher/conf.d/*
+    source $f
+end
+
