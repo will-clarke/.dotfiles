@@ -49,6 +49,14 @@ fish -c 'fisher install < plugins-tmp'
 # May help..... $ fish -c 'fisher install IlanCosman/tide@v5'
 ```
 
+# Random stuff to install
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+go install github.com/doronbehar/pistol/cmd/pistol@latest
+brew install libmagic
+```
+
 # This may help if installing Ubuntu
 
 ```sh
@@ -67,6 +75,8 @@ postgresql-contrib
 git
 fd-find
 curl
+zoxide
+fzf
 fish
 stow
 pass
@@ -76,3 +86,5 @@ pass-extension-otp
 linux-headers-$(uname -r)
 broadcom-sta-*
 ```
+
+
