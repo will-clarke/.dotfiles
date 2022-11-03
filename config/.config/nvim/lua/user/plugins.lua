@@ -48,14 +48,10 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
   use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
 
@@ -85,20 +81,21 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
 
   -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
   use "JoosepAlviste/nvim-ts-context-commentstring"
 
   -- Git
   use "lewis6991/gitsigns.nvim"
-
-  -- ME
-  use "ibhagwan/fzf-lua"
   use "tpope/vim-fugitive"
+
+  -- Search
+  use "ibhagwan/fzf-lua"
+
+  -- Language stuff
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommanded if need floating window support
+  
+  use 'pelodelfuego/vim-swoop'
 
 
   -- Automatically set up your configuration after cloning packer.nvim

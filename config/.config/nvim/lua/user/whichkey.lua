@@ -85,25 +85,14 @@ local mappings = {
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["n"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["c"] = { "<cmd>q<CR>", "Close Buffer" },
+  ["/"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = { "<cmd>FzfLua files<CR>", "Find files" },
-    -- "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-  ["F"] = { "<cmd>FzfLua grep_project<cr>", "Find Text" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-
   ["<CR>"] = { "<cmd>ToggleTerm<CR>", "Term"},
-  ["j"] = { "<cmd>FzfLua grep_project<cr>", "Grep" },
+  ["j"] = { "<cmd>FzsfLua grep_cword<cr>", "Grep" },
+  ["J"] = { "<cmd>FzfLua live_grep_glob<cr>", "Grep" },
   ["'"] = { "<cmd>FzfLua resume<CR>", "Term"},
-  p = {
-    name = "Packer",
-    -- c = { "<cmd>PackerCompile<cr>", "Compile" },
-    -- i = { "<cmd>PackerInstall<cr>", "Install" },
-    -- s = { "<cmd>PackerSync<cr>", "Sync" },
-    -- S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
-  },
-
+  ["s"] = { "<cmd>"}, 
   g = {
     name = "Git",
     g = { "<cmd>Git<CR>", "Git" },
@@ -127,14 +116,8 @@ local mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
-    },
-    w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
-    },
+    d = { "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document Diagnostics" },
+    w = { "<cmd>FzfLua lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -160,3 +143,11 @@ local mappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
+which_key.register({ ["l"] = { "<cmd>call SwoopSelection()<cr>", "Alpha" }}, {
+  mode = "v", -- VISUAL mode
+  prefix = "<leader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+})

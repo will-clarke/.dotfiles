@@ -4,6 +4,7 @@ evanlucas/fish-kubectl-completions
 edc/bass
 JGAntunes/fish-gvm
 oh-my-fish/plugin-license
-jethrokuan/z
 danhper/fish-ssh-agent
 tadfisher/pass-otp
+jorgebucaran/nvm.fish
+kidonng/zoxide.fish

@@ -49,11 +49,30 @@
 	user = will-clarke
 [pull]
 	rebase = false
-[init]
-	defaultBranch = master
+# [init]
+	# defaultBranch = master
 [includeIf "gitdir:~/"]
     path = ~/code/infosum/.gitconfig
 [browseAtRemote]
 	type = infosum
 [push]
 	default = current
+
+# delta stuff
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    light = false    # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+[branch]
+	autoSetupMerge = always
