@@ -143,4 +143,7 @@ cmd zi ${{
 }}
 map Z :zi
 
-
+map f ${{
+    file="$(fzf)"
+    [ -n "$file" ] && $EDITOR $file 
+}}
