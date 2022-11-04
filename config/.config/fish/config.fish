@@ -9,7 +9,7 @@ if status is-interactive
     end
 end
 
-set PATH $PATH /Users/wmmc/.local/bin
+set PATH $PATH ~/.local/bin ~/.ghcup/bin
 
 status --is-interactive; and source (goenv init -|psub)
 
@@ -25,3 +25,5 @@ for f in  ~/.config/fisher/conf.d/*
     source $f
 end
 
+
+test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish 
