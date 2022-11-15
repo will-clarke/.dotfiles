@@ -14,3 +14,4 @@ theme = "tokyonight"
 
 [keys.normal]
 Z = { Z = ":write-quit" }
+

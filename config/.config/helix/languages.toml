@@ -1,0 +1,4 @@
+[[language]]
+name = "elixir"
+auto-format = true
+formatter = { command = "mix format" }
