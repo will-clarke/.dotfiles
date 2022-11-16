@@ -118,11 +118,11 @@
                     },
                                         
                     {
-                        "description": "hyper-m to music",
+                        "description": "hyper-s to spotify",
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "m",
+                                    "key_code": "s",
                                     "modifiers": {
                                         "mandatory": [
                                             "command",
