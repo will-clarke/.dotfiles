@@ -11,11 +11,15 @@ end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin
 
-status --is-interactive; and source (goenv init -|psub)
+if type -q goenv
+    status --is-interactive; and source (goenv init -|psub)
+end
 
-# if type -q zoxide
-    # zoxide init fish | source
-# end
+if type -q zoxide
+    zoxide init fish | source
+end
+
+set -Ux HELIX_RUNTIME ~/code/helix/runtime
 
 # fisher should be separate & not checked into git
 set -U -x fisher_path ~/.config/fisher
@@ -27,3 +31,4 @@ end
 
 
 test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish 
+test -f ~/.config/fish/config-local.fish && source ~/.config.bak/fish/config-local.fish

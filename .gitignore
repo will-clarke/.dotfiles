@@ -3,3 +3,5 @@ config/.config/fish/fish_variables
 /config/.config/configstore/update-notifier-netlify-cli.json
 /plugins-tmp
 /config/.config/fisher/
+:
+config/.config/fish/config-local.fish
