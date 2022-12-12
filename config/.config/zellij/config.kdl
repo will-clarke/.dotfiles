@@ -1,5 +1,7 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
+    // ME: I added these unbinds
+    unbind "Ctrl p" "Ctrl n" "Ctrl g" "Ctrl t" "Ctrl h" "Ctrl s" "Ctrl o" "Ctrl q"
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
@@ -145,22 +147,24 @@ keybinds {
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
-    shared_except "pane" "locked" {
+    // ME:
+    // I added 'normal' to the end of this lot:
+    shared_except "pane" "locked" "normal" {
         bind "Ctrl p" { SwitchToMode "Pane"; }
     }
-    shared_except "resize" "locked" {
+    shared_except "resize" "locked" "normal" {
         bind "Ctrl n" { SwitchToMode "Resize"; }
     }
-    shared_except "scroll" "locked" {
+    shared_except "scroll" "locked" "normal" {
         bind "Ctrl s" { SwitchToMode "Scroll"; }
     }
-    shared_except "session" "locked" {
+    shared_except "session" "locked" "normal" {
         bind "Ctrl o" { SwitchToMode "Session"; }
     }
-    shared_except "tab" "locked" {
+    shared_except "tab" "locked" "normal" {
         bind "Ctrl t" { SwitchToMode "Tab"; }
     }
-    shared_except "move" "locked" {
+    shared_except "move" "locked" "normal" {
         bind "Ctrl h" { SwitchToMode "Move"; }
     }
     shared_except "tmux" "locked" {

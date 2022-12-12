@@ -31,4 +31,4 @@ end
 
 
 test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish 
-test -f ~/.config/fish/config-local.fish && source ~/.config.bak/fish/config-local.fish
+test -f ~/.config/fish/config-local.fish && source ~/.config/fish/config-local.fish
