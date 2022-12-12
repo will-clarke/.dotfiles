@@ -82,7 +82,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "touch ~/notes/`/usr/local/bin/gdate --rfc-3339=date`.md && open -a kitty ~/notes/`/usr/local/bin/gdate --rfc-3339=date`.md"
+                                        "shell_command": "touch ~/notes/`/opt/homebrew/bin/gdate --rfc-3339=date`.md && open -a kitty ~/notes/`/opt/homebrew/bin/gdate --rfc-3339=date`.md"
                                     }
                                 ],
                                 "type": "basic"
@@ -715,27 +715,6 @@
                                 "to": [
                                     {
                                         "shell_command": "osascript $HOME/bin/insert_shrug.scpt"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "space to nvim",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
