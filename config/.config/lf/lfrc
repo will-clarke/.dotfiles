@@ -48,6 +48,16 @@ cmd fzf_search ${{
 }}
 map ss :fzf_search
 
+
+map D delete
+# map d # leave the command name empty like this for unmapping
+# map dd delete
+# map dD ${{
+#     echo 'delete?[y/n]'
+#     read ans
+#     [ $ans = 'y' ] && echo 'deleting files..' || $IFS=':'; rm -rf $fx
+# }}
+
 # set previewer ~/.config/lf/pv.sh
 
 # set '-eu' options for shell commands
