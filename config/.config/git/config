@@ -32,7 +32,7 @@
 	done = !git checkout master && git pull && git removebranches
 	wip = for-each-ref --sort='-authordate:iso8601' --count 20 --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.config/git/gitignore_global
 	autocrlf = input
 [fetch]
 	prune = true
