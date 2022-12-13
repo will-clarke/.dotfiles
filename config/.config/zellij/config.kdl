@@ -2,7 +2,8 @@
 keybinds {
     // ME: I added these unbinds
     normal {
-    unbind "Ctrl p" "Ctrl n" "Ctrl g" "Ctrl t" "Ctrl h" "Ctrl s" "Ctrl o" "Ctrl q"
+    unbind "Ctrl p" "Ctrl n" "Ctrl g" "Ctrl h" "Ctrl s" "Ctrl o" "Ctrl q"
+    bind "Ctrl x" { SwitchToMode "pane"; }
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
@@ -161,7 +162,7 @@ keybinds {
     shared_except "session" "locked" "normal" {
         bind "Ctrl o" { SwitchToMode "Session"; }
     }
-    shared_except "tab" "locked" "normal" {
+    shared_except "tab" "locked" {
         bind "Ctrl t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" "normal" {
