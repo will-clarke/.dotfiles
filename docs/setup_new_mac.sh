@@ -30,6 +30,8 @@ brew install google-chrome --cask
 brew install --cask slack
 brew install gnu-sed
 brew install fd
+brew install starship
+brew install exa
 
 fish_add_path "$HOMEBREW_PREFIX/bin"
 fish_add_path ~/.cargo/bin
