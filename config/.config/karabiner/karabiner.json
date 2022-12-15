@@ -82,7 +82,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "touch ~/notes/`/opt/homebrew/bin/gdate --rfc-3339=date`.md && open -a kitty ~/notes/`/opt/homebrew/bin/gdate --rfc-3339=date`.md"
+                                        "shell_command": "mkdir -p ~/notes/diary && touch ~/notes/diary/`/opt/homebrew/bin/gdate --rfc-3339=date`.md && /opt/homebrew/bin/kitty ~/.cargo/bin/hx ~/notes/diary/`/opt/homebrew/bin/gdate --rfc-3339=date`.md"
                                     }
                                 ],
                                 "type": "basic"

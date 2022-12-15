@@ -1,3 +1,5 @@
+set fish_greeting #disable welcome
+
 if status is-interactive
     abbr --add --global gco git checkout
     abbr --add --global ga git add

@@ -39,8 +39,8 @@
 [user]
 	name = William Clarke
 	email = wmmclarke@gmail.com
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+[url "ssh://git@github.com/flypay"]
+	insteadOf = https://github.com/flypay
 [url "ssh://git@gitlab.com/"]
   insteadOf = https://gitlab.com/
 [url "ssh://git@bitbucket.org/"]
@@ -49,10 +49,6 @@
 	user = will-clarke
 [pull]
 	rebase = false
-# [init]
-	# defaultBranch = master
-[includeIf "gitdir:~/"]
-    path = ~/code/infosum/.gitconfig
 [browseAtRemote]
 	type = infosum
 [push]
