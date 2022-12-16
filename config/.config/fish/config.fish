@@ -31,9 +31,7 @@ for f in  ~/.config/fisher/conf.d/*
     source $f
 end
 
-
-# may be needed:
-# set -a fish_function_path ~/.config/fish/functions.local/
+set -a fish_function_path ~/.config/fish/functions.local/
 
 test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish 
 test -f ~/.config/fish/config-local.fish && source ~/.config/fish/config-local.fish

@@ -15,6 +15,11 @@ theme = "tokyonight"
 [keys.normal]
 Z = { Z = ":write-quit", Q = ":quit!" }
 C-w = ":w"
+C-f = ":sh kitty @ launch --no-response --copy-env --cwd=current --type=overlay lf"
+# "C-/" = ":sh kitty @ launch --no-response --copy-env --hold --cwd=current --type=overlay lf"
+# C-t = ":sh kitty @ launch --no-response --copy-env --hold --cwd=current --type=tab mix test"
+# C-T = ":sh kitty @ launch --no-response --copy-env --hold --cwd=current --type=tab pnpm test"
+
 
 [keys.insert]
 "C-b" = "move_char_left"
