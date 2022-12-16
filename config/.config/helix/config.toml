@@ -37,3 +37,6 @@ C-f = ":sh kitty @ launch --no-response --copy-env --cwd=current --type=overlay 
 "end" = "goto_line_end_newline"
 "C-e" = "goto_line_end_newline"
 "A-left" = "goto_line_start"
+
+"A-x" = "normal_mode" # Maps Alt-X to enter normal mode
+j = { k = "normal_mode" } # Maps `jk` to exit insert mode

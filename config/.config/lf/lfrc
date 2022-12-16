@@ -5,7 +5,7 @@ set shell sh
 set previewer ~/.config/lf/lf_kitty_preview
 set cleaner ~/.config/lf/lf_kitty_clean
 
-
+map <esc> quit
 
 cmd z %{{
     result="$(zoxide query --exclude "${PWD}" -- "$@")"

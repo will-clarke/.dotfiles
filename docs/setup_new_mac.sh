@@ -47,6 +47,7 @@ brew install fish \
   elixir-ls \
   helix \
   goenv \
+  git-delta
 
 brew install --cask insomnia \
   google-chrome \ 

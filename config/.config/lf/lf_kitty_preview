@@ -10,7 +10,4 @@ if [[ "$( file -Lb --mime-type "$file")" =~ ^image ]]; then
     exit 1
 fi
 
-
-
-highlight -O ansi "$1"
-# pistol "$file"
+/opt/homebrew/bin/highlight -O ansi "$1"
