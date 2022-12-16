@@ -1,0 +1,3 @@
+ address chat.sr.ht
+ nickname will-clarke
+ password-cmd  pass show sr.ht/personal-access-token2
