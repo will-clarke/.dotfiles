@@ -21,7 +21,7 @@ if type -q zoxide
     zoxide init fish | source
 end
 
-set -Ux HELIX_RUNTIME ~/code/helix/runtime
+# set -Ux HELIX_RUNTIME ~/code/helix/runtime
 
 # fisher should be separate & not checked into git
 set -U -x fisher_path ~/.config/fisher

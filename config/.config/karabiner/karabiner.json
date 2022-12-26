@@ -66,7 +66,31 @@
                         ]
                     },
                     {
-                        "description": "hyper-; to today",
+                        "description": "hyper-' to personal diary",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "quote",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "shift",
+                                            "control",
+                                            "option",
+                                            "command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch hx ~/notes/diary/$(gdate --rfc-3339=date).md; open -a kitty"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                   {
+                        "description": "hyper-; to work todos",
                         "manipulators": [
                             {
                                 "from": {
@@ -82,7 +106,7 @@
                                 },
                                 "to": [
                                     {
-                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch hx ~/notes/diary/$(gdate --rfc-3339=date).md; open -a kitty"
+                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch hx ~/notes/work/$(gdate --rfc-3339=date).md; open -a kitty"
                                     }
                                 ],
                                 "type": "basic"

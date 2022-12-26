@@ -5,7 +5,7 @@ set shell sh
 set previewer ~/.config/lf/lf_kitty_preview
 set cleaner ~/.config/lf/lf_kitty_clean
 
-map <esc> quit
+# map <esc> quit
 
 cmd z %{{
     result="$(zoxide query --exclude "${PWD}" -- "$@")"
@@ -95,8 +95,10 @@ map O $mimeopen --ask $f
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
 cmd open &{{
+    echo  $(file --mime-type -Lb $f) 
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
+
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
