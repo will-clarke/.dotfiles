@@ -141,6 +141,30 @@
                         ]
                     },
                                         
+
+                    {
+                        "description": "cmd-; to tmp terminal",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) focus-tab  --match 'recent:1'; open -a kitty"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+
+                    
                     {
                         "description": "hyper-s to spotify",
                         "manipulators": [
