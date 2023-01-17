@@ -6,3 +6,6 @@ config/.config/fish/fish_variables
 
 config/.config/fish/config.local.fish
 config/.config/fish/functions.local
+config/.config/nnn/bookmarks/
+config/.config/nnn/.lastd
+config/.config/neofetch
