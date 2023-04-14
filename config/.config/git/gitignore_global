@@ -65,11 +65,13 @@ GTAGS
 
 .git
 
-.secret_script.sh
-.secret_folder/*
 *DS_Store
 .go-version
 
 .script.sh
 
 tmp
+
+.secret_script.sh
+.secret_folder/*
+TODO.md
