@@ -12,7 +12,45 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	--	'kana/vim-textobj-entire',
+	-- 'kana/vim-textobj-entire',
+	'folke/neodev.nvim',
+	{
+  "folke/trouble.nvim",
+  requires = "nvim-tree/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+},
+	"nvim-neotest/neotest-go",
+
+	{
+		"nvim-neotest/neotest",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-go",
+
+		},
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					-- require("neotest-plenary"),
+					require("neotest-go")({
+						experimental = {
+							test_table = true,
+						},
+						args = { "-count=1", "-timeout=60s" }
+					})
+				}
+
+			})
+		end
+	},
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	{
 		'stevearc/oil.nvim',

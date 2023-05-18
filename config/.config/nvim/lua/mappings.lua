@@ -26,6 +26,7 @@ vim.keymap.set('n', '<leader>Y', '"+Y', { desc = "Yank Line" })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = "Yank" })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = "Paste" })
 
+vim.keymap.set('n', '<leader>t', require("neotest").run.run, { desc = "Test" })
 
 
 -- vim.keymap.set('n', '<space>d', function()
@@ -57,3 +58,8 @@ vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+
+
+local telescope = require("telescope")
+telescope.load_extension("undo")
+vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
