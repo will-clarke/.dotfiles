@@ -8,6 +8,10 @@ config/.config/fish/config.local.fish
 config/.config/fish/functions.local
 config/.config/nnn/bookmarks/
 config/.config/nnn/.lastd
+config/.config/nnn/sessions/
 config/.config/neofetch
 config/.config/gh/hosts.yml
 config/.config/raycast/
+
+config/.config/github-copilot/hosts.json
+

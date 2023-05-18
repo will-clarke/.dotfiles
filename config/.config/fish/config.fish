@@ -6,7 +6,8 @@ if status is-interactive
     abbr --add --global gd git diff
     abbr --add --global gs git status
     abbr --add --global gdc git diff --cached
-    abbr --add --global n nnn -e
+    abbr --add --global nn nnn -e
+    abbr --add --global n nvim
     if type -q fzf_configure_bindings
         fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
     end
@@ -28,13 +29,13 @@ end
 set -U -x fisher_path ~/.config/fisher
 set -p fish_complete_path ~/.config/fisher/completions
 set -p fish_function_path ~/.config/fisher/functions
-for f in  ~/.config/fisher/conf.d/*
+for f in ~/.config/fisher/conf.d/*
     source $f
 end
 
 set -a fish_function_path ~/.config/fish/functions.local/
 
-test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish 
+test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish
 test -f ~/.config/fish/config-local.fish && source ~/.config/fish/config-local.fish
 
 
@@ -42,8 +43,8 @@ type -q starship && starship init fish | source
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /opt/homebrew/anaconda3/bin/conda
-    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+if test -f /Users/will.clarke/miniforge3/bin/conda
+    eval /Users/will.clarke/miniforge3/bin/conda "shell.fish" "hook" $argv | source
 end
 # <<< conda initialize <<<
 

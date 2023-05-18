@@ -20,6 +20,13 @@ Then
 1. `git clone` this repo
 2. `stow config` and anything else you may want
 
+## Git leaks
+
+Probs makes sense to install gitleaks (`brew install gitleaks`) and use it as a pre-commit hook:
+```sh
+echo "gitleaks protect" > .git/hooks/pre-commit
+```
+
 ## Different Binaries
 
 Since MacOS and Linux are slightly different, I've got two sets of executables.
