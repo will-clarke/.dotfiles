@@ -13,6 +13,7 @@ vim.keymap.set('n', '<leader>ss', builtin.grep_string, { desc = "Search string" 
 vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>bn', ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ":bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set('n', '<leader>bd', ":bdelete<CR>", { desc = "Delete buffer" })
 vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>lo", builtin.lsp_document_symbols, { desc = "SymbOls" })
 vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions, { desc = "Type" })
@@ -22,6 +23,32 @@ vim.keymap.set("n", "<leader>li", builtin.lsp_implementations, { desc = "impleme
 vim.keymap.set("n", "<leader>lO", builtin.lsp_dynamic_workspace_symbols, { desc = "workplace symbols" })
 vim.keymap.set("n", "<leader>lci", builtin.lsp_incoming_calls, { desc = "incoming calls" })
 vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoing calls" })
+vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
+
+
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  {silent = true, noremap = true}
+)
+
+
+-- vim.keymap.set("n", "<leader>lco", bu, { desc = "outgoing calls" })
+
+
 vim.keymap.set("n", "<leader>r", builtin.registers, { desc = "Registers" })
 
 vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
@@ -36,8 +63,23 @@ vim.keymap.set('n', '<leader>Y', '"+Y', { desc = "Yank Line" })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = "Yank" })
 vim.keymap.set('n', '<leader>p', '"+p', { desc = "Paste" })
 
-vim.keymap.set('n', '<leader>t', require("neotest").run.run, { desc = "Test" })
 
+vim.keymap.set('n', '<leader>tt', require("neotest").run.run, { desc = "Test" })
+vim.keymap.set('n', '<leader>tf', function()
+require("neotest").run.run(vim.fn.expand("%"))
+end, { desc = "Test file" })
+vim.keymap.set('n', '<leader>td', function() 
+require("neotest").run.run({strategy = "dap"}) end , { desc = "Debug" })
+vim.keymap.set('n', '<leader>ta',require("neotest").run.attach , { desc = "Attach to test" })
+vim.keymap.set('n', '<leader>to',require("neotest").output_panel.toggle, { desc = "Output toggle" })
+vim.keymap.set('n', '<leader>tO',
+function()
+require("neotest").output.open({enter = true})
+end
+, { desc = "Output open" })
+
+vim.keymap.set('n', '<leader>n', ":e ~/notes/work/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Notes" })
+vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Journal" })
 
 -- vim.keymap.set('n', '<space>d', function()
 -- 	vim.diagnostic.open_float()
@@ -47,7 +89,8 @@ vim.keymap.set('n', '<leader>t', require("neotest").run.run, { desc = "Test" })
 -- end, { desc="Diagnostic List" })
 
 
-vim.keymap.set("n", "<leader>g", ":Neogit<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gg", require("neogit").open, { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
 
 
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
@@ -62,7 +105,7 @@ local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
 vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Add Harpoon" })
-vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+vim.keymap.set("n", "<leader>A", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
 
 vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
@@ -74,10 +117,49 @@ local telescope = require("telescope")
 telescope.load_extension("undo")
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
+vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
+
+local toggle_theme = function()
+	local themes = {
+		"tokyonight",
+		"tokyonight-night",
+		-- "tokyonight-moon",
+		"tokyonight-day",
+	}
+	local current_theme = vim.g.colors_name
+	local next_theme_idx = 1
+	for k, v in pairs(themes) do
+		if current_theme == v then
+			next_theme_idx = k
+		end
+	end
+
+	next_theme_idx = next_theme_idx % #themes + 1
+
+	local next_theme = themes[next_theme_idx]
+
+	vim.cmd('colorscheme ' .. next_theme)
+	vim.g.colors_name = next_theme
+
+	print("setting theme to " .. next_theme)
+end
+
+vim.keymap.set("n", "<leader>tt", toggle_theme, { desc = "toggle theme" })
+
+
+vim.cmd [[colorscheme tokyonight]]
 
 
 local wk = require("which-key")
 wk.register({
 	["<leader>f"] = { name = "+file" },
-	["<leader>z"] = { name = "+lolz" },
 })
+
+
+
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("v", "<A-k>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")

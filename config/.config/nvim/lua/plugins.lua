@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- 'kana/vim-textobj-entire',
+	'gabrielpoca/replacer.nvim',
 	'folke/tokyonight.nvim',
 	{
 		'folke/neodev.nvim',
@@ -95,15 +96,10 @@ require("lazy").setup({
 	{
 		'TimUntersberger/neogit',
 		requires = 'nvim-lua/plenary.nvim',
+		lazy = true,
 		config = function()
 			require('neogit').setup {}
 		end,
-	},
-	{
-		'nvim-pack/nvim-spectre',
-		config = function()
-			require('spectre').setup()
-		end
 	},
 	{
 		'nvim-telescope/telescope-fzf-native.nvim',
