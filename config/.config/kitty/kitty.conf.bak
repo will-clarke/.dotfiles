@@ -41,7 +41,10 @@ map ctrl+alt+z toggle_layout stack
 
 enabled_layouts tall,stack,fat,grid,horizontal,splits,vertical
 
-font_family    GoMono Nerd Font Mono
+#// font_family    GoMono Nerd Font Mono
+
+font_family     SauceCodePro Nerd Font
+
 font_size 21.0
 
 map ctrl+alt+h neighboring_window left
@@ -2319,6 +2322,6 @@ map ctrl+alt+t goto_layout tall
 
 
 # BEGIN_KITTY_THEME
-# 3024 Night
+# zenbones_dark
 include current-theme.conf
 # END_KITTY_THEME

@@ -13,18 +13,39 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- 'kana/vim-textobj-entire',
-	'folke/neodev.nvim',
+	'folke/tokyonight.nvim',
 	{
-  "folke/trouble.nvim",
-  requires = "nvim-tree/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-},
+		'folke/neodev.nvim',
+		config = function()
+			require("neodev").setup({})
+		end
+
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		requires = {
+			'nvim-tree/nvim-web-devicons',
+			opt = true,
+			config = function()
+				require('lualine').setup({
+					options = {
+						theme = 'tokyonight'
+					}
+				})
+			end
+		}
+	},
+	{
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("trouble").setup {
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			}
+		end
+	},
 	"nvim-neotest/neotest-go",
 
 	{
@@ -95,6 +116,7 @@ require("lazy").setup({
 			-- require("telescope").load_extension('harpoon')
 		end
 	},
+	'hrsh7th/cmp-nvim-lua',
 	{
 		'hrsh7th/nvim-cmp',
 		config = function()
@@ -106,6 +128,8 @@ require("lazy").setup({
 					{ name = "copilot",  group_index = 2 },
 					-- Other Sources
 					{ name = "nvim_lsp", group_index = 2 },
+					-- { name = 'nvim_lua' },
+
 					{ name = "path",     group_index = 2 },
 				}),
 				mapping = cmp.mapping.preset.insert({
@@ -214,7 +238,6 @@ require("lazy").setup({
 	},
 	{ "folke/neoconf.nvim",              cmd = "Neoconf" },
 	{ 'nvim-treesitter/nvim-treesitter', cmd = 'TSUpdate' },
-	"folke/neodev.nvim",
 	"folke/trouble.nvim",
 	{
 		'nvim-telescope/telescope.nvim',
@@ -238,9 +261,6 @@ require("lazy").setup({
 					},
 				},
 			})
-
-			telescope.load_extension("undo")
-			vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 		end
 	},
 	{ 'rose-pine/neovim',     name = 'rose-pine' },
@@ -249,9 +269,7 @@ require("lazy").setup({
 	{ 'neovim/nvim-lspconfig' },
 
 	"folke/zen-mode.nvim",
-	-- "github/copilot.vim",
 	"eandrju/cellular-automaton.nvim",
-	--"laytan/cloak.nvim",
 })
 
 vim.cmd('colorscheme rose-pine')
@@ -285,3 +303,4 @@ require 'nvim-treesitter.configs'.setup {
 
 -- set termguicolors to enable highlight groups
 -- vim.opt.termguicolors = true
+vim.cmd [[colorscheme tokyonight]]
