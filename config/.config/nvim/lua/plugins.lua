@@ -268,8 +268,6 @@ require("lazy").setup({
 	"eandrju/cellular-automaton.nvim",
 })
 
-vim.cmd('colorscheme rose-pine')
-
 require 'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
 	ensure_installed = { "vimdoc", "javascript", "typescript", "go", "c", "lua", "rust" },
@@ -293,10 +291,6 @@ require 'nvim-treesitter.configs'.setup {
 	},
 }
 
--- disable netrw at the very start of your init.lua (strongly advised)
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- set termguicolors to enable highlight groups
--- vim.opt.termguicolors = true
+vim.opt.termguicolors = true
 vim.cmd [[colorscheme tokyonight]]
