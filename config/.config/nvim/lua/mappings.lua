@@ -121,7 +121,7 @@ vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 
 local toggle_theme = function()
 	local themes = {
-		"tokyonight",
+		-- "tokyonight",
 		"tokyonight-night",
 		-- "tokyonight-moon",
 		"tokyonight-day",
