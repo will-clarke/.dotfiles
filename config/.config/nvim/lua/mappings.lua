@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "-", ':NnnPicker<CR>', { desc = "NNN" })
 -- vim.keymap.set("n", "<leader>-", ':NnnPicker %:p:h<CR>', { desc = "NNN local" })
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
-
+vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
@@ -25,6 +25,7 @@ vim.keymap.set("n", "<leader>lci", builtin.lsp_incoming_calls, { desc = "incomin
 vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoing calls" })
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
 
+vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
 
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
   {silent = true, noremap = true}
@@ -51,10 +52,10 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 
 vim.keymap.set("n", "<leader>r", builtin.registers, { desc = "Registers" })
 
-vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
+-- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
 
-vim.keymap.set('n', '<space>F', function()
+vim.keymap.set('n', '<leader>F', function()
 	vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
@@ -143,9 +144,7 @@ local toggle_theme = function()
 
 	print("setting theme to " .. next_theme)
 end
-
-vim.keymap.set("n", "<leader>tt", toggle_theme, { desc = "toggle theme" })
-
+vim.keymap.set("n", "<leader>TT", toggle_theme, { desc = "toggle theme" })
 
 vim.cmd [[colorscheme tokyonight]]
 
