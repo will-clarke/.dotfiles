@@ -79,6 +79,8 @@ require("neotest").output.open({enter = true})
 end
 , { desc = "Output open" })
 
+vim.keymap.set('n', '<leader>ts',require("neotest").summary.toggle, { desc = "Summary of test" })
+
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Journal" })
 
@@ -168,3 +170,14 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 -- indenting blocks visually
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+local readline = require 'readline'
+vim.keymap.set('!', '<M-f>', readline.forward_word)
+vim.keymap.set('!', '<M-b>', readline.backward_word)
+vim.keymap.set('!', '<C-a>', readline.beginning_of_line)
+vim.keymap.set('!', '<C-e>', readline.end_of_line)
+vim.keymap.set('!', '<M-d>', readline.kill_word)
+vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
+vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
+vim.keymap.set('!', '<C-k>', readline.kill_line)
+vim.keymap.set('!', '<C-u>', readline.backward_kill_line)

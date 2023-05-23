@@ -1,3 +1,4 @@
+# :set filetype?
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("close_with_q", {clear = true}),
   pattern = {
@@ -11,7 +12,10 @@ vim.api.nvim_create_autocmd("FileType", {
     "startuptime",
     "tsplayground",
     "checkhealth",
-    "oil"
+    "oil",
+    "neotest-output",
+    "neotest-attach",
+    "neotest-summary",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

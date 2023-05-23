@@ -13,6 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- 'kana/vim-textobj-entire',
+    --
+    'linty-org/readline.nvim',
     'gabrielpoca/replacer.nvim',
     'folke/tokyonight.nvim',
     {
