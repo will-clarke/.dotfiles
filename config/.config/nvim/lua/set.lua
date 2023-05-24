@@ -32,3 +32,4 @@ vim.opt.colorcolumn = "80"
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.g.gitblame_enabled = 0

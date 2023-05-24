@@ -1,5 +1,5 @@
+require("set")
 require("plugins")
 require("lsp")
 require("mappings")
-require("set")
 require("autocmds")
