@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     -- 'kana/vim-textobj-entire',
     --
+
+    'f-person/git-blame.nvim',
     'linty-org/readline.nvim',
     'gabrielpoca/replacer.nvim',
     'folke/tokyonight.nvim',
@@ -129,7 +131,7 @@ require("lazy").setup({
             cmp.setup {
                 sources = cmp.config.sources({
                     -- Copilot Source
-                    { name = "copilot",  group_index = 2, priority = 5},
+                    { name = "copilot",  group_index = 2, priority = 5 },
                     -- Other Sources
                     { name = "nvim_lsp", group_index = 2 },
                     -- { name = 'nvim_lua' },
@@ -202,9 +204,9 @@ require("lazy").setup({
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },     -- Required
         }
     },
     {

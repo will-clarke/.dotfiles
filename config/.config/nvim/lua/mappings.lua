@@ -94,6 +94,8 @@ vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/".. os.date('%Y-%m-%d').. ".
 
 vim.keymap.set("n", "<leader>gg", require("neogit").open, { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
+vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
+
 
 
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
@@ -181,3 +183,6 @@ vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
 vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
 vim.keymap.set('!', '<C-k>', readline.kill_line)
 vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+
+
+
