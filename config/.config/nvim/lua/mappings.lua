@@ -6,10 +6,15 @@ vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent dire
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
+vim.keymap.set('n', '<leader>fF', builtin.fd, { desc = "Find files from CWD" })
 vim.keymap.set('n', '<leader>fs', ":w<CR>", { desc = "File save" })
 vim.keymap.set('n', '<leader>fr', ":Telescope oldfiles<CR>", { desc = "Find Recent files" })
-vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = "Live grep" })
-vim.keymap.set('n', '<leader>ss', builtin.grep_string, { desc = "Search string" })
+vim.keymap.set('n', '<leader>ss', builtin.live_grep, { desc = "Search project" })
+vim.keymap.set('n', '<leader>sS', builtin.current_buffer_fuzzy_find, { desc = "Search buffer" })
+
+vim.keymap.set('n', '<leader>k', builtin.keymaps, { desc = "Keymaps" })
+
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = "Search word" })
 vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>bn', ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ":bprev<CR>", { desc = "Previous buffer" })
@@ -50,7 +55,8 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 -- vim.keymap.set("n", "<leader>lco", bu, { desc = "outgoing calls" })
 
 
-vim.keymap.set("n", "<leader>r", builtin.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
 
 -- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
