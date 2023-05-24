@@ -7,7 +7,6 @@ cmp.setup {
         -- Other Sources
         { name = "nvim_lsp", group_index = 2 },
         -- { name = 'nvim_lua' },
-
         { name = "path",     group_index = 2 },
     }),
     mapping = cmp.mapping.preset.insert({

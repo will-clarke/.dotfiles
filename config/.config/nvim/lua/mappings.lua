@@ -10,8 +10,7 @@ vim.keymap.set("n", "-", function()
         return
     end
     require("oil").open()
-end
-, { desc = "Open parent directory" })
+end , { desc = "Open parent directory" })
 
 vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
 
@@ -141,6 +140,7 @@ vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 local telescope = require("telescope")
 telescope.load_extension("undo")
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
 
 vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 

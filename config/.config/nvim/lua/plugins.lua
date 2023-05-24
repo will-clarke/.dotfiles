@@ -1,11 +1,12 @@
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
-        "clone",
+            "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable", -- latest stable release 
         lazypath,
     })
 end
@@ -16,10 +17,14 @@ require("lazy").setup({
     -- kevinhwang91/nvim-bqf
     -- yazgoo/vmux
     -- 'Matt-A-Bennett/vim-surround-funk',
+    'mbbill/undotree',
     'f-person/git-blame.nvim',
     'linty-org/readline.nvim',
     'gabrielpoca/replacer.nvim',
     'folke/tokyonight.nvim',
+    'ThePrimeagen/harpoon',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/nvim-cmp',
     {
         'folke/neodev.nvim',
         config = function()
@@ -159,14 +164,6 @@ require("lazy").setup({
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
     },
     {
-        'ThePrimeagen/harpoon',
-        config = function()
-            -- require("telescope").load_extension('harpoon')
-        end
-    },
-    'hrsh7th/cmp-nvim-lua',
-    'hrsh7th/nvim-cmp',
-    {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
         event = "InsertEnter",
@@ -217,9 +214,11 @@ require("lazy").setup({
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
         -- or                              , branch = '0.1.1',
-        dependencies = { 'nvim-lua/plenary.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
             'debugloop/telescope-undo.nvim',
         },
     },
     "folke/zen-mode.nvim",
 })
+
