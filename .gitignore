@@ -16,3 +16,7 @@ config/.config/raycast/
 config/.config/github-copilot/hosts.json
 
 config/.config/nvim/lua/.luarc.json
+
+
+config/.config/Amazon/
+config/.config/filezilla/
