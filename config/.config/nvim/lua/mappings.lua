@@ -5,7 +5,7 @@ vim.keymap.set("n", "-", function()
     -- if the buffer is a NeogitPopup buffer, "press" "-" & return early
     if vim.bo.filetype == "NeogitPopup" then
         -- send a valid "-" as if I'd pressed it
-        local keys = vim.api.nvim_replace_termcodes('-',true,false,false)
+        local keys = vim.api.nvim_replace_termcodes('-', true, false, false)
         vim.api.nvim_feedkeys(keys, "n", false)
         return
     end
@@ -72,7 +72,7 @@ vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
 -- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
 
-vim.keymap.set('n', '<leader>F', function()
+vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
@@ -201,3 +201,5 @@ vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
 vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
 vim.keymap.set('!', '<C-k>', readline.kill_line)
 vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+
+vim.keymap.set("n", "<leader>m", require('treesj').toggle, { desc = "Split/Join" })

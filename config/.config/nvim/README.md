@@ -1,1 +1,0 @@
-- go install -v github.com/cweill/gotests/gotests@v1.6.0
