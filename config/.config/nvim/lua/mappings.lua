@@ -2,14 +2,19 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "-", ':NnnPicker<CR>', { desc = "NNN" })
 -- vim.keymap.set("n", "<leader>-", ':NnnPicker %:p:h<CR>', { desc = "NNN local" })
 vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
-
+vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
+vim.keymap.set('n', '<leader>fF', builtin.fd, { desc = "Find files from CWD" })
 vim.keymap.set('n', '<leader>fs', ":w<CR>", { desc = "File save" })
 vim.keymap.set('n', '<leader>fr', ":Telescope oldfiles<CR>", { desc = "Find Recent files" })
-vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = "Live grep" })
-vim.keymap.set('n', '<leader>ss', builtin.grep_string, { desc = "Search string" })
+vim.keymap.set('n', '<leader>ss', builtin.live_grep, { desc = "Search project" })
+vim.keymap.set('n', '<leader>sS', builtin.current_buffer_fuzzy_find, { desc = "Search buffer" })
+
+vim.keymap.set('n', '<leader>k', builtin.keymaps, { desc = "Keymaps" })
+
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = "Search word" })
 vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>bn', ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ":bprev<CR>", { desc = "Previous buffer" })
@@ -25,6 +30,7 @@ vim.keymap.set("n", "<leader>lci", builtin.lsp_incoming_calls, { desc = "incomin
 vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoing calls" })
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
 
+vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
 
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
   {silent = true, noremap = true}
@@ -49,12 +55,13 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 -- vim.keymap.set("n", "<leader>lco", bu, { desc = "outgoing calls" })
 
 
-vim.keymap.set("n", "<leader>r", builtin.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
+vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
 
-vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
+-- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
 
-vim.keymap.set('n', '<space>F', function()
+vim.keymap.set('n', '<leader>F', function()
 	vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
@@ -78,6 +85,8 @@ require("neotest").output.open({enter = true})
 end
 , { desc = "Output open" })
 
+vim.keymap.set('n', '<leader>ts',require("neotest").summary.toggle, { desc = "Summary of test" })
+
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/".. os.date('%Y-%m-%d').. ".md<CR>" , { desc = "Journal" })
 
@@ -91,6 +100,8 @@ vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/".. os.date('%Y-%m-%d').. ".
 
 vim.keymap.set("n", "<leader>gg", require("neogit").open, { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
+vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
+
 
 
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
@@ -121,7 +132,7 @@ vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 
 local toggle_theme = function()
 	local themes = {
-		"tokyonight",
+		-- "tokyonight",
 		"tokyonight-night",
 		-- "tokyonight-moon",
 		"tokyonight-day",
@@ -143,9 +154,7 @@ local toggle_theme = function()
 
 	print("setting theme to " .. next_theme)
 end
-
-vim.keymap.set("n", "<leader>tt", toggle_theme, { desc = "toggle theme" })
-
+vim.keymap.set("n", "<leader>TT", toggle_theme, { desc = "toggle theme" })
 
 vim.cmd [[colorscheme tokyonight]]
 
@@ -156,10 +165,30 @@ wk.register({
 })
 
 
+-- save
+vim.keymap.set("n", "<C-s>", ":w<CR>")
+vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>i")
 
+-- moving lines up and down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("v", "<A-k>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
+-- indenting blocks visually
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+local readline = require 'readline'
+vim.keymap.set('!', '<M-f>', readline.forward_word)
+vim.keymap.set('!', '<M-b>', readline.backward_word)
+vim.keymap.set('!', '<C-a>', readline.beginning_of_line)
+vim.keymap.set('!', '<C-e>', readline.end_of_line)
+vim.keymap.set('!', '<M-d>', readline.kill_word)
+vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
+vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
+vim.keymap.set('!', '<C-k>', readline.kill_line)
+vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+
+
+
