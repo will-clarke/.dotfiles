@@ -66,8 +66,10 @@ vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 -- vim.keymap.set("n", "<leader>lco", bu, { desc = "outgoing calls" })
 
 
-vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
+-- vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
 vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
+
+vim.keymap.set('n', '<Leader>R', require("replacer").run, { desc = "Replacer" })
 
 -- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
@@ -172,9 +174,7 @@ vim.cmd [[colorscheme tokyonight]]
 
 
 local wk = require("which-key")
-wk.register({
-    ["<leader>f"] = { name = "+file" },
-})
+wk.register({ ["<leader>f"] = { name = "+file" } })
 
 
 -- save

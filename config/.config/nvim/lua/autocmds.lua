@@ -25,10 +25,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
+
 local yank_group = augroup('HighlightYank', {})
-local boo_whitespace = augroup('BooWhitespace', {})
-
-
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
@@ -40,11 +38,12 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({ "BufWritePre" }, {
-    group = boo_whitespace,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
+-- local boo_whitespace = augroup('BooWhitespace', {})
+-- autocmd({ "BufWritePre" }, {
+--     group = boo_whitespace,
+--     pattern = "*",
+--     command = [[%s/\s\+$//e]],
+-- })
 
 
 vim.api.nvim_create_augroup('AutoFormatting', {})
