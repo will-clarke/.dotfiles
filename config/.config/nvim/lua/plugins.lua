@@ -26,6 +26,15 @@ require("lazy").setup({
     'hrsh7th/nvim-cmp',
     'nvim-treesitter/nvim-treesitter-context',
     {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            require("toggleterm").setup {
+                open_mapping = [[<c-\>]],
+            }
+        end
+    },
+    {
         'folke/neodev.nvim',
         config = function()
             require("neodev").setup({})

@@ -1,7 +1,17 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "-", ':NnnPicker<CR>', { desc = "NNN" })
 -- vim.keymap.set("n", "<leader>-", ':NnnPicker %:p:h<CR>', { desc = "NNN local" })
-vim.keymap.set("n", "-", function()
+--
+--
+--
+
+local cool = function()
+    -- something like this
+    -- :vsplit | wincmd p | exe "normal gd" | wincmd p
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('ifoo<cr>', true, false, true), 'm', true)
+end
+
+vim.keymap.set("n", "gD", cool, { desc = "Open parent directory" })
+local oil = function()
     -- if the buffer is a NeogitPopup buffer, "press" "-" & return early
     if vim.bo.filetype == "NeogitPopup" then
         -- send a valid "-" as if I'd pressed it
@@ -10,7 +20,12 @@ vim.keymap.set("n", "-", function()
         return
     end
     require("oil").open()
-end , { desc = "Open parent directory" })
+end
+
+vim.keymap.set("n", ";", oil, { desc = "Open parent directory" })
+vim.keymap.set("n", "-", oil, { desc = "Open parent directory" })
+
+require("oil").open()
 
 vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
 
