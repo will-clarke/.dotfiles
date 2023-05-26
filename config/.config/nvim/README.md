@@ -1,5 +1,9 @@
-- REMAP ALL OIL SHORTCUTS.
-- oil respects c-s
-- semicolon for oil???
+# Plugins to think about:
+
 - nvim-dap
-iamcco/markdown-preview.nvim
+- iamcco/markdown-preview.nvim
+
+- search shortcuts?
+
+## TODO
+- Make big plugins load quickly

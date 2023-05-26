@@ -45,6 +45,7 @@ require("oil").setup({
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
         ["gv"] = "actions.select_vsplit",
+        ["<C-s>"] = false,
         ["gs"] = "actions.select_split",
         ["gt"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
