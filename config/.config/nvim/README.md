@@ -2,6 +2,8 @@
 
 - nvim-dap
 - iamcco/markdown-preview.nvim
+- https://github.com/sindrets/diffview.nvim
+- https://github.com/L3MON4D3/LuaSnip -- read more!
 
 - search shortcuts?
 

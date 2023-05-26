@@ -26,6 +26,7 @@ require("lazy").setup({
     'hrsh7th/nvim-cmp',
     'nvim-treesitter/nvim-treesitter-context',
     'eandrju/cellular-automaton.nvim',
+    'saadparwaiz1/cmp_luasnip',
     {
         "gaoDean/autolist.nvim",
         ft = {
@@ -52,6 +53,13 @@ require("lazy").setup({
         'RRethy/vim-illuminate',
         config = function()
         end,
+    },
+    {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end
     },
     {
         'akinsho/toggleterm.nvim',

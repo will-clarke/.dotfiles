@@ -1,12 +1,18 @@
 local cmp = require 'cmp'
 
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            require 'luasnip'.lsp_expand(args.body)
+        end
+    },
     sources = cmp.config.sources({
         -- Copilot Source
         { name = "copilot",  group_index = 2, priority = 5 },
         -- Other Sources
         { name = "nvim_lsp", group_index = 2 },
         -- { name = 'nvim_lua' },
+        { name = 'luasnip',  group_index = 2 },
         { name = "path",     group_index = 2 },
     }),
     mapping = cmp.mapping.preset.insert({
