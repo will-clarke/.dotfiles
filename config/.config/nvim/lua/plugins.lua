@@ -173,9 +173,9 @@ require("lazy").setup({
         'stevearc/oil.nvim',
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("oil").setup()
-        end
+        -- config = function()
+        --     require("oil").setup()
+        -- end
     },
     {
         'lewis6991/gitsigns.nvim',
