@@ -25,6 +25,34 @@ require("lazy").setup({
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/nvim-cmp',
     'nvim-treesitter/nvim-treesitter-context',
+    'eandrju/cellular-automaton.nvim',
+    {
+        "gaoDean/autolist.nvim",
+        ft = {
+            "markdown",
+            "text",
+            "tex",
+            "plaintex",
+        },
+        config = function()
+            local autolist = require("autolist")
+            autolist.setup()
+            autolist.create_mapping_hook("i", "<CR>", autolist.new)
+            autolist.create_mapping_hook("i", "<Tab>", autolist.indent)
+            autolist.create_mapping_hook("i", "<S-Tab>", autolist.indent, "<C-D>")
+            autolist.create_mapping_hook("n", "o", autolist.new)
+            autolist.create_mapping_hook("n", "O", autolist.new_before)
+            autolist.create_mapping_hook("n", ">>", autolist.indent)
+            autolist.create_mapping_hook("n", "<<", autolist.indent)
+            autolist.create_mapping_hook("n", "<C-r>", autolist.force_recalculate)
+            autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
+        end,
+    },
+    {
+        'RRethy/vim-illuminate',
+        config = function()
+        end,
+    },
     {
         'akinsho/toggleterm.nvim',
         version = "*",

@@ -26,6 +26,13 @@ require("copilot_cmp").setup({})
 
 require("copilot").setup({
     -- we're disabling these as copilot-cmp is dealing with it
-    suggestion = { enabled = false },
-    panel = { enabled = false },
+    suggestion = {
+        enabled = false,
+    },
+    panel = {
+        enabled = false,
+    },
+    -- filetypes = {
+    --     markdown = true,
+    -- },
 })

@@ -23,9 +23,6 @@ local oil = function()
 end
 
 vim.keymap.set("n", ";", oil, { desc = "Open parent directory" })
-vim.keymap.set("n", "-", oil, { desc = "Open parent directory" })
-
-require("oil").open()
 
 vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
 
@@ -216,5 +213,11 @@ vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
 vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
 vim.keymap.set('!', '<C-k>', readline.kill_line)
 vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+vim.keymap.set('!', '<C-f>', '<Right>')
+vim.keymap.set('!', '<C-b>', '<Left>')
+vim.keymap.set('!', '<C-p>', '<Up>')
+vim.keymap.set('!', '<C-d>', '<Delete>') -- delete-char
+vim.keymap.set('!', '<C-n>', '<Down>')
+vim.keymap.set('!', '<C-h>', '<BS>')     -- backward-delete-char
 
 vim.keymap.set("n", "<leader>m", require('treesj').toggle, { desc = "Split/Join" })

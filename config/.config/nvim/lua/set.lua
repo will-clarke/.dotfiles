@@ -1,7 +1,9 @@
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 -- vim.opt.relativenumber = true
 vim.opt.nu = true
+
+vim.opt.smartcase = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -17,8 +19,10 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
+-- noremap <silent><esc> <esc>:noh<CR><esc> - maybe we could enable hlsearch??
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+
 
 vim.opt.termguicolors = true
 
