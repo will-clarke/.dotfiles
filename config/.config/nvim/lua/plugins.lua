@@ -28,6 +28,12 @@ require("lazy").setup({
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
     {
+        'sindrets/diffview.nvim',
+        config = function()
+            require 'diffview'.setup({})
+        end
+    },
+    {
         "gaoDean/autolist.nvim",
         ft = {
             "markdown",

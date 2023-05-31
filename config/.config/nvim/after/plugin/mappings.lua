@@ -1,8 +1,4 @@
 vim.g.mapleader = " "
--- vim.keymap.set("n", "<leader>-", ':NnnPicker %:p:h<CR>', { desc = "NNN local" })
---
---
---
 
 local cool = function()
     -- something like this
@@ -51,6 +47,8 @@ vim.keymap.set("n", "<leader>lO", builtin.lsp_dynamic_workspace_symbols, { desc 
 vim.keymap.set("n", "<leader>lci", builtin.lsp_incoming_calls, { desc = "incoming calls" })
 vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoing calls" })
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
+vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "definitions" })
+vim.keymap.set("n", "<leader>gr", builtin.lsp_references, { desc = "references" })
 
 vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
 
