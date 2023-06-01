@@ -34,7 +34,10 @@ require("lazy").setup({
             { 'nvim-telescope/telescope.nvim' },
         },
         config = function()
-            require('neoclip').setup({})
+            require("telescope").load_extension('neoclip')
+            require('neoclip').setup({
+                enable_persistent_history = true,
+            })
         end,
     },
     {

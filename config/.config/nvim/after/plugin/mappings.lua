@@ -89,12 +89,6 @@ vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
-vim.keymap.set('n', '<leader>y', '"+y', { desc = "Yank" })
-vim.keymap.set('n', '<leader>Y', '"+Y', { desc = "Yank Line" })
-vim.keymap.set('v', '<leader>y', '"+y', { desc = "Yank" })
-vim.keymap.set('n', '<leader>p', '"+p', { desc = "Paste" })
-
-
 vim.keymap.set('n', '<leader>tt', require("neotest").run.run, { desc = "Test" })
 vim.keymap.set('n', '<leader>tf', function()
     require("neotest").run.run(vim.fn.expand("%"))
