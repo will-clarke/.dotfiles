@@ -125,12 +125,13 @@ vim.keymap.set("n", "<leader>gg", require("neogit").open, { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
 vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
 
-
-
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
 vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
 
 vim.keymap.set('n', '<space>ca', function()
+    vim.lsp.buf.code_action({ apply = true })
+end, { desc = "Code Action" })
+vim.keymap.set('n', '<space>la', function()
     vim.lsp.buf.code_action({ apply = true })
 end, { desc = "Code Action" })
 
@@ -138,13 +139,13 @@ end, { desc = "Code Action" })
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
-vim.keymap.set("n", "<leader>a", mark.add_file, { desc = "Add Harpoon" })
-vim.keymap.set("n", "<leader>A", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
+vim.keymap.set("n", "<leader>A", mark.add_file, { desc = "Add Harpoon" })
+vim.keymap.set("n", "<leader>a", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
 
 vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
 vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+-- vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+-- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
 
 local telescope = require("telescope")
