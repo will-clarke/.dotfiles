@@ -1,15 +1,15 @@
 local ls = require "luasnip"
-local fmt = require("luasnip.extras.fmt").fmt
+-- local fmt = require("luasnip.extras.fmt").fmt
 local rep = require("luasnip.extras").rep
 
 -- some shorthands...
 local snip = ls.snippet
-local node = ls.snippet_node
+-- local node = ls.snippet_node
 local text = ls.text_node
 local insert = ls.insert_node
 local func = ls.function_node
-local choice = ls.choice_node
-local dynamicn = ls.dynamic_node
+-- local choice = ls.choice_node
+-- local dynamicn = ls.dynamic_node
 
 
 ls.config.set_config {
@@ -22,24 +22,24 @@ ls.config.set_config {
     store_selection_keys = "<c-s>",
 }
 
-local function get_line_iter(str)
-    if str:sub(-1) ~= "\n" then
-        str = str .. "\n"
-    end
-
-    return str:gmatch "(.-)\n"
-end
-local function box_trim_lines(str)
-    local new_str = ""
-
-    for line in get_line_iter(str) do
-        line = line:gsub("^%s+", "")
-        line = string.gsub(line, "%s+$", "")
-        new_str = new_str .. "\n" .. line
-    end
-
-    return new_str
-end
+-- local function get_line_iter(str)
+--     if str:sub(-1) ~= "\n" then
+--         str = str .. "\n"
+--     end
+--
+--     return str:gmatch "(.-)\n"
+-- end
+-- local function box_trim_lines(str)
+--     local new_str = ""
+--
+--     for line in get_line_iter(str) do
+--         line = line:gsub("^%s+", "")
+--         line = string.gsub(line, "%s+$", "")
+--         new_str = new_str .. "\n" .. line
+--     end
+--
+--     return new_str
+-- end
 
 local date = function()
     return { os.date "%Y-%m-%d" }
@@ -153,22 +153,6 @@ ls.add_snippets(nil, {
         }),
     },
     markdown = {
-        -- -- Select link, press C-s, enter link to receive snippet
-        -- snip({
-        --     trig = "link",
-        --     namr = "markdown_link",
-        --     dscr = "Create markdown link [txt](url)",
-        -- },
-        -- {
-        --     text "[",
-        --     insert(1),
-        --     text "](",
-        --     func(function(_, snip)
-        --         return snip.env.TM_SELECTED_TEXT[1] or insert(2)
-        --     end, {}),
-        --     text ")",
-        --     insert(0),
-        -- }),
         snip({
             trig = "codewrap",
             namr = "markdown_code_wrap",
@@ -220,14 +204,7 @@ ls.add_snippets(nil, {
         }),
     },
     go = {
-        snip("pp", {
-            text "fmt.Println(\"",
-            insert(1, "obj"),
-            text "\": \"",
-            insert(1, "obj"),
-            text "\")",
-            insert(0),
-        }),
+        snip("pz", { text "fmt.Println(\"", insert(1, "obj"), text "\", ", rep(1), text ")", insert(0) }),
         snip("test", {
             text "func ",
             insert(1, "Name"),

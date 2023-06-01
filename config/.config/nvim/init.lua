@@ -1,3 +1,3 @@
-require("set")
+require("opt")
 require("plugins")
 require("autocmds")

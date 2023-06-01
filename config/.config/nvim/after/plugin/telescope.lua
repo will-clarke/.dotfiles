@@ -2,7 +2,10 @@ local telescope = require("telescope")
 local actions = require("telescope.actions")
 
 telescope.setup({
-    extensions = { undo = {} },
+    extensions = {
+        undo = {},
+        neoclip = {},
+    },
     defaults = {
         mappings = {
             i = {
@@ -16,3 +19,5 @@ telescope.setup({
         winblend = 0,
     },
 })
+
+telescope.load_extension('neoclip')

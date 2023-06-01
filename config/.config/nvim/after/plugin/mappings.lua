@@ -49,6 +49,8 @@ vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoin
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
 vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "definitions" })
 vim.keymap.set("n", "<leader>gr", builtin.lsp_references, { desc = "references" })
+vim.keymap.set("n", "<leader>y", ":Telescope neoclip<CR>", { desc = "Yank ring" })
+--  maybe also look in after/plugin/telescope.lua
 
 vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
 
@@ -152,7 +154,6 @@ local telescope = require("telescope")
 telescope.load_extension("undo")
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
-
 vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 
 local toggle_theme = function()

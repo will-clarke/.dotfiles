@@ -28,6 +28,16 @@ require("lazy").setup({
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
     {
+        "AckslD/nvim-neoclip.lua",
+        requires = {
+            { 'kkharji/sqlite.lua',           module = 'sqlite' },
+            { 'nvim-telescope/telescope.nvim' },
+        },
+        config = function()
+            require('neoclip').setup({})
+        end,
+    },
+    {
         'sindrets/diffview.nvim',
         config = function()
             require 'diffview'.setup({})
