@@ -28,7 +28,23 @@ require("lazy").setup({
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
     'nvim-pack/nvim-spectre',
-    'vimwiki/vimwiki', -- do we need this???
+    -- 'vimwiki/vimwiki', -- do we need this???
+    {
+        "mickael-menu/zk-nvim",
+        config = function()
+            require("zk").setup({
+                picker = "telescope",
+            })
+        end
+    },
+
+    {
+        'nvim-orgmode/orgmode',
+        -- ft = { 'org' },
+        config = function()
+            require('orgmode').setup {}
+        end
+    },
     {
         "nvim-neorg/neorg",
         build = ":Neorg sync-parsers",
@@ -41,7 +57,8 @@ require("lazy").setup({
                     ["core.dirman"] = {      -- Manages Neorg workspaces
                         config = {
                             workspaces = {
-                                notes = "~/notes",
+                                notes = "~/notes2",
+                                lolzzz = "~/notes3",
                             },
                         },
                     },

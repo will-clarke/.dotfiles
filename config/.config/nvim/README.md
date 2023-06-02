@@ -6,3 +6,11 @@
 
 ## TODO
 - Make big plugins load quickly
+
+https://github.com/nvim-neorg/neorg/blob/main/doc/neorg.norg
+https://github.com/nvim-neorg/norg-specs/blob/main/1.0-specification.norg#L1336
+
+These two are interesting:
+https://github.com/mickael-menu/zk
+https://github.com/mickael-menu/zk-nvim
+

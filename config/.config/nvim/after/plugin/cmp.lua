@@ -15,12 +15,11 @@ cmp.setup {
         end
     },
     sources = cmp.config.sources({
-        -- Copilot Source
-        { name = "copilot",  group_index = 2, priority = 5 },
-        -- Other Sources
-        { name = "nvim_lsp", group_index = 2 },
-        { name = 'luasnip',  group_index = 2 },
-        { name = "path",     group_index = 2 },
+        { name = "copilot" },
+        { name = "nvim_lsp" },
+        { name = 'luasnip' },
+        { name = "path" },
+        { name = 'orgmode' }
     }),
     mapping = cmp.mapping.preset.insert({
         ['<C-m>'] = cmp.mapping.complete(),
