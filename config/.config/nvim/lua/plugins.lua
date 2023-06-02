@@ -27,6 +27,33 @@ require("lazy").setup({
     'nvim-treesitter/nvim-treesitter-context',
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
+    'nvim-pack/nvim-spectre',
+    'vimwiki/vimwiki', -- do we need this???
+    {
+        "nvim-neorg/neorg",
+        build = ":Neorg sync-parsers",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},  -- Loads default behaviour
+                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                    ["core.dirman"] = {      -- Manages Neorg workspaces
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    {
+        "ellisonleao/glow.nvim", -- cool markdown previewr
+        config = true,
+        cmd = "Glow",
+    },
     {
         "AckslD/nvim-neoclip.lua",
         requires = {
