@@ -22,6 +22,7 @@ if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
     -- Open notes linked by the current buffer.
     map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", opts)
 
+    map("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>", opts)
     -- Preview a linked note.
     map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
     -- Open the code actions for a visual selection.
