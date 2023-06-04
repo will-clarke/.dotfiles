@@ -242,11 +242,12 @@ vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 --
 --
 --
-vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, { desc = "continue / START!" })
-vim.keymap.set('n', '<leader>ds', function() require('dap').step_over() end, { desc = "step over " })
-vim.keymap.set('n', '<leader>di', function() require('dap').step_into() end, { desc = "step In" })
-vim.keymap.set('n', '<leader>do', function() require('dap').step_out() end, { desc = "step Out" })
-vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = "breakpoint" })
+vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = "test (go)" })
+vim.keymap.set('n', '<leader>dc', require('dap').continue, { desc = "continue / START!" })
+vim.keymap.set('n', '<leader>ds', require('dap').step_over, { desc = "Step over " })
+vim.keymap.set('n', '<leader>di', require('dap').step_into, { desc = "step In" })
+vim.keymap.set('n', '<leader>do', require('dap').step_out, { desc = "step Out" })
+vim.keymap.set('n', '<Leader>db', require('dap').toggle_breakpoint, { desc = "breakpoint" })
 -- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
 vim.keymap.set('n', '<Leader>dm',
     function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "message??" })
@@ -262,7 +263,10 @@ vim.keymap.set('n', '<Leader>df', function()
     local widgets = require('dap.ui.widgets')
     widgets.centered_float(widgets.frames)
 end, { desc = "frames" })
-vim.keymap.set('n', '<Leader>ds', function()
+vim.keymap.set('n', '<Leader>dS', function()
     local widgets = require('dap.ui.widgets')
     widgets.centered_float(widgets.scopes)
 end, { desc = "scopes" })
+
+
+vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
