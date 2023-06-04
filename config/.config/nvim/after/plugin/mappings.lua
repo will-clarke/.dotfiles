@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>tO',
     , { desc = "Output open" })
 
 vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
-
+vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Journal" })
 
@@ -235,3 +235,34 @@ vim.api.nvim_set_keymap("n", "<leader>zf",
     "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
 -- Search for the notes matching the current visual selection.
 vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
+
+-- vnoremap <M-k> <Cmd>lua require("dapui").eval()<CR>
+--
+--
+--
+--
+--
+vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end, { desc = "continue / START!" })
+vim.keymap.set('n', '<leader>ds', function() require('dap').step_over() end, { desc = "step over " })
+vim.keymap.set('n', '<leader>di', function() require('dap').step_into() end, { desc = "step In" })
+vim.keymap.set('n', '<leader>do', function() require('dap').step_out() end, { desc = "step Out" })
+vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = "breakpoint" })
+-- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+vim.keymap.set('n', '<Leader>dm',
+    function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "message??" })
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = "repl" })
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "last run" })
+vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
+    require('dap.ui.widgets').hover()
+end, { desc = "hover" })
+vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+    require('dap.ui.widgets').preview()
+end, { desc = "preview" })
+vim.keymap.set('n', '<Leader>df', function()
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.frames)
+end, { desc = "frames" })
+vim.keymap.set('n', '<Leader>ds', function()
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.scopes)
+end, { desc = "scopes" })
