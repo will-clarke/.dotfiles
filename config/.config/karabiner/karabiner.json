@@ -82,7 +82,7 @@
                                 },
                                 "to": [
                                     {
-                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch hx ~/notes/diary/$(gdate --rfc-3339=date).md; open -a kitty"
+                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch nvim ~/notes/diary/$(gdate --rfc-3339=date).md; open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
@@ -106,7 +106,7 @@
                                 },
                                 "to": [
                                     {
-                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch hx ~/notes/work/$(gdate --rfc-3339=date).md; open -a kitty"
+                                         "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch nvim ~/notes/work/$(gdate --rfc-3339=date).md; open -a kitty"
                                     }
                                 ],
                                 "type": "basic"
@@ -140,7 +140,7 @@
                             }
                         ]
                     },
-                                      
+
                     {
                         "description": "hyper-s to spotify",
                         "manipulators": [
@@ -167,7 +167,7 @@
                                 "type": "basic"
                             }
                         ]
-                    },                    
+                    },
                     {
                         "description": "hyper-t to slack",
                         "manipulators": [

@@ -222,6 +222,8 @@ local opts = { noremap = true, silent = false }
 
 -- Create a new note after asking for its title.
 vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", opts)
 
 -- Open notes.
 vim.api.nvim_set_keymap("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opts)

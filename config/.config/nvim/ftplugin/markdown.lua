@@ -23,8 +23,17 @@ if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
     map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", opts)
 
     map("n", "<leader>zi", "<Cmd>ZkInsertLink<CR>", opts)
+    map("v", "<leader>zI", ":'<'>ZkInsertLinkAtSelection {matchSelected = true}<CR>", opts)
     -- Preview a linked note.
     map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
     -- Open the code actions for a visual selection.
     map("v", "<leader>za", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
+
+
+
+    map("n", "<leader>t", "vip:'<,'>!prettier --parser markdown<cr>", opts)
+    map("v", "<leader>t", ":'<,'>!prettier --parser markdown<cr>", opts)
+
+    -- vnoremap <leader>md :'<,'>!prettier --parser markdown<cr>
+    -- nnoremap <leader>md vip:'<,'>!prettier --parser markdown<cr>
 end
