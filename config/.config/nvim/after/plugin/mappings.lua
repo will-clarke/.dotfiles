@@ -271,3 +271,8 @@ end, { desc = "scopes" })
 
 
 vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
+
+
+-- GEt this working
+-- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
+-- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
