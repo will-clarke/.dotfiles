@@ -28,7 +28,12 @@ require("lazy").setup({
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
     'nvim-pack/nvim-spectre',
-    'mfussenegger/nvim-dap',
+    {
+        "max397574/better-escape.nvim",
+        config = function()
+            require("better_escape").setup()
+        end,
+    }, 'mfussenegger/nvim-dap',
     {
         'theHamsta/nvim-dap-virtual-text',
         config = function()

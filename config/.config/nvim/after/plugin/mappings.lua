@@ -118,7 +118,7 @@ vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. 
 -- end, { desc="Diagnostic List" })
 
 
-vim.keymap.set("n", "<leader>gg", require("neogit").open, { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
 vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
 
