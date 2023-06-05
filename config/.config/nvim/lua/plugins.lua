@@ -288,7 +288,7 @@ require("lazy").setup({
         end
     },
     'tpope/vim-surround',
-    -- 'tpope/vim-fugitive',
+    'tpope/vim-fugitive',
     'knsh14/vim-github-link',
     'ggandor/lightspeed.nvim',
     {

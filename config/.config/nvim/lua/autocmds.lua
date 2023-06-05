@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "neotest-output",
         "neotest-attach",
         "neotest-summary",
+        "fugitive",
         "dap-float",
     },
     callback = function(event)

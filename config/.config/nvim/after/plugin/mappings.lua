@@ -28,6 +28,7 @@ vim.keymap.set('n', '<leader>fF', builtin.fd, { desc = "Find files from CWD" })
 vim.keymap.set('n', '<leader>fs', ":w<CR>", { desc = "File save" })
 vim.keymap.set('n', '<leader>fr', ":Telescope oldfiles<CR>", { desc = "Find Recent files" })
 vim.keymap.set('n', '<leader>ss', builtin.live_grep, { desc = "Search project" })
+vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Search project" })
 vim.keymap.set('n', '<leader>sS', builtin.current_buffer_fuzzy_find, { desc = "Search buffer" })
 
 vim.keymap.set('n', '<leader>k', builtin.keymaps, { desc = "Keymaps" })

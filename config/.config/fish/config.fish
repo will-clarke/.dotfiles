@@ -24,6 +24,7 @@ if type -q zoxide
 end
 
 # set -Ux HELIX_RUNTIME ~/code/helix/runtime
+set -Ux ZK_NOTEBOOK_DIR ~/notes
 
 # fisher should be separate & not checked into git
 set -U -x fisher_path ~/.config/fisher
