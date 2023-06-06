@@ -25,14 +25,11 @@ lsp.on_attach(function(_, bufnr)
 end)
 
 
-lsp.configure('lua_ls', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = 'utf-8'
+require('lspconfig').clangd.setup {
+    capabilities = capabilities
+}
+--
 
 lsp.setup()
