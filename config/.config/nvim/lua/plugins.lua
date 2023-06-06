@@ -27,7 +27,17 @@ require("lazy").setup({
     'nvim-treesitter/nvim-treesitter-context',
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
-    'nvim-pack/nvim-spectre',
+    'rhysd/conflict-marker.vim',
+    {
+        'numToStr/Navigator.nvim',
+        config = function()
+            require('Navigator').setup()
+        end
+    },
+    {
+        'nvim-pack/nvim-spectre',
+        cmd = 'Spectre',
+    },
     {
         "max397574/better-escape.nvim",
         config = function()
@@ -117,6 +127,7 @@ require("lazy").setup({
             require("telescope").load_extension('neoclip')
             require('neoclip').setup({
                 enable_persistent_history = true,
+                -- continuous_sync = true, TODO: Would be cool to do this... but getting an 'attempt to index a boolean value' error
             })
         end,
     },

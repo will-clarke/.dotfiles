@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
         -- "oil",
         "neotest-output",
         "neotest-attach",
+        "neotest-output-panel",
         "neotest-summary",
         "fugitive",
         "dap-float",

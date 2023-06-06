@@ -90,7 +90,9 @@ vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
+-- vim.keymap.set('n', '<leader>tl', require("neotest").run.last, { desc = "last" })
 vim.keymap.set('n', '<leader>tt', require("neotest").run.run, { desc = "Test" })
+vim.keymap.set('n', '<leader>tr', require("neotest").run.run, { desc = "Test" })
 vim.keymap.set('n', '<leader>tf', function()
     require("neotest").run.run(vim.fn.expand("%"))
 end, { desc = "Test file" })
@@ -272,7 +274,15 @@ end, { desc = "scopes" })
 
 vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
 
+vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc = "quickfix replacer" })
 
 -- GEt this working
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
 -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
+--
+--
+vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
