@@ -288,9 +288,9 @@ vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
 --
 vim.keymap.set({ 'n', 't' }, '<A-H>', '<C-W><')
-vim.keymap.set({ 'n', 't' }, '<A-L>', '')
-vim.keymap.set({ 'n', 't' }, '<A-K>', ':exe ":norm <C-W>-<CR>"')
-vim.keymap.set({ 'n', 't' }, '<A-J>', ':norm "<C-W>+"<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-L>', '<C-W>>')
+vim.keymap.set({ 'n', 't' }, '<A-K>', '<C-W>-')
+vim.keymap.set({ 'n', 't' }, '<A-J>', '<C-W>+')
 --
 --
 -- " decrease width
