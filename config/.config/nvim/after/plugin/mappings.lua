@@ -281,6 +281,7 @@ vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc 
 -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
 --
 --
+--
 vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
@@ -288,32 +289,14 @@ vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
 --
 --
-vim.keymap.set({ 'n', 't' }, '<A-q>', ':echo "x-q"')
-vim.keymap.set({ 'n', 't' }, '<C-q>', ':echo "qqqqqq"<CR>')
-vim.keymap.set({ 'n', 't' }, '<Esc><C-q>', ':echo "hay"<CR>')
-vim.keymap.set({ 'n', 't' }, '<Esc><C-h>', ':echo "hayh"<CR>')
-vim.keymap.set({ 'n', 't' }, '<Esc><C-l>', ':echo "hayl"<CR>')
-vim.keymap.set({ 'n', 't' }, '<Esc><C-k>', ':echo "hayk"<CR>')
--- vim.keymap.set({ 'n', 't' }, '<Esc><C-l>', '<C-W>>')
--- vim.keymap.set({ 'n', 't' }, '<Esc><C-k>', '<C-W>-')
--- vim.keymap.set({ 'n', 't' }, '<Esc><C-j>', '<C-W>+')
 --
 --
--- " decrease width
--- nnoremap <C-H> <C-W><
--- " increase width
--- nnoremap <C-L> <C-W>>
--- " decrease height
--- nnoremap <C-K> <C-W>-
--- " increase height
--- nnoremap <C-J> <C-W>+
--- " move window in normal
--- nnoremap <A-h> <C-w>h
--- nnoremap <A-j> <C-w>j
--- nnoremap <A-k> <C-w>k
--- nnoremap <A-l> <C-w>l
--- " create windows using H, J, K, L
--- nnoremap <A-H> <C-w>v
--- nnoremap <A-J> <C-w>s<C-w>k
--- nnoremap <A-K> <C-w>s
--- nnoremap <A-L> <C-w>v<C-w>h
+--
+
+
+
+
+vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
+vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)
+vim.keymap.set('n', '<M-K>', require('smart-splits').resize_up)
+vim.keymap.set('n', '<M-L>', require('smart-splits').resize_right)

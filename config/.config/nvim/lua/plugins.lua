@@ -29,6 +29,13 @@ require("lazy").setup({
     'saadparwaiz1/cmp_luasnip',
     'rhysd/conflict-marker.vim',
     {
+        -- for doing split resizing
+        'mrjones2014/smart-splits.nvim',
+        config = function()
+            require('smart-splits').setup({})
+        end
+    },
+    {
         'numToStr/Navigator.nvim',
         config = function()
             require('Navigator').setup()
