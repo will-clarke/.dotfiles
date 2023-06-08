@@ -287,10 +287,16 @@ vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
 --
-vim.keymap.set({ 'n', 't' }, '<A-H>', '<C-W><')
-vim.keymap.set({ 'n', 't' }, '<A-L>', '<C-W>>')
-vim.keymap.set({ 'n', 't' }, '<A-K>', '<C-W>-')
-vim.keymap.set({ 'n', 't' }, '<A-J>', '<C-W>+')
+--
+vim.keymap.set({ 'n', 't' }, '<A-q>', ':echo "x-q"')
+vim.keymap.set({ 'n', 't' }, '<C-q>', ':echo "qqqqqq"<CR>')
+vim.keymap.set({ 'n', 't' }, '<Esc><C-q>', ':echo "hay"<CR>')
+vim.keymap.set({ 'n', 't' }, '<Esc><C-h>', ':echo "hayh"<CR>')
+vim.keymap.set({ 'n', 't' }, '<Esc><C-l>', ':echo "hayl"<CR>')
+vim.keymap.set({ 'n', 't' }, '<Esc><C-k>', ':echo "hayk"<CR>')
+-- vim.keymap.set({ 'n', 't' }, '<Esc><C-l>', '<C-W>>')
+-- vim.keymap.set({ 'n', 't' }, '<Esc><C-k>', '<C-W>-')
+-- vim.keymap.set({ 'n', 't' }, '<Esc><C-j>', '<C-W>+')
 --
 --
 -- " decrease width
