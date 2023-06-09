@@ -5,6 +5,11 @@
 - https://github.com/L3MON4D3/LuaSnip -- read more!
 
 ## TODO
+
+- Add more cmp sources
+- Get ZkInsertLink to search through all notes (eg. play around with Zk list)
+
+
 - Make big plugins load quickly
 
 https://github.com/nvim-neorg/neorg/blob/main/doc/neorg.norg
