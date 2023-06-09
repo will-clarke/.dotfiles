@@ -265,3 +265,12 @@ vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)
 vim.keymap.set('n', '<M-K>', require('smart-splits').resize_up)
 vim.keymap.set('n', '<M-L>', require('smart-splits').resize_right)
+
+
+vim.keymap.set("n", "]t", function()
+    require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+    require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
