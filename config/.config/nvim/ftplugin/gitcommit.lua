@@ -3,3 +3,4 @@ local opts = { noremap = true, silent = false }
 
 -- Open the link under the caret.
 map("n", "<C-C><C-C>", "ZZ", opts)
+map("i", "<C-C><C-C>", "<C-o>ZZ", opts)
