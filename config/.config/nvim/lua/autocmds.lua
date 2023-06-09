@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "startuptime",
         "tsplayground",
         "checkhealth",
+        "git",
         -- "oil",
         "neotest-output",
         "neotest-attach",
