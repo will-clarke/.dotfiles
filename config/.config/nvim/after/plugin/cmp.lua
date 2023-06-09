@@ -2,6 +2,9 @@ local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 cmp.setup {
+    view = {
+        entries = "native" -- can be "custom", "wildmenu" or "native"
+    },
     snippet = {
         expand = function(args)
             require 'luasnip'.lsp_expand(args.body)
@@ -14,31 +17,22 @@ cmp.setup {
         { name = "path" },
         { name = 'orgmode' }
     }),
+
     mapping = cmp.mapping.preset.insert({
-        -- do we need more 'complete' mappings?
-        ['<C-m>'] = cmp.mapping.complete(),
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Tab>'] = cmp.mapping.confirm(),
-        ['<C-CR>'] = cmp.mapping.confirm(),
-        ['<C-d>'] = cmp.mapping.confirm(),
+        ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<M-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = function(fallback)
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else
-                cmp.mapping.confirm()
-            end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
                 fallback()
             end
-        end, { "i", "s" }),
+        end,
         ["<CR>"] = cmp.mapping({
             i = function(fallback)
                 if cmp.visible() and cmp.get_active_entry() then
