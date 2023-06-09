@@ -1,12 +1,5 @@
 vim.g.mapleader = " "
 
-local cool = function()
-    -- something like this
-    -- :vsplit | wincmd p | exe "normal gd" | wincmd p
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('ifoo<cr>', true, false, true), 'm', true)
-end
-
-vim.keymap.set("n", "gD", cool, { desc = "Open parent directory" })
 local oil = function()
     -- if the buffer is a NeogitPopup buffer, "press" "-" & return early
     if vim.bo.filetype == "NeogitPopup" then
@@ -74,10 +67,6 @@ vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
     { silent = true, noremap = true }
 )
-
-
--- vim.keymap.set("n", "<leader>lco", bu, { desc = "outgoing calls" })
-
 
 -- vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
 vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
@@ -150,7 +139,6 @@ vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
 
 local telescope = require("telescope")
 telescope.load_extension("undo")
-telescope.load_extension("zk")
 vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
@@ -224,6 +212,7 @@ vim.keymap.set("n", "<leader>m", require('treesj').toggle, { desc = "Split/Join"
 
 local opts = { noremap = true, silent = false }
 
+-- !!!MORE ZK MAPPINGS IN ftplugin/markdown.lua!!!
 -- Create a new note after asking for its title.
 vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", opts)
@@ -237,13 +226,9 @@ vim.api.nvim_set_keymap("n", "<leader>zt", "<Cmd>ZkTags<CR>", opts)
 -- Search for the notes matching a given query.
 vim.api.nvim_set_keymap("n", "<leader>zf",
     "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
--- Search for the notes matching the current visual selection.
-vim.api.nvim_set_keymap("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opts)
 
--- vnoremap <M-k> <Cmd>lua require("dapui").eval()<CR>
---
---
---
+
+-- !!!MORE ZK MAPPINGS IN ftplugin/markdown.lua!!!
 --
 --
 vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = "test (go)" })
@@ -281,21 +266,11 @@ vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc 
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
 -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
 --
---
---
 vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
 vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
---
---
---
---
---
-
-
-
 
 vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)

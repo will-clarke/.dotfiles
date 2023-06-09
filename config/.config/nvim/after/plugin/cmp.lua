@@ -29,7 +29,7 @@ cmp.setup {
             if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             else
-                fallback()
+                cmp.mapping.confirm()
             end
         end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
