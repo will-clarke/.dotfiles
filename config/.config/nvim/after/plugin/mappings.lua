@@ -1,19 +1,6 @@
 vim.g.mapleader = " "
 
-local oil = function()
-    -- if the buffer is a NeogitPopup buffer, "press" "-" & return early
-    if vim.bo.filetype == "NeogitPopup" then
-        -- send a valid "-" as if I'd pressed it
-        local keys = vim.api.nvim_replace_termcodes('-', true, false, false)
-        vim.api.nvim_feedkeys(keys, "n", false)
-        return
-    end
-    require("oil").open()
-end
-
-vim.keymap.set("n", ";", oil, { desc = "Open parent directory" })
-
-vim.keymap.set("n", "<leader>.", require("oil").open, { desc = "Open parent directory" })
+vim.keymap.set("n", ";", require("oil").open, { desc = "Oil" })
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
@@ -110,7 +97,9 @@ vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. 
 -- end, { desc="Diagnostic List" })
 
 
-vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gp", ":Git Pull<CR>", { desc = "Git pull" })
+vim.keymap.set("n", "<leader>gco", ":Git checkout", { desc = "Git checkout" })
 vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
 vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
 
