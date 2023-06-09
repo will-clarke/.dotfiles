@@ -14,9 +14,14 @@ cmp.setup {
         { name = "copilot" },
         { name = "nvim_lsp" },
         { name = 'luasnip' },
+        { name = 'emoji' },
         { name = "path" },
-        { name = 'orgmode' }
+        { name = 'calc' },
+        { name = "git" },
+    }, {
+        { name = 'buffer' },
     }),
+
 
     mapping = cmp.mapping.preset.insert({
         ['<C-j>'] = cmp.mapping.select_next_item(),
@@ -49,8 +54,24 @@ cmp.setup {
 
 }
 
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+        { name = 'buffer' },
+    })
+})
+
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
 require("copilot_cmp").setup({})
 
+require("cmp_git").setup({})
 
 require("copilot").setup({
     -- we're disabling these as copilot-cmp is dealing with it

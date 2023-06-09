@@ -6,6 +6,7 @@
 
 ## TODO
 
+- Octo is super cool. Do code reviews from vim!!! omg
 - Add more cmp sources
 - Get ZkInsertLink to search through all notes (eg. play around with Zk list)
 

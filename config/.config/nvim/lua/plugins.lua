@@ -22,12 +22,30 @@ require("lazy").setup({
     'gabrielpoca/replacer.nvim',
     'folke/tokyonight.nvim',
     'ThePrimeagen/harpoon',
-    'hrsh7th/cmp-nvim-lua',
-    'hrsh7th/nvim-cmp',
     'nvim-treesitter/nvim-treesitter-context',
     'eandrju/cellular-automaton.nvim',
     'saadparwaiz1/cmp_luasnip',
     'rhysd/conflict-marker.vim',
+    -- cmp
+    'hrsh7th/cmp-calc',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-path',
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-buffer',
+    'petertriho/cmp-git',
+    'hrsh7th/cmp-emoji',
+    {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function()
+            require "octo".setup()
+        end
+    },
     {
         -- for doing split resizing
         'mrjones2014/smart-splits.nvim',
