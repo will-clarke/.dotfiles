@@ -44,8 +44,8 @@ type -q starship && starship init fish | source
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /Users/will.clarke/miniforge3/bin/conda
-    eval /Users/will.clarke/miniforge3/bin/conda "shell.fish" "hook" $argv | source
-end
+# if test -f /Users/will.clarke/miniforge3/bin/conda
+#     eval /Users/will.clarke/miniforge3/bin/conda "shell.fish" "hook" $argv | source
+# end
 # <<< conda initialize <<<
 
