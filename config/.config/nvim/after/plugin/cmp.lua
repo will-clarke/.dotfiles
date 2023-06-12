@@ -13,7 +13,7 @@ end
 
 cmp.setup {
     view = {
-        entries = "native" -- can be "custom", "wildmenu" or "native"
+        entries = "custom" -- can be "custom", "wildmenu" or "native"
     },
     snippet = {
         expand = function(args)
