@@ -13,3 +13,11 @@
 These two are interesting:
 https://github.com/mickael-menu/zk
 https://github.com/mickael-menu/zk-nvim
+
+Muck around with KITTY
+- make alt-j work in kitty too
+- make a way to change both vim & kitty colourschemes together (maybe called from nvim?)
+- Maybe think about how to use ChatGPT
+
+
+- make an 'entire' text object
