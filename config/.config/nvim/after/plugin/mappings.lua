@@ -274,3 +274,26 @@ end, { desc = "Next todo comment" })
 vim.keymap.set("n", "[t", function()
     require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
+
+-- local function cmd(command)
+--     return table.concat({ '<Cmd>', command, '<CR>' })
+-- end
+
+vim.keymap.set('n', '<leader><CR>', require('maximize').toggle, { desc = "Maximise" })
+-- vim.keymap.set('n', '<C-w>z', cmd 'WindowsMaximize')
+-- vim.keymap.set('n', '<C-w>_', cmd 'WindowsMaximizeVertically')
+-- vim.keymap.set('n', '<C-w>|', cmd 'WindowsMaximizeHorizontally')
+-- vim.keymap.set('n', '<C-w>=', cmd 'WindowsEqualize')
+--
+-- vim.keymap.set('n', '<leader>wz', cmd 'WindowsMaximize')
+-- vim.keymap.set('n', '<leader>w_', cmd 'WindowsMaximizeVertically')
+-- vim.keymap.set('n', '<leader>w|', cmd 'WindowsMaximizeHorizontally')
+-- vim.keymap.set('n', '<leader>w=', cmd 'WindowsEqualize')
+
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+
+vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
+vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")

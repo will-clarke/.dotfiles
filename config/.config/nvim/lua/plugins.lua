@@ -35,6 +35,27 @@ require("lazy").setup({
     'hrsh7th/cmp-buffer',
     'petertriho/cmp-git',
     'hrsh7th/cmp-emoji',
+    'declancm/maximize.nvim',
+    {
+        "gbprod/yanky.nvim",
+        config = function()
+            require("yanky").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end
+    },
+    {
+        "giusgad/pets.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "giusgad/hologram.nvim",
+        },
+        config = function()
+            require("pets").setup({})
+        end,
+    },
     {
         "jackMort/ChatGPT.nvim",
         event = "VeryLazy",

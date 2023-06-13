@@ -2331,6 +2331,6 @@ map ctrl+alt+t goto_layout tall
 
 
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Tokyo Night Storm
 include current-theme.conf
 # END_KITTY_THEME

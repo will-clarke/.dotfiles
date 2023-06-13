@@ -43,15 +43,16 @@ cmp.setup {
         ["<M-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<C-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            elseif has_words_before() then
-                require('cmp').confirm({ select = true })
-            else
-                fallback()
-            end
-        end),
+        ["<Tab>"] = cmp.mapping({
+            i = function(fallback)
+                if luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    require('cmp').confirm({ select = true })
+                else
+                    fallback()
+                end
+            end }),
         ["<CR>"] = cmp.mapping({
             i = function(fallback)
                 if cmp.visible() and cmp.get_active_entry() then
