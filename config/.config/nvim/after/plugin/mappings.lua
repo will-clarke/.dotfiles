@@ -62,14 +62,17 @@ vim.keymap.set('n', '<Leader>R', require("replacer").run, { desc = "Replacer" })
 
 -- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
+vim.keymap.set('n', '<leader>V', ':e ~/.config/nvim/after/plugin/mappings.lua<CR>', { desc = "Vimrc" })
 
 vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
 -- vim.keymap.set('n', '<leader>tl', require("neotest").run.last, { desc = "last" })
-vim.keymap.set('n', '<leader>tt', require("neotest").run.run, { desc = "Test" })
-vim.keymap.set('n', '<leader>tr', require("neotest").run.run, { desc = "Test" })
+vim.keymap.set('n', '<leader>tr', function()
+    require("neotest").summary.open()
+    require("neotest").run.run()
+end, { desc = "Test" })
 vim.keymap.set('n', '<leader>tf', function()
     require("neotest").run.run(vim.fn.expand("%"))
 end, { desc = "Test file" })
@@ -84,7 +87,6 @@ vim.keymap.set('n', '<leader>tO',
     end
     , { desc = "Output open" })
 
-vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Journal" })
@@ -295,8 +297,8 @@ vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
 vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
 vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
-vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
-vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleForward)")
+vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleBackward)")
 
 local function map(mode, l, r, opts)
     opts = opts or {}
@@ -311,28 +313,28 @@ map('n', ']c', function()
     if vim.wo.diff then return ']c' end
     vim.schedule(function() gs.next_hunk() end)
     return '<Ignore>'
-end, { expr = true })
+end, { expr = true, desc = "Next hunk" })
 
 map('n', '[c', function()
     if vim.wo.diff then return '[c' end
     vim.schedule(function() gs.prev_hunk() end)
     return '<Ignore>'
-end, { expr = true })
+end, { expr = true, desc = "Previous hunk" })
 
 -- Actions
-map('n', '<leader>hs', gs.stage_hunk)
-map('n', '<leader>hr', gs.reset_hunk)
-map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end)
-map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
-map('n', '<leader>hS', gs.stage_buffer)
-map('n', '<leader>hu', gs.undo_stage_hunk)
-map('n', '<leader>hR', gs.reset_buffer)
-map('n', '<leader>hp', gs.preview_hunk)
-map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-map('n', '<leader>tb', gs.toggle_current_line_blame)
-map('n', '<leader>hd', gs.diffthis)
-map('n', '<leader>hD', function() gs.diffthis('~') end)
-map('n', '<leader>hT', gs.toggle_deleted)
+map('n', '<leader>hs', gs.stage_hunk, { desc = "stage hunk" })
+map('n', '<leader>hr', gs.reset_hunk, { desc = "reset hunk" })
+map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "stage hunk" })
+map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "reset hunk" })
+map('n', '<leader>hS', gs.stage_buffer, { desc = "stage buffer" })
+map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "undo stage hunk" })
+map('n', '<leader>hR', gs.reset_buffer, { desc = "reset buffer" })
+map('n', '<leader>hp', gs.preview_hunk, { desc = "preview hunk" })
+map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = "blame" })
+map('n', '<leader>hB', gs.toggle_current_line_blame, { desc = "toggle blame on current line" })
+map('n', '<leader>hd', gs.diffthis, { desc = "diff" })
+map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "diff ~" })
+map('n', '<leader>hT', gs.toggle_deleted, { desc = "toggle deleted" })
 
 -- Text object
 map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
