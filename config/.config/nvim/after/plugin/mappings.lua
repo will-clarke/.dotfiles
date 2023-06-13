@@ -19,7 +19,7 @@ vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>bn', ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ":bprev<CR>", { desc = "Previous buffer" })
 vim.keymap.set('n', '<leader>bd', ":bdelete<CR>", { desc = "Delete buffer" })
-vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = "Help" })
+vim.keymap.set('n', '<leader>ht', builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>lo", builtin.lsp_document_symbols, { desc = "SymbOls" })
 vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions, { desc = "Type" })
 vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "definitions" })
@@ -297,3 +297,42 @@ vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 
 vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
 vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
+
+local function map(mode, l, r, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, l, r, opts)
+end
+
+local gs = package.loaded.gitsigns
+
+-- Navigation
+map('n', ']c', function()
+    if vim.wo.diff then return ']c' end
+    vim.schedule(function() gs.next_hunk() end)
+    return '<Ignore>'
+end, { expr = true })
+
+map('n', '[c', function()
+    if vim.wo.diff then return '[c' end
+    vim.schedule(function() gs.prev_hunk() end)
+    return '<Ignore>'
+end, { expr = true })
+
+-- Actions
+map('n', '<leader>hs', gs.stage_hunk)
+map('n', '<leader>hr', gs.reset_hunk)
+map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end)
+map('n', '<leader>hS', gs.stage_buffer)
+map('n', '<leader>hu', gs.undo_stage_hunk)
+map('n', '<leader>hR', gs.reset_buffer)
+map('n', '<leader>hp', gs.preview_hunk)
+map('n', '<leader>hb', function() gs.blame_line { full = true } end)
+map('n', '<leader>tb', gs.toggle_current_line_blame)
+map('n', '<leader>hd', gs.diffthis)
+map('n', '<leader>hD', function() gs.diffthis('~') end)
+map('n', '<leader>hT', gs.toggle_deleted)
+
+-- Text object
+map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
