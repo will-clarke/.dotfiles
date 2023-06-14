@@ -35,6 +35,40 @@ require("lazy").setup({
     'hrsh7th/cmp-buffer',
     'petertriho/cmp-git',
     'hrsh7th/cmp-emoji',
+    'declancm/maximize.nvim',
+    'knubie/vim-kitty-navigator',
+    {
+        "gbprod/yanky.nvim",
+        config = function()
+            require("yanky").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end
+    },
+    {
+        "giusgad/pets.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "giusgad/hologram.nvim",
+        },
+        config = function()
+            require("pets").setup({})
+        end,
+    },
+    {
+        "jackMort/ChatGPT.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("chatgpt").setup()
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    },
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -116,54 +150,25 @@ require("lazy").setup({
             })
         end
     },
-
-    {
-        'nvim-orgmode/orgmode',
-        -- ft = { 'org' },
-        config = function()
-            require('orgmode').setup {}
-        end
-    },
-    {
-        "nvim-neorg/neorg",
-        build = ":Neorg sync-parsers",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("neorg").setup {
-                load = {
-                    ["core.defaults"] = {},  -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                    ["core.dirman"] = {      -- Manages Neorg workspaces
-                        config = {
-                            workspaces = {
-                                notes = "~/notes2",
-                                lolzzz = "~/notes3",
-                            },
-                        },
-                    },
-                },
-            }
-        end,
-    },
     {
         "ellisonleao/glow.nvim", -- cool markdown previewr
         config = true,
         cmd = "Glow",
     },
-    {
-        "AckslD/nvim-neoclip.lua",
-        requires = {
-            { 'kkharji/sqlite.lua',           module = 'sqlite' },
-            { 'nvim-telescope/telescope.nvim' },
-        },
-        config = function()
-            require("telescope").load_extension('neoclip')
-            require('neoclip').setup({
-                enable_persistent_history = true,
-                -- continuous_sync = true, TODO: Would be cool to do this... but getting an 'attempt to index a boolean value' error
-            })
-        end,
-    },
+    -- {
+    --     "AckslD/nvim-neoclip.lua",
+    --     requires = {
+    --         { 'kkharji/sqlite.lua',           module = 'sqlite' },
+    --         { 'nvim-telescope/telescope.nvim' },
+    --     },
+    --     config = function()
+    --         require("telescope").load_extension('neoclip')
+    --         require('neoclip').setup({
+    --             enable_persistent_history = true,
+    --             -- continuous_sync = true, TODO: Would be cool to do this... but getting an 'attempt to index a boolean value' error
+    --         })
+    --     end,
+    -- },
     {
         'sindrets/diffview.nvim',
         config = function()
@@ -280,11 +285,7 @@ require("lazy").setup({
         "folke/trouble.nvim",
         requires = "nvim-tree/nvim-web-devicons",
         config = function()
-            require("trouble").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
+            require("trouble").setup {}
         end
     },
     "nvim-neotest/neotest-go",

@@ -38,3 +38,5 @@ vim.opt.colorcolumn = "80"
 vim.opt.clipboard = "unnamedplus"
 
 vim.g.gitblame_enabled = 0
+
+vim.g.kitty_navigator_no_mappings = 1

@@ -19,7 +19,7 @@ vim.keymap.set('n', '<leader>bb', builtin.buffers, { desc = "Buffers" })
 vim.keymap.set('n', '<leader>bn', ":bnext<CR>", { desc = "Next buffer" })
 vim.keymap.set('n', '<leader>bp', ":bprev<CR>", { desc = "Previous buffer" })
 vim.keymap.set('n', '<leader>bd', ":bdelete<CR>", { desc = "Delete buffer" })
-vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = "Help" })
+vim.keymap.set('n', '<leader>ht', builtin.help_tags, { desc = "Help" })
 vim.keymap.set("n", "<leader>lo", builtin.lsp_document_symbols, { desc = "SymbOls" })
 vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions, { desc = "Type" })
 vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "definitions" })
@@ -62,14 +62,17 @@ vim.keymap.set('n', '<Leader>R', require("replacer").run, { desc = "Replacer" })
 
 -- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
 vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
+vim.keymap.set('n', '<leader>V', ':e ~/.config/nvim/after/plugin/mappings.lua<CR>', { desc = "Vimrc" })
 
 vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
 end, { desc = "Format" })
 
 -- vim.keymap.set('n', '<leader>tl', require("neotest").run.last, { desc = "last" })
-vim.keymap.set('n', '<leader>tt', require("neotest").run.run, { desc = "Test" })
-vim.keymap.set('n', '<leader>tr', require("neotest").run.run, { desc = "Test" })
+vim.keymap.set('n', '<leader>tr', function()
+    require("neotest").summary.open()
+    require("neotest").run.run()
+end, { desc = "Test" })
 vim.keymap.set('n', '<leader>tf', function()
     require("neotest").run.run(vim.fn.expand("%"))
 end, { desc = "Test file" })
@@ -84,7 +87,6 @@ vim.keymap.set('n', '<leader>tO',
     end
     , { desc = "Output open" })
 
-vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Journal" })
@@ -170,8 +172,9 @@ vim.keymap.set("n", "<C-s>", ":w<CR>")
 vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>i")
 
 -- -- moving lines up and down
--- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
--- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+-- GETS OVERWRITTEN OMG
+vim.keymap.set("n", "<M-J>", ":m .+1<CR>==")
+vim.keymap.set("n", "<M-K>", ":m .-3<CR>==")
 vim.keymap.set("v", "<M-J>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<M-K>", ":m '<-2<CR>gv=gv")
 
@@ -255,11 +258,11 @@ vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc 
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
 -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
 --
-vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>KittyNavigateLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>KittyNavigateRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>KittyNavigateUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>KittyNavigateDown<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>KittyNavigatePrevious<CR>')
 
 vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)
@@ -274,3 +277,65 @@ end, { desc = "Next todo comment" })
 vim.keymap.set("n", "[t", function()
     require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
+
+-- local function cmd(command)
+--     return table.concat({ '<Cmd>', command, '<CR>' })
+-- end
+
+vim.keymap.set('n', '<leader><CR>', require('maximize').toggle, { desc = "Maximise" })
+-- vim.keymap.set('n', '<C-w>z', cmd 'WindowsMaximize')
+-- vim.keymap.set('n', '<C-w>_', cmd 'WindowsMaximizeVertically')
+-- vim.keymap.set('n', '<C-w>|', cmd 'WindowsMaximizeHorizontally')
+-- vim.keymap.set('n', '<C-w>=', cmd 'WindowsEqualize')
+--
+-- vim.keymap.set('n', '<leader>wz', cmd 'WindowsMaximize')
+-- vim.keymap.set('n', '<leader>w_', cmd 'WindowsMaximizeVertically')
+-- vim.keymap.set('n', '<leader>w|', cmd 'WindowsMaximizeHorizontally')
+-- vim.keymap.set('n', '<leader>w=', cmd 'WindowsEqualize')
+
+vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+
+vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleForward)")
+vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleBackward)")
+
+local function map(mode, l, r, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, l, r, opts)
+end
+
+local gs = package.loaded.gitsigns
+
+-- Navigation
+map('n', ']c', function()
+    if vim.wo.diff then return ']c' end
+    vim.schedule(function() gs.next_hunk() end)
+    return '<Ignore>'
+end, { expr = true, desc = "Next hunk" })
+
+map('n', '[c', function()
+    if vim.wo.diff then return '[c' end
+    vim.schedule(function() gs.prev_hunk() end)
+    return '<Ignore>'
+end, { expr = true, desc = "Previous hunk" })
+
+-- Actions
+map('n', '<leader>hs', gs.stage_hunk, { desc = "stage hunk" })
+map('n', '<leader>hr', gs.reset_hunk, { desc = "reset hunk" })
+map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "stage hunk" })
+map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "reset hunk" })
+map('n', '<leader>hS', gs.stage_buffer, { desc = "stage buffer" })
+map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "undo stage hunk" })
+map('n', '<leader>hR', gs.reset_buffer, { desc = "reset buffer" })
+map('n', '<leader>hp', gs.preview_hunk, { desc = "preview hunk" })
+map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = "blame" })
+map('n', '<leader>hB', gs.toggle_current_line_blame, { desc = "toggle blame on current line" })
+map('n', '<leader>hd', gs.diffthis, { desc = "diff" })
+map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "diff ~" })
+map('n', '<leader>hT', gs.toggle_deleted, { desc = "toggle deleted" })
+
+-- Text object
+map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')

@@ -20,14 +20,14 @@ Then
 1. `git clone` this repo
 2. `stow config` and anything else you may want
 
-## Git leaks
+## 🔒 Git leaks 🔒
 
 Probs makes sense to install gitleaks (`brew install gitleaks`) and use it as a pre-commit hook:
 ```sh
 echo "gitleaks protect" > .git/hooks/pre-commit
 ```
 
-## Different Binaries
+## 💻 Different Binaries 💻
 
 Since MacOS and Linux are slightly different, I've got two sets of executables.
 
@@ -35,16 +35,19 @@ Since MacOS and Linux are slightly different, I've got two sets of executables.
 
 ```
 cd $HOME
-git clone https://git.sr.ht/will-clarke/.dotfiles 
-#  OR via ssh; 
-#  git clone git@git.sr.ht:~will-clarke/.dotfiles 
+git clone https://git.sr.ht/will-clarke/.dotfiles
+#  OR via ssh;
+#  git clone git@git.sr.ht:~will-clarke/.dotfiles
 cd .dotfiles && stow bin-mac config git
-
 
 # Apply mac-specific settings
 curl https://git.sr.ht/~will-clarke/.dotfiles/blob/master/docs/setup_new_mac.sh -o setup_new_mac.sh && chmod +x setup_new_mac.sh
 vi setup_new_mac.sh
 # if this look good...
 # ./setup_new_mac.sh
+
+# Install gitleaks
+brew install gitleaks
+echo "gitleaks protect" > .git/hooks/pre-commit
 
 ```

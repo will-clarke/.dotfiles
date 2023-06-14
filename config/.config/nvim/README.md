@@ -1,22 +1,24 @@
 # Plugins to think about:
 
-- nvim-dap
-- iamcco/markdown-preview.nvim
 - https://github.com/L3MON4D3/LuaSnip -- read more!
 
 ## TODO
 
 - Octo is super cool. Do code reviews from vim!!! omg
-- Add more cmp sources
 - Get ZkInsertLink to search through all notes (eg. play around with Zk list)
 
 
 - Make big plugins load quickly
 
-https://github.com/nvim-neorg/neorg/blob/main/doc/neorg.norg
-https://github.com/nvim-neorg/norg-specs/blob/main/1.0-specification.norg#L1336
-
 These two are interesting:
 https://github.com/mickael-menu/zk
 https://github.com/mickael-menu/zk-nvim
 
+Muck around with KITTY
+- make alt-j work in kitty too
+- make a way to change both vim & kitty colourschemes together (maybe called from nvim?)
+- Maybe think about how to use ChatGPT
+- Improve kitty shortcuts like how to go to the next tab
+
+
+- make an 'entire' text object
