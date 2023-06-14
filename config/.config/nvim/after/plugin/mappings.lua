@@ -2,6 +2,9 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", ";", require("oil").open, { desc = "Oil" })
 
+vim.keymap.set("n", "<leader>qq", ":wq<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>qQ", ":qa!<CR>", { desc = "Quit ALL NOW" })
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
 vim.keymap.set('n', '<leader>fF', builtin.fd, { desc = "Find files from CWD" })
@@ -252,7 +255,7 @@ end, { desc = "scopes" })
 
 vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
 
-vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc = "quickfix replacer" })
+vim.keymap.set('n', '<Leader>qr', require("replacer").run, { silent = true, desc = "quickfix replacer" })
 
 -- GEt this working
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
