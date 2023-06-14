@@ -18,6 +18,7 @@ Muck around with KITTY
 - make alt-j work in kitty too
 - make a way to change both vim & kitty colourschemes together (maybe called from nvim?)
 - Maybe think about how to use ChatGPT
+- Improve kitty shortcuts like how to go to the next tab
 
 
 - make an 'entire' text object

@@ -172,8 +172,9 @@ vim.keymap.set("n", "<C-s>", ":w<CR>")
 vim.keymap.set("i", "<C-s>", "<ESC>:w<CR>i")
 
 -- -- moving lines up and down
--- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
--- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+-- GETS OVERWRITTEN OMG
+vim.keymap.set("n", "<M-J>", ":m .+1<CR>==")
+vim.keymap.set("n", "<M-K>", ":m .-3<CR>==")
 vim.keymap.set("v", "<M-J>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<M-K>", ":m '<-2<CR>gv=gv")
 
