@@ -36,6 +36,7 @@ require("lazy").setup({
     'petertriho/cmp-git',
     'hrsh7th/cmp-emoji',
     'declancm/maximize.nvim',
+    'knubie/vim-kitty-navigator',
     {
         "gbprod/yanky.nvim",
         config = function()

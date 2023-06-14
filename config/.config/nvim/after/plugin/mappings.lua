@@ -258,11 +258,11 @@ vim.keymap.set('n', '<Leader>q', require("replacer").run, { silent = true, desc 
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
 -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
 --
-vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>NavigatorLeft<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>NavigatorRight<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>NavigatorUp<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>NavigatorDown<CR>')
-vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>NavigatorPrevious<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>KittyNavigateLeft<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>KittyNavigateRight<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>KittyNavigateUp<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>KittyNavigateDown<CR>')
+vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>KittyNavigatePrevious<CR>')
 
 vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
 vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)
