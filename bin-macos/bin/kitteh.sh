@@ -5,5 +5,5 @@ if pgrep "kitty" > /dev/null; then
     open -a kitty
 else
     # no kitty instance ... open one!
-    fish -c "kitty"
+    fish -c "cd $HOME && kitty"
 fi
