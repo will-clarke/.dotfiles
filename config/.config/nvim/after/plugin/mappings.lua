@@ -2,6 +2,15 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", ";", require("oil").open, { desc = "Oil" })
 
+-- Text objects!!!!
+-- l = line
+-- e = entire buffer
+vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
+vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
+
+vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+
 vim.keymap.set("n", "<leader>qq", ":wq<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qQ", ":qa!<CR>", { desc = "Quit ALL NOW" })
 
@@ -342,3 +351,4 @@ map('n', '<leader>hT', gs.toggle_deleted, { desc = "toggle deleted" })
 
 -- Text object
 map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+
