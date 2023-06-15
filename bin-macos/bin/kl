@@ -1,2 +1,2 @@
 #!/bin/sh
-exec  /usr/local/bin/gls --hyperlink=auto --color=auto "$@"
+exec  "$(brew --prefix)/bin/gls" --hyperlink=auto --color=auto "$@"

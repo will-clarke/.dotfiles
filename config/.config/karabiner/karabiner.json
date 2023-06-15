@@ -329,6 +329,33 @@
                         ]
                     },
                     {
+                        "description": "hyper-z to kitty OMG",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command",
+                                            "shift",
+                                            "control",
+                                            "option"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "XDG_CONFIG_HOME=$HOME/.config PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/:$HOME/.goenv/shims $HOME/bin/kitteh.sh"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "hyper-a to kitty omg",
                         "manipulators": [
                             {
