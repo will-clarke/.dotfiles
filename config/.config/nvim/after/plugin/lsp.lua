@@ -30,6 +30,7 @@ capabilities.offsetEncoding = 'utf-8'
 require('lspconfig').clangd.setup {
     capabilities = capabilities
 }
---
+
+lsp.skip_server_setup({ 'jdtls' })
 
 lsp.setup()
