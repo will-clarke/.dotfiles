@@ -1,13 +1,7 @@
-# Plugins to think about:
-
-- https://github.com/L3MON4D3/LuaSnip -- read more!
-
 ## TODO
 
 - Octo is super cool. Do code reviews from vim!!! omg
 - Get ZkInsertLink to search through all notes (eg. play around with Zk list)
-
-
 - Make big plugins load quickly
 
 These two are interesting:
@@ -20,5 +14,5 @@ Muck around with KITTY
 - Maybe think about how to use ChatGPT
 - Improve kitty shortcuts like how to go to the next tab
 
-
-- make an 'entire' text object
+- https://github.com/L3MON4D3/LuaSnip -- read more! Any more snippets?
+- Fix luasnip sometimes breaking command-line autocomplete

@@ -1,3 +1,10 @@
+-- vnoremap <leader>p "_dP
+-- nnoremap <Leader>ln :lnext<CR>
+-- nnoremap <Leader>lp :lprev<CR>
+-- nnoremap <Leader>ll :llist<CR>
+
+
+
 vim.g.mapleader = " "
 
 vim.keymap.set("n", ";", require("oil").open, { desc = "Oil" })
@@ -48,24 +55,18 @@ vim.keymap.set("n", "<leader>y", ":Telescope neoclip<CR>", { desc = "Yank ring" 
 
 vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
 
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-    { silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-    { silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-    { silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-    { silent = true, noremap = true }
-)
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-    { silent = true, noremap = true }
-)
-vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-    { silent = true, noremap = true }
-)
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true })
+vim.keymap.set("n", "<leader>xn", function() require("trouble").next({ skip_groups = true, jump = true }); end,
+    { silent = true, noremap = true, desc = "next" })
+vim.keymap.set("n", "<leader>xp", function() require("trouble").previous({ skip_groups = true, jump = true }); end,
+    { silent = true, noremap = true, desc = "previous" })
+
+
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
 
 -- vim.keymap.set("n", "<leader>R", builtin.registers, { desc = "Registers" })
 vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
@@ -102,6 +103,7 @@ vim.keymap.set('n', '<leader>tO',
 vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Journal" })
+vim.keymap.set('n', '<leader>T', ":e ~/notes/TODO.md<CR>", { desc = "TODO" })
 
 -- vim.keymap.set('n', '<space>d', function()
 -- 	vim.diagnostic.open_float()
@@ -112,10 +114,25 @@ vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. 
 
 
 vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gw", ":Gwrite<CR>", { desc = "Git Write" })
+vim.keymap.set("n", "<leader>gr", ":Gread<CR>", { desc = "Git Read" })
 vim.keymap.set("n", "<leader>gp", ":Git Pull<CR>", { desc = "Git pull" })
+vim.keymap.set("n", "<leader>gP", ":Git Push<CR>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gco", ":Git checkout", { desc = "Git checkout" })
-vim.keymap.set("n", "<leader>gl", ":GetCommitLink<CR>", { desc = "Git link" })
+vim.keymap.set("n", "<leader>gL", ":GetCommitLink<CR>", { desc = "Git Link" })
+vim.keymap.set("n", "<leader>gl", ":Git log<CR>", { desc = "Git log" })
 vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
+
+-- nnoremap <Leader>gs :G<CR>
+-- nnoremap <Leader>gc :Git commit<CR>
+-- nnoremap <Leader>ga :Gwrite<CR>
+-- nnoremap <Leader>gk :Gread<CR>
+-- " nnoremap <Leader>gl :GV<CR>
+-- nnoremap <Leader>gp :Git push<CR>
+-- nnoremap <Leader>gf :diffget //2<CR>
+-- nnoremap <Leader>gj :diffget //3<CR>
+
 
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
 vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
@@ -170,7 +187,7 @@ local toggle_theme = function()
 
     print("setting theme to " .. next_theme)
 end
-vim.keymap.set("n", "<leader>TT", toggle_theme, { desc = "toggle theme" })
+vim.keymap.set("n", "<leader>tT", toggle_theme, { desc = "toggle theme" })
 
 vim.cmd [[colorscheme tokyonight]]
 
@@ -294,7 +311,8 @@ end, { desc = "Previous todo comment" })
 --     return table.concat({ '<Cmd>', command, '<CR>' })
 -- end
 
-vim.keymap.set('n', '<leader><CR>', require('maximize').toggle, { desc = "Maximise" })
+vim.keymap.set('n', '<leader><C-CR>', require('maximize').toggle, { desc = "Maximise" })
+vim.keymap.set('n', '<leader><CR>', ":ToggleTerm<CR>", { desc = "Toggle term" })
 -- vim.keymap.set('n', '<C-w>z', cmd 'WindowsMaximize')
 -- vim.keymap.set('n', '<C-w>_', cmd 'WindowsMaximizeVertically')
 -- vim.keymap.set('n', '<C-w>|', cmd 'WindowsMaximizeHorizontally')
@@ -351,4 +369,3 @@ map('n', '<leader>hT', gs.toggle_deleted, { desc = "toggle deleted" })
 
 -- Text object
 map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-

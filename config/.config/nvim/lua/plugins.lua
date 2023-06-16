@@ -38,6 +38,13 @@ require("lazy").setup({
     'declancm/maximize.nvim',
     'knubie/vim-kitty-navigator',
     {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            require("toggleterm").setup {}
+        end,
+    },
+    {
         "gbprod/yanky.nvim",
         config = function()
             require("yanky").setup({

@@ -15,6 +15,7 @@ end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin
 
+
 if type -q goenv
     status --is-interactive; and source (goenv init -|psub)
 end
@@ -41,6 +42,8 @@ test -f ~/.config/fish/config-local.fish && source ~/.config/fish/config-local.f
 
 
 type -q starship && starship init fish | source
+
+set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk/include"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
