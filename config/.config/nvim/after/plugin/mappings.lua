@@ -70,6 +70,10 @@ vim.keymap.set("n", "<leader>xn", function() require("trouble").next({ skip_grou
     { silent = true, noremap = true, desc = "next" })
 vim.keymap.set("n", "<leader>xp", function() require("trouble").previous({ skip_groups = true, jump = true }); end,
     { silent = true, noremap = true, desc = "previous" })
+vim.keymap.set("n", "]x", function() require("trouble").next({ skip_groups = true, jump = true }); end,
+    { silent = true, noremap = true, desc = "next" })
+vim.keymap.set("n", "[x", function() require("trouble").previous({ skip_groups = true, jump = true }); end,
+    { silent = true, noremap = true, desc = "previous" })
 
 
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true })
