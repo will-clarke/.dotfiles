@@ -3,12 +3,15 @@
 -- nnoremap <Leader>lp :lprev<CR>
 -- nnoremap <Leader>ll :llist<CR>
 
--- nnoremap <C-w>o :mksession! ~/session.vim<CR>:wincmd o<CR> and so on for all the windowing commands you want to support (see :help CTRL-W, there's a lot). The ! prevents errors relating to overwriting an existing session file.
-vim.keymap.set('n', '<C-w>o', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>", { desc = "Only window" })
-vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { desc = "Undo session" })
-vim.keymap.set('n', '<leader>wo', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>", { desc = "Only window" })
-vim.keymap.set('n', '<leader>wu', ":source ~/.config/nvim/session.vim<CR>", { desc = "Undo session" })
--- nnoremap <C-w>u :source ~/session.vim<CR> to "undo" the last windowing command.
+vim.keymap.set('n', '<C-w>o', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
+    { noremap = true, desc = "Only window" })
+vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
+
+vim.keymap.set('n', '<leader>wz', ":echo 'hey'<CR>", { desc = "Window" })
+vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
+vim.keymap.set('n', '<leader>wo', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
+    { noremap = true, desc = "Only window" })
+vim.keymap.set('n', '<leader>wu', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
 
 
 vim.g.mapleader = " "
@@ -145,7 +148,6 @@ vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
 
 
 -- vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save" })
-vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
 
 vim.keymap.set('n', '<space>ca', function()
     vim.lsp.buf.code_action({ apply = true })
