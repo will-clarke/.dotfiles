@@ -3,6 +3,12 @@
 -- nnoremap <Leader>lp :lprev<CR>
 -- nnoremap <Leader>ll :llist<CR>
 
+-- nnoremap <C-w>o :mksession! ~/session.vim<CR>:wincmd o<CR> and so on for all the windowing commands you want to support (see :help CTRL-W, there's a lot). The ! prevents errors relating to overwriting an existing session file.
+vim.keymap.set('n', '<C-w>o', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>", { desc = "Only window" })
+vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { desc = "Undo session" })
+vim.keymap.set('n', '<leader>wo', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>", { desc = "Only window" })
+vim.keymap.set('n', '<leader>wu', ":source ~/.config/nvim/session.vim<CR>", { desc = "Undo session" })
+-- nnoremap <C-w>u :source ~/session.vim<CR> to "undo" the last windowing command.
 
 
 vim.g.mapleader = " "
@@ -117,8 +123,8 @@ vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Git" })
 vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git" })
 vim.keymap.set("n", "<leader>gw", ":Gwrite<CR>", { desc = "Git Write" })
 vim.keymap.set("n", "<leader>gr", ":Gread<CR>", { desc = "Git Read" })
-vim.keymap.set("n", "<leader>gp", ":Git Pull<CR>", { desc = "Git pull" })
-vim.keymap.set("n", "<leader>gP", ":Git Push<CR>", { desc = "Git push" })
+vim.keymap.set("n", "<leader>gp", ":Git pull<CR>", { desc = "Git pull" })
+vim.keymap.set("n", "<leader>gP", ":Git push<CR>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gco", ":Git checkout", { desc = "Git checkout" })
 vim.keymap.set("n", "<leader>gL", ":GetCommitLink<CR>", { desc = "Git Link" })
 vim.keymap.set("n", "<leader>gl", ":Git log<CR>", { desc = "Git log" })

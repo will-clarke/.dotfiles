@@ -37,13 +37,6 @@ require("lazy").setup({
     'hrsh7th/cmp-emoji',
     'knubie/vim-kitty-navigator',
     {
-        'akinsho/toggleterm.nvim',
-        version = "*",
-        config = function()
-            require("toggleterm").setup {}
-        end,
-    },
-    {
         "gbprod/yanky.nvim",
         config = function()
             require("yanky").setup({
