@@ -3,18 +3,18 @@
 -- nnoremap <Leader>lp :lprev<CR>
 -- nnoremap <Leader>ll :llist<CR>
 
-vim.keymap.set('n', '<C-w>o', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
-    { noremap = true, desc = "Only window" })
-vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
+vim.g.mapleader = " "
 
-vim.keymap.set('n', '<leader>wz', ":echo 'hey'<CR>", { desc = "Window" })
+-- vim.keymap.set('n', '<C-w>o', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
+--     { noremap = true, desc = "Only window" })
+-- vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
+
 vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
 vim.keymap.set('n', '<leader>wo', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
     { noremap = true, desc = "Only window" })
 vim.keymap.set('n', '<leader>wu', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
 
 
-vim.g.mapleader = " "
 
 vim.keymap.set("n", ";", require("oil").open, { desc = "Oil" })
 
