@@ -311,17 +311,7 @@ end, { desc = "Previous todo comment" })
 --     return table.concat({ '<Cmd>', command, '<CR>' })
 -- end
 
-vim.keymap.set('n', '<leader><C-CR>', require('maximize').toggle, { desc = "Maximise" })
 vim.keymap.set('n', '<leader><CR>', ":ToggleTerm<CR>", { desc = "Toggle term" })
--- vim.keymap.set('n', '<C-w>z', cmd 'WindowsMaximize')
--- vim.keymap.set('n', '<C-w>_', cmd 'WindowsMaximizeVertically')
--- vim.keymap.set('n', '<C-w>|', cmd 'WindowsMaximizeHorizontally')
--- vim.keymap.set('n', '<C-w>=', cmd 'WindowsEqualize')
---
--- vim.keymap.set('n', '<leader>wz', cmd 'WindowsMaximize')
--- vim.keymap.set('n', '<leader>w_', cmd 'WindowsMaximizeVertically')
--- vim.keymap.set('n', '<leader>w|', cmd 'WindowsMaximizeHorizontally')
--- vim.keymap.set('n', '<leader>w=', cmd 'WindowsEqualize')
 
 vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
 vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")

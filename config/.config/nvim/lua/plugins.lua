@@ -35,7 +35,6 @@ require("lazy").setup({
     'hrsh7th/cmp-buffer',
     'petertriho/cmp-git',
     'hrsh7th/cmp-emoji',
-    'declancm/maximize.nvim',
     'knubie/vim-kitty-navigator',
     {
         'akinsho/toggleterm.nvim',
