@@ -11,14 +11,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = " "
 require("lazy").setup({
     {
         'mbbill/undotree',
-        keys = { "<leader>U" }
+        keys = { { "<leader>U", vim.cmd.UndotreeToggle, desc = "Undo" } }
     },
     {
         'f-person/git-blame.nvim',
-        keys = { "<leader>gb" }
+        keys = { { "<leader>gb", ":GitBlameToggle<CR>", desc = "git blame" } }
     },
     {
         'linty-org/readline.nvim',
@@ -26,31 +27,20 @@ require("lazy").setup({
     },
     {
         'gabrielpoca/replacer.nvim',
-        keys = { "<leader>qr" },
+        keys = { "<leader>qr", ':lua require("replacer").run()<cr>', desc = "replacer" },
     },
     {
         'folke/tokyonight.nvim',
     },
     {
         'ThePrimeagen/harpoon',
-        keys   = {
-            "<leader>A",
-            "<leader>a",
-            "<C-h>",
-            "<C-t>",
+        keys = {
+            { "<leader>a", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = "harpoon" },
+            { "<leader>A", ":lua require('harpoon.mark').add_file()<CR>",        desc = "harpoon add file" },
+            { "<C-h>",     ":lua require('harpoon.ui').nav_file(1)<CR>",         desc = "harpoon 1" },
+            { "<C-t>",     ":lua require('harpoon.ui').nav_file(2)<CR>",         desc = "harpoon 2" },
         },
-        config = function()
-            require("harpoon").setup()
-
-            local mark = require("harpoon.mark")
-            local ui = require("harpoon.ui")
-
-            vim.keymap.set("n", "<leader>A", mark.add_file, { desc = "Add Harpoon" })
-            vim.keymap.set("n", "<leader>a", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
-
-            vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-            vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-        end
+        opt  = {}
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
@@ -60,33 +50,144 @@ require("lazy").setup({
         'eandrju/cellular-automaton.nvim',
         cmd = "CellularAutomaton",
     },
-    -- {
-    --     'saadparwaiz1/cmp_luasnip',
-    --     event = "VeryLazy",
-    -- },
     {
         'rhysd/conflict-marker.vim',
         event = "VeryLazy",
     },
-    {
-        'hrsh7th/nvim-cmp',
-        event = "InsertEnter",
-        dependencies = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp",
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-calc',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-emoji',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-path',
-            'petertriho/cmp-git',
-            'saadparwaiz1/cmp_luasnip',
-        },
-    },
+    -- {
+    --     'hrsh7th/nvim-cmp',
+    --     event = "InsertEnter",
+    --     dependencies = {
+    --         "hrsh7th/cmp-buffer",
+    --         "hrsh7th/cmp-nvim-lsp",
+    --         'hrsh7th/cmp-buffer',
+    --         'hrsh7th/cmp-calc',
+    --         'hrsh7th/cmp-cmdline',
+    --         'hrsh7th/cmp-emoji',
+    --         'hrsh7th/cmp-nvim-lua',
+    --         'hrsh7th/cmp-path',
+    --         'petertriho/cmp-git',
+    --         'saadparwaiz1/cmp_luasnip',
+    --     },
+    --     config = function()
+    --         local luasnip = require("luasnip")
+    --         local cmp = require("cmp")
+    --
+    --         local has_words_before = function()
+    --             print("has_words_before")
+    --             unpack = unpack or table.unpack
+    --             local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    --             -- return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    --             ret = col ~= 0 and
+    --                 vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    --             print("ret = " .. tostring(ret))
+    --             return ret
+    --         end
+    --
+    --         cmp.setup {
+    --             view = {
+    --                 entries = "custom" -- can be "custom", "wildmenu" or "native"
+    --             },
+    --             snippet = {
+    --                 expand = function(args)
+    --                     require 'luasnip'.lsp_expand(args.body)
+    --                 end
+    --             },
+    --             sources = cmp.config.sources({
+    --                 { name = "copilot" },
+    --                 { name = "nvim_lsp" },
+    --                 { name = 'luasnip' },
+    --                 { name = 'emoji' },
+    --                 { name = "path" },
+    --                 { name = 'calc' },
+    --                 { name = "git" },
+    --             }, {
+    --                 { name = 'buffer' },
+    --             }),
+    --
+    --             mapping = cmp.mapping.preset.insert({
+    --                 ['<C-j>'] = cmp.mapping.select_next_item(),
+    --                 ['<C-k>'] = cmp.mapping.select_prev_item(),
+    --                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    --                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    --                 ['<C-Space>'] = cmp.mapping.complete(),
+    --                 ['<C-e>'] = cmp.mapping.abort(),
+    --                 ["<M-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    --                 ["<C-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    --
+    --                 ["<Tab>"] = cmp.mapping({
+    --                     i = function(fallback)
+    --                         if luasnip.expand_or_jumpable() then
+    --                             luasnip.expand_or_jump()
+    --                         elseif has_words_before() then
+    --                             require('cmp').confirm({ select = true })
+    --                         else
+    --                             fallback()
+    --                         end
+    --                     end }),
+    --                 ["<CR>"] = cmp.mapping({
+    --                     i = function(fallback)
+    --                         if cmp.visible() and cmp.get_active_entry() then
+    --                             cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+    --                         else
+    --                             fallback()
+    --                         end
+    --                     end,
+    --                     -- s = cmp.mapping.confirm({ select = true }),
+    --                     -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    --                 }),
+    --             }),
+    --
+    --         }
+    --
+    --         cmp.setup.filetype('gitcommit', {
+    --             sources = cmp.config.sources({
+    --                 { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    --             }, {
+    --                 { name = 'buffer' },
+    --             })
+    --         })
+    --
+    --         cmp.setup.cmdline('/', {
+    --             mapping = cmp.mapping.preset.cmdline(),
+    --             sources = {
+    --                 { name = 'buffer' }
+    --             }
+    --         })
+    --
+    --         require("copilot_cmp").setup({})
+    --
+    --         require("cmp_git").setup({})
+    --
+    --         require("copilot").setup({
+    --             -- we're disabling these as copilot-cmp is dealing with it
+    --             suggestion = {
+    --                 enabled = false,
+    --             },
+    --             panel = {
+    --                 enabled = false,
+    --             },
+    --             -- filetypes = {
+    --             --     markdown = true,
+    --             -- },
+    --         })
+    --     end,
+    -- },
     {
         'knubie/vim-kitty-navigator',
-        event = "VeryLazy",
+        cmd = {
+            "KittyNavigateRight",
+            "KittyNavigateLeft",
+            "KittyNavigateUp",
+            "KittyNavigateDown",
+        },
+        config = function()
+            vim.keymap.set({ 'n', 't' }, '<A-h>', '<CMD>KittyNavigateLeft<CR>')
+            vim.keymap.set({ 'n', 't' }, '<A-l>', '<CMD>KittyNavigateRight<CR>')
+            vim.keymap.set({ 'n', 't' }, '<A-k>', '<CMD>KittyNavigateUp<CR>')
+            vim.keymap.set({ 'n', 't' }, '<A-j>', '<CMD>KittyNavigateDown<CR>')
+            vim.keymap.set({ 'n', 't' }, '<A-p>', '<CMD>KittyNavigatePrevious<CR>')
+        end,
     },
     {
         'mfussenegger/nvim-jdtls',
@@ -94,29 +195,18 @@ require("lazy").setup({
     },
     {
         "gbprod/yanky.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("yanky").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
-        end
-    },
-    {
-        "giusgad/pets.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "giusgad/hologram.nvim",
+        -- keys = { "p", "P", "gp", "gP", "c-p", "C-n" },
+        keys = {
+            { "p",     "<Plug>(YankyPutAfter)",     desc = "Yank after cursor" },
+            { "P",     "<Plug>(YankyPutBefore)",    desc = "Yank before cursor" },
+            { "<c-p>", "<Plug>(YankyCycleForward)" },
+            { "<c-n>", "<Plug>(YankyCycleBackward)" },
         },
-        config = function()
-            require("pets").setup({})
-        end,
+        opt = {},
     },
     {
         "jackMort/ChatGPT.nvim",
-        event = "VeryLazy",
+        cmd = { "ChatGPT" },
         config = function()
             require("chatgpt").setup()
         end,
@@ -146,7 +236,7 @@ require("lazy").setup({
         config = function()
             require "octo".setup()
         end,
-        event = "VeryLazy",
+        cmd = "Octo",
     },
     {
         -- for doing split resizing
@@ -154,14 +244,18 @@ require("lazy").setup({
         event = "VeryLazy",
         config = function()
             require('smart-splits').setup({})
-        end
+            vim.keymap.set('n', '<M-H>', require('smart-splits').resize_left)
+            vim.keymap.set('n', '<M-J>', require('smart-splits').resize_down)
+            vim.keymap.set('n', '<M-K>', require('smart-splits').resize_up)
+            vim.keymap.set('n', '<M-L>', require('smart-splits').resize_right)
+        end,
+        keys = {
+            '<M-H>',
+            '<M-J>',
+            '<M-K>',
+            '<M-L>',
+        }
     },
-    -- {
-    --     'numToStr/Navigator.nvim',
-    --     config = function()
-    --         require('Navigator').setup()
-    --     end
-    -- },
     {
         'nvim-pack/nvim-spectre',
         event = "VeryLazy",
@@ -310,53 +404,7 @@ require("lazy").setup({
             'nvim-tree/nvim-web-devicons',
             opt = true,
         },
-        config = function()
-            require('lualine').setup {
-                options = {
-                    icons_enabled = true,
-                    theme = 'auto',
-                    component_separators = { left = '', right = '' },
-                    section_separators = { left = '', right = '' },
-                    disabled_filetypes = {
-                        statusline = {},
-                        winbar = {},
-                    },
-                    ignore_focus = {},
-                    always_divide_middle = true,
-                    globalstatus = false,
-                    refresh = {
-                        statusline = 1000,
-                        tabline = 1000,
-                        winbar = 1000,
-                    }
-                },
-                sections = {
-                    lualine_a = { 'mode' },
-                    lualine_b = { 'branch', 'diff', 'diagnostics' },
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'encoding', 'fileformat', 'filetype' },
-                    lualine_y = { 'progress' },
-                    lualine_z = { 'location' }
-                },
-                inactive_sections = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = { 'location' },
-                    lualine_y = {},
-                    lualine_z = {}
-                },
-                tabline = {},
-                winbar = {},
-                inactive_winbar = {},
-                extensions = {}
-            }
-            -- require('lualine').setup({
-            --     options = {
-            --         theme = 'tokyonight'
-            --     }
-            -- })
-        end
+        opt = {},
     },
     {
         "folke/trouble.nvim",
@@ -476,11 +524,93 @@ require("lazy").setup({
         cmd = "Copilot",
         event = "InsertEnter",
     },
-    "zbirenbaum/copilot-cmp",
+    -- "zbirenbaum/copilot-cmp",
+    -- {
+    --     "williamboman/mason.nvim",
+    --     event = "VeryLazy",
+    --     build = ":MasonUpdate",
+    -- },
+    -- {
+    --     'VonHeikemen/lsp-zero.nvim',
+    --     branch = 'v2.x',
+    --     lazy = true,
+    --     config = function()
+    --         -- This is where you modify the settings for lsp-zero
+    --         -- Note: autocompletion settings will not take effect
+    --
+    --         require('lsp-zero.settings').preset({})
+    --     end
+    -- },
+
+    -- Autocompletion
     {
-        "williamboman/mason.nvim",
-        event = "VeryLazy",
-        build = ":MasonUpdate",
+        'hrsh7th/nvim-cmp',
+        event = 'InsertEnter',
+        dependencies = {
+            {
+                'L3MON4D3/LuaSnip',
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-nvim-lsp",
+                'hrsh7th/cmp-buffer',
+                'hrsh7th/cmp-calc',
+                'hrsh7th/cmp-cmdline',
+                'hrsh7th/cmp-emoji',
+                'hrsh7th/cmp-nvim-lua',
+                'hrsh7th/cmp-path',
+                'petertriho/cmp-git',
+                'saadparwaiz1/cmp_luasnip',
+            },
+        },
+        config = function()
+            -- Here is where you configure the autocompletion settings.
+            -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
+            -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
+
+            require('lsp-zero.cmp').extend()
+
+            -- And you can configure cmp even more, if you want to.
+            local cmp = require('cmp')
+            local cmp_action = require('lsp-zero.cmp').action()
+
+            cmp.setup({
+                mapping = {
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+                    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+                }
+            })
+        end
+    },
+
+    -- LSP
+    {
+        'neovim/nvim-lspconfig',
+        cmd = 'LspInfo',
+        event = { 'BufReadPre', 'BufNewFile' },
+        dependencies = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'williamboman/mason-lspconfig.nvim' },
+            {
+                'williamboman/mason.nvim',
+                build = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
+        },
+        config = function()
+            -- This is where all the LSP shenanigans will live
+
+            local lsp = require('lsp-zero')
+
+            lsp.on_attach(function(client, bufnr)
+                lsp.default_keymaps({ buffer = bufnr })
+            end)
+
+            -- (Optional) Configure lua language server for neovim
+            require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
+            lsp.setup()
+        end
     },
     {
         'VonHeikemen/lsp-zero.nvim',

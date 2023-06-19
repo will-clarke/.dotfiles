@@ -9,6 +9,8 @@ vim.g.mapleader = " "
 --     { noremap = true, desc = "Only window" })
 -- vim.keymap.set('n', '<C-w>u', ":source ~/.config/nvim/session.vim<CR>", { noremap = true, desc = "Undo session" })
 
+vim.keymap.set('n', '<leader>L', ":Lazy<CR>", { desc = "Lazy" })
+
 vim.keymap.set('n', '<leader>w', "<C-w>", { desc = "Window" })
 vim.keymap.set('n', '<leader>wo', ":mksession! ~/.config/nvim/session.vim<CR>:wincmd o<CR>",
     { noremap = true, desc = "Only window" })
@@ -28,6 +30,7 @@ vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire bu
 vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
 
 vim.keymap.set("n", "<leader>qq", ":wq<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>qa", ":qa<CR>", { desc = "Quit all" })
 vim.keymap.set("n", "<leader>qQ", ":qa!<CR>", { desc = "Quit ALL NOW" })
 
 local builtin = require('telescope.builtin')
@@ -59,7 +62,7 @@ vim.keymap.set("n", "<leader>lco", builtin.lsp_outgoing_calls, { desc = "outgoin
 vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename, { desc = "rename variable" })
 vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "definitions" })
 vim.keymap.set("n", "<leader>gr", builtin.lsp_references, { desc = "references" })
-vim.keymap.set("n", "<leader>y", ":Telescope neoclip<CR>", { desc = "Yank ring" })
+-- vim.keymap.set("n", "<leader>y", ":Telescope neoclip<CR>", { desc = "Yank ring" })
 --  maybe also look in after/plugin/telescope.lua
 
 vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = "Find files" })
@@ -86,9 +89,9 @@ vim.keymap.set("n", "<leader>r", builtin.resume, { desc = "resume" })
 
 vim.keymap.set('n', '<Leader>R', require("replacer").run, { desc = "Replacer" })
 
--- vim.keymap.set('n', '<leader><leader>', ':source $MYVIMRC<CR>', { desc = "Source Vimrc" })
-vim.keymap.set('n', '<leader>v', ':e $MYVIMRC<CR>', { desc = "Vimrc" })
-vim.keymap.set('n', '<leader>V', ':e ~/.config/nvim/after/plugin/mappings.lua<CR>', { desc = "Vimrc" })
+vim.keymap.set('n', '<leader>vi', ':e $MYVIMRC<CR>', { desc = "Vimrc init" })
+vim.keymap.set('n', '<leader>vm', ':e ~/.config/nvim/after/plugin/mappings.lua<CR>', { desc = "Vimrc mappings" })
+vim.keymap.set('n', '<leader>vp', ':e ~/.config/nvim/lua/plugins.lua<CR>', { desc = "Vimrc plugins" })
 
 vim.keymap.set('n', '<leader>=', function()
     vim.lsp.buf.format { async = true }
@@ -135,7 +138,7 @@ vim.keymap.set("n", "<leader>gP", ":Git push<CR>", { desc = "Git push" })
 vim.keymap.set("n", "<leader>gco", ":Git checkout", { desc = "Git checkout" })
 vim.keymap.set("n", "<leader>gL", ":GetCommitLink<CR>", { desc = "Git Link" })
 vim.keymap.set("n", "<leader>gl", ":Git log<CR>", { desc = "Git log" })
-vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
+-- vim.keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>", { desc = "Git blame" })
 
 -- nnoremap <Leader>gs :G<CR>
 -- nnoremap <Leader>gc :Git commit<CR>
@@ -164,7 +167,7 @@ end, { desc = "Code Action" })
 -- local telescope = require("telescope")
 -- telescope.load_extension("undo")
 -- vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
+-- vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 
 local toggle_theme = function()
@@ -232,7 +235,7 @@ vim.keymap.set('!', '<C-d>', '<Delete>') -- delete-char
 vim.keymap.set('!', '<C-n>', '<Down>')
 vim.keymap.set('!', '<C-h>', '<BS>')     -- backward-delete-char
 
-vim.keymap.set("n", "<leader>m", require('treesj').toggle, { desc = "Split/Join" })
+-- vim.keymap.set("n", "<leader>m", require('treesj').toggle, { desc = "Split/Join" })
 
 
 local opts = { noremap = true, silent = false }
@@ -285,7 +288,7 @@ end, { desc = "scopes" })
 
 vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
 
-vim.keymap.set('n', '<Leader>qr', require("replacer").run, { silent = true, desc = "quickfix replacer" })
+-- vim.keymap.set('n', '<Leader>qr', require("replacer").run, { silent = true, desc = "quickfix replacer" })
 
 -- GEt this working
 -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
@@ -317,13 +320,13 @@ end, { desc = "Previous todo comment" })
 
 vim.keymap.set('n', '<leader><CR>', ":ToggleTerm<CR>", { desc = "Toggle term" })
 
-vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-
-vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleForward)")
-vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleBackward)")
+-- vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+-- vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+-- vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+-- vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+--
+-- vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleForward)")
+-- vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleBackward)")
 
 local function map(mode, l, r, opts)
     opts = opts or {}
