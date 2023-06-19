@@ -15,11 +15,11 @@ config/.config/raycast/
 
 config/.config/github-copilot/hosts.json
 
-config/.config/nvim/lua/.luarc.json
 
 config/.config/Amazon/
 config/.config/dlv/
 config/.config/filezilla/
 config/.config/tmux/plugins
 
-config/.config/nvim/session.vim
+config/.config/nvim/*
+!config/.config/nvim/lua/custom
