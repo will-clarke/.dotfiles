@@ -14,6 +14,7 @@ One of these should work:
 - `sudo apt install git stow`
 - `sudo pacman -S git stow`
 - `brew install stow`
+- `git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim`
 
 Then
 
