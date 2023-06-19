@@ -16,3 +16,10 @@ Muck around with KITTY
 
 - https://github.com/L3MON4D3/LuaSnip -- read more! Any more snippets?
 - Fix luasnip sometimes breaking command-line autocomplete
+
+
+## How to install
+
+```sh
+brew install java mvn ripgrep
+```

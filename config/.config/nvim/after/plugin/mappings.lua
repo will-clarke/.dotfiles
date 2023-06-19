@@ -339,7 +339,8 @@ local function map(mode, l, r, opts)
     vim.keymap.set(mode, l, r, opts)
 end
 
-local gs = package.loaded.gitsigns
+local gs = require('gitsigns')
+-- package.loaded.gitsigns
 
 -- Navigation
 map('n', ']c', function()
