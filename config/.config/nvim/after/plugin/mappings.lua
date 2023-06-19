@@ -98,25 +98,6 @@ vim.keymap.set('n', '<leader>=', function()
 end, { desc = "Format" })
 
 -- vim.keymap.set('n', '<leader>tl', require("neotest").run.last, { desc = "last" })
-vim.keymap.set('n', '<leader>tr', function()
-    require("neotest").summary.open()
-    require("neotest").run.run()
-end, { desc = "Test" })
-vim.keymap.set('n', '<leader>tf', function()
-    require("neotest").run.run(vim.fn.expand("%"))
-end, { desc = "Test file" })
-vim.keymap.set('n', '<leader>td', function()
-    require("neotest").run.run({ strategy = "dap" })
-end, { desc = "Debug" })
-vim.keymap.set('n', '<leader>ta', require("neotest").run.attach, { desc = "Attach to test" })
-vim.keymap.set('n', '<leader>to', require("neotest").output_panel.toggle, { desc = "Output toggle" })
-vim.keymap.set('n', '<leader>tO',
-    function()
-        require("neotest").output.open({ enter = true })
-    end
-    , { desc = "Output open" })
-
-vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
 vim.keymap.set('n', '<leader>n', ":e ~/notes/work/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Notes" })
 vim.keymap.set('n', '<leader>NN', ":e ~/notes/diary/" .. os.date('%Y-%m-%d') .. ".md<CR>", { desc = "Journal" })
 vim.keymap.set('n', '<leader>T', ":e ~/notes/TODO.md<CR>", { desc = "TODO" })
@@ -259,34 +240,6 @@ vim.api.nvim_set_keymap("n", "<leader>zf",
 -- !!!MORE ZK MAPPINGS IN ftplugin/markdown.lua!!!
 --
 --
-vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = "test (go)" })
-vim.keymap.set('n', '<leader>dc', require('dap').continue, { desc = "continue / START!" })
-vim.keymap.set('n', '<leader>ds', require('dap').step_over, { desc = "Step over " })
-vim.keymap.set('n', '<leader>di', require('dap').step_into, { desc = "step In" })
-vim.keymap.set('n', '<leader>do', require('dap').step_out, { desc = "step Out" })
-vim.keymap.set('n', '<Leader>db', require('dap').toggle_breakpoint, { desc = "breakpoint" })
--- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-vim.keymap.set('n', '<Leader>dm',
-    function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { desc = "message??" })
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = "repl" })
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "last run" })
-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
-    require('dap.ui.widgets').hover()
-end, { desc = "hover" })
-vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
-    require('dap.ui.widgets').preview()
-end, { desc = "preview" })
-vim.keymap.set('n', '<Leader>df', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.frames)
-end, { desc = "frames" })
-vim.keymap.set('n', '<Leader>dS', function()
-    local widgets = require('dap.ui.widgets')
-    widgets.centered_float(widgets.scopes)
-end, { desc = "scopes" })
-
-
-vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
 
 -- vim.keymap.set('n', '<Leader>qr', require("replacer").run, { silent = true, desc = "quickfix replacer" })
 

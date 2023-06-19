@@ -15,7 +15,7 @@ vim.g.mapleader = " "
 require("lazy").setup({
     {
         'mbbill/undotree',
-        keys = { { "<leader>U", vim.cmd.UndotreeToggle, desc = "Undo" } }
+        keys = { { "<leader>U", vim.cmd.UndotreeToggle, desc = "Undo" } },
     },
     {
         'f-person/git-blame.nvim',
@@ -195,14 +195,15 @@ require("lazy").setup({
     },
     {
         "gbprod/yanky.nvim",
-        -- keys = { "p", "P", "gp", "gP", "c-p", "C-n" },
         keys = {
             { "p",     "<Plug>(YankyPutAfter)",     desc = "Yank after cursor" },
             { "P",     "<Plug>(YankyPutBefore)",    desc = "Yank before cursor" },
             { "<c-p>", "<Plug>(YankyCycleForward)" },
             { "<c-n>", "<Plug>(YankyCycleBackward)" },
         },
-        opt = {},
+        config = function()
+            require("yanky").setup({})
+        end,
     },
     {
         "jackMort/ChatGPT.nvim",
@@ -258,7 +259,6 @@ require("lazy").setup({
     },
     {
         'nvim-pack/nvim-spectre',
-        event = "VeryLazy",
         cmd = 'Spectre',
     },
     {
@@ -270,7 +270,39 @@ require("lazy").setup({
     },
     {
         'mfussenegger/nvim-dap',
-        event = "VeryLazy",
+        keys = {
+            "<leader>d"
+        },
+        config = function()
+            vim.keymap.set('n', '<leader>dt', require('dap-go').debug_test, { desc = "test (go)" })
+            vim.keymap.set('n', '<leader>dc', require('dap').continue, { desc = "continue / START!" })
+            vim.keymap.set('n', '<leader>ds', require('dap').step_over, { desc = "Step over " })
+            vim.keymap.set('n', '<leader>di', require('dap').step_into, { desc = "step In" })
+            vim.keymap.set('n', '<leader>do', require('dap').step_out, { desc = "step Out" })
+            vim.keymap.set('n', '<Leader>db', require('dap').toggle_breakpoint, { desc = "breakpoint" })
+            -- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+            vim.keymap.set('n', '<Leader>dm',
+                function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+                { desc = "message??" })
+            vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end, { desc = "repl" })
+            vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "last run" })
+            vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
+                require('dap.ui.widgets').hover()
+            end, { desc = "hover" })
+            vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+                require('dap.ui.widgets').preview()
+            end, { desc = "preview" })
+            vim.keymap.set('n', '<Leader>df', function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.frames)
+            end, { desc = "frames" })
+            vim.keymap.set('n', '<Leader>dS', function()
+                local widgets = require('dap.ui.widgets')
+                widgets.centered_float(widgets.scopes)
+            end, { desc = "scopes" })
+
+            vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
+        end
     },
     {
         'theHamsta/nvim-dap-virtual-text',
@@ -320,20 +352,6 @@ require("lazy").setup({
         event = "VeryLazy",
         cmd = "Glow",
     },
-    -- {
-    --     "AckslD/nvim-neoclip.lua",
-    --     requires = {
-    --         { 'kkharji/sqlite.lua',           module = 'sqlite' },
-    --         { 'nvim-telescope/telescope.nvim' },
-    --     },
-    --     config = function()
-    --         require("telescope").load_extension('neoclip')
-    --         require('neoclip').setup({
-    --             enable_persistent_history = true,
-    --             -- continuous_sync = true, TODO: Would be cool to do this... but getting an 'attempt to index a boolean value' error
-    --         })
-    --     end,
-    -- },
     {
         'sindrets/diffview.nvim',
         event = "VeryLazy",
@@ -366,7 +384,7 @@ require("lazy").setup({
     },
     {
         'RRethy/vim-illuminate',
-        event = "VeryLazy",
+        keys = "*",
         config = function()
         end,
     },
@@ -390,7 +408,7 @@ require("lazy").setup({
     },
     {
         'folke/neodev.nvim',
-        event = "VeryLazy",
+        ft = "lua",
         config = function()
             require("neodev").setup({
                 library = { plugins = { "nvim-dap-ui" }, types = true },
@@ -429,7 +447,8 @@ require("lazy").setup({
     },
     {
         "nvim-neotest/neotest",
-        event = "VeryLazy",
+        ft = "go",
+        cmd = "Neotest",
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
@@ -450,6 +469,31 @@ require("lazy").setup({
                 }
 
             })
+
+            vim.keymap.set('n', '<leader>tr', function()
+                require("neotest").summary.open()
+                require("neotest").run.run()
+            end, { desc = "Test" })
+            vim.keymap.set('n', '<leader>tf', function()
+                require("neotest").run.run(vim.fn.expand("%"))
+            end, { desc = "Test file" })
+            vim.keymap.set('n', '<leader>td', function()
+                require("neotest").run.run({ strategy = "dap" })
+            end, { desc = "Debug" })
+            vim.keymap.set('n', '<leader>ta', require("neotest").run.attach, { desc = "Attach to test" })
+            vim.keymap.set('n', '<leader>to', require("neotest").output_panel.toggle, { desc = "Output toggle" })
+            vim.keymap.set('n', '<leader>tO',
+                function()
+                    require("neotest").output.open({ enter = true })
+                end
+                , { desc = "Output open" })
+
+            vim.keymap.set('n', '<leader>ts', require("neotest").summary.toggle, { desc = "Summary of test" })
+
+
+            -- TODO: Get working
+            -- nnoremap <silent>[n <cmd>lua require("neotest").jump.prev({ status = "failed" })<CR>
+            -- nnoremap <silent>]n <cmd>lua require("neotest").jump.next({ status = "failed" })<CR>
         end
     },
     {
@@ -460,12 +504,12 @@ require("lazy").setup({
     },
     {
         "stevearc/dressing.nvim",
-        event = "VeryLazy",
+        opts = {},
     },
     {
         "Wansmer/treesj",
         keys = {
-            { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+            { "<leader>m", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
         },
         opts = { use_default_keymaps = false, max_join_length = 150 },
     },
@@ -524,24 +568,6 @@ require("lazy").setup({
         cmd = "Copilot",
         event = "InsertEnter",
     },
-    -- "zbirenbaum/copilot-cmp",
-    -- {
-    --     "williamboman/mason.nvim",
-    --     event = "VeryLazy",
-    --     build = ":MasonUpdate",
-    -- },
-    -- {
-    --     'VonHeikemen/lsp-zero.nvim',
-    --     branch = 'v2.x',
-    --     lazy = true,
-    --     config = function()
-    --         -- This is where you modify the settings for lsp-zero
-    --         -- Note: autocompletion settings will not take effect
-    --
-    --         require('lsp-zero.settings').preset({})
-    --     end
-    -- },
-
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
@@ -562,6 +588,7 @@ require("lazy").setup({
             },
         },
         config = function()
+            require("snippets")
             -- Here is where you configure the autocompletion settings.
             -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
             -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
@@ -572,12 +599,89 @@ require("lazy").setup({
             local cmp = require('cmp')
             local cmp_action = require('lsp-zero.cmp').action()
 
+            local luasnip = require("luasnip")
+
+            local has_words_before = function()
+                print("has_words_before")
+                unpack = unpack or table.unpack
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                -- return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+                ret = col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+                print("ret = " .. tostring(ret))
+                return ret
+            end
+
             cmp.setup({
                 mapping = {
+                    -- ['<C-Space>'] = cmp.mapping.complete(),
+                    -- ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+                    -- ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+                    ['<C-j>'] = cmp.mapping.select_next_item(),
+                    ['<C-k>'] = cmp.mapping.select_prev_item(),
+                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ["<M-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                    ["<C-Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+                    ["<Tab>"] = cmp.mapping({
+                        i = function(fallback)
+                            if luasnip.expand_or_jumpable() then
+                                luasnip.expand_or_jump()
+                            elseif has_words_before() then
+                                require('cmp').confirm({ select = true })
+                            else
+                                fallback()
+                            end
+                        end }),
+                    ["<CR>"] = cmp.mapping({
+                        i = function(fallback)
+                            if cmp.visible() and cmp.get_active_entry() then
+                                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                            else
+                                fallback()
+                            end
+                        end,
+                        -- s = cmp.mapping.confirm({ select = true }),
+                        -- c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                    }),
                 }
+            })
+
+
+            cmp.setup.filetype('gitcommit', {
+                sources = cmp.config.sources({
+                    { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+                }, {
+                    { name = 'buffer' },
+                })
+            })
+
+            cmp.setup.cmdline('/', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+
+            require("copilot_cmp").setup({})
+
+            require("cmp_git").setup({})
+
+            require("copilot").setup({
+                -- we're disabling these as copilot-cmp is dealing with it
+                suggestion = {
+                    enabled = false,
+                },
+                panel = {
+                    enabled = false,
+                },
+                -- filetypes = {
+                --     markdown = true,
+                -- },
             })
         end
     },
@@ -634,12 +738,16 @@ require("lazy").setup({
         }
     },
     {
-        'numToStr/Comment.nvim',
+        "zbirenbaum/copilot-cmp",
         event = "VeryLazy",
-        config = function()
-            require('Comment').setup()
-        end
-    },
+    }
+    , {
+    'numToStr/Comment.nvim',
+    event = "VeryLazy",
+    config = function()
+        require('Comment').setup()
+    end
+},
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
@@ -662,7 +770,6 @@ require("lazy").setup({
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
-        -- or                              , branch = '0.1.1',
         event = "VeryLazy",
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -671,6 +778,6 @@ require("lazy").setup({
     },
     {
         "folke/zen-mode.nvim",
-        event = "VeryLazy",
+        cmd = "ZenMode",
     },
 })
