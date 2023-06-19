@@ -14,11 +14,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     {
         'mbbill/undotree',
-        event = "VeryLazy",
+        keys = { "<leader>U" }
     },
     {
         'f-person/git-blame.nvim',
-        event = "VeryLazy",
+        keys = { "<leader>gb" }
     },
     {
         'linty-org/readline.nvim',
@@ -26,15 +26,31 @@ require("lazy").setup({
     },
     {
         'gabrielpoca/replacer.nvim',
-        event = "VeryLazy",
+        keys = { "<leader>qr" },
     },
     {
         'folke/tokyonight.nvim',
-        event = "VeryLazy",
     },
     {
         'ThePrimeagen/harpoon',
-        event = "VeryLazy",
+        keys   = {
+            "<leader>A",
+            "<leader>a",
+            "<C-h>",
+            "<C-t>",
+        },
+        config = function()
+            require("harpoon").setup()
+
+            local mark = require("harpoon.mark")
+            local ui = require("harpoon.ui")
+
+            vim.keymap.set("n", "<leader>A", mark.add_file, { desc = "Add Harpoon" })
+            vim.keymap.set("n", "<leader>a", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
+
+            vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+            vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+        end
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
@@ -42,47 +58,31 @@ require("lazy").setup({
     },
     {
         'eandrju/cellular-automaton.nvim',
-        event = "VeryLazy",
+        cmd = "CellularAutomaton",
     },
-    {
-        'saadparwaiz1/cmp_luasnip',
-        event = "VeryLazy",
-    },
+    -- {
+    --     'saadparwaiz1/cmp_luasnip',
+    --     event = "VeryLazy",
+    -- },
     {
         'rhysd/conflict-marker.vim',
         event = "VeryLazy",
     },
     {
-        'hrsh7th/cmp-calc',
-        event = "VeryLazy",
-    },
-    {
-        'hrsh7th/cmp-cmdline',
-        event = "VeryLazy",
-    },
-    {
-        'hrsh7th/cmp-nvim-lua',
-        event = "VeryLazy",
-    },
-    {
-        'hrsh7th/cmp-path',
-        event = "VeryLazy",
-    },
-    {
         'hrsh7th/nvim-cmp',
-        event = "VeryLazy",
-    },
-    {
-        'hrsh7th/cmp-buffer',
-        event = "VeryLazy",
-    },
-    {
-        'petertriho/cmp-git',
-        event = "VeryLazy",
-    },
-    {
-        'hrsh7th/cmp-emoji',
-        event = "VeryLazy",
+        event = "InsertEnter",
+        dependencies = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp",
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-calc',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-emoji',
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-path',
+            'petertriho/cmp-git',
+            'saadparwaiz1/cmp_luasnip',
+        },
     },
     {
         'knubie/vim-kitty-navigator',
@@ -405,8 +405,21 @@ require("lazy").setup({
         end
     },
     {
-        'Wansmer/treesj',
+        "monaqa/dial.nvim",
+        -- lazy-load on keys
+        -- mode is `n` by default. For more advanced options, check the section on key mappings
+        keys = { "<C-a>", { "<C-x>", mode = "n" } },
+    },
+    {
+        "stevearc/dressing.nvim",
         event = "VeryLazy",
+    },
+    {
+        "Wansmer/treesj",
+        keys = {
+            { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+        },
+        opts = { use_default_keymaps = false, max_join_length = 150 },
     },
     {
         'nvim-treesitter/nvim-treesitter-textobjects',

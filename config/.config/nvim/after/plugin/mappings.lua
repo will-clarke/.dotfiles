@@ -157,21 +157,13 @@ vim.keymap.set('n', '<space>la', function()
 end, { desc = "Code Action" })
 
 
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-
-vim.keymap.set("n", "<leader>A", mark.add_file, { desc = "Add Harpoon" })
-vim.keymap.set("n", "<leader>a", ui.toggle_quick_menu, { desc = "Harpoon quick menu" })
-
-vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
 -- vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 -- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
 
-local telescope = require("telescope")
-telescope.load_extension("undo")
-vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+-- local telescope = require("telescope")
+-- telescope.load_extension("undo")
+-- vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
 vim.keymap.set("n", "<leader>tn", ":set number!<CR>", { desc = "set number!" })
 
