@@ -11,9 +11,13 @@ M.disabled = {
 		["<leader>wl"] = "",
 		["<leader>wr"] = "",
 		["<leader>fm"] = "",
+		["<leader>n"] = "",
+		["<leader>rn"] = "",
+		["<leader>/"] = "",
 		["<C-a>"] = "",
 		["<C-c>"] = "",
 		["<C-n>"] = "",
+		["<C-b>"] = "",
 	},
 }
 
