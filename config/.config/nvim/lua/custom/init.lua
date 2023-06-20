@@ -84,10 +84,11 @@ end
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
-vim.api.nvim_create_augroup("Fugitive", {})
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = { "fugitive", "gitcommit" },
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "fugitive" },
 	callback = function(event)
+		print("in fugitive apparently")
+
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("n", "<C-c>", ":norm ZZ", { buffer = event.buf, noremap = true, silent = true })
 
@@ -97,7 +98,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		-- map("n", "<tab>", ":normal =<CR>", opts)
 		-- map("n", 'cn', ':<C-U>Git commit --no-verify<CR>', opts)
 	end,
-	group = "Fugitive",
+	group = vim.api.nvim_create_augroup("_fugit", { clear = true }),
 })
 
 vim.api.nvim_create_augroup("Git", {})

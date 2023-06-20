@@ -27,6 +27,7 @@ vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text o
 
 vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
 vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "i" }, "<C-s>", "<esc>:w<CR>i", { desc = "Save" })
 
 M.general = {
 	n = {
