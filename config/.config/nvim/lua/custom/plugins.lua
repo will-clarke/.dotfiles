@@ -44,14 +44,14 @@ local plugins = {
 		"monaqa/dial.nvim",
 		keys = { "<C-a>", { "<C-x>", mode = "n" } },
 	},
-	{
-		"folke/trouble.nvim",
-		event = "VeryLazy",
-		requires = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({})
-		end,
-	},
+	-- {
+	-- 	"folke/trouble.nvim",
+	-- 	event = "VeryLazy",
+	-- 	requires = "nvim-tree/nvim-web-devicons",
+	-- 	config = function()
+	-- 		require("trouble").setup({})
+	-- 	end,
+	-- },
 	{
 		"gaoDean/autolist.nvim",
 		ft = {
@@ -177,7 +177,12 @@ local plugins = {
 	-- }
 
 	-- To use a extras plugin
-	-- { import = "custom.configs.extras.symbols-outline", },
+	{ import = "custom.configs.extras.copilot", },
+	{ import = "custom.configs.extras.diffview", },
+	{ import = "custom.configs.extras.mason-extras", },
+	{ import = "custom.configs.extras.symbols-outline", },
+	{ import = "custom.configs.extras.trouble", },
+
 }
 
 return plugins

@@ -2,18 +2,18 @@
 local M = {}
 
 M.disabled = {
-  n = {
-      ["<leader>w"] = "",
-      ["<leader>wa"] = "",
-      ["<leader>ma"] = "",
-      ["<leader>wk"] = "",
-      ["<leader>wK"] = "",
-      ["<leader>wl"] = "",
-      ["<leader>wr"] = "",
-      ["<C-a>"] = ""
-  }
+	n = {
+		["<leader>w"] = "",
+		["<leader>wa"] = "",
+		["<leader>ma"] = "",
+		["<leader>wk"] = "",
+		["<leader>wK"] = "",
+		["<leader>wl"] = "",
+		["<leader>wr"] = "",
+		["<leader>fm"] = "",
+		["<C-a>"] = "",
+	},
 }
-
 
 M.general = {
 	n = {
@@ -24,6 +24,8 @@ M.general = {
 		["<leader>V"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
 		["<leader>k"] = { ":Telescope keymaps<CR>" },
+		["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
+		["<leader>lf"] = { vim.lsp.buf.format, "format" },
 	},
 }
 
