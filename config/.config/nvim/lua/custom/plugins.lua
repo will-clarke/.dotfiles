@@ -22,6 +22,20 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
+		"gbprod/yanky.nvim",
+		keys = {
+			{ "p", "<Plug>(YankyPutAfter)", { mode = { "x", "n" } } },
+			{ "gp", "<Plug>(YankyGPutAfter)", { mode = { "x", "n" } } },
+			{ "n", "<Plug>(YankyPutBefore)", { mode = { "x", "n" } } },
+			{ "gn", "<Plug>(YankyGPutBefore)", { mode = { "x", "n" } } },
+			{ "<C-p>", "<Plug>(YankyCycleForward)", { mode = { "x", "n" } } },
+			{ "<C-n>", "<Plug>(YankyCycleBackward)", { mode = { "x", "n" } } },
+		},
+		config = function()
+			require("yanky").setup()
+		end,
+	},
+	{
 		"nvim-treesitter/nvim-treesitter-context",
 		lazy = false,
 	},

@@ -8,16 +8,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.termguicolors = true
 
--- vim.cmd([[hi TreesitterContextBottom gui=underline guisp=Grey]])
+vim.cmd([[hi TreesitterContext guibg=Black gui=bold]])
 
-vim.highlight.create("TreesitterContextBottom", { ctermbg = "Black", guibg = "Black" }, false)
-
--- Auto resize panes when resizing nvim window
--- autocmd("VimResized", {
---   pattern = "*",
---   command = "tabdo wincmd =",
--- })
---
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
 	pattern = {
