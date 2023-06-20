@@ -111,6 +111,10 @@ M.telescope = {
 					local actions = require("telescope.actions")
 					actions.close(...)
 				end,
+				["<Esc>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.close(...)
+				end,
 			},
 		},
 	},
