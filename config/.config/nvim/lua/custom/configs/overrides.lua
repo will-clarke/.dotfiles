@@ -59,24 +59,40 @@ M.nvimtree = {
 	},
 }
 
-local cmp = require("cmp")
 M.cmp = {
 	mapping = {
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
-			select = false,
-		}),
-		sources = {
-			{ name = "nvim_lsp" },
-			{ name = "luasnip" },
-			{ name = "buffer" },
-			{ name = "nvim_lua" },
-			{ name = "path" },
-		},
+		["<C-k>"] = function()
+			local cmp = require("cmp")
+			cmp.mapping.select_prev_item()
+		end,
+		["<C-j>"] = function()
+			local cmp = require("cmp")
+			cmp.mapping.select_next_item()
+		end,
+		["<CR>"] = function()
+			local cmp = require("cmp")
+			cmp.mapping.confirm({
+				behavior = cmp.ConfirmBehavior.Insert,
+				select = false,
+			})
+		end,
+		-- sources = {
+		-- 	{ name = "nvim_lsp" },
+		-- 	{ name = "luasnip" },
+		-- 	{ name = "buffer" },
+		-- 	{ name = "nvim_lua" },
+		-- 	{ name = "path" },
+		-- },
 	},
 }
+
+-- mapping = cmp.mapping.preset.insert({
+--     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+--     ['<C-f>'] = cmp.mapping.scroll_docs(4),
+--     ['<C-Space>'] = cmp.mapping.complete(),
+--     ['<C-e>'] = cmp.mapping.abort(),
+--     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+--   }),
 
 local actions = require("telescope.actions")
 M.telescope = {
