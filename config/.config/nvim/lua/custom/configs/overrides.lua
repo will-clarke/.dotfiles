@@ -61,13 +61,14 @@ M.nvimtree = {
 
 M.cmp = {
 	mapping = {
-		["<C-k>"] = function()
+		["<C-k>"] = function(...)
+			print("hiiii")
 			local cmp = require("cmp")
-			cmp.mapping.select_prev_item()
+			cmp.mapping.select_prev_item(...)
 		end,
-		["<C-j>"] = function()
+		["<C-j>"] = function(...)
 			local cmp = require("cmp")
-			cmp.mapping.select_next_item()
+			cmp.mapping.select_next_item(...)
 		end,
 		["<CR>"] = function()
 			local cmp = require("cmp")
@@ -94,13 +95,18 @@ M.cmp = {
 --     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 --   }),
 
-local actions = require("telescope.actions")
 M.telescope = {
 	defaults = {
 		mappings = {
 			i = {
-				["<C-j>"] = actions.move_selection_next,
-				["<C-k>"] = actions.move_selection_previous,
+				["<C-j>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.move_selection_next(...)
+				end,
+				["<C-k>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.move_selection_previous(...)
+				end,
 			},
 		},
 	},

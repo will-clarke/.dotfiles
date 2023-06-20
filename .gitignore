@@ -20,6 +20,3 @@ config/.config/Amazon/
 config/.config/dlv/
 config/.config/filezilla/
 config/.config/tmux/plugins
-
-config/.config/nvim/*
-!config/.config/nvim/lua/custom
