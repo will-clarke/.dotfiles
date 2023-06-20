@@ -26,6 +26,13 @@ local plugins = {
 		"tpope/vim-fugitive",
 		cmd = "Git",
 	},
+  { 'aymericbeaumet/vim-symlink', requires = { 'moll/vim-bbye' },},
+	{
+		"stevearc/oil.nvim",
+    opts = {},
+    keys = ";",
+	},
+
 
 	-- override plugin configs
 	{
