@@ -87,8 +87,6 @@ vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "fugitive" },
 	callback = function(event)
-		print("in fugitive apparently")
-
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("n", "<C-c><C-c>", ":norm! ZZ", { buffer = event.buf, noremap = true, silent = true })
 		vim.keymap.set("n", "<tab>", ":norm =<CR>", { buffer = event.buf, noremap = true, silent = true })
