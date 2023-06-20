@@ -21,12 +21,21 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
-
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		lazy = false,
+	},
 	{
 		"tpope/vim-fugitive",
 		cmd = "Git",
 	},
-
+	{
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
+		keys = {
+			{ "<leader>la", ":CodeActionMenu<CR>" },
+		},
+	},
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -35,9 +44,7 @@ local plugins = {
 	},
 	{
 		"Wansmer/treesj",
-		keys = {
-			{ "<leader>m", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
-		},
+		keys = { { "<leader>m", "<cmd>TSJToggle<cr>", desc = "Join Toggle" } },
 		opts = { use_default_keymaps = false, max_join_length = 150 },
 	},
 	{
@@ -88,20 +95,38 @@ local plugins = {
 		cmd = "Octo",
 	},
 	{
-		"rhysd/conflict-marker.vim",
-		event = "VeryLazy",
-	},
-	{
 		"linty-org/readline.nvim",
-		event = "VeryLazy",
+		event = "InsertEnter",
+		config = function()
+			local readline = require("readline")
+			vim.keymap.set("!", "<M-f>", readline.forward_word)
+			vim.keymap.set("!", "<M-b>", readline.backward_word)
+			vim.keymap.set("!", "<C-a>", readline.beginning_of_line)
+			vim.keymap.set("!", "<C-e>", readline.end_of_line)
+			vim.keymap.set("!", "<M-d>", readline.kill_word)
+			vim.keymap.set("!", "<M-BS>", readline.backward_kill_word)
+			vim.keymap.set("!", "<C-w>", readline.unix_word_rubout)
+			vim.keymap.set("!", "<C-k>", readline.kill_line)
+			vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
+		end,
 	},
 	{
-		"rhysd/conflict-marker.vim",
-		event = "VeryLazy",
+		"akinsho/git-conflict.nvim",
+		config = true,
+		lazy = false,
+		cmd = {
+			"GitConflictChooseOurs",
+			"GitConflictChooseTheirs",
+			"GitConflictChooseBoth",
+			"GitConflictChooseNone",
+			"GitConflictNextConflict",
+			"GitConflictPrevConflict",
+			"GitConflictListQf",
+		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		event = "VeryLazy",
+		event = "InsertEnter",
 	},
 	{
 		"stevearc/oil.nvim",
@@ -134,7 +159,7 @@ local plugins = {
 	},
 	{
 		"knsh14/vim-github-link",
-		event = "VeryLazy",
+		keys = { { "<leader>gl", "<CMD>GetCommitLink<CR>" } },
 	},
 
 	-- override plugin configs
@@ -177,12 +202,11 @@ local plugins = {
 	-- }
 
 	-- To use a extras plugin
-	{ import = "custom.configs.extras.copilot", },
-	{ import = "custom.configs.extras.diffview", },
-	{ import = "custom.configs.extras.mason-extras", },
-	{ import = "custom.configs.extras.symbols-outline", },
-	{ import = "custom.configs.extras.trouble", },
-
+	{ import = "custom.configs.extras.copilot" },
+	{ import = "custom.configs.extras.diffview" },
+	{ import = "custom.configs.extras.mason-extras" },
+	{ import = "custom.configs.extras.symbols-outline" },
+	{ import = "custom.configs.extras.trouble" },
 }
 
 return plugins

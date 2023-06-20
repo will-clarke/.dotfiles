@@ -12,8 +12,16 @@ M.disabled = {
 		["<leader>wr"] = "",
 		["<leader>fm"] = "",
 		["<C-a>"] = "",
+		["<C-c>"] = "",
 	},
 }
+
+-- TODO: Can I just dump these here???
+vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
+vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
+
+vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
 
 M.general = {
 	n = {
@@ -24,8 +32,9 @@ M.general = {
 		["<leader>V"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
 		["<leader>k"] = { ":Telescope keymaps<CR>" },
-		["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
+		-- ["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
 		["<leader>lf"] = { vim.lsp.buf.format, "format" },
+		-- ["<leader>lo"] = { ":Telescope lsp_document_symbols<CR>", "outline" },
 	},
 }
 
