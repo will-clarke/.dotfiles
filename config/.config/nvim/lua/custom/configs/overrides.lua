@@ -59,24 +59,24 @@ M.nvimtree = {
 	},
 }
 
+local cmp = require("cmp")
 M.cmp = {
 	mapping = {
-		["<C-k>"] = function(...)
-			print("hiiii")
-			local cmp = require("cmp")
-			cmp.mapping.select_prev_item(...)
-		end,
-		["<C-j>"] = function(...)
-			local cmp = require("cmp")
-			cmp.mapping.select_next_item(...)
-		end,
-		["<CR>"] = function()
-			local cmp = require("cmp")
-			cmp.mapping.confirm({
-				behavior = cmp.ConfirmBehavior.Insert,
-				select = false,
-			})
-		end,
+		["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+		["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+		["<C-CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping({
+			i = function(fallback)
+				if cmp.visible() and cmp.get_active_entry() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				else
+					fallback()
+				end
+			end,
+			s = cmp.mapping.confirm({ select = true }),
+			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+		}),
+
 		-- sources = {
 		-- 	{ name = "nvim_lsp" },
 		-- 	{ name = "luasnip" },
@@ -106,6 +106,10 @@ M.telescope = {
 				["<C-k>"] = function(...)
 					local actions = require("telescope.actions")
 					actions.move_selection_previous(...)
+				end,
+				["<C-g>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.close(...)
 				end,
 			},
 		},

@@ -26,8 +26,8 @@ local plugins = {
 		keys = {
 			{ "p", "<Plug>(YankyPutAfter)", { mode = { "x", "n" } } },
 			{ "gp", "<Plug>(YankyGPutAfter)", { mode = { "x", "n" } } },
-			{ "n", "<Plug>(YankyPutBefore)", { mode = { "x", "n" } } },
-			{ "gn", "<Plug>(YankyGPutBefore)", { mode = { "x", "n" } } },
+			{ "P", "<Plug>(YankyPutBefore)", { mode = { "x", "n" } } },
+			{ "gP", "<Plug>(YankyGPutBefore)", { mode = { "x", "n" } } },
 			{ "<C-p>", "<Plug>(YankyCycleForward)", { mode = { "x", "n" } } },
 			{ "<C-n>", "<Plug>(YankyCycleBackward)", { mode = { "x", "n" } } },
 		},
@@ -200,6 +200,8 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		opts = overrides.cmp,
+
+		-- dependencies = {},
 	},
 
 	-- Install a plugin
