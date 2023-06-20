@@ -58,8 +58,10 @@ local plugins = {
 	},
 	{
 		"Wansmer/treesj",
-		keys = { { "<leader>m", "<cmd>TSJToggle<cr>", desc = "Join Toggle" } },
-		opts = { use_default_keymaps = false, max_join_length = 150 },
+		keys = { { "<leader>m", ":TSJToggle<cr>", desc = "Join Toggle" } },
+		config = function()
+			require("treesj").setup({ use_default_keymaps = false, max_join_length = 150 })
+		end,
 	},
 	{
 		"monaqa/dial.nvim",
@@ -190,6 +192,14 @@ local plugins = {
 	{
 		"nvim-tree/nvim-tree.lua",
 		opts = overrides.nvimtree,
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		opts = overrides.telescope,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		opts = overrides.cmp,
 	},
 
 	-- Install a plugin
