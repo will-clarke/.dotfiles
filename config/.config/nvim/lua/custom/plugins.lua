@@ -146,12 +146,16 @@ local plugins = {
 	},
 	{
 		"stevearc/oil.nvim",
+		lazy = false,
 		opts = {
-
+			win_options = {
+				concealcursor = "nivc",
+			},
 			default_file_explorer = true,
 			view_options = {
 				show_hidden = true,
 			},
+			use_default_keymaps = false,
 			keymaps = {
 				["g?"] = "actions.show_help",
 				["<CR>"] = "actions.select",
