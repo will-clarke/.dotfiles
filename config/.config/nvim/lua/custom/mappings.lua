@@ -55,6 +55,8 @@ M.general = {
 		["<leader>lr"] = { ":lua require('nvchad_ui.renamer').open()<CR>", "rename" },
 		["<leader>ld"] = { ":lua vim.diagnostic.open_float({ border = 'rounded' })", "diagnostics" },
 
+		["<leader>M"] = { ":put =execute('messages')", "Messages to a buffer" },
+
 		["<leader>hs"] = {
 			function()
 				require("gitsigns").stage_hunk()
