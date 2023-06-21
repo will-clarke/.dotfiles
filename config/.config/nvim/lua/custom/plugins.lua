@@ -210,7 +210,7 @@ local plugins = {
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
-			"petertriho/cmp-git",
+			{ "petertriho/cmp-git", config = true },
 			"saadparwaiz1/cmp_luasnip",
 		},
 	},
