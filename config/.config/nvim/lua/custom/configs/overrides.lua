@@ -62,6 +62,7 @@ M.nvimtree = {
 local cmp = require("cmp")
 M.cmp = {
 	mapping = {
+		-- ["<C-k>"] = "<Cmd>lua require('cmp').mapping.select_prev_item()<CR>",
 		["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
 		["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
 		["<C-CR>"] = cmp.mapping.confirm({ select = true }),
@@ -76,14 +77,20 @@ M.cmp = {
 			s = cmp.mapping.confirm({ select = true }),
 			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		}),
+	},
 
-		-- sources = {
-		-- 	{ name = "nvim_lsp" },
-		-- 	{ name = "luasnip" },
-		-- 	{ name = "buffer" },
-		-- 	{ name = "nvim_lua" },
-		-- 	{ name = "path" },
-		-- },
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
+		{ name = "nvim_lua" },
+		{ name = "path" },
+		-- new ones:
+		{ name = "emoji" },
+		{ name = "calc" },
+		{ name = "git" },
+
+		-- { name = "copilot" },
 	},
 }
 
