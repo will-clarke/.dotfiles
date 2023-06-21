@@ -83,7 +83,6 @@ local plugins = {
 			"tex",
 			"plaintex",
 		},
-		event = "VeryLazy",
 		config = function()
 			local autolist = require("autolist")
 			autolist.setup()
@@ -227,6 +226,7 @@ local plugins = {
 			require("better_escape").setup()
 		end,
 	},
+	{ "gabrielpoca/replacer.nvim" },
 
 	-- To make a plugin not be loaded
 	-- {

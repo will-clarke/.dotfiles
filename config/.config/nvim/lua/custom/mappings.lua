@@ -55,7 +55,10 @@ M.general = {
 		["<leader>lr"] = { ":lua require('nvchad_ui.renamer').open()<CR>", "rename" },
 		["<leader>ld"] = { ":lua vim.diagnostic.open_float({ border = 'rounded' })", "diagnostics" },
 
-		["<leader>M"] = { ":put =execute('messages')", "Messages to a buffer" },
+		["<leader>M"] = { ":put =execute('messages')<CR>", "Messages to a buffer" },
+		["<leader><leader>"] = { ":Telescope find_files<CR>", "Find files" },
+
+		["<leader>Q"] = { ':lua require("replacer").run()<cr>', "replacer" },
 
 		["<leader>hs"] = {
 			function()
