@@ -52,7 +52,7 @@ local plugins = {
 	},
 	{
 		"tpope/vim-unimpaired",
-		keys = { "[f", "]f" },
+		keys = { "[f", "]f", "[q", "]q" },
 	},
 	{
 		"tpope/vim-dispatch",

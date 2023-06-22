@@ -50,7 +50,21 @@ M.general = {
 		["<leader>k"] = { ":Telescope keymaps<CR>" },
 		-- ["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
 		["<leader>lf"] = { vim.lsp.buf.format, "format" },
-		["<leader>/"] = { ":Telescope grep_string", "search" },
+		["<leader>/"] = {
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.grep_string({ search = vim.fn.input("Grep > ") })
+			end,
+			"search",
+		},
+		["<leader>fw"] = {
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.grep_string()
+			end,
+			"search",
+		},
+
 		["<leader>r"] = { ":Telescope resume", "resume" },
 		["<leader>lr"] = { ":lua require('nvchad_ui.renamer').open()<CR>", "rename" },
 		["<leader>ld"] = { ":lua vim.diagnostic.open_float({ border = 'rounded' })", "diagnostics" },
