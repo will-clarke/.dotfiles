@@ -94,7 +94,7 @@ local plugins = {
 			autolist.create_mapping_hook("n", ">>", autolist.indent)
 			autolist.create_mapping_hook("n", "<<", autolist.indent)
 			autolist.create_mapping_hook("n", "<C-r>", autolist.force_recalculate)
-			autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
+			-- autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
 		end,
 	},
 	{
@@ -224,6 +224,38 @@ local plugins = {
 		event = "InsertEnter",
 		config = function()
 			require("better_escape").setup()
+		end,
+	},
+
+	{
+		"nvim-neotest/neotest",
+
+		keys = {
+			{ "<leader>tt", ":lua require('neotest').run.run()<CR>", "test" },
+			{ "<leader>tf", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
+			{ "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", "test debug" },
+			{ "<leader>ts", ":lua require('neotest').run.stop()<CR>", "test stop" },
+			{ "<leader>ta", ":lua require('neotest').run.attach()<CR>", "test attach" },
+		},
+
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-go",
+		},
+
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-go")({
+						experimental = {
+							test_table = true,
+						},
+						args = { "-count=1", "-timeout=60s" },
+					}),
+				},
+			})
 		end,
 	},
 	{ "gabrielpoca/replacer.nvim" },
