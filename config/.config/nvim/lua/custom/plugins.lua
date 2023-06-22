@@ -51,6 +51,14 @@ local plugins = {
 		},
 	},
 	{
+		"tpope/vim-unimpaired",
+		keys = { "[f", "]f" },
+	},
+	{
+		"tpope/vim-dispatch",
+		cmd = "Dispatch",
+	},
+	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		event = "VeryLazy",
