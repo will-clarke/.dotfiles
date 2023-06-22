@@ -236,6 +236,16 @@ local plugins = {
 			{ "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", "test debug" },
 			{ "<leader>ts", ":lua require('neotest').run.stop()<CR>", "test stop" },
 			{ "<leader>ta", ":lua require('neotest').run.attach()<CR>", "test attach" },
+			{
+				"<leader>tl",
+				function()
+					require("neotest").run.run_last()
+				end,
+				"test last",
+			},
+			-- require("neotest").summary.toggle()
+			--require("neotest").output.open({ enter = true })
+			--require("neotest").output_panel.toggle()
 		},
 
 		dependencies = {
