@@ -250,20 +250,20 @@ local plugins = {
 			vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
 		end,
 	},
-	{
-		"akinsho/git-conflict.nvim",
-		config = true,
-		lazy = false,
-		cmd = {
-			"GitConflictChooseOurs",
-			"GitConflictChooseTheirs",
-			"GitConflictChooseBoth",
-			"GitConflictChooseNone",
-			"GitConflictNextConflict",
-			"GitConflictPrevConflict",
-			"GitConflictListQf",
-		},
-	},
+	-- {
+	-- 	"akinsho/git-conflict.nvim",
+	-- 	config = true,
+	-- 	lazy = false,
+	-- 	cmd = {
+	-- 		"GitConflictChooseOurs",
+	-- 		"GitConflictChooseTheirs",
+	-- 		"GitConflictChooseBoth",
+	-- 		"GitConflictChooseNone",
+	-- 		"GitConflictNextConflict",
+	-- 		"GitConflictPrevConflict",
+	-- 		"GitConflictListQf",
+	-- 	},
+	-- },
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "InsertEnter",
@@ -336,7 +336,7 @@ local plugins = {
 			"hrsh7th/cmp-emoji",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
-			{ "petertriho/cmp-git", config = true },
+			-- { "petertriho/cmp-git", config = true },
 			"saadparwaiz1/cmp_luasnip",
 		},
 	},
@@ -409,7 +409,7 @@ local plugins = {
 
 	-- To use a extras plugin
 	{ import = "custom.configs.extras.copilot" },
-	{ import = "custom.configs.extras.diffview" },
+	-- { import = "custom.configs.extras.diffview" },
 	{ import = "custom.configs.extras.mason-extras" },
 	{ import = "custom.configs.extras.symbols-outline" },
 	{ import = "custom.configs.extras.trouble" },
