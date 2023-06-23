@@ -90,6 +90,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(event)
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("i", "<C-c>", "<ESC>:wq<CR>", { buffer = event.buf, noremap = true, silent = true })
+		vim.keymap.set("n", "<C-c>", ":wq<CR>", { buffer = event.buf, noremap = true, silent = true })
 		vim.keymap.set("n", "<tab>", ":norm =<CR>", { buffer = event.buf, noremap = true, silent = true })
 		vim.keymap.set("n", "cn", ":<C-U>Git commit --no-verify<CR>", { buffer = event.buf, silent = true })
 
