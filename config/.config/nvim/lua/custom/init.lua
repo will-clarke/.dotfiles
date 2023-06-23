@@ -85,7 +85,7 @@ end
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "fugitive" },
+	pattern = { "fugitive", "gitcommit" },
 	callback = function(event)
 		vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 		vim.keymap.set("i", "<C-c>", ":norm! ZZ", { buffer = event.buf, noremap = true, silent = true })

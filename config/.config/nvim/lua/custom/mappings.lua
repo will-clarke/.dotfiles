@@ -45,6 +45,7 @@ M.general = {
 		-- [";"] = { ':lua require("oil").open()<CR>', "oil" },
 		-- [";"] = { function() require("oil").open() end, "oil" },
 		["<leader>gg"] = { ":tab Git<CR>" },
+		["<leader><CR>"] = { ":make<CR>" },
 		["<leader>v"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
 		["<leader>k"] = { ":Telescope keymaps<CR>" },

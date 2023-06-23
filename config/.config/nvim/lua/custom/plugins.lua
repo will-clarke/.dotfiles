@@ -55,6 +55,16 @@ local plugins = {
 		keys = { "[f", "]f", "[q", "]q" },
 	},
 	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	},
+	{
 		"tpope/vim-dispatch",
 		cmd = "Dispatch",
 	},
