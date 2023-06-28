@@ -49,6 +49,8 @@ M.general = {
 		["<leader>v"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
 		["<leader>k"] = { ":Telescope keymaps<CR>" },
+		["gd"] = { ":Telescope lsp_definitions<CR>" },
+		["gr"] = { ":Telescope lsp_references<CR>" },
 		-- ["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
 		["<leader>lf"] = { vim.lsp.buf.format, "format" },
 		["<leader>/"] = {
@@ -134,6 +136,13 @@ M.general = {
 			end,
 			"New vertical term",
 		},
+
+		["<leader>dx"] = { "<cmd>TroubleToggle<cr>" },
+		["<leader>dw"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>" },
+		["<leader>dd"] = { "<cmd>TroubleToggle document_diagnostics<cr>" },
+		["<leader>dl"] = { "<cmd>TroubleToggle loclist<cr>" },
+		["<leader>dq"] = { "<cmd>TroubleToggle quickfix<cr>" },
+		["gR"] = { "<cmd>TroubleToggle lsp_references<cr>" },
 
 		-- ["<leader>lo"] = { ":Telescope lsp_document_symbols<CR>", "outline" },
 	},

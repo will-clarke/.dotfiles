@@ -22,6 +22,23 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
+		"ellisonleao/glow.nvim",
+		config = true,
+		cmd = "Glow",
+	},
+	{
+		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("chatgpt").setup()
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+	},
+	{
 		"gbprod/yanky.nvim",
 		keys = {
 			{ "p", "<Plug>(YankyPutAfter)", { mode = { "x", "n" } } },
@@ -250,20 +267,20 @@ local plugins = {
 			vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
 		end,
 	},
-	-- {
-	-- 	"akinsho/git-conflict.nvim",
-	-- 	config = true,
-	-- 	lazy = false,
-	-- 	cmd = {
-	-- 		"GitConflictChooseOurs",
-	-- 		"GitConflictChooseTheirs",
-	-- 		"GitConflictChooseBoth",
-	-- 		"GitConflictChooseNone",
-	-- 		"GitConflictNextConflict",
-	-- 		"GitConflictPrevConflict",
-	-- 		"GitConflictListQf",
-	-- 	},
-	-- },
+	{
+		"akinsho/git-conflict.nvim",
+		config = true,
+		lazy = false,
+		cmd = {
+			"GitConflictChooseOurs",
+			"GitConflictChooseTheirs",
+			"GitConflictChooseBoth",
+			"GitConflictChooseNone",
+			"GitConflictNextConflict",
+			"GitConflictPrevConflict",
+			"GitConflictListQf",
+		},
+	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		event = "InsertEnter",
@@ -290,7 +307,7 @@ local plugins = {
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = "actions.close",
 				["q"] = "actions.close",
-				["<C-l>"] = "actions.refresh",
+				["<C-r>"] = "actions.refresh",
 				["-"] = "actions.parent",
 				["_"] = "actions.open_cwd",
 				["`"] = "actions.cd",
@@ -357,7 +374,7 @@ local plugins = {
 			{ "<leader>tt", ":lua require('neotest').run.run()<CR>", "test" },
 			{ "<leader>tf", ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
 			{ "<leader>td", ":lua require('neotest').run.run({strategy = 'dap'})<CR>", "test debug" },
-			{ "<leader>ts", ":lua require('neotest').run.stop()<CR>", "test stop" },
+			{ "<leader>tS", ":lua require('neotest').run.stop()<CR>", "test stop" },
 			{ "<leader>ta", ":lua require('neotest').run.attach()<CR>", "test attach" },
 			{
 				"<leader>tl",
@@ -366,6 +383,9 @@ local plugins = {
 				end,
 				"test last",
 			},
+			{ "<leader>ts", ":lua require('neotest').summary.toggle()<CR>", "test summary" },
+			{ "<leader>to", ":lua require('neotest').output.open({enter = true})<CR>", "test output" },
+			{ "<leader>tO", ":lua require('neotest').output_panel.toggle()<CR>", "test output panel" },
 			-- require("neotest").summary.toggle()
 			--require("neotest").output.open({ enter = true })
 			--require("neotest").output_panel.toggle()
