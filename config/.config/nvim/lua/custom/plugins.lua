@@ -22,6 +22,42 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
+		"m4xshen/hardtime.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
+		"ThePrimeagen/harpoon",
+		keys = {
+			{ "<leader>A", ":lua require('harpoon.mark').add_file()<CR>" },
+			{ "<leader>a", ":lua require('harpoon.ui').toggle_quick_menu()<CR>" },
+			{ "<M-j>", ":lua require('harpoon.ui').nav_file(1)<CR>" },
+			{ "<M-k>", ":lua require('harpoon.ui').nav_file(2)<CR>" },
+			{ "<M-l>", ":lua require('harpoon.ui').nav_file(3)<CR>" },
+		},
+	},
+	{
+		"olexsmir/gopher.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = true,
+		cmd = {
+			"GoInstallDeps",
+			"GoTagAdd",
+			"GoTagRm",
+			"GoMod",
+			"GoGet",
+			"GoImpl",
+			"GoTestAdd",
+			"GoTestsAll",
+			"GoTestsExp",
+			"GoGenerate",
+			"GoIfErr",
+		},
+	},
+	{
 		"ellisonleao/glow.nvim",
 		config = true,
 		cmd = "Glow",

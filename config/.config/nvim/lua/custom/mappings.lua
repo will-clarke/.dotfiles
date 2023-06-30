@@ -45,8 +45,8 @@ M.general = {
 		-- [";"] = { ':lua require("oil").open()<CR>', "oil" },
 		-- [";"] = { function() require("oil").open() end, "oil" },
 		["<leader>gg"] = { ":tab Git<CR>" },
-		["<leader>gp"] = { ":tab Git pull<CR>" },
-		["<leader>gP"] = { ":tab Git push<CR>" },
+		["<leader>gp"] = { ":Dispatch! Git pull<CR>" },
+		["<leader>gP"] = { ":Dispatch! Git push<CR>" },
 		["<leader><CR>"] = { ":make<CR>" },
 		["<leader>v"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
@@ -73,7 +73,7 @@ M.general = {
 			"search",
 		},
 
-		["<leader>r"] = { ":Telescope resume", "resume" },
+		["<leader>r"] = { ":Telescope resume<CR>", "resume" },
 		["<leader>lr"] = { ":lua require('nvchad_ui.renamer').open()<CR>", "rename" },
 		["<leader>ld"] = { ":lua vim.diagnostic.open_float({ border = 'rounded' })", "diagnostics" },
 
