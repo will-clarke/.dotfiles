@@ -21,11 +21,11 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
-	{
-		"m4xshen/hardtime.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
+	-- {
+	-- 	"m4xshen/hardtime.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {},
+	-- },
 	{
 		"ThePrimeagen/harpoon",
 		keys = {
@@ -77,7 +77,7 @@ local plugins = {
 	{
 		"gbprod/yanky.nvim",
 		keys = {
-			{ "p", "<Plug>(YankyPutAfter)", { mode = { "x", "n" } } },
+			-- { "p", "<Plug>(YankyPutAfter)", { mode = { "x", "n" } } },
 			{ "gp", "<Plug>(YankyGPutAfter)", { mode = { "x", "n" } } },
 			{ "P", "<Plug>(YankyPutBefore)", { mode = { "x", "n" } } },
 			{ "gP", "<Plug>(YankyGPutBefore)", { mode = { "x", "n" } } },
@@ -229,12 +229,6 @@ local plugins = {
 		cmd = "Dispatch",
 	},
 	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
 		"Wansmer/treesj",
 		keys = { { "<leader>m", ":TSJToggle<cr>", desc = "Join Toggle" } },
 		config = function()
@@ -306,7 +300,6 @@ local plugins = {
 	{
 		"akinsho/git-conflict.nvim",
 		config = true,
-		lazy = false,
 		cmd = {
 			"GitConflictChooseOurs",
 			"GitConflictChooseTheirs",
@@ -360,6 +353,12 @@ local plugins = {
 	},
 
 	-- override plugin configs
+	-- {}
+	{
+		"numToStr/Comment.nvim",
+		opts = overrides.comment,
+	},
+
 	{
 		"williamboman/mason.nvim",
 		opts = overrides.mason,
@@ -368,6 +367,7 @@ local plugins = {
 		"nvim-treesitter/nvim-treesitter",
 		opts = overrides.treesitter,
 	},
+
 	{
 		"nvim-tree/nvim-tree.lua",
 		opts = overrides.nvimtree,
