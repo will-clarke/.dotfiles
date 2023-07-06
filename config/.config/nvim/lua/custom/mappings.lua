@@ -42,9 +42,13 @@ vim.keymap.set({ "o", "x" }, "ah", ":<C-U>Gitsigns select_hunk<CR>")
 
 M.general = {
 	n = {
-		-- [";"] = { ":", "enter command mode", opts = { nowait = true } },
-		-- [";"] = { ':lua require("oil").open()<CR>', "oil" },
-		-- [";"] = { function() require("oil").open() end, "oil" },
+
+		["<leader>zn"] = { "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" },
+		["<leader>zw"] = { "<Cmd>ZkNew { group = 'work' }<CR>" },
+		["<leader>zd"] = { "<Cmd>ZkNew { group = 'diary' }<CR>" },
+		["<leader>zo"] = { "<Cmd>ZkNotes { sort = { 'modified' } }<CR>" },
+		["<leader>zt"] = { "<Cmd>ZkTags<CR>" },
+
 		["<leader>gg"] = { ":tab Git<CR>" },
 		["<leader>gp"] = { ":Dispatch! Git pull<CR>" },
 		["<leader>gP"] = { ":Dispatch! Git push<CR>" },
