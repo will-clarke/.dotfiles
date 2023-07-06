@@ -48,6 +48,7 @@ M.general = {
 		["<leader>gg"] = { ":tab Git<CR>" },
 		["<leader>gp"] = { ":Dispatch! Git pull<CR>" },
 		["<leader>gP"] = { ":Dispatch! Git push<CR>" },
+		["<leader>gl"] = { ":Git log<CR>" },
 		["<leader><CR>"] = { ":make<CR>" },
 		["<leader>v"] = { ":e $HOME/.config/nvim/lua/custom/init.lua<CR>" },
 		["<leader>w"] = { "<C-w>" },
@@ -149,6 +150,32 @@ M.general = {
 		["<leader>dl"] = { "<cmd>TroubleToggle loclist<cr>" },
 		["<leader>dq"] = { "<cmd>TroubleToggle quickfix<cr>" },
 		["gR"] = { "<cmd>TroubleToggle lsp_references<cr>" },
+
+		["<leader>dt"] = { ":lua require('dap-go').debug_test()<CR>" },
+		["<leader>dc"] = { ":lua require('dap').continue()<CR>" },
+		["<leader>ds"] = { ":lua require('dap').step_over()<CR>" },
+		["<leader>di"] = { ":lua require('dap').step_into()<CR>" },
+		["<leader>do"] = { ":lua require('dap').step_out()<CR>" },
+		["<Leader>db"] = { ":lua require('dap').toggle_breakpoint()<CR>" },
+		["<Leader>dB"] = { ":lua require('dap').set_breakpoint()<CR>" },
+		["<Leader>dr"] = { ":lua require('dap').repl.open()<CR>" },
+		["<Leader>dh"] = { ":lua require('dap.ui.widgets').hover()<CR>" },
+		-- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "last run" })
+		-- vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+		--     require('dap.ui.widgets').preview()
+		-- end, { desc = "preview" })
+		-- vim.keymap.set('n', '<Leader>df', function()
+		--     local widgets = require('dap.ui.widgets')
+		--     widgets.centered_float(widgets.frames)
+		-- end, { desc = "frames" })
+		-- vim.keymap.set('n', '<Leader>dS', function()
+		--     local widgets = require('dap.ui.widgets')
+		--     widgets.centered_float(widgets.scopes)
+		-- end, { desc = "scopes" })
+		--
+		--
+		-- vim.keymap.set('n', '<Leader>du', function() require('dapui').toggle() end, { desc = "UI toggle" })
+		--
 
 		-- ["<leader>lo"] = { ":Telescope lsp_document_symbols<CR>", "outline" },
 	},

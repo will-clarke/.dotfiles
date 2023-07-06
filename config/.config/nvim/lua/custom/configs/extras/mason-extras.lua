@@ -5,7 +5,7 @@ local setup = function(_, opts)
   local lspconfig = require "lspconfig"
 
   -- List of servers to install
-  local servers = { "html", "cssls", "tsserver", "clangd" }
+  local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls" }
 
   require("mason").setup(opts)
 
@@ -34,14 +34,14 @@ local setup = function(_, opts)
     --   require("rust-tools").setup {}
     -- end,
     -- Another example with clangd
-    -- Users usually run into different offset_encodings issue, 
+    -- Users usually run into different offset_encodings issue,
     -- so this is how to bypass it (kindof)
     ["clangd"] = function()
       lspconfig.clangd.setup({
         cmd = {
           "clangd",
           "--offset-encoding=utf-16", -- To match null-ls
-          --  With this, you can configure server with 
+          --  With this, you can configure server with
           --    - .clangd files
           --    - global clangd/config.yaml files
           --  Read the `--enable-config` option in `clangd --help` for more information

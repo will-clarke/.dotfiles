@@ -21,6 +21,49 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+	{
+		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
+	},
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		config = function()
+			require("nvim-dap-virtual-text").setup()
+		end,
+		event = "VeryLazy",
+	},
+	{
+		"leoluz/nvim-dap-go",
+		config = function()
+			require("dap-go").setup()
+		end,
+		event = "VeryLazy",
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		requires = { "mfussenegger/nvim-dap" },
+		event = "VeryLazy",
+		config = function()
+			require("dapui").setup()
+
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
+		end,
+	},
+
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
 	-- {
 	-- 	"m4xshen/hardtime.nvim",
 	-- 	event = "VeryLazy",
@@ -202,6 +245,7 @@ local plugins = {
 	{
 		"tpope/vim-fugitive",
 		cmd = "Git",
+		event = "BufRead",
 	},
 	{
 		"weilbith/nvim-code-action-menu",
@@ -349,7 +393,7 @@ local plugins = {
 	},
 	{
 		"knsh14/vim-github-link",
-		keys = { { "<leader>gl", "<CMD>GetCommitLink<CR>" } },
+		keys = { { "<leader>gL", "<CMD>GetCommitLink<CR>" } },
 	},
 
 	-- override plugin configs
@@ -436,7 +480,14 @@ local plugins = {
 
 		config = function()
 			require("neotest").setup({
+
+				floating = {
+					border = "rounded",
+					max_height = 0.95,
+					max_width = 0.95,
+				},
 				adapters = {
+
 					require("neotest-go")({
 						experimental = {
 							test_table = true,
