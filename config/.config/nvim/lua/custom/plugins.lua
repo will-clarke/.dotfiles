@@ -509,10 +509,10 @@ local plugins = {
 	{ "gabrielpoca/replacer.nvim" },
 
 	-- To make a plugin not be loaded
-	-- {
-	--   "NvChad/nvim-colorizer.lua",
-	--   enabled = false
-	-- },
+	{
+		"NvChad/nvim-colorizer.lua",
+		enabled = false,
+	},
 
 	-- All NvChad plugins are lazy-loaded by default
 	-- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
@@ -525,7 +525,7 @@ local plugins = {
 	-- To use a extras plugin
 	{ import = "custom.configs.extras.copilot" },
 	-- { import = "custom.configs.extras.diffview" },
-	{ import = "custom.configs.extras.mason-extras" },
+	-- { import = "custom.configs.extras.mason-extras" },
 	{ import = "custom.configs.extras.symbols-outline" },
 	{ import = "custom.configs.extras.trouble" },
 }
