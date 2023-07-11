@@ -8,11 +8,21 @@ local plugins = {
 		"michaelb/sniprun",
 		build = "bash install.sh",
 		config = function()
-			require("sniprun").setup()
+			vim.api.nvim_set_keymap("v", "<leader>e", ":SnipRun<CR>", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>e", "<Plug>SnipRunOperator", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>ee", ":SnipRun<CR>", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>er", ":SnipReset<CR>", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>ec", ":SnipClose<CR>", { silent = true })
+
+			require("sniprun").setup({
+				-- repl_enable = { "Python3_original", "python3_original", "python", "python3" },
+			})
 		end,
 		cmd = { "SnipRun", "SnipReset", "SnipInfo", "SnipLive" },
 		keys = {
-			{ "<leader>e", ":SnipRun<CR>", { mode = "x", "n" } },
+			"<leader>ee",
+			-- { "<leader>e", ":SnipRun<CR>", { mode = "x", "n" } },
+			-- { "<leader>ee", "<Plug>SnipRunOperator" }, -- text object
 		},
 	},
 	{
