@@ -5,7 +5,7 @@ local setup = function(_, opts)
 	local lspconfig = require("lspconfig")
 
 	-- List of servers to install
-	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls" }
+	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "mypy" }
 
 	require("mason").setup(opts)
 
@@ -58,6 +58,15 @@ local setup = function(_, opts)
 		-- Example: disable auto configuring an LSP
 		-- Here, we disable lua_ls so we can use NvChad's default config
 		["lua_ls"] = function() end,
+
+		["zls"] = function()
+			lspconfig.zls.setup({
+				on_attach = function(client, bufnr)
+					on_attach(client, bufnr)
+				end,
+				capabilities = capabilities,
+			})
+		end,
 	})
 end
 

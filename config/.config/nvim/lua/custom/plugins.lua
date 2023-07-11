@@ -30,6 +30,23 @@ local plugins = {
 		end,
 	},
 	{
+		"hrsh7th/nvim-cmp",
+		opts = overrides.cmp,
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-calc",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-path",
+			-- { "petertriho/cmp-git", config = true },
+			"saadparwaiz1/cmp_luasnip",
+		},
+	},
+	{
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
 	},
@@ -306,21 +323,37 @@ local plugins = {
 			"text",
 			"tex",
 			"plaintex",
+			"norg",
 		},
 		config = function()
-			local autolist = require("autolist")
-			autolist.setup()
-			autolist.create_mapping_hook("i", "<CR>", autolist.new)
-			autolist.create_mapping_hook("i", "<Tab>", autolist.indent)
-			autolist.create_mapping_hook("i", "<S-Tab>", autolist.indent, "<C-D>")
-			autolist.create_mapping_hook("n", "o", autolist.new)
-			autolist.create_mapping_hook("n", "O", autolist.new_before)
-			autolist.create_mapping_hook("n", ">>", autolist.indent)
-			autolist.create_mapping_hook("n", "<<", autolist.indent)
-			autolist.create_mapping_hook("n", "<C-r>", autolist.force_recalculate)
-			-- autolist.create_mapping_hook("n", "<leader>x", autolist.invert_entry, "")
+			require("autolist").setup()
+
+			-- vim.keymap.del("i", "<CR>")
+			vim.keymap.set("i", "<tab>", "<cmd>AutolistTab<cr>")
+			vim.keymap.set("i", "<s-tab>", "<cmd>AutolistShiftTab<cr>")
+			-- vim.keymap.set("i", "<c-t>", "<c-t><cmd>AutolistRecalculate<cr>") -- an example of using <c-t> to indent
+			vim.keymap.set("i", "<CR>", "<CR><cmd>AutolistNewBullet<cr>")
+			vim.keymap.set("n", "o", "o<cmd>AutolistNewBullet<cr>")
+			vim.keymap.set("n", "O", "O<cmd>AutolistNewBulletBefore<cr>")
+			vim.keymap.set("n", "<CR>", "<cmd>AutolistToggleCheckbox<cr><CR>")
+			vim.keymap.set("n", "<C-r>", "<cmd>AutolistRecalculate<cr>")
+
+			-- cycle list types with dot-repeat
+			vim.keymap.set("n", "<leader>cn", require("autolist").cycle_next_dr, { expr = true })
+			vim.keymap.set("n", "<leader>cp", require("autolist").cycle_prev_dr, { expr = true })
+
+			-- if you don't want dot-repeat
+			-- vim.keymap.set("n", "<leader>cn", "<cmd>AutolistCycleNext<cr>")
+			-- vim.keymap.set("n", "<leader>cp", "<cmd>AutolistCycleNext<cr>")
+
+			-- functions to recalculate list on edit
+			vim.keymap.set("n", ">>", ">><cmd>AutolistRecalculate<cr>")
+			vim.keymap.set("n", "<<", "<<<cmd>AutolistRecalculate<cr>")
+			vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
+			vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
 		end,
 	},
+
 	{
 		"pwntester/octo.nvim",
 		requires = {
@@ -428,30 +461,13 @@ local plugins = {
 		"nvim-telescope/telescope.nvim",
 		opts = overrides.telescope,
 	},
-	{
-		"hrsh7th/nvim-cmp",
-		opts = overrides.cmp,
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-calc",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-nvim-lua",
-			"hrsh7th/cmp-path",
-			-- { "petertriho/cmp-git", config = true },
-			"saadparwaiz1/cmp_luasnip",
-		},
-	},
 
 	-- Install a plugin
 	{
 		"max397574/better-escape.nvim",
 		event = "InsertEnter",
 		config = function()
-			require("better_escape").setup()
+			require("better_escape").setup({ mapping = { "jk", "kj" } })
 		end,
 	},
 
@@ -525,7 +541,7 @@ local plugins = {
 	-- To use a extras plugin
 	{ import = "custom.configs.extras.copilot" },
 	-- { import = "custom.configs.extras.diffview" },
-	-- { import = "custom.configs.extras.mason-extras" },
+	{ import = "custom.configs.extras.mason-extras" },
 	{ import = "custom.configs.extras.symbols-outline" },
 	{ import = "custom.configs.extras.trouble" },
 }
