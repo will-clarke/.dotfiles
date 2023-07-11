@@ -5,6 +5,7 @@ M.disabled = {
 	n = {
 		["gc"] = "",
 		["<leader>w"] = "",
+		["<leader>e"] = "",
 		["<leader>wa"] = "",
 		["<leader>ma"] = "",
 		["<leader>wk"] = "",

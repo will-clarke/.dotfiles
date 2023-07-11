@@ -4,7 +4,17 @@ local overrides = require("custom.configs.overrides")
 local plugins = {
 
 	-- Override plugin definition options
-
+	{
+		"michaelb/sniprun",
+		build = "bash install.sh",
+		config = function()
+			require("sniprun").setup()
+		end,
+		cmd = { "SnipRun", "SnipReset", "SnipInfo", "SnipLive" },
+		keys = {
+			{ "<leader>e", ":SnipRun<CR>", { mode = "x", "n" } },
+		},
+	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -384,7 +394,11 @@ local plugins = {
 	},
 	{
 		"akinsho/git-conflict.nvim",
-		config = true,
+		config = function()
+			require("git-conflict").setup()
+		end,
+		event = "BufRead",
+		keys = { "co", "ct", "cb", "c0", "[x", "]x" },
 		cmd = {
 			"GitConflictChooseOurs",
 			"GitConflictChooseTheirs",

@@ -5,7 +5,7 @@ local setup = function(_, opts)
 	local lspconfig = require("lspconfig")
 
 	-- List of servers to install
-	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "mypy" }
+	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "pyright" }
 
 	require("mason").setup(opts)
 
