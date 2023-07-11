@@ -4,10 +4,33 @@ local setup = function(_, opts)
 
 	local lspconfig = require("lspconfig")
 
-	-- List of servers to install
-	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "pyright" }
+	opts.ensure_installed = {
+		-- lua stuff
+		"lua-language-server",
+		"stylua",
+
+		-- web dev stuff
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		"deno",
+		"prettier",
+
+		-- c/cpp stuff
+		"clangd",
+		"clang-format",
+
+		"gopls",
+		"gofumpt",
+
+		"pyright",
+		"mypy",
+	}
 
 	require("mason").setup(opts)
+
+	-- List of servers to install FOR LSP
+	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "pyright" }
 
 	require("mason-lspconfig").setup({
 		ensure_installed = servers,

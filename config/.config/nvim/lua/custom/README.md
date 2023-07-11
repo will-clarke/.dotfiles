@@ -1,14 +1,14 @@
 # Lua config
 
 ## TODO
-- [ ] Get autolist <CR> working in md
-- [ ] Why is autolist clobbering all the other mappings? Doesn't seem  legit
+- [x] Get autolist <CR> working in md
+- [x] Why is autolist clobbering all the other mappings? Doesn't seem  legit
 - [x] Get emoji cmp working ✅
 - [ ] Get cmp working without having to require at the root level
-- [ ] C-c in fugitive doesnt work
+- [x] C-c in fugitive doesnt work
 - [ ] quickfix fixer
-- [ ] harpoon keys
-- [ ] conflict markers??????
+- [x] harpoon keys
+- [x] conflict markers??????
 - [ ] kity navigator???
     - [ ] "knubie/vim-kitty-navigator",
 
