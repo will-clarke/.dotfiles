@@ -87,6 +87,9 @@ M.mason = {
 
 		"gopls",
 		"gofumpt",
+
+		"pyright",
+		"mypy",
 	},
 }
 

@@ -432,7 +432,7 @@ local plugins = {
 			},
 			default_file_explorer = true,
 			view_options = {
-				show_hidden = true,
+				-- show_hidden = true,
 			},
 			use_default_keymaps = false,
 			keymaps = {

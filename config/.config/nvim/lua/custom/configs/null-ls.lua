@@ -20,7 +20,7 @@ local sources = {
 
 	b.formatting.gofumpt,
 
-	b.diagnostics.mypy.with({ command = { "python", "-m", "mypy" } }),
+	b.diagnostics.mypy,
 }
 
 null_ls.setup({
