@@ -220,17 +220,8 @@ local plugins = {
 		config = function()
 			require("git-conflict").setup()
 		end,
-		event = "BufRead",
-		keys = { "co", "ct", "cb", "c0", "[x", "]x" },
-		cmd = {
-			"GitConflictChooseOurs",
-			"GitConflictChooseTheirs",
-			"GitConflictChooseBoth",
-			"GitConflictChooseNone",
-			"GitConflictNextConflict",
-			"GitConflictPrevConflict",
-			"GitConflictListQf",
-		},
+		lazy = false,
+		event = "VeryLazy",
 	},
 	{
 		"knsh14/vim-github-link",
