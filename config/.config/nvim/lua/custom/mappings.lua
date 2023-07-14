@@ -165,6 +165,7 @@ M.general = {
 		["<Leader>dB"] = { ":lua require('dap').set_breakpoint()<CR>" },
 		["<Leader>dr"] = { ":lua require('dap').repl.open()<CR>" },
 		["<Leader>dh"] = { ":lua require('dap.ui.widgets').hover()<CR>" },
+		["<Leader>L"] = { ":Lazy<CR>" },
 		-- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end, { desc = "last run" })
 		-- vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
 		--     require('dap.ui.widgets').preview()

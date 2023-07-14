@@ -2,7 +2,14 @@ local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
-
+	{
+		"echasnovski/mini.align",
+		version = "*",
+		config = function()
+			require("mini.align").setup()
+		end,
+		keys = { "ga", "gA" },
+	},
 	{
 		"knubie/vim-kitty-navigator",
 		event = "VeryLazy",
