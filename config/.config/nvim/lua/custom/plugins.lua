@@ -3,7 +3,48 @@ local overrides = require("custom.configs.overrides")
 ---@type NvPluginSpec[]
 local plugins = {
 
-	-- Override plugin definition options
+	{
+		"knubie/vim-kitty-navigator",
+		event = "VeryLazy",
+	},
+	{
+		"Vigemus/iron.nvim",
+		keys = {
+			{ "<leader>sr", "<cmd>IronRepl<cr>", { mode = "n" } },
+			{ "<leader>sf", "<cmd>IronFocus<cr>" },
+			{ "<leader>sR", "<cmd>IronRestart<cr>" },
+			{ "<leader>sh", "<cmd>IronHide<cr>" },
+		},
+		config = function()
+			local view = require("iron.view")
+			require("iron.core").setup({
+				config = {
+					repl_open_cmd = view.split.vertical("40%"),
+				},
+				keymaps = {
+					send_motion = "<space>ss",
+					visual_send = "<space>ss",
+					send_file = "<space>sf",
+					send_line = "<space>sl",
+					send_until_cursor = "<space>su",
+					send_mark = "<space>sm",
+					mark_motion = "<space>sm",
+					mark_visual = "<space>sm",
+					remove_mark = "<space>sd",
+					cr = "<space>s<cr>",
+					interrupt = "<space>s<space>",
+					exit = "<space>sq",
+					clear = "<space>sL",
+				},
+			})
+		end,
+		cmd = { "IronRepl" },
+	},
+	{
+		"dccsillag/magma-nvim",
+		build = ":UpdateRemotePlugins",
+		cmd = { "MagmaEvaluateLine", "MagmaEvalFile", "MagmaEvaluateCell" },
+	},
 	{
 		"michaelb/sniprun",
 		build = "bash install.sh",
@@ -46,6 +87,14 @@ local plugins = {
 		config = function()
 			require("zk").setup({})
 		end,
+		cmd = { "ZkNew", "ZkNotes", "ZkTags" },
+		keys = {
+			"<leader>zd",
+			"<leader>zn",
+			"<leader>zo",
+			"<leader>zt",
+			"<leader>zw",
+		},
 	},
 	{
 		"hrsh7th/nvim-cmp",
