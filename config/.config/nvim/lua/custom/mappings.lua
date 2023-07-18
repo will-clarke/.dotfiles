@@ -64,7 +64,11 @@ M.general = {
 		["<leader>ce"] = { ":ChatGPTEditWithInstructions<CR>" },
 		["<leader>k"] = { ":Telescope keymaps<CR>" },
 		["gd"] = { ":Telescope lsp_definitions<CR>" },
-		["gr"] = { ":Telescope lsp_references<CR>" },
+		["gr"] = {
+			function()
+				require("telescope.builtin").lsp_references({ show_line = false })
+			end,
+		},
 		-- ["<leader>la"] = { vim.lsp.buf.code_action, "code action" },
 		["<leader>lf"] = { vim.lsp.buf.format, "format" },
 		["<leader>/"] = {
