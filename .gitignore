@@ -20,3 +20,5 @@ config/.config/Amazon/
 config/.config/dlv/
 config/.config/filezilla/
 config/.config/tmux/plugins
+
+config/.config/helix/runtime/

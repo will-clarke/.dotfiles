@@ -103,8 +103,48 @@ M.cmp = {
 --     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 --   }),
 
+-- Default: {
+--   bottom_pane = {
+--     height = 25,
+--     preview_cutoff = 120,
+--     prompt_position = "top"
+--   },
+--   center = {
+--     height = 0.4,
+--     preview_cutoff = 40,
+--     prompt_position = "top",
+--     width = 0.5
+--   },
+--   cursor = {
+--     height = 0.9,
+--     preview_cutoff = 40,
+--     width = 0.8
+--   },
+--   horizontal = {
+--     height = 0.9,
+--     preview_cutoff = 120,
+--     prompt_position = "bottom",
+--     width = 0.8
+--   },
+--   vertical = {
+--     height = 0.9,
+--     preview_cutoff = 40,
+--     prompt_position = "bottom",
+--     width = 0.8
+--   }
 M.telescope = {
 	defaults = {
+		layout_config = {
+			horizontal = {
+				prompt_position = "top",
+				preview_width = 0.55,
+				results_width = 1.2,
+				results_height = 1,
+				width = 0.99,
+			},
+			prompt_position = "top",
+			vertical = { width = 1 },
+		},
 		mappings = {
 			i = {
 				["<C-j>"] = function(...)

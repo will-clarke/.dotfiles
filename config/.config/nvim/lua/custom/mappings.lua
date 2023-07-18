@@ -44,12 +44,14 @@ vim.keymap.set({ "o", "x" }, "ah", ":<C-U>Gitsigns select_hunk<CR>")
 M.general = {
 	n = {
 
-		["<leader>zn"] = { "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" },
-		["<leader>zw"] = { "<Cmd>ZkNew { group = 'work' }<CR>" },
-		["<leader>zd"] = { "<Cmd>ZkNew { group = 'diary' }<CR>" },
-		["<leader>zo"] = { "<Cmd>ZkNotes { sort = { 'modified' } }<CR>" },
-		["<leader>zt"] = { "<Cmd>ZkTags<CR>" },
-
+		["<leader>F"] = {
+			function()
+				vim.diagnostic.open_float({ border = "rounded" })
+			end,
+			"Floating diagnostic",
+		},
+		["gj"] = { "j" },
+		["gk"] = { "k" },
 		["<leader>gg"] = { ":tab Git<CR>" },
 		["<leader>gp"] = { ":Dispatch! Git pull<CR>" },
 		["<leader>gP"] = { ":Dispatch! Git push<CR>" },

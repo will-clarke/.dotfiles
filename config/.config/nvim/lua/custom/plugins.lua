@@ -6,7 +6,11 @@ local plugins = {
 		"echasnovski/mini.align",
 		version = "*",
 		config = function()
-			require("mini.align").setup()
+			require("mini.align").setup({
+				mappings = {
+					start = "gA",
+				},
+			})
 		end,
 		keys = { "ga", "gA" },
 	},
@@ -17,7 +21,7 @@ local plugins = {
 	{
 		"Vigemus/iron.nvim",
 		keys = {
-			{ "<leader>sr", "<cmd>IronRepl<cr>", { mode = "n" } },
+			{ "<leader>sr", "<cmd>IronRepl<cr>", { mode = "n", desc = "repl" } },
 			{ "<leader>sf", "<cmd>IronFocus<cr>" },
 			{ "<leader>sR", "<cmd>IronRestart<cr>" },
 			{ "<leader>sh", "<cmd>IronHide<cr>" },
@@ -94,15 +98,33 @@ local plugins = {
 	{
 		"mickael-menu/zk-nvim",
 		config = function()
-			require("zk").setup({})
+			require("zk").setup({
+				picker = "telescope",
+
+				lsp = {
+					-- `config` is passed to `vim.lsp.start_client(config)`
+					config = {
+						cmd = { "zk", "lsp" },
+						name = "zk",
+						-- on_attach = ...
+						-- etc, see `:h vim.lsp.start_client()`
+					},
+
+					-- automatically attach buffers in a zk notebook that match the given filetypes
+					auto_attach = {
+						enabled = true,
+						filetypes = { "markdown" },
+					},
+				},
+			})
 		end,
 		cmd = { "ZkNew", "ZkNotes", "ZkTags" },
 		keys = {
-			"<leader>zd",
-			"<leader>zn",
-			"<leader>zo",
-			"<leader>zt",
-			"<leader>zw",
+			{ "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" },
+			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>" },
+			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>" },
+			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>" },
+			{ "<leader>zt", "<Cmd>ZkTags<CR>" },
 		},
 	},
 	{
