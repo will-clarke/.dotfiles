@@ -3,6 +3,20 @@ local overrides = require("custom.configs.overrides")
 ---@type NvPluginSpec[]
 local plugins = {
 	{
+		"NeogitOrg/neogit",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+		cmd = "Neogit",
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		cmd = { "LazyGit", "LazyGitConfig", "LazyGitCurrentFile" },
+	},
+	{
 		"echasnovski/mini.align",
 		version = "*",
 		config = function()
@@ -225,11 +239,11 @@ local plugins = {
 			require("yanky").setup()
 		end,
 	},
-	{
-		"tpope/vim-fugitive",
-		cmd = "Git",
-		event = "BufRead",
-	},
+	-- {
+	-- 	"tpope/vim-fugitive",
+	-- 	cmd = "Git",
+	-- 	event = "BufRead",
+	-- },
 	{
 		"weilbith/nvim-code-action-menu",
 		cmd = "CodeActionMenu",

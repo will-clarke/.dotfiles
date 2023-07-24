@@ -21,6 +21,8 @@ local sources = {
 	b.formatting.gofumpt,
 
 	b.diagnostics.mypy,
+
+	b.code_actions.shellcheck,
 }
 
 null_ls.setup({

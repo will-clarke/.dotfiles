@@ -25,12 +25,26 @@ local setup = function(_, opts)
 
 		"pyright",
 		"mypy",
+		"black",
+
+		"shellcheck",
 	}
 
 	require("mason").setup(opts)
 
+	local registry = require("mason-registry")
+
+	registry.refresh(function()
+		for _, pkg_name in ipairs(opts.ensure_installed) do
+			local pkg = registry.get_package(pkg_name)
+			if not pkg:is_installed() then
+				pkg:install()
+			end
+		end
+	end)
+
 	-- List of servers to install FOR LSP
-	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "pyright" }
+	local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "lua_ls", "pyright", "bashls" }
 
 	require("mason-lspconfig").setup({
 		ensure_installed = servers,
