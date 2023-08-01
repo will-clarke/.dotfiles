@@ -3,6 +3,18 @@ local overrides = require("custom.configs.overrides")
 ---@type NvPluginSpec[]
 local plugins = {
 	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				integrations = {
+					neogit = true,
+				},
+			})
+		end,
+	},
+	{
 		"NeogitOrg/neogit",
 		dependencies = "nvim-lua/plenary.nvim",
 		config = true,
