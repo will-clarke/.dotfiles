@@ -1,23 +1,78 @@
--- Read the docs: https://www.lunarvim.org/docs/configuration
--- Example configs: https://github.com/LunarVim/starter.lvim
--- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
--- Forum: https://www.reddit.com/r/lunarvim/
--- Discord: https://discord.com/invite/Xb9B4Ny
---
---
---
+lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
+lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+  "Search text" }
 
 lvim.plugins = {
   {
-    "tpope/vim-repeat",
-    event = "BufRead",
-  },
-  { 
-    "tpope/vim-commentary",
+    "linty-org/readline.nvim",
+    config = function()
+      local readline = require 'readline'
+      vim.keymap.set('!', '<C-k>', readline.kill_line)
+      vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+      vim.keymap.set('!', '<M-d>', readline.kill_word)
+      vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
+      vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
+      vim.keymap.set('!', '<C-d>', '<Delete>') -- delete-char
+      vim.keymap.set('!', '<C-h>', '<BS>')     -- backward-delete-char
+      vim.keymap.set('!', '<C-a>', readline.beginning_of_line)
+      vim.keymap.set('!', '<C-e>', readline.end_of_line)
+      vim.keymap.set('!', '<M-f>', readline.forward_word)
+      vim.keymap.set('!', '<M-b>', readline.backward_word)
+      vim.keymap.set('!', '<C-f>', '<Right>') -- forward-char
+      vim.keymap.set('!', '<C-b>', '<Left>')  -- backward-char
+      vim.keymap.set('!', '<C-n>', '<Down>')  -- next-line
+      vim.keymap.set('!', '<C-p>', '<Up>')    -- previous-line
+    end
   },
   {
-    "tpope/vim-surround",
-    event = "BufRead"
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
+    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+    },
+    config = true
+  },
+  {
+    "mickael-menu/zk-nvim",
+    config = function()
+      require("zk").setup({
+        picker = "telescope",
+
+        lsp = {
+          -- `config` is passed to `vim.lsp.start_client(config)`
+          config = {
+            cmd = { "zk", "lsp" },
+            name = "zk",
+            -- on_attach = ...
+            -- etc, see `:h vim.lsp.start_client()`
+          },
+
+          -- automatically attach buffers in a zk notebook that match the given filetypes
+          auto_attach = {
+            enabled = true,
+            filetypes = { "markdown" },
+          },
+        },
+      })
+    end,
+    cmd = { "ZkNew", "ZkNotes", "ZkTags" },
+    keys = {
+      { "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" },
+      { "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>" },
+      { "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>" },
+      { "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>" },
+      { "<leader>zt", "<Cmd>ZkTags<CR>" },
+    },
   },
   {
     "Wansmer/treesj",
@@ -78,7 +133,6 @@ lvim.plugins = {
       table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
     end,
   },
-
 }
 
 local formatters = require "lvim.lsp.null-ls.formatters"
