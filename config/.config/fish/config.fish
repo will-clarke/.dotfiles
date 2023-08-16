@@ -1,6 +1,7 @@
 set fish_greeting #disable welcome
 
 if status is-interactive
+    abbr --add --global nvim lvim
     abbr --add --global gco git checkout
     abbr --add --global ga git add
     abbr --add --global gd git diff
@@ -52,3 +53,9 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk/include"
 # end
 # <<< conda initialize <<<
 
+
+# PREFIX=/usr/local/anaconda3
+
+if type -q direnv
+  direnv hook fish | source
+end
