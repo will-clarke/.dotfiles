@@ -10,13 +10,16 @@ vim.opt.termguicolors = true
 -- vim.opt.autochdir = true
 
 vim.cmd([[hi TreesitterContext guibg=Black gui=bold]])
-
 vim.cmd([[hi def NeogitDiffAddHighlight guibg=#404040 guifg=#859900]])
 vim.cmd([[hi def NeogitDiffDeleteHighlight guibg=#404040 guifg=#dc322f]])
 vim.cmd([[hi def NeogitDiffContextHighlight guibg=#333333 guifg=#b2b2b2]])
 vim.cmd([[hi def NeogitDiffContext guibg=#262626 guifg=#b2b2b2]])
 vim.cmd([[hi def NeogitHunkHeader guifg=#cccccc guibg=#404040]])
 vim.cmd([[hi def NeogitHunkHeaderHighlight guifg=#cccccc guibg=#4d4d4d]])
+
+vim.cmd([[hi def NeogitChangeModified guibg=#404040 guifg=#859900]])
+vim.cmd([[hi def NeogitChangeAdded guibg=#404040 guifg=#859900]])
+vim.cmd([[hi def NeogitChangeDeleted guibg=#404040 guifg=#dc322f]])
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),

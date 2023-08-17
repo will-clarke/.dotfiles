@@ -1,6 +1,7 @@
 set fish_greeting #disable welcome
 
 if status is-interactive
+    abbr --add --global nvim lvim
     abbr --add --global gco git checkout
     abbr --add --global ga git add
     abbr --add --global gd git diff
@@ -47,8 +48,11 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk/include"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-# if test -f /Users/will.clarke/miniforge3/bin/conda
-#     eval /Users/will.clarke/miniforge3/bin/conda "shell.fish" "hook" $argv | source
-# end
+if test -f /opt/homebrew/anaconda3/bin/conda
+    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
 # <<< conda initialize <<<
 
+if type -q direnv
+  direnv hook fish | source
+end

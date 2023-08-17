@@ -20,8 +20,11 @@ local sources = {
 
 	b.formatting.gofumpt,
 
+	b.formatting.black,
+
 	b.diagnostics.mypy,
 
+	b.formatting.shfmt,
 	b.code_actions.shellcheck,
 }
 

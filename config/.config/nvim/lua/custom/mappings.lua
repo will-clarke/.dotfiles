@@ -42,6 +42,10 @@ vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 vim.keymap.set({ "o", "x" }, "ah", ":<C-U>Gitsigns select_hunk<CR>")
 
 M.general = {
+	v = {
+		["<D-c>"] = { "y" },
+		["<M-c>"] = { "y" },
+	},
 	n = {
 
 		["<leader>F"] = {
@@ -129,7 +133,7 @@ M.general = {
 
 		["<leader>gb"] = {
 			function()
-				package.loaded.gitsigns.blame_line()
+				require("gitsigns").blame_line()
 			end,
 			"Blame line",
 		},
