@@ -53,6 +53,9 @@ if test -f /opt/homebrew/anaconda3/bin/conda
 end
 # <<< conda initialize <<<
 
+
+# PREFIX=/usr/local/anaconda3
+
 if type -q direnv
   direnv hook fish | source
 end
