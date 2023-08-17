@@ -1,44 +1,35 @@
--- Read the docs: https://www.lunarvim.org/docs/configuration
--- Example configs: https://github.com/LunarVim/starter.lvim
--- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
--- Forum: https://www.reddit.com/r/lunarvim/
--- Discord: https://discord.com/invite/Xb9B4Ny
-
 lvim.colorscheme = "kanagawa"
 lvim.builtin.nvimtree.active = false
 
 lvim.builtin.telescope.defaults.layout_config = { horizontal = { width = 0.99 } }
-lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = function(...) local actions = require("telescope.actions") actions.move_selection_next(...) end
-lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = function(...) local actions = require("telescope.actions") actions.move_selection_previous(...) end
-lvim.builtin.telescope.defaults.mappings.i["<C-g>"] = function(...) local actions = require("telescope.actions") actions.close(...) end
-lvim.builtin.telescope.defaults.mappings.i["<esc>"] = function(...) local actions = require("telescope.actions") actions.close(...) end
+lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = function(...)
+  local actions = require("telescope.actions")
+  actions.move_selection_next(...)
+end
+lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = function(...)
+  local actions = require("telescope.actions")
+  actions.move_selection_previous(...)
+end
+lvim.builtin.telescope.defaults.mappings.i["<C-g>"] = function(...)
+  local actions = require("telescope.actions")
+  actions.close(...)
+end
+lvim.builtin.telescope.defaults.mappings.i["<esc>"] = function(...)
+  local actions = require("telescope.actions")
+  actions.close(...)
+end
 
 
-
-
-
-
-  --       extensions = {
-  --         live_grep_args = {
-  --           auto_quoting = true, -- enable/disable auto-quoting
-  --           -- define mappings, e.g.
-  --           mappings = {         -- extend mappings
-  --             i = {
-  --               ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-  --               ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
-  --               ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
-  --             },
-  --           },
-  --           -- ... also accepts theme settings, for example:
-  --           -- theme = "dropdown", -- use dropdown theme
-  --           -- theme = { }, -- use own theme spec
-  --           -- layout_config = { mirror=true }, -- mirror preview pane
-  --         }
-  --       }
-  --     }
-  --   end
-  -- },
-
+lvim.builtin.telescope.extensions.live_grep_args = {
+  auto_quoting = true,           -- enable/disable auto-quoting
+  mappings = {                   -- extend mappings
+    i = {
+      ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+      ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
+      ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+    },
+  },
+}
 
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
