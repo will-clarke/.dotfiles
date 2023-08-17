@@ -1,6 +1,8 @@
 lvim.colorscheme = "kanagawa"
 lvim.builtin.nvimtree.active = false
 
+
+-- telescope
 lvim.builtin.telescope.defaults.layout_config = { horizontal = { width = 0.99 } }
 lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = function(...)
   local actions = require("telescope.actions")
@@ -18,11 +20,9 @@ lvim.builtin.telescope.defaults.mappings.i["<esc>"] = function(...)
   local actions = require("telescope.actions")
   actions.close(...)
 end
-
-
 lvim.builtin.telescope.extensions.live_grep_args = {
-  auto_quoting = true,           -- enable/disable auto-quoting
-  mappings = {                   -- extend mappings
+  auto_quoting = true,
+  mappings = {
     i = {
       ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
       ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
@@ -30,13 +30,22 @@ lvim.builtin.telescope.extensions.live_grep_args = {
     },
   },
 }
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "live_grep_args")
+  -- pcall(telescope.load_extension, "neoclip")
+end
 
+
+
+-- keybindings
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 
+
+-- plugins
 lvim.plugins = {
   "rebelot/kanagawa.nvim",
   "olexsmir/gopher.nvim",
@@ -57,27 +66,27 @@ lvim.plugins = {
     event = "BufRead",
     config = function() require "lsp_signature".on_attach() end,
   },
-  {
-    "romgrk/nvim-treesitter-context",
-    config = function()
-      require("treesitter-context").setup {
-        enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
-        throttle = true, -- Throttles plugin updates (may improve performance)
-        max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
-        patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-          -- For all filetypes
-          -- Note that setting an entry here replaces all other patterns for this entry.
-          -- By setting the 'default' entry below, you can control which nodes you want to
-          -- appear in the context window.
-          default = {
-            'class',
-            'function',
-            'method',
-          },
-        },
-      }
-    end
-  },
+  -- {
+  --   "romgrk/nvim-treesitter-context",
+  --   config = function()
+  --     require("treesitter-context").setup {
+  --       enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
+  --       throttle = true, -- Throttles plugin updates (may improve performance)
+  --       max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+  --       patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+  --         -- For all filetypes
+  --         -- Note that setting an entry here replaces all other patterns for this entry.
+  --         -- By setting the 'default' entry below, you can control which nodes you want to
+  --         -- appear in the context window.
+  --         default = {
+  --           'class',
+  --           'function',
+  --           'method',
+  --         },
+  --       },
+  --     }
+  --   end
+  -- },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -112,9 +121,7 @@ lvim.plugins = {
       vim.keymap.set('!', '<C-p>', '<Up>')    -- previous-line
     end
   },
-
   { "nvim-telescope/telescope-live-grep-args.nvim" },
-
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -131,15 +138,10 @@ lvim.plugins = {
         picker = "telescope",
 
         lsp = {
-          -- `config` is passed to `vim.lsp.start_client(config)`
           config = {
             cmd = { "zk", "lsp" },
             name = "zk",
-            -- on_attach = ...
-            -- etc, see `:h vim.lsp.start_client()`
           },
-
-          -- automatically attach buffers in a zk notebook that match the given filetypes
           auto_attach = {
             enabled = true,
             filetypes = { "markdown" },
@@ -215,7 +217,6 @@ lvim.plugins = {
   --     table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
   --   end,
   -- },
-
   {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
@@ -228,10 +229,6 @@ lvim.plugins = {
     end,
   }
 }
-
-
-
-
 
 
 local formatters = require "lvim.lsp.null-ls.formatters"
@@ -285,11 +282,7 @@ lvim.autocommands = {
 }
 
 
-lvim.builtin.treesitter.ensure_installed = {
-  "go",
-  "gomod",
-  "python",
-}
+lvim.builtin.treesitter.ensure_installed = { "go", "gomod", "python" }
 
 lvim.format_on_save = {
   pattern = { "*.go", "*.py" },
@@ -413,11 +406,6 @@ lvim.builtin.which_key.mappings["C"] = {
 }
 
 
-
-lvim.builtin.telescope.on_config_done = function(telescope)
-  pcall(telescope.load_extension, "live_grep_args")
-  -- pcall(telescope.load_extension, "neoclip")
-end
 
 
 lvim.builtin.which_key.mappings["t"] = {
