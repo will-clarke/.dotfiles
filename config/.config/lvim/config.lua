@@ -5,6 +5,40 @@
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
 lvim.colorscheme = "kanagawa"
+lvim.builtin.nvimtree.active = false
+
+lvim.builtin.telescope.defaults.layout_config = { horizontal = { width = 0.99 } }
+lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = function(...) local actions = require("telescope.actions") actions.move_selection_next(...) end
+lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = function(...) local actions = require("telescope.actions") actions.move_selection_previous(...) end
+lvim.builtin.telescope.defaults.mappings.i["<C-g>"] = function(...) local actions = require("telescope.actions") actions.close(...) end
+lvim.builtin.telescope.defaults.mappings.i["<esc>"] = function(...) local actions = require("telescope.actions") actions.close(...) end
+
+
+
+
+
+
+  --       extensions = {
+  --         live_grep_args = {
+  --           auto_quoting = true, -- enable/disable auto-quoting
+  --           -- define mappings, e.g.
+  --           mappings = {         -- extend mappings
+  --             i = {
+  --               ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+  --               ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
+  --               ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+  --             },
+  --           },
+  --           -- ... also accepts theme settings, for example:
+  --           -- theme = "dropdown", -- use dropdown theme
+  --           -- theme = { }, -- use own theme spec
+  --           -- layout_config = { mirror=true }, -- mirror preview pane
+  --         }
+  --       }
+  --     }
+  --   end
+  -- },
+
 
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
@@ -22,6 +56,50 @@ lvim.plugins = {
   "nvim-neotest/neotest",
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
+  { "tpope/vim-repeat" },
+  {
+    "felipec/vim-sanegx",
+    event = "BufRead",
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function() require "lsp_signature".on_attach() end,
+  },
+  {
+    "romgrk/nvim-treesitter-context",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            'class',
+            'function',
+            'method',
+          },
+        },
+      }
+    end
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+
+
   {
     "linty-org/readline.nvim",
     config = function()
@@ -43,62 +121,9 @@ lvim.plugins = {
       vim.keymap.set('!', '<C-p>', '<Up>')    -- previous-line
     end
   },
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
-    },
-    config = function()
-      require("telescope").setup {
 
-        defaults = {
-          layout_config = {
-            horizontal = {
-              width = 0.99,
-            },
-          },
-          mappings = {
-            i = {
-              ["<C-j>"] = function(...)
-                local actions = require("telescope.actions")
-                actions.move_selection_next(...)
-              end,
-              ["<C-k>"] = function(...)
-                local actions = require("telescope.actions")
-                actions.move_selection_previous(...)
-              end,
-              ["<C-g>"] = function(...)
-                local actions = require("telescope.actions")
-                actions.close(...)
-              end,
-              ["<Esc>"] = function(...)
-                local actions = require("telescope.actions")
-                actions.close(...)
-              end,
-            },
-          },
-        },
-        extensions = {
-          live_grep_args = {
-            auto_quoting = true, -- enable/disable auto-quoting
-            -- define mappings, e.g.
-            mappings = {       -- extend mappings
-              i = {
-                ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-                ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
-                ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
-              },
-            },
-            -- ... also accepts theme settings, for example:
-            -- theme = "dropdown", -- use dropdown theme
-            -- theme = { }, -- use own theme spec
-            -- layout_config = { mirror=true }, -- mirror preview pane
-          }
-        }
-      }
-      require("telescope").load_extension("live_grep_args")
-    end
-  },
+  { "nvim-telescope/telescope-live-grep-args.nvim" },
+
   {
     "NeogitOrg/neogit",
     dependencies = {
@@ -183,23 +208,40 @@ lvim.plugins = {
     "knubie/vim-kitty-navigator",
     event = "VeryLazy",
   },
+  -- {
+  --   "github/copilot.vim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     -- copilot assume mapped
+  --     vim.g.copilot_assume_mapped = true
+  --     vim.g.copilot_no_tab_map = true
+  --   end,
+  -- },
+  -- {
+  --   "hrsh7th/cmp-copilot",
+  --   config = function()
+  --     lvim.builtin.cmp.formatting.source_names["copilot"] = "( )"
+  --     table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
+  --   end,
+  -- },
+
   {
-    "github/copilot.vim",
-    event = "VeryLazy",
+    "zbirenbaum/copilot-cmp",
+    event = "InsertEnter",
+    dependencies = { "zbirenbaum/copilot.lua" },
     config = function()
-      -- copilot assume mapped
-      vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = true
+      vim.defer_fn(function()
+        require("copilot").setup()     -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
+        require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+      end, 100)
     end,
-  },
-  {
-    "hrsh7th/cmp-copilot",
-    config = function()
-      lvim.builtin.cmp.formatting.source_names["copilot"] = "( )"
-      table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
-    end,
-  },
+  }
 }
+
+
+
+
+
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
@@ -377,4 +419,22 @@ lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.t
 lvim.builtin.which_key.mappings["C"] = {
   name = "Python",
   c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
+}
+
+
+
+lvim.builtin.telescope.on_config_done = function(telescope)
+  pcall(telescope.load_extension, "live_grep_args")
+  -- pcall(telescope.load_extension, "neoclip")
+end
+
+
+lvim.builtin.which_key.mappings["t"] = {
+  name = "Diagnostics",
+  t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
+  d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
+  q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
+  l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
+  r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
