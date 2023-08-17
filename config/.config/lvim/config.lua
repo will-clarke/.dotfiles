@@ -1,8 +1,23 @@
+-- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Example configs: https://github.com/LunarVim/starter.lvim
+-- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Forum: https://www.reddit.com/r/lunarvim/
+-- Discord: https://discord.com/invite/Xb9B4Ny
+
+
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 
 lvim.plugins = {
+  "olexsmir/gopher.nvim",
+  "leoluz/nvim-dap-go",
+  "ChristianChiarulli/swenv.nvim",
+  "stevearc/dressing.nvim",
+  "mfussenegger/nvim-dap-python",
+  "nvim-neotest/neotest",
+  "nvim-neotest/neotest-python",
+  "nvim-neotest/neotest-go",
   {
     "linty-org/readline.nvim",
     config = function()
@@ -67,11 +82,11 @@ lvim.plugins = {
     end,
     cmd = { "ZkNew", "ZkNotes", "ZkTags" },
     keys = {
-      { "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>" },
-      { "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>" },
-      { "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>" },
-      { "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>" },
-      { "<leader>zt", "<Cmd>ZkTags<CR>" },
+      { "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "Zk New" },
+      { "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", "Zk Work" },
+      { "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", "Zk Diary" },
+      { "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Zk Open" },
+      { "<leader>zt", "<Cmd>ZkTags<CR>", "Zk Tags" },
     },
   },
   {
@@ -137,6 +152,8 @@ lvim.plugins = {
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
+  { command = "goimports", filetypes = { "go" } },
+  { command = "gofumpt",   filetypes = { "go" } },
   { name = "black" },
   {
     name = "prettier",
@@ -151,7 +168,7 @@ formatters.setup {
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { name = "flake8" },
+  { name = "flake8", filetypes = { "python" } },
   {
     name = "shellcheck",
     args = { "--severity", "warning" },
@@ -163,4 +180,150 @@ code_actions.setup {
   {
     name = "proselint",
   },
+}
+
+
+
+
+lvim.autocommands = {
+  {
+    "BufWinEnter", {
+    pattern = { "COMMIT_EDITMSG", "NeogitCommitMessage" },
+    callback = function()
+      vim.wo.spell = true
+      vim.api.nvim_win_set_cursor(0, { 1, 0 })
+      if vim.fn.getline(1) == "" then
+        vim.cmd("startinsert!")
+      end
+    end
+  },
+  }
+}
+
+
+lvim.builtin.treesitter.ensure_installed = {
+  "go",
+  "gomod",
+  "python",
+}
+
+lvim.format_on_save = {
+  pattern = { "*.go", "*.py" },
+  enabled = true,
+}
+
+------------------------
+-- Dap
+------------------------
+local dap_ok, dapgo = pcall(require, "dap-go")
+if not dap_ok then
+  return
+end
+
+dapgo.setup()
+
+------------------------
+-- LSP
+------------------------
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
+
+local lsp_manager = require "lvim.lsp.manager"
+lsp_manager.setup("golangci_lint_ls", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+
+lsp_manager.setup("gopls", {
+  on_attach = function(client, bufnr)
+    require("lvim.lsp").common_on_attach(client, bufnr)
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+    local map = function(mode, lhs, rhs, desc)
+      if desc then
+        desc = desc
+      end
+
+      vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+    end
+    map("n", "<leader>Ci", "<cmd>GoInstallDeps<Cr>", "Install Go Dependencies")
+    map("n", "<leader>Ct", "<cmd>GoMod tidy<cr>", "Tidy")
+    map("n", "<leader>Ca", "<cmd>GoTestAdd<Cr>", "Add Test")
+    map("n", "<leader>CA", "<cmd>GoTestsAll<Cr>", "Add All Tests")
+    map("n", "<leader>Ce", "<cmd>GoTestsExp<Cr>", "Add Exported Tests")
+    map("n", "<leader>Cg", "<cmd>GoGenerate<Cr>", "Go Generate")
+    map("n", "<leader>Cf", "<cmd>GoGenerate %<Cr>", "Go Generate File")
+    map("n", "<leader>Cc", "<cmd>GoCmt<Cr>", "Generate Comment")
+    map("n", "<leader>DT", "<cmd>lua require('dap-go').debug_test()<cr>", "Debug Test")
+  end,
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+  settings = {
+    gopls = {
+      usePlaceholders = true,
+      gofumpt = true,
+      codelenses = {
+        generate = false,
+        gc_details = true,
+        test = true,
+        tidy = true,
+      },
+    },
+  },
+})
+
+local status_ok, gopher = pcall(require, "gopher")
+if not status_ok then
+  return
+end
+
+-- :MasonInstall gopls golangci-lint-langserver delve goimports gofumpt gomodifytags gotests impl
+gopher.setup {
+  commands = {
+    go = "go",
+    gomodifytags = "gomodifytags",
+    gotests = "gotests",
+    impl = "impl",
+    iferr = "iferr",
+  },
+}
+
+
+
+-- setup debug adapter
+lvim.builtin.dap.active = true
+local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+pcall(function()
+  require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
+end)
+
+-- setup testing
+require("neotest").setup({
+  adapters = {
+    require("neotest-go")({}),
+    require("neotest-python")({
+      -- Extra arguments for nvim-dap configuration
+      -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
+      dap = {
+        justMyCode = false,
+        console = "integratedTerminal",
+      },
+      args = { "--log-level", "DEBUG", "--quiet" },
+      runner = "pytest",
+    })
+  }
+})
+
+lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
+  "Test Method" }
+lvim.builtin.which_key.mappings["dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+  "Test Method DAP" }
+lvim.builtin.which_key.mappings["df"] = {
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test Class" }
+lvim.builtin.which_key.mappings["dF"] = {
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test Class DAP" }
+lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
+
+-- binding for switching
+lvim.builtin.which_key.mappings["C"] = {
+  name = "Python",
+  c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
 }
