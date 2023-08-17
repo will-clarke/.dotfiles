@@ -4,12 +4,14 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
+lvim.colorscheme = "kanagawa"
 
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 
 lvim.plugins = {
+  "rebelot/kanagawa.nvim",
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
   "ChristianChiarulli/swenv.nvim",
@@ -83,10 +85,10 @@ lvim.plugins = {
     cmd = { "ZkNew", "ZkNotes", "ZkTags" },
     keys = {
       { "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "Zk New" },
-      { "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", "Zk Work" },
-      { "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", "Zk Diary" },
-      { "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Zk Open" },
-      { "<leader>zt", "<Cmd>ZkTags<CR>", "Zk Tags" },
+      { "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>",                  "Zk Work" },
+      { "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>",                 "Zk Diary" },
+      { "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",         "Zk Open" },
+      { "<leader>zt", "<Cmd>ZkTags<CR>",                                    "Zk Tags" },
     },
   },
   {
