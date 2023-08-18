@@ -369,6 +369,7 @@ require("neotest").setup({
 })
 
 lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope frecency<cr>", "frequency" }
+lvim.builtin.which_key.mappings["y"] = { "<cmd>Telescope neoclip<cr>", "frequency" }
 
 lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
   "Test Method" }
@@ -381,10 +382,10 @@ lvim.builtin.which_key.mappings["dF"] = {
 lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
 
 -- binding for switching
-lvim.builtin.which_key.mappings["C"] = {
-  name = "Python",
-  c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
-}
+-- lvim.builtin.which_key.mappings["C"] = {
+--   -- name = "Python",
+--   -- c = { "<cmd>lua require('swenv.api').pick_venv()<cr>", "Choose Env" },
+-- }
 
 
 
