@@ -30,9 +30,11 @@ lvim.builtin.telescope.extensions.live_grep_args = {
     },
   },
 }
+
 lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "live_grep_args")
-  -- pcall(telescope.load_extension, "neoclip")
+  pcall(telescope.load_extension, "frecency")
+  pcall(telescope.load_extension, "neoclip")
 end
 
 
@@ -58,6 +60,15 @@ lvim.plugins = {
   "nvim-neotest/neotest-go",
   { "tpope/vim-repeat" },
   {
+    "AckslD/nvim-neoclip.lua",
+    dependencies = {
+      {'nvim-telescope/telescope.nvim'},
+    },
+    config = function()
+      require('neoclip').setup()
+    end,
+  },
+  {
     "felipec/vim-sanegx",
     event = "BufRead",
   },
@@ -66,27 +77,6 @@ lvim.plugins = {
     event = "BufRead",
     config = function() require "lsp_signature".on_attach() end,
   },
-  -- {
-  --   "romgrk/nvim-treesitter-context",
-  --   config = function()
-  --     require("treesitter-context").setup {
-  --       enable = true,   -- Enable this plugin (Can be enabled/disabled later via commands)
-  --       throttle = true, -- Throttles plugin updates (may improve performance)
-  --       max_lines = 0,   -- How many lines the window should span. Values <= 0 mean no limit.
-  --       patterns = {     -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-  --         -- For all filetypes
-  --         -- Note that setting an entry here replaces all other patterns for this entry.
-  --         -- By setting the 'default' entry below, you can control which nodes you want to
-  --         -- appear in the context window.
-  --         default = {
-  --           'class',
-  --           'function',
-  --           'method',
-  --         },
-  --       },
-  --     }
-  --   end
-  -- },
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
@@ -98,8 +88,13 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-
-
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    -- config = function()
+    --   require "telescope".load_extension("frecency")
+    -- end,
+    dependencies = { "kkharji/sqlite.lua" }
+  },
   {
     "linty-org/readline.nvim",
     config = function()
@@ -201,22 +196,6 @@ lvim.plugins = {
     "knubie/vim-kitty-navigator",
     event = "VeryLazy",
   },
-  -- {
-  --   "github/copilot.vim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     -- copilot assume mapped
-  --     vim.g.copilot_assume_mapped = true
-  --     vim.g.copilot_no_tab_map = true
-  --   end,
-  -- },
-  -- {
-  --   "hrsh7th/cmp-copilot",
-  --   config = function()
-  --     lvim.builtin.cmp.formatting.source_names["copilot"] = "( )"
-  --     table.insert(lvim.builtin.cmp.sources, 2, { name = "copilot" })
-  --   end,
-  -- },
   {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
@@ -388,6 +367,8 @@ require("neotest").setup({
     })
   }
 })
+
+lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope frecency<cr>", "frequency" }
 
 lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
   "Test Method" }
