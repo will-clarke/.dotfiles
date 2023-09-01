@@ -49,6 +49,7 @@ lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.li
 
 -- plugins
 lvim.plugins = {
+  -- 'terrastruct/d2-vim',
   "rebelot/kanagawa.nvim",
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
@@ -58,14 +59,33 @@ lvim.plugins = {
   "nvim-neotest/neotest",
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
+
+  {
+    'ruifm/gitlinker.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = true,
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
   { "tpope/vim-repeat" },
   {
     "AckslD/nvim-neoclip.lua",
     dependencies = {
-      {'nvim-telescope/telescope.nvim'},
+      { 'nvim-telescope/telescope.nvim' },
+      { 'kkharji/sqlite.lua',           module = 'sqlite' },
     },
     config = function()
-      require('neoclip').setup()
+      require('neoclip').setup({
+        enable_persistent_history = false,
+      })
     end,
   },
   {
@@ -162,13 +182,14 @@ lvim.plugins = {
   },
   {
     'stevearc/oil.nvim',
+    lazy = false,
     opts = {
       win_options = {
         concealcursor = "nivc",
       },
       default_file_explorer = true,
       view_options = {
-        -- show_hidden = true,
+        show_hidden = true,
       },
       use_default_keymaps = false,
       keymaps = {
@@ -191,6 +212,7 @@ lvim.plugins = {
     },
     keys = { { ";", ":lua require('oil').open()<CR>" } },
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
   },
   {
     "knubie/vim-kitty-navigator",
