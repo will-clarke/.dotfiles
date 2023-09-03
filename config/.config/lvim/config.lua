@@ -232,11 +232,13 @@ lvim.plugins = {
 }
 
 
+local null_ls = require "null-ls"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "goimports", filetypes = { "go" } },
   { command = "gofumpt",   filetypes = { "go" } },
   { name = "black" },
+  { name = "djlint" , filetypes = {"django", "jinja.html", "htmldjango"} },
   {
     name = "prettier",
     ---@usage arguments to pass to the formatter
@@ -306,6 +308,7 @@ dapgo.setup()
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
 
 local lsp_manager = require "lvim.lsp.manager"
+
 lsp_manager.setup("golangci_lint_ls", {
   on_init = require("lvim.lsp").common_on_init,
   capabilities = require("lvim.lsp").common_capabilities(),
