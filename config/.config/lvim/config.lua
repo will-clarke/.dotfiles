@@ -59,7 +59,12 @@ lvim.plugins = {
   "nvim-neotest/neotest",
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
-
+  {
+    "chrishrb/gx.nvim",
+    event = { "BufEnter" },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true, -- default settings
+  },
   {
     'ruifm/gitlinker.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
@@ -394,7 +399,7 @@ require("neotest").setup({
 })
 
 lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope frecency<cr>", "frequency" }
-lvim.builtin.which_key.mappings["y"] = { "<cmd>Telescope neoclip<cr>", "frequency" }
+lvim.builtin.which_key.mappings["y"] = { "<cmd>Telescope neoclip<cr>", "neoclip" }
 
 lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
   "Test Method" }
@@ -413,8 +418,15 @@ lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.t
 -- }
 
 
+vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
+vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
+
+vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
 
 
+
+lvim.builtin.which_key.mappings[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD"}
 lvim.builtin.which_key.mappings["t"] = {
   name = "Diagnostics",
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
