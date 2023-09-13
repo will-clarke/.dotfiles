@@ -224,6 +224,9 @@ lvim.plugins = {
     event = "VeryLazy",
   },
   {
+    "hrsh7th/cmp-emoji",
+  },
+  {
     "zbirenbaum/copilot-cmp",
     event = "InsertEnter",
     dependencies = { "zbirenbaum/copilot.lua" },
@@ -237,13 +240,17 @@ lvim.plugins = {
 }
 
 
+lvim.builtin.cmp.sources = vim.list_extend(lvim.builtin.cmp.sources, {
+  { name = "emoji"},
+})
+
 local null_ls = require "null-ls"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "goimports", filetypes = { "go" } },
   { command = "gofumpt",   filetypes = { "go" } },
   { name = "black" },
-  { name = "djlint" , filetypes = {"django", "jinja.html", "htmldjango"} },
+  { name = "djlint",       filetypes = { "django", "jinja.html", "htmldjango" } },
   {
     name = "prettier",
     ---@usage arguments to pass to the formatter
@@ -426,7 +433,7 @@ vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire bu
 
 
 
-lvim.builtin.which_key.mappings[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD"}
+lvim.builtin.which_key.mappings[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "Diagnostics",
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
