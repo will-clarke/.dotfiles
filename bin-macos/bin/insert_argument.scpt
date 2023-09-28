@@ -1,6 +1,6 @@
 on run argv
 
-set previousClipboard to (the clipboard as text)
+set previousClipboard to (the clipboard)
 
 delay 0.1
 set the clipboard to (item 1 of argv)

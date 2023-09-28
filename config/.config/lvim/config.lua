@@ -40,8 +40,11 @@ end
 
 
 -- keybindings
+lvim.builtin.which_key.mappings["p"] = { ":Telescope neoclip<CR>", "paste clipboard"}
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
+lvim.builtin.which_key.mappings["?"] = { ":Telescope grep_string<CR>", "grep string" }
+lvim.builtin.which_key.mappings["<CR>"] = { ":make<CR>", "make" }
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
@@ -89,7 +92,8 @@ lvim.plugins = {
     },
     config = function()
       require('neoclip').setup({
-        enable_persistent_history = false,
+        enable_persistent_history = true,
+        continuous_sync = true,
       })
     end,
   },
@@ -407,16 +411,17 @@ require("neotest").setup({
 
 lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope frecency<cr>", "frequency" }
 lvim.builtin.which_key.mappings["y"] = { "<cmd>Telescope neoclip<cr>", "neoclip" }
+-- lvim.builtin.which_key.mappings["C-p"] = { "<cmd>Telescope neoclip<cr>", "neoclip" }
 
-lvim.builtin.which_key.mappings["dm"] = { "<cmd>lua require('neotest').run.run()<cr>",
-  "Test Method" }
+lvim.builtin.which_key.mappings["dt"] = { "<cmd>lua require('neotest').run.run()<cr>",
+  "Test" }
 lvim.builtin.which_key.mappings["dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
   "Test Method DAP" }
 lvim.builtin.which_key.mappings["df"] = {
-  "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test Class" }
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test File" }
 lvim.builtin.which_key.mappings["dF"] = {
-  "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test Class DAP" }
-lvim.builtin.which_key.mappings["dS"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
+  "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test File DAP" }
+lvim.builtin.which_key.mappings["ds"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
 
 -- binding for switching
 -- lvim.builtin.which_key.mappings["C"] = {

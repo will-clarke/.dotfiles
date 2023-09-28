@@ -1,4 +1,4 @@
-set previousClipboard to (the clipboard as text)
+set previousClipboard to (the clipboard)
 
 delay 0.1
 set the clipboard to "¯\\_(ツ)_/¯"
