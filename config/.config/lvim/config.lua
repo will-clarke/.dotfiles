@@ -40,7 +40,7 @@ end
 
 
 -- keybindings
-lvim.builtin.which_key.mappings["p"] = { ":Telescope neoclip<CR>", "paste clipboard"}
+lvim.builtin.which_key.mappings["p"] = { ":Telescope neoclip<CR>", "paste clipboard" }
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 lvim.builtin.which_key.mappings["?"] = { ":Telescope grep_string<CR>", "grep string" }
@@ -62,6 +62,7 @@ lvim.plugins = {
   "nvim-neotest/neotest",
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   {
     "chrishrb/gx.nvim",
     event = { "BufEnter" },
@@ -122,7 +123,7 @@ lvim.plugins = {
     -- config = function()
     --   require "telescope".load_extension("frecency")
     -- end,
-    dependencies = { "kkharji/sqlite.lua" }
+    dependencies = { "kkharji/sqlite.lua" },
   },
   {
     "linty-org/readline.nvim",
@@ -245,7 +246,7 @@ lvim.plugins = {
 
 
 lvim.builtin.cmp.sources = vim.list_extend(lvim.builtin.cmp.sources, {
-  { name = "emoji"},
+  { name = "emoji" },
 })
 
 local null_ls = require "null-ls"
