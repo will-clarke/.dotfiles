@@ -202,6 +202,12 @@ lvim.plugins = {
         show_hidden = true,
       },
       use_default_keymaps = false,
+      columns = {
+        "icon",
+        "permissions",
+        "size",
+        "mtime",
+      },
       keymaps = {
         ["g?"] = "actions.show_help",
         ["<CR>"] = "actions.select",
