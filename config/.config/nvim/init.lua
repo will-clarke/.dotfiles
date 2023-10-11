@@ -21,6 +21,7 @@ require("lazy").setup({
 	"folke/which-key.nvim",
 	{ "folke/neoconf.nvim",        cmd = "Neoconf" },
 	"folke/neodev.nvim",
+	'nvim-treesitter/nvim-treesitter',
 	{
 		"williamboman/mason.nvim",
 		config = function()
@@ -44,7 +45,6 @@ require("lazy").setup({
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.4',
-		-- or                              , branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 	{ 'neovim/nvim-lspconfig' },
@@ -231,18 +231,34 @@ end
 local ok, wk = pcall(require, "which-key")
 if ok then
 	wk.register({
-		m = { "<CMD>TSJToggle<CR>", "Join" },
+		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
+		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
+	}, {})
+	wk.register({
+		l = {
+			name = "LSP",
+			f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "format" },
+			r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
+			w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
+			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
+			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
+			e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
+			d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
+			o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
+		},
+		k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 		g = {
-			g = { "<CMD>Neogit<CR>", "git" }
+			g = { "<CMD>Neogit<CR>", "git" },
 		},
 		W = { "<CMD>WhichKey<CR>", "which key" },
 		w = { "<CMD>w<CR>", "write" },
 		f = {
-			f = { "<cmd>Telescope find_files<cr>", "Find File" },  -- create a binding with label
+			name = "Find",
+			f = { "<cmd>Telescope find_files<cr>", "Find File" },   -- create a binding with label
 			r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false }, -- additional options for creating the keymap
-			n = { "New File" },                                    -- just a label. don't create any mapping
-			e = "Edit File",                                       -- same as above
-			b = { function() print("bar") end, "Foobar" }          -- you can also pass functions!
+			n = { "New File" },                                     -- just a label. don't create any mapping
+			e = "Edit File",                                        -- same as above
+			b = { function() print("bar") end, "Foobar" }           -- you can also pass functions!
 		},
 	}, { prefix = "<leader>" })
 end
@@ -288,6 +304,8 @@ local kind_icons = {
 	Value = "󰎠",
 	Enum = "",
 	Keyword = "󰌋",
+	Copilot = "󰚩",
+	Emoji = "󰎃",
 	Snippet = "",
 	Color = "󰏘",
 	File = "󰈙",
@@ -350,10 +368,13 @@ cmp.setup {
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
+			print(tostring(vim_item.kind))
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
 			vim_item.menu = ({
+				copilot = "[Copilot]",
+				emoji = "[Emoji]",
 				nvim_lsp = "[LSP]",
 				luasnip = "[Snippet]",
 				buffer = "[Buffer]",
@@ -383,4 +404,86 @@ cmp.setup {
 		ghost_text = false,
 		native_menu = false,
 	},
+}
+
+
+
+require 'nvim-treesitter.configs'.setup {
+	-- A list of parser names, or "all" (the five listed parsers should always be installed)
+	ensure_installed = { "lua", "go" },
+
+	-- Install parsers synchronously (only applied to `ensure_installed`)
+	sync_install = false,
+
+
+	highlight = {
+		enable = true,
+	},
+
+	indent = {
+		enable = true
+	},
+
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			-- init_selection = "gnn", -- set to `false` to disable one of the mappings
+			node_incremental = "g<TAB>",
+			-- scope_incremental = "grc",
+			node_decremental = "g<S-TAB>",
+		},
+	},
+}
+
+
+vim.cmd [[set foldmethod=expr]]
+vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
+vim.cmd [[set nofoldenable]] -- Disable folding at startup.
+
+
+local lga_ok, lga_actions = pcall(require, "telescope-live-grep-args.actions")
+if not lga_ok then
+	print("lga not ok")
+	return
+end
+
+require('telescope').setup {
+	defaults = {
+		-- Default configuration for telescope goes here:
+		-- config_key = value,
+		mappings = {
+			i = {
+				-- map actions.which_key to <C-h> (default: <C-/>)
+				-- actions.which_key shows the mappings for your picker,
+				-- e.g. git_{create, delete, ...}_branch for the git_branches picker
+				["<C-h>"] = "which_key"
+			}
+		}
+	},
+	pickers = {
+		-- Default configuration for builtin pickers goes here:
+		-- picker_name = {
+		--   picker_config_key = value,
+		--   ...
+		-- }
+		-- Now the picker_config_key will be applied every time you call this
+		-- builtin picker
+	},
+	extensions = {
+		live_grep_args = {
+			auto_quoting = true,
+			mappings = {
+				i = {
+					["<C-y>"] = lga_actions.quote_prompt(),
+					["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
+					["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+				},
+			},
+		}
+		-- Your extension configuration goes here:
+		-- extension_name = {
+		--   extension_config_key = value,
+		-- }
+		-- please take a look at the readme of the extension you want to configure
+	}
 }
