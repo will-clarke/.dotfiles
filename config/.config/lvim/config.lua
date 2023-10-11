@@ -66,6 +66,42 @@ lvim.plugins = {
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
   "wsdjeg/vim-fetch",
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+  },
+  {
+    "max397574/better-escape.nvim",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+  {
+    "ray-x/sad.nvim",
+    dependencies = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+    config = function()
+      require("sad").setup {}
+    end,
+  },
+  {
+    'ldelossa/gh.nvim',
+    dependencies = { 'ldelossa/litee.nvim' },
+    config = function()
+      require('litee.lib').setup()
+      require('litee.gh').setup()
+    end
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
   "tpope/vim-dispatch",
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   {
@@ -290,6 +326,7 @@ lvim.builtin.cmp.sources = vim.list_extend(lvim.builtin.cmp.sources, {
 local null_ls = require "null-ls"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
+  null_ls.builtins.formatting.jq,
   { command = "goimports", filetypes = { "go" } },
   { command = "gofumpt",   filetypes = { "go" } },
   { name = "black" },
@@ -343,7 +380,7 @@ lvim.autocommands = {
 lvim.builtin.treesitter.ensure_installed = { "go", "gomod", "python" }
 
 lvim.format_on_save = {
-  pattern = { "*.go", "*.py" },
+  pattern = { "*.go", "*.py", "*lua" },
   enabled = true,
 }
 
@@ -363,6 +400,16 @@ dapgo.setup()
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "gopls" })
 
 local lsp_manager = require "lvim.lsp.manager"
+
+lsp_manager.setup("lua_ls", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+lsp_manager.setup("pyright", {
+  on_init = require("lvim.lsp").common_on_init,
+  capabilities = require("lvim.lsp").common_capabilities(),
+})
+lsp_manager.setup("jsonls", {})
 
 lsp_manager.setup("golangci_lint_ls", {
   on_init = require("lvim.lsp").common_on_init,
@@ -411,6 +458,9 @@ if not status_ok then
   return
 end
 
+lvim.lsp.installer.setup.ensure_installed = {
+  "gopls", "golangci_lint_ls", "pyright"
+}
 -- :MasonInstall gopls golangci-lint-langserver delve goimports gofumpt gomodifytags gotests impl
 gopher.setup {
   commands = {
@@ -462,6 +512,52 @@ lvim.builtin.which_key.mappings["tf"] = {
 lvim.builtin.which_key.mappings["ts"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
 lvim.builtin.which_key.mappings["tF"] = {
   "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test File DAP" }
+
+lvim.builtin.which_key.mappings["gh"] = {
+  name = "+Github",
+  c = {
+    name = "+Commits",
+    c = { "<cmd>GHCloseCommit<cr>", "Close" },
+    e = { "<cmd>GHExpandCommit<cr>", "Expand" },
+    o = { "<cmd>GHOpenToCommit<cr>", "Open To" },
+    p = { "<cmd>GHPopOutCommit<cr>", "Pop Out" },
+    z = { "<cmd>GHCollapseCommit<cr>", "Collapse" },
+  },
+  i = {
+    name = "+Issues",
+    p = { "<cmd>GHPreviewIssue<cr>", "Preview" },
+  },
+  l = {
+    name = "+Litee",
+    t = { "<cmd>LTPanel<cr>", "Toggle Panel" },
+  },
+  r = {
+    name = "+Review",
+    b = { "<cmd>GHStartReview<cr>", "Begin" },
+    c = { "<cmd>GHCloseReview<cr>", "Close" },
+    d = { "<cmd>GHDeleteReview<cr>", "Delete" },
+    e = { "<cmd>GHExpandReview<cr>", "Expand" },
+    s = { "<cmd>GHSubmitReview<cr>", "Submit" },
+    z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
+  },
+  p = {
+    name = "+Pull Request",
+    c = { "<cmd>GHClosePR<cr>", "Close" },
+    d = { "<cmd>GHPRDetails<cr>", "Details" },
+    e = { "<cmd>GHExpandPR<cr>", "Expand" },
+    o = { "<cmd>GHOpenPR<cr>", "Open" },
+    p = { "<cmd>GHPopOutPR<cr>", "PopOut" },
+    r = { "<cmd>GHRefreshPR<cr>", "Refresh" },
+    t = { "<cmd>GHOpenToPR<cr>", "Open To" },
+    z = { "<cmd>GHCollapsePR<cr>", "Collapse" },
+  },
+  t = {
+    name = "+Threads",
+    c = { "<cmd>GHCreateThread<cr>", "Create" },
+    n = { "<cmd>GHNextThread<cr>", "Next" },
+    t = { "<cmd>GHToggleThread<cr>", "Toggle" },
+  },
+}
 
 -- binding for switching
 -- lvim.builtin.which_key.mappings["C"] = {
