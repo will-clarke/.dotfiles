@@ -21,6 +21,14 @@ require("lazy").setup({
 	"folke/which-key.nvim",
 	{ "folke/neoconf.nvim",        cmd = "Neoconf" },
 	"folke/neodev.nvim",
+	{
+		'ldelossa/gh.nvim',
+		dependencies = { 'ldelossa/litee.nvim' },
+		config = function()
+			require('litee.lib').setup()
+			require('litee.gh').setup()
+		end
+	},
 	'nvim-treesitter/nvim-treesitter',
 	{
 		"williamboman/mason.nvim",
@@ -33,6 +41,13 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		opts = {},
+	},
+
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").load_extension "frecency"
+		end,
 	},
 	{ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
 	{
@@ -73,8 +88,8 @@ require("lazy").setup({
 		dependencies = { "zbirenbaum/copilot.lua" },
 		config = function()
 			vim.defer_fn(function()
-				require("copilot").setup() -- https://github.com/zbirenbaum/copilot.lua/blob/master/README.md#setup-and-configuration
-				require("copilot_cmp").setup() -- https://github.com/zbirenbaum/copilot-cmp/blob/master/README.md#configuration
+				require("copilot").setup()
+				require("copilot_cmp").setup()
 			end, 100)
 		end,
 	},
@@ -235,9 +250,13 @@ if ok then
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 	}, {})
 	wk.register({
+		[' '] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
+		['/'] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
+		["?"] = { ":Telescope grep_string<CR>", "grep string" },
+		r = { "<cmd>Telescope frecency<cr>", "recent files" },
 		l = {
 			name = "LSP",
-			f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "format" },
+			f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
 			r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
 			w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
 			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
@@ -249,16 +268,61 @@ if ok then
 		k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 		g = {
 			g = { "<CMD>Neogit<CR>", "git" },
+			h = {
+				name = "+Github",
+				c = {
+					name = "+Commits",
+					c = { "<cmd>GHCloseCommit<cr>", "Close" },
+					e = { "<cmd>GHExpandCommit<cr>", "Expand" },
+					o = { "<cmd>GHOpenToCommit<cr>", "Open To" },
+					p = { "<cmd>GHPopOutCommit<cr>", "Pop Out" },
+					z = { "<cmd>GHCollapseCommit<cr>", "Collapse" },
+				},
+				i = {
+					name = "+Issues",
+					p = { "<cmd>GHPreviewIssue<cr>", "Preview" },
+				},
+				l = {
+					name = "+Litee",
+					t = { "<cmd>LTPanel<cr>", "Toggle Panel" },
+				},
+				r = {
+					name = "+Review",
+					b = { "<cmd>GHStartReview<cr>", "Begin" },
+					c = { "<cmd>GHCloseReview<cr>", "Close" },
+					d = { "<cmd>GHDeleteReview<cr>", "Delete" },
+					e = { "<cmd>GHExpandReview<cr>", "Expand" },
+					s = { "<cmd>GHSubmitReview<cr>", "Submit" },
+					z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
+				},
+				p = {
+					name = "+Pull Request",
+					c = { "<cmd>GHClosePR<cr>", "Close" },
+					d = { "<cmd>GHPRDetails<cr>", "Details" },
+					e = { "<cmd>GHExpandPR<cr>", "Expand" },
+					o = { "<cmd>GHOpenPR<cr>", "Open" },
+					p = { "<cmd>GHPopOutPR<cr>", "PopOut" },
+					r = { "<cmd>GHRefreshPR<cr>", "Refresh" },
+					t = { "<cmd>GHOpenToPR<cr>", "Open To" },
+					z = { "<cmd>GHCollapsePR<cr>", "Collapse" },
+				},
+				t = {
+					name = "+Threads",
+					c = { "<cmd>GHCreateThread<cr>", "Create" },
+					n = { "<cmd>GHNextThread<cr>", "Next" },
+					t = { "<cmd>GHToggleThread<cr>", "Toggle" },
+				},
+			}
 		},
 		W = { "<CMD>WhichKey<CR>", "which key" },
 		w = { "<CMD>w<CR>", "write" },
 		f = {
 			name = "Find",
-			f = { "<cmd>Telescope find_files<cr>", "Find File" },   -- create a binding with label
+			f = { "<cmd>Telescope find_files<cr>", "Find File" },  -- create a binding with label
 			r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false }, -- additional options for creating the keymap
-			n = { "New File" },                                     -- just a label. don't create any mapping
-			e = "Edit File",                                        -- same as above
-			b = { function() print("bar") end, "Foobar" }           -- you can also pass functions!
+			n = { "New File" },                                    -- just a label. don't create any mapping
+			e = "Edit File",                                       -- same as above
+			b = { function() print("bar") end, "Foobar" }          -- you can also pass functions!
 		},
 	}, { prefix = "<leader>" })
 end
@@ -451,8 +515,26 @@ require('telescope').setup {
 	defaults = {
 		-- Default configuration for telescope goes here:
 		-- config_key = value,
+		layout_config = { horizontal = { width = 0.99, height = 0.99 } },
 		mappings = {
 			i = {
+				["<C-j>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.move_selection_next(...)
+				end,
+				["<C-k>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.move_selection_previous(...)
+				end,
+				["<C-g>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.close(...)
+				end,
+				["<esc>"] = function(...)
+					local actions = require("telescope.actions")
+					actions.close(...)
+				end,
+
 				-- map actions.which_key to <C-h> (default: <C-/>)
 				-- actions.which_key shows the mappings for your picker,
 				-- e.g. git_{create, delete, ...}_branch for the git_branches picker
@@ -487,3 +569,12 @@ require('telescope').setup {
 		-- please take a look at the readme of the extension you want to configure
 	}
 }
+
+
+vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
+vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
+
+vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+
+vim.cmd [[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]]
