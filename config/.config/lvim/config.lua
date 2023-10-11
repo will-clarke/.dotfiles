@@ -47,6 +47,7 @@ lvim.builtin.which_key.mappings["p"] = { ":Telescope neoclip<CR>", "paste clipbo
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 lvim.builtin.which_key.mappings["?"] = { ":Telescope grep_string<CR>", "grep string" }
+lvim.builtin.which_key.mappings["lo"] = { ":AeialToggle<CR>", "outline toggle" }
 lvim.builtin.which_key.mappings["<CR>"] = { ":Make<CR>", "make" }
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
@@ -318,19 +319,19 @@ lvim.plugins = {
   }
 }
 
-
-lvim.builtin.cmp.sources = vim.list_extend(lvim.builtin.cmp.sources, {
-  { name = "emoji" },
-})
+lvim.builtin.cmp.sources = vim.list_extend(
+  lvim.builtin.cmp.sources, {
+    { name = "emoji" },
+  })
 
 local null_ls = require "null-ls"
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   null_ls.builtins.formatting.jq,
-  { command = "goimports", filetypes = { "go" } },
-  { command = "gofumpt",   filetypes = { "go" } },
+  -- { command = "goimports", filetypes = { "go" } },
+  -- { command = "gofumpt",   filetypes = { "go" } },
   { name = "black" },
-  { name = "djlint",       filetypes = { "django", "jinja.html", "htmldjango" } },
+  { name = "djlint", filetypes = { "django", "jinja.html", "htmldjango" } },
   {
     name = "prettier",
     ---@usage arguments to pass to the formatter
@@ -411,10 +412,10 @@ lsp_manager.setup("pyright", {
 })
 lsp_manager.setup("jsonls", {})
 
-lsp_manager.setup("golangci_lint_ls", {
-  on_init = require("lvim.lsp").common_on_init,
-  capabilities = require("lvim.lsp").common_capabilities(),
-})
+-- lsp_manager.setup("golangci_lint_ls", {
+--   on_init = require("lvim.lsp").common_on_init,
+--   capabilities = require("lvim.lsp").common_capabilities(),
+-- })
 
 lsp_manager.setup("gopls", {
   on_attach = function(client, bufnr)

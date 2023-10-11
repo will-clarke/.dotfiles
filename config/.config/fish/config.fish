@@ -1,7 +1,6 @@
 set fish_greeting #disable welcome
 
 if status is-interactive
-    abbr --add --global nvim lvim
     abbr --add --global gco git checkout
     abbr --add --global ga git add
     abbr --add --global gd git diff
