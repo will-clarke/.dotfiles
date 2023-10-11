@@ -20,16 +20,6 @@ lvim.builtin.telescope.defaults.mappings.i["<esc>"] = function(...)
   local actions = require("telescope.actions")
   actions.close(...)
 end
-lvim.builtin.telescope.extensions.live_grep_args = {
-  auto_quoting = true,
-  mappings = {
-    i = {
-      ["<C-y>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-      ["<C-v>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " -g!vendor " }),
-      ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
-    },
-  },
-}
 
 lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "live_grep_args")
@@ -37,6 +27,19 @@ lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "neoclip")
 end
 
+local ok, lga_actions = pcall(require, "telescope-live-grep-args.actions")
+if ok then
+  lvim.builtin.telescope.extensions.live_grep_args = {
+    auto_quoting = true,
+    mappings = {
+      i = {
+        ["<C-y>"] = lga_actions.quote_prompt(),
+        ["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
+        ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+      },
+    },
+  }
+end
 
 
 -- keybindings
@@ -44,7 +47,7 @@ lvim.builtin.which_key.mappings["p"] = { ":Telescope neoclip<CR>", "paste clipbo
 lvim.builtin.which_key.mappings["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
 lvim.builtin.which_key.mappings["?"] = { ":Telescope grep_string<CR>", "grep string" }
-lvim.builtin.which_key.mappings["<CR>"] = { ":make<CR>", "make" }
+lvim.builtin.which_key.mappings["<CR>"] = { ":Make<CR>", "make" }
 lvim.builtin.which_key.mappings.g.g = { "<cmd>Neogit<cr>", "Lazygit" }
 lvim.builtin.which_key.mappings.s.t = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   "Search text" }
@@ -62,6 +65,8 @@ lvim.plugins = {
   "nvim-neotest/neotest",
   "nvim-neotest/neotest-python",
   "nvim-neotest/neotest-go",
+  "wsdjeg/vim-fetch",
+  "tpope/vim-dispatch",
   { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   {
     "chrishrb/gx.nvim",
@@ -95,6 +100,33 @@ lvim.plugins = {
       require('neoclip').setup({
         enable_persistent_history = true,
         continuous_sync = true,
+        keys = {
+          telescope = {
+            i = {
+              -- select = '<cr>',
+              -- paste = '<c-p>',
+              select = '<c-z>',
+              paste = '<cr>',
+              paste_behind = '<c-P>',
+              -- replay = '<c-q>', -- replay a macro
+              -- delete = '<c-d>', -- delete an entry
+              -- edit = '<c-e>', -- edit an entry
+              -- custom = {},
+            },
+            -- n = {
+            --   select = '<cr>',
+            --   paste = 'p',
+            --   --- It is possible to map to more than one key.
+            --   -- paste = { 'p', '<c-p>' },
+            --   paste_behind = 'P',
+            --   replay = 'q',
+            --   delete = 'd',
+            --   edit = 'e',
+            --   custom = {},
+            -- },
+          },
+        },
+
       })
     end,
   },
@@ -414,15 +446,16 @@ lvim.builtin.which_key.mappings["F"] = { "<cmd>Telescope frecency<cr>", "frequen
 lvim.builtin.which_key.mappings["y"] = { "<cmd>Telescope neoclip<cr>", "neoclip" }
 -- lvim.builtin.which_key.mappings["C-p"] = { "<cmd>Telescope neoclip<cr>", "neoclip" }
 
-lvim.builtin.which_key.mappings["dt"] = { "<cmd>lua require('neotest').run.run()<cr>",
-  "Test" }
-lvim.builtin.which_key.mappings["dM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
+lvim.builtin.which_key.mappings["tM"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>",
   "Test Method DAP" }
-lvim.builtin.which_key.mappings["df"] = {
+lvim.builtin.which_key.mappings["tt"] = { "<cmd>lua require('neotest').run.run()<cr>", "Test" }
+lvim.builtin.which_key.mappings["to"] = { "<cmd>lua require('neotest').output_panel.toggle()<CR>", "Output pannel" }
+lvim.builtin.which_key.mappings["tO"] = { "<cmd>lua require('neotest').output.open({enter = true})<CR>", "Output open" }
+lvim.builtin.which_key.mappings["tf"] = {
   "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Test File" }
-lvim.builtin.which_key.mappings["dF"] = {
+lvim.builtin.which_key.mappings["ts"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
+lvim.builtin.which_key.mappings["tF"] = {
   "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Test File DAP" }
-lvim.builtin.which_key.mappings["ds"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Test Summary" }
 
 -- binding for switching
 -- lvim.builtin.which_key.mappings["C"] = {
@@ -440,9 +473,10 @@ vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire bu
 
 
 lvim.builtin.which_key.mappings[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" }
-lvim.builtin.which_key.mappings["t"] = {
+lvim.builtin.which_key.mappings["T"] = {
   name = "Diagnostics",
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
+  T = { "<cmd>TroubleToggle<cr>", "trouble" },
   w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
   d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
