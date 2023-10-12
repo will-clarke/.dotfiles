@@ -305,8 +305,9 @@ if ok then
 				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
 				f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
 				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
-				o = { "<CMD>lua require('neotest').output_panel.toggle()", "output" },
-				O = { "<CMD>lua require('neotest').output.open({ enter = true })", "Output" },
+				o = { "<CMD>lua require('neotest').output_panel.toggle()<CR>", "output" },
+				O = { "<CMD>lua require('neotest').output.open({ enter = true })<CR>", "Output" },
+				s = { "<CMD>lua require("neotest ").summary.toggle()<CR>", "summary" },
 			},
 			k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			g = {
