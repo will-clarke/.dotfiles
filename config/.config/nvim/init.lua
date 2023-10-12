@@ -29,6 +29,12 @@ require("lazy").setup({
 	},
 	"folke/neodev.nvim",
 	{
+		"ThePrimeagen/harpoon",
+		config = function()
+			require("harpoon").setup({})
+		end
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
@@ -318,8 +324,17 @@ if ok then
 			['/'] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 				"Search text" },
 			["?"] = { ":Telescope grep_string<CR>", "grep string" },
-			r = { "<cmd>Telescope frecency<cr>", "recent files" },
-			l = {
+			s     = {},
+			d     = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
+			a     = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
+			j     = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
+			J     = { ':lua require("harpoon.ui").nav_prev()<CR>', "harpoon prev" },
+			k     = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
+			K     = { ':lua require("harpoon.ui").nav_next()<CR>', "harpoon next" },
+			[";"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
+			["'"] = { ':lua require("harpoon.term").gotoTerminal(2)<CR>', "harpoon term #2" },
+			r     = { "<CMD>Telescope frecency<CR>", "recent files" },
+			l     = {
 				name = "LSP",
 				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
 				r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
@@ -330,7 +345,7 @@ if ok then
 				d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
 			},
-			t = {
+			t     = {
 				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
 				f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
 				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
@@ -338,8 +353,8 @@ if ok then
 				O = { "<CMD>lua require('neotest').output.open({ enter = true })<CR>", "Output" },
 				s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "summary" },
 			},
-			k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
-			g = {
+			K     = { "<CMD>Telescope keymaps<CR>", "keymaps" },
+			g     = {
 				g = { "<CMD>Neogit<CR>", "git" },
 				h = {
 					name = "+Github",
@@ -387,13 +402,14 @@ if ok then
 					},
 				},
 			},
-			N = {
+			N     = {
 				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',
 				"number toggle" },
-			W = { "<CMD>execute 'set wrap!' | echo 'Wrap is now ' . ( &wrap ? 'enabled' : 'disabled' )<CR>",
+			W     = {
+				"<CMD>execute 'set wrap!' | echo 'Wrap is now ' . ( &wrap ? 'enabled' : 'disabled' )<CR>",
 				"wrap" },
-			w = { "<CMD>w<CR>", "write" },
-			f = {
+			w     = { "<CMD>w<CR>", "write" },
+			f     = {
 				name = "Find",
 				f = { "<cmd>Telescope find_files<cr>", "Find File" },
 				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false },
