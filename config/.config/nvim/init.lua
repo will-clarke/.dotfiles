@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.g.mapleader = " "
 
-
 -- plugins
 require("lazy").setup({
 	"folke/which-key.nvim",
@@ -307,7 +306,7 @@ if ok then
 				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
 				o = { "<CMD>lua require('neotest').output_panel.toggle()<CR>", "output" },
 				O = { "<CMD>lua require('neotest').output.open({ enter = true })<CR>", "Output" },
-				s = { "<CMD>lua require("neotest ").summary.toggle()<CR>", "summary" },
+				s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "summary" },
 			},
 			k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			g = {
@@ -358,15 +357,17 @@ if ok then
 					},
 				},
 			},
-			W = { "<CMD>WhichKey<CR>", "which key" },
+			N = {
+				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',
+				"number toggle" },
+			W = { "<CMD>execute 'set wrap!' | echo 'Wrap is now ' . ( &wrap ? 'enabled' : 'disabled' )<CR>",
+				"wrap" },
 			w = { "<CMD>w<CR>", "write" },
 			f = {
 				name = "Find",
-				f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false }, -- additional options for creating the keymap
-				n = { "New File" },                             -- just a label. don't create any mapping
-				e = "Edit File",                                -- same as above
-				b = { function() print("bar") end, "Foobar" }   -- you can also pass functions!
+				f = { "<cmd>Telescope find_files<cr>", "Find File" },
+				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false },
+				n = { "<cmd>e tmp<cr>", "New File" }, -- just a label. don't create any mapping
 			},
 		},
 	})
