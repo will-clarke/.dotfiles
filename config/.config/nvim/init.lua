@@ -22,6 +22,42 @@ require("lazy").setup({
 	{ "folke/neoconf.nvim",        cmd = "Neoconf" },
 	"folke/neodev.nvim",
 	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-go",
+		}
+		,
+		config = function()
+			-- get neotest namespace (api call creates or returns namespace)
+			local neotest_ns = vim.api.nvim_create_namespace("neotest")
+			vim.diagnostic.config({
+				virtual_text = {
+					format = function(diagnostic)
+						local message =
+						    diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " ")
+						    :gsub("^%s+", "")
+						return message
+					end,
+				},
+			}, neotest_ns)
+			require("neotest").setup({
+				-- your neotest config here
+				adapters = {
+					require("neotest-go"),
+				},
+			})
+		end,
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {},
+		config = function(_, opts) require 'lsp_signature'.setup(opts) end
+	},
+	{
 		'ldelossa/gh.nvim',
 		dependencies = { 'ldelossa/litee.nvim' },
 		config = function()
@@ -248,90 +284,98 @@ if ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
-	}, {})
-	wk.register({
-		[' '] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-		['/'] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
-		["?"] = { ":Telescope grep_string<CR>", "grep string" },
-		r = { "<cmd>Telescope frecency<cr>", "recent files" },
-		l = {
-			name = "LSP",
-			f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
-			r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
-			w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
-			p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
-			n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
-			e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
-			d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
-			o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
+		["<leader>"] = {
+			[' '] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
+			['/'] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+				"Search text" },
+			["?"] = { ":Telescope grep_string<CR>", "grep string" },
+			r = { "<cmd>Telescope frecency<cr>", "recent files" },
+			l = {
+				name = "LSP",
+				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
+				r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
+				w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
+				p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
+				n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
+				e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
+				d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
+				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
+			},
+			t = {
+				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
+				f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
+				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
+				o = { "<CMD>lua require('neotest').output_panel.toggle()", "output" },
+				O = { "<CMD>lua require('neotest').output.open({ enter = true })", "Output" },
+			},
+			k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
+			g = {
+				g = { "<CMD>Neogit<CR>", "git" },
+				h = {
+					name = "+Github",
+					c = {
+						name = "+Commits",
+						c = { "<cmd>GHCloseCommit<cr>", "Close" },
+						e = { "<cmd>GHExpandCommit<cr>", "Expand" },
+						o = { "<cmd>GHOpenToCommit<cr>", "Open To" },
+						p = { "<cmd>GHPopOutCommit<cr>", "Pop Out" },
+						z = { "<cmd>GHCollapseCommit<cr>", "Collapse" },
+					},
+					i = {
+						name = "+Issues",
+						p = { "<cmd>GHPreviewIssue<cr>", "Preview" },
+					},
+					l = {
+						name = "+Litee",
+						t = { "<cmd>LTPanel<cr>", "Toggle Panel" },
+					},
+					r = {
+						name = "+Review",
+						b = { "<cmd>GHStartReview<cr>", "Begin" },
+						c = { "<cmd>GHCloseReview<cr>", "Close" },
+						d = { "<cmd>GHDeleteReview<cr>", "Delete" },
+						e = { "<cmd>GHExpandReview<cr>", "Expand" },
+						s = { "<cmd>GHSubmitReview<cr>", "Submit" },
+						z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
+					},
+					p = {
+						name = "+Pull Request",
+						c = { "<cmd>GHClosePR<cr>", "Close" },
+						d = { "<cmd>GHPRDetails<cr>", "Details" },
+						e = { "<cmd>GHExpandPR<cr>", "Expand" },
+						o = { "<cmd>GHOpenPR<cr>", "Open" },
+						p = { "<cmd>GHPopOutPR<cr>", "PopOut" },
+						r = { "<cmd>GHRefreshPR<cr>", "Refresh" },
+						t = { "<cmd>GHOpenToPR<cr>", "Open To" },
+						z = { "<cmd>GHCollapsePR<cr>", "Collapse" },
+					},
+					t = {
+						name = "+Threads",
+						c = { "<cmd>GHCreateThread<cr>", "Create" },
+						n = { "<cmd>GHNextThread<cr>", "Next" },
+						t = { "<cmd>GHToggleThread<cr>", "Toggle" },
+					},
+				},
+			},
+			W = { "<CMD>WhichKey<CR>", "which key" },
+			w = { "<CMD>w<CR>", "write" },
+			f = {
+				name = "Find",
+				f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
+				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false }, -- additional options for creating the keymap
+				n = { "New File" },                             -- just a label. don't create any mapping
+				e = "Edit File",                                -- same as above
+				b = { function() print("bar") end, "Foobar" }   -- you can also pass functions!
+			},
 		},
-		k = { "<CMD>Telescope keymaps<CR>", "keymaps" },
-		g = {
-			g = { "<CMD>Neogit<CR>", "git" },
-			h = {
-				name = "+Github",
-				c = {
-					name = "+Commits",
-					c = { "<cmd>GHCloseCommit<cr>", "Close" },
-					e = { "<cmd>GHExpandCommit<cr>", "Expand" },
-					o = { "<cmd>GHOpenToCommit<cr>", "Open To" },
-					p = { "<cmd>GHPopOutCommit<cr>", "Pop Out" },
-					z = { "<cmd>GHCollapseCommit<cr>", "Collapse" },
-				},
-				i = {
-					name = "+Issues",
-					p = { "<cmd>GHPreviewIssue<cr>", "Preview" },
-				},
-				l = {
-					name = "+Litee",
-					t = { "<cmd>LTPanel<cr>", "Toggle Panel" },
-				},
-				r = {
-					name = "+Review",
-					b = { "<cmd>GHStartReview<cr>", "Begin" },
-					c = { "<cmd>GHCloseReview<cr>", "Close" },
-					d = { "<cmd>GHDeleteReview<cr>", "Delete" },
-					e = { "<cmd>GHExpandReview<cr>", "Expand" },
-					s = { "<cmd>GHSubmitReview<cr>", "Submit" },
-					z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
-				},
-				p = {
-					name = "+Pull Request",
-					c = { "<cmd>GHClosePR<cr>", "Close" },
-					d = { "<cmd>GHPRDetails<cr>", "Details" },
-					e = { "<cmd>GHExpandPR<cr>", "Expand" },
-					o = { "<cmd>GHOpenPR<cr>", "Open" },
-					p = { "<cmd>GHPopOutPR<cr>", "PopOut" },
-					r = { "<cmd>GHRefreshPR<cr>", "Refresh" },
-					t = { "<cmd>GHOpenToPR<cr>", "Open To" },
-					z = { "<cmd>GHCollapsePR<cr>", "Collapse" },
-				},
-				t = {
-					name = "+Threads",
-					c = { "<cmd>GHCreateThread<cr>", "Create" },
-					n = { "<cmd>GHNextThread<cr>", "Next" },
-					t = { "<cmd>GHToggleThread<cr>", "Toggle" },
-				},
-			}
-		},
-		W = { "<CMD>WhichKey<CR>", "which key" },
-		w = { "<CMD>w<CR>", "write" },
-		f = {
-			name = "Find",
-			f = { "<cmd>Telescope find_files<cr>", "Find File" },  -- create a binding with label
-			r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false }, -- additional options for creating the keymap
-			n = { "New File" },                                    -- just a label. don't create any mapping
-			e = "Edit File",                                       -- same as above
-			b = { function() print("bar") end, "Foobar" }          -- you can also pass functions!
-		},
-	}, { prefix = "<leader>" })
+	})
 end
 
 
 
 
 vim.cmd [[colorscheme tokyonight-night]]
-vim.cmd [[autocmd BufWritePre *go lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
 
 
 
