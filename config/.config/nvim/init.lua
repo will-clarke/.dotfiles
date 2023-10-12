@@ -14,12 +14,36 @@ vim.opt.rtp:prepend(lazypath)
 --  settings
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.g.mapleader = " "
+vim.opt.termguicolors = true
+vim.o.background = 'dark'
+vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
 
 -- plugins
 require("lazy").setup({
 	"folke/which-key.nvim",
-	{ "folke/neoconf.nvim",        cmd = "Neoconf" },
+	{
+		"folke/neoconf.nvim",
+		cmd = "Neoconf"
+	},
 	"folke/neodev.nvim",
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({})
+			vim.cmd.colorscheme "catppuccin"
+		end
+	},
+	-- {
+	-- 	"gbprod/nord.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("nord").setup({})
+	-- 		vim.cmd.colorscheme("nord")
+	-- 	end,
+	-- },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -71,12 +95,12 @@ require("lazy").setup({
 			require("mason").setup()
 		end
 	},
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {},
+	-- },
 
 	{
 		"nvim-telescope/telescope-frecency.nvim",
@@ -376,8 +400,6 @@ end
 
 
 
-vim.cmd [[colorscheme tokyonight-night]]
-vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
 
 
 
@@ -624,3 +646,5 @@ vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire bu
 vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
 
 vim.cmd [[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]]
+
+-- vim.cmd [[colorscheme tokyonight-night]]
