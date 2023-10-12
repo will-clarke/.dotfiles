@@ -17,6 +17,8 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float  silent! nnoremap <buffer> q :close<CR>]]
+
 
 -- plugins
 require("lazy").setup({
@@ -31,7 +33,11 @@ require("lazy").setup({
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({})
+			require("catppuccin").setup({
+				integrations = {
+					harpoon = true,
+				}
+			})
 			vim.cmd.colorscheme "catppuccin"
 		end
 	},
