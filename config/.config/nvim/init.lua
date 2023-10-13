@@ -46,11 +46,12 @@ require("lazy").setup({
 	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',
 	"hrsh7th/cmp-emoji",
+	"nvim-telescope/telescope-live-grep-args.nvim",
 	{
 		"ThePrimeagen/harpoon",
 		config = function()
 			require("harpoon").setup({})
-		end
+		end,
 	},
 	{
 		"catppuccin/nvim",
@@ -154,6 +155,7 @@ require("lazy").setup({
 	},
 	{
 		"linty-org/readline.nvim",
+		-- Can we apply defaults?
 		config = function()
 			local readline = require 'readline'
 			vim.keymap.set('!', '<C-k>', readline.kill_line)
@@ -200,13 +202,12 @@ require("lazy").setup({
 			{ "<leader>zt", "<Cmd>ZkTags<CR>",                                    "Zk Tags" },
 		},
 	},
-	-- {
-	-- 	"Wansmer/treesj",
-	-- 	config = function()
-	-- 		require("treesj").setup({ use_default_keymaps = false, max_join_length = 150 })
-	-- 	end,
-	-- },
-	{ "nvim-telescope/telescope-live-grep-args.nvim" },
+	{
+		"Wansmer/treesj",
+		config = function()
+			require("treesj").setup({ use_default_keymaps = false, max_join_length = 150 })
+		end,
+	},
 	{
 		'numToStr/Comment.nvim',
 		opts = {},
@@ -322,6 +323,7 @@ if ok then
 			s        = {},
 			q        = { "<CMD>copen<CR>", "quickfix" },
 			m        = { ':cnext<CR>', "cnext" },
+			M        = { ':TSJToggle<CR>', "Join toggle" },
 			[","]    = { ':cprev<CR>', "cprev" },
 			d        = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
 			a        = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
@@ -596,9 +598,12 @@ end
 
 require('telescope').setup {
 	defaults = {
-		-- Default configuration for telescope goes here:
-		-- config_key = value,
-		layout_config = { horizontal = { width = 0.99, height = 0.99 } },
+		layout_config = {
+			horizontal = {
+				width = 0.99,
+				height = 0.99,
+			},
+		},
 		mappings = {
 			i = {
 				["<C-j>"] = function(...)
@@ -617,23 +622,10 @@ require('telescope').setup {
 					local actions = require("telescope.actions")
 					actions.close(...)
 				end,
-
-				-- map actions.which_key to <C-h> (default: <C-/>)
-				-- actions.which_key shows the mappings for your picker,
-				-- e.g. git_{create, delete, ...}_branch for the git_branches picker
-				["<C-h>"] = "which_key"
 			}
 		}
 	},
-	pickers = {
-		-- Default configuration for builtin pickers goes here:
-		-- picker_name = {
-		--   picker_config_key = value,
-		--   ...
-		-- }
-		-- Now the picker_config_key will be applied every time you call this
-		-- builtin picker
-	},
+	pickers = {},
 	extensions = {
 		live_grep_args = {
 			auto_quoting = true,
@@ -645,11 +637,6 @@ require('telescope').setup {
 				},
 			},
 		}
-		-- Your extension configuration goes here:
-		-- extension_name = {
-		--   extension_config_key = value,
-		-- }
-		-- please take a look at the readme of the extension you want to configure
 	}
 }
 -- }}}
