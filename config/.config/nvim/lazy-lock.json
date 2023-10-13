@@ -30,6 +30,7 @@
   "telescope-frecency.nvim": { "branch": "master", "commit": "daf59744f60e34cbb48a40a092e9e735553b6f21" },
   "telescope-live-grep-args.nvim": { "branch": "master", "commit": "851c0997d55601f2afd7290db0f90dc364e29f58" },
   "telescope.nvim": { "branch": "master", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
+  "vim-dispatch": { "branch": "master", "commit": "6cc2691576f97d43f8751664d1a1a908b99927e5" },
   "vim-kitty-navigator": { "branch": "master", "commit": "c3d8aaaa61717b2c142ff39553fcab709fd606a7" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "zk-nvim": { "branch": "main", "commit": "e9e5e21dbeacd0e753728c7ea45b7a7582d9080a" }

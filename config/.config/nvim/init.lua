@@ -1,3 +1,6 @@
+-- vim:foldmethod=marker
+
+-- lazy setup {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -10,19 +13,30 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+-- }}}
 
---  settings
+--  settings {{{
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.o.background = 'dark'
+vim.opt.number = true
+vim.cmd [[set foldmethod=expr]]
+vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
+vim.cmd [[set nofoldenable]] -- Disable folding at startup.
+-- }}}
+
+-- autocmds {{{
+vim.cmd [[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]]
 vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
-vim.cmd [[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float  silent! nnoremap <buffer> q :close<CR>]]
+vim.cmd [[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float,qf,messages silent! nnoremap <buffer> q :close<CR>]]
+vim.cmd [[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
+-- }}}
 
-
--- plugins
+-- plugins {{{
 require("lazy").setup({
 	"folke/which-key.nvim",
+	"tpope/vim-dispatch",
 	{
 		"folke/neoconf.nvim",
 		cmd = "Neoconf"
@@ -261,11 +275,9 @@ require("lazy").setup({
 	},
 
 })
+-- }}}
 
-
-
-
--- lsp
+-- lsp {{{
 local lsp_zero = require('lsp-zero')
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -313,28 +325,34 @@ if present then
 		end)
 	end
 end
+-- }}}
 
+-- which key {{{
 local ok, wk = pcall(require, "which-key")
 if ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
+		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
 		["<leader>"] = {
-			[' '] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-			['/'] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+			["?"]    = { "<CMD>Telescope keymaps<CR>", "keymaps" },
+			['<CR>'] = { "<CMD>Make<CR>", "make" },
+			[' ']    = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
+			['/']    = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 				"Search text" },
-			["?"] = { ":Telescope grep_string<CR>", "grep string" },
-			s     = {},
-			d     = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
-			a     = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
-			j     = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
-			J     = { ':lua require("harpoon.ui").nav_prev()<CR>', "harpoon prev" },
-			k     = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
-			K     = { ':lua require("harpoon.ui").nav_next()<CR>', "harpoon next" },
-			[";"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
-			["'"] = { ':lua require("harpoon.term").gotoTerminal(2)<CR>', "harpoon term #2" },
-			r     = { "<CMD>Telescope frecency<CR>", "recent files" },
-			l     = {
+			["."]    = { ":Telescope grep_string<CR>", "grep string" },
+			s        = {},
+			q        = { "<CMD>copen<CR>", "quickfix" },
+			m        = { ':cprev<CR>', "cprev" },
+			[","]    = { ':cnext<CR>', "cnext" },
+			d        = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
+			a        = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
+			j        = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
+			k        = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
+			[";"]    = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
+			["'"]    = { ':lua require("harpoon.term").gotoTerminal(2)<CR>', "harpoon term #2" },
+			r        = { "<CMD>Telescope frecency<CR>", "recent files" },
+			l        = {
 				name = "LSP",
 				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
 				r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
@@ -345,16 +363,17 @@ if ok then
 				d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
 			},
-			t     = {
+			t        = {
 				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
 				f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
 				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
 				o = { "<CMD>lua require('neotest').output_panel.toggle()<CR>", "output" },
 				O = { "<CMD>lua require('neotest').output.open({ enter = true })<CR>", "Output" },
 				s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "summary" },
+				l = { "<CMD>lua require('neotest').run.run_last()<CR>", "last" },
+
 			},
-			K     = { "<CMD>Telescope keymaps<CR>", "keymaps" },
-			g     = {
+			g        = {
 				g = { "<CMD>Neogit<CR>", "git" },
 				h = {
 					name = "+Github",
@@ -402,14 +421,14 @@ if ok then
 					},
 				},
 			},
-			N     = {
+			N        = {
 				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',
 				"number toggle" },
-			W     = {
+			W        = {
 				"<CMD>execute 'set wrap!' | echo 'Wrap is now ' . ( &wrap ? 'enabled' : 'disabled' )<CR>",
 				"wrap" },
-			w     = { "<CMD>w<CR>", "write" },
-			f     = {
+			w        = { "<CMD>w<CR>", "write" },
+			f        = {
 				name = "Find",
 				f = { "<cmd>Telescope find_files<cr>", "Find File" },
 				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false },
@@ -419,12 +438,14 @@ if ok then
 	})
 end
 
+vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
+vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
 
+vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
+-- }}}
 
-
-
-
-
+-- cmp {{{
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
 	return
@@ -522,7 +543,6 @@ cmp.setup {
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
-			print(tostring(vim_item.kind))
 			-- Kind icons
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
@@ -559,9 +579,9 @@ cmp.setup {
 		native_menu = false,
 	},
 }
+-- }}}
 
-
-
+-- treesitter {{{
 require 'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
 	ensure_installed = { "lua", "go" },
@@ -588,13 +608,9 @@ require 'nvim-treesitter.configs'.setup {
 		},
 	},
 }
+-- }}}
 
-
-vim.cmd [[set foldmethod=expr]]
-vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
-vim.cmd [[set nofoldenable]] -- Disable folding at startup.
-
-
+-- telescope {{{
 local lga_ok, lga_actions = pcall(require, "telescope-live-grep-args.actions")
 if not lga_ok then
 	print("lga not ok")
@@ -659,14 +675,4 @@ require('telescope').setup {
 		-- please take a look at the readme of the extension you want to configure
 	}
 }
-
-
-vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
-vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
-
-vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
-vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
-
-vim.cmd [[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]]
-
--- vim.cmd [[colorscheme tokyonight-night]]
+-- }}}
