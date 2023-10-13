@@ -36,12 +36,16 @@ vim.cmd [[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ contex
 -- plugins {{{
 require("lazy").setup({
 	"folke/which-key.nvim",
+	'tpope/vim-surround',
+	'tpope/vim-repeat',
 	"tpope/vim-dispatch",
-	{
-		"folke/neoconf.nvim",
-		cmd = "Neoconf"
-	},
 	"folke/neodev.nvim",
+	'nvim-treesitter/nvim-treesitter',
+	'neovim/nvim-lspconfig',
+	'hrsh7th/cmp-nvim-lsp',
+	'hrsh7th/nvim-cmp',
+	'L3MON4D3/LuaSnip',
+	"hrsh7th/cmp-emoji",
 	{
 		"ThePrimeagen/harpoon",
 		config = function()
@@ -61,15 +65,6 @@ require("lazy").setup({
 			vim.cmd.colorscheme "catppuccin"
 		end
 	},
-	-- {
-	-- 	"gbprod/nord.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("nord").setup({})
-	-- 		vim.cmd.colorscheme("nord")
-	-- 	end,
-	-- },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -80,7 +75,6 @@ require("lazy").setup({
 		}
 		,
 		config = function()
-			-- get neotest namespace (api call creates or returns namespace)
 			local neotest_ns = vim.api.nvim_create_namespace("neotest")
 			vim.diagnostic.config({
 				virtual_text = {
@@ -93,7 +87,6 @@ require("lazy").setup({
 				},
 			}, neotest_ns)
 			require("neotest").setup({
-				-- your neotest config here
 				adapters = {
 					require("neotest-go"),
 				},
@@ -114,43 +107,27 @@ require("lazy").setup({
 			require('litee.gh').setup()
 		end
 	},
-	'nvim-treesitter/nvim-treesitter',
 	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
 		end
 	},
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {},
-	-- },
-
 	{
 		"nvim-telescope/telescope-frecency.nvim",
 		config = function()
 			require("telescope").load_extension "frecency"
 		end,
 	},
-	{ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
 	{
-		'numToStr/Comment.nvim',
-		opts = {
-			-- add any options here
-		},
-		lazy = false,
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v3.x'
 	},
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.4',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	{ 'neovim/nvim-lspconfig' },
-	{ 'hrsh7th/cmp-nvim-lsp' },
-	{ 'hrsh7th/nvim-cmp' },
-	{ 'L3MON4D3/LuaSnip' },
 	{
 		"knubie/vim-kitty-navigator",
 		event = "VeryLazy",
@@ -163,9 +140,6 @@ require("lazy").setup({
 			"sindrets/diffview.nvim", -- optional
 		},
 		config = true
-	},
-	{
-		"hrsh7th/cmp-emoji",
 	},
 	{
 		"zbirenbaum/copilot-cmp",
@@ -234,6 +208,11 @@ require("lazy").setup({
 	-- },
 	{ "nvim-telescope/telescope-live-grep-args.nvim" },
 	{
+		'numToStr/Comment.nvim',
+		opts = {},
+		lazy = false,
+	},
+	{
 		'stevearc/oil.nvim',
 		lazy = false,
 		opts = {
@@ -290,7 +269,6 @@ require('lspconfig').lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = {
-				-- Get the language server to recognize the `vim` global
 				globals = { 'vim' },
 			},
 		},
@@ -349,8 +327,7 @@ if ok then
 			a        = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
 			j        = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
 			k        = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
-			[";"]    = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
-			["'"]    = { ':lua require("harpoon.term").gotoTerminal(2)<CR>', "harpoon term #2" },
+			["'"]    = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
 			r        = { "<CMD>Telescope frecency<CR>", "recent files" },
 			l        = {
 				name = "LSP",

@@ -15,7 +15,6 @@
   "lsp-zero.nvim": { "branch": "v3.x", "commit": "22d2186bee730d68f6fd3bb2d19a389784c37a96" },
   "lsp_signature.nvim": { "branch": "master", "commit": "33250c84c7a552daf28ac607d9d9e82f88cd0907" },
   "mason.nvim": { "branch": "main", "commit": "cd7835b15f5a4204fc37e0aa739347472121a54c" },
-  "neoconf.nvim": { "branch": "main", "commit": "393d37abd9d82adcac627309a41758ae8e140d9e" },
   "neodev.nvim": { "branch": "main", "commit": "a4b6e7ca11ff5be2264d5c169fcedd97d8699ec4" },
   "neogit": { "branch": "master", "commit": "d3fbf8b48f4f8bc406eb23f8b06eb912776f8cb0" },
   "neotest": { "branch": "master", "commit": "1e67a504d03def3a6a1125d934cb511680f72555" },
@@ -32,6 +31,8 @@
   "telescope.nvim": { "branch": "master", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
   "vim-dispatch": { "branch": "master", "commit": "6cc2691576f97d43f8751664d1a1a908b99927e5" },
   "vim-kitty-navigator": { "branch": "master", "commit": "c3d8aaaa61717b2c142ff39553fcab709fd606a7" },
+  "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
+  "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "which-key.nvim": { "branch": "main", "commit": "7ccf476ebe0445a741b64e36c78a682c1c6118b7" },
   "zk-nvim": { "branch": "main", "commit": "e9e5e21dbeacd0e753728c7ea45b7a7582d9080a" }
 }
