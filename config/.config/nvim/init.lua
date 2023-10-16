@@ -50,6 +50,7 @@ require("lazy").setup({
 	"hrsh7th/cmp-emoji",
 	'nvim-treesitter/nvim-treesitter-context',
 	"nvim-telescope/telescope-live-grep-args.nvim",
+	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 	{
 		'nvim-telescope/telescope-ui-select.nvim',
 		config = function()
