@@ -21,6 +21,7 @@ vim.g.mapleader = " "
 vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.opt.number = true
+vim.opt.smartcase = true
 vim.cmd [[set foldmethod=expr]]
 vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
 vim.cmd [[set nofoldenable]] -- Disable folding at startup.
@@ -39,6 +40,7 @@ require("lazy").setup({
 	'tpope/vim-surround',
 	'tpope/vim-repeat',
 	"tpope/vim-dispatch",
+	'tpope/vim-unimpaired', -- ]q ]a ]f ]< > ]e ]n ]ow ]ol
 	"folke/neodev.nvim",
 	'nvim-treesitter/nvim-treesitter',
 	'neovim/nvim-lspconfig',
@@ -46,7 +48,155 @@ require("lazy").setup({
 	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',
 	"hrsh7th/cmp-emoji",
+	'nvim-treesitter/nvim-treesitter-context',
 	"nvim-telescope/telescope-live-grep-args.nvim",
+	{
+		'nvim-telescope/telescope-ui-select.nvim',
+		config = function()
+			require("telescope").load_extension "ui-select"
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter", },
+		config = function()
+			require 'nvim-treesitter.configs'.setup {
+				textobjects = {
+					select = {
+						enable = true,
+
+						-- Automatically jump forward to textobj, similar to targets.vim
+						lookahead = true,
+
+						keymaps = {
+							-- You can use the capture groups defined in textobjects.scm
+							["aa"] = "@attribute.outer",
+							["ia"] = "@attribute.inner",
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ac"] = "@class.outer",
+							["ic"] = { query = "@class.inner", desc =
+							"Select inner part of a class region" },
+
+
+							["ab"] = "@block.outer",
+							["ib"] = "@block.inner",
+							["ad"] = "@conditional.outer",
+							["id"] = "@conditional.inner",
+							["ao"] = "@loop.outer",
+							["io"] = "@loop.inner",
+							["ap"] = "@parameter.outer",
+							["ip"] = "@parameter.inner",
+							["a/"] = "@comment.outer",
+							["ar"] = "@frame.outer",
+							["ir"] = "@frame.inner",
+							["at"] = "@attribute.outer",
+							["it"] = "@attribute.inner",
+							["as"] = "@statement.outer",
+							["is"] = "@statement.outer",
+
+
+						},
+						-- You can choose the select mode (default is charwise 'v')
+						--
+						-- Can also be a function which gets passed a table with the keys
+						-- * query_string: eg '@function.inner'
+						-- * method: eg 'v' or 'o'
+						-- and should return the mode ('v', 'V', or '<c-v>') or a table
+						-- mapping query_strings to modes.
+						-- selection_modes = {
+						-- 	['@parameter.outer'] = 'v', -- charwise
+						-- 	['@function.outer'] = 'V', -- linewise
+						-- 	['@class.outer'] = '<c-v>', -- blockwise
+						-- },
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]m"] = "@function.outer",
+						["]f"] = "@call.outer",
+						["]d"] = "@conditional.outer",
+						["]o"] = "@loop.outer",
+						["]s"] = "@statement.outer",
+						["]a"] = "@parameter.outer",
+						["]c"] = "@comment.outer",
+						["]b"] = "@block.outer",
+						["]l"] = { query = "@class.outer", desc = "next class start" },
+						["]r"] = "@frame.outer",
+						["]t"] = "@attribute.outer",
+						["]e"] = "@scopename.outer",
+						["]]m"] = "@function.inner",
+						["]]f"] = "@call.inner",
+						["]]d"] = "@conditional.inner",
+						["]]o"] = "@loop.inner",
+						["]]a"] = "@parameter.inner",
+						["]]b"] = "@block.inner",
+						["]]l"] = { query = "@class.inner", desc = "next class start" },
+						["]]r"] = "@frame.inner",
+						["]]t"] = "@attribute.inner",
+						["]]e"] = "@scopename.inner",
+					},
+					goto_next_end = {
+						["]M"] = "@function.outer",
+						["]F"] = "@call.outer",
+						["]D"] = "@conditional.outer",
+						["]O"] = "@loop.outer",
+						["]S"] = "@statement.outer",
+						["]A"] = "@parameter.outer",
+						["]C"] = "@comment.outer",
+						["]B"] = "@block.outer",
+						["]L"] = "@class.outer",
+						["]R"] = "@frame.outer",
+						["]T"] = "@attribute.outer",
+						["]E"] = "@scopename.outer",
+						["]]M"] = "@function.inner",
+						["]]F"] = "@call.inner",
+						["]]D"] = "@conditional.inner",
+						["]]O"] = "@loop.inner",
+						["]]A"] = "@parameter.inner",
+						["]]B"] = "@block.inner",
+						["]]L"] = "@class.inner",
+						["]]R"] = "@frame.inner",
+						["]]T"] = "@attribute.inner",
+						["]]E"] = "@scopename.inner",
+					},
+					goto_previous_end = {
+						["[M"] = "@function.outer",
+						["[F"] = "@call.outer",
+						["[D"] = "@conditional.outer",
+						["[O"] = "@loop.outer",
+						["[S"] = "@statement.outer",
+						["[A"] = "@parameter.outer",
+						["[C"] = "@comment.outer",
+						["[B"] = "@block.outer",
+						["[L"] = "@class.outer",
+						["[R"] = "@frame.outer",
+						["[T"] = "@attribute.outer",
+						["[E"] = "@scopename.outer",
+						["[[M"] = "@function.inner",
+						["[[F"] = "@call.inner",
+						["[[D"] = "@conditional.inner",
+						["[[O"] = "@loop.inner",
+						["[[A"] = "@parameter.inner",
+						["[[B"] = "@block.inner",
+						["[[L"] = "@class.inner",
+						["[[R"] = "@frame.inner",
+						["[[T"] = "@attribute.inner",
+						["[[E"] = "@scopename.inner",
+					},
+				},
+			}
+		end,
+	},
+	{
+		"max397574/better-escape.nvim",
+		config = function()
+			require("better_escape").setup()
+		end,
+	},
 	{
 		"ThePrimeagen/harpoon",
 		config = function()
@@ -320,12 +470,12 @@ if ok then
 			['/']    = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 				"Search text" },
 			["."]    = { ":Telescope grep_string<CR>", "grep string" },
-			s        = {},
+			d        = { ":Telescope diagnostics<CR>", "diagnostics" },
 			q        = { "<CMD>copen<CR>", "quickfix" },
 			m        = { ':cnext<CR>', "cnext" },
 			M        = { ':TSJToggle<CR>', "Join toggle" },
 			[","]    = { ':cprev<CR>', "cprev" },
-			d        = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
+			s        = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
 			a        = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
 			j        = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
 			k        = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
@@ -333,13 +483,12 @@ if ok then
 			r        = { "<CMD>Telescope frecency<CR>", "recent files" },
 			l        = {
 				name = "LSP",
+				a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "codea action" },
 				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
 				r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
 				w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
 				p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
 				n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
-				e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "show line diagnostics" },
-				d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "set loclist" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
 			},
 			t        = {
@@ -627,6 +776,10 @@ require('telescope').setup {
 	},
 	pickers = {},
 	extensions = {
+
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {},
+		},
 		live_grep_args = {
 			auto_quoting = true,
 			mappings = {
