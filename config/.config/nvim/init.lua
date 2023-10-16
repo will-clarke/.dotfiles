@@ -22,6 +22,7 @@ vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.opt.number = true
 vim.opt.smartcase = true
+vim.g.gitblame_enabled = false
 vim.cmd [[set foldmethod=expr]]
 vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
 vim.cmd [[set nofoldenable]] -- Disable folding at startup.
@@ -50,7 +51,19 @@ require("lazy").setup({
 	"hrsh7th/cmp-emoji",
 	'nvim-treesitter/nvim-treesitter-context',
 	"nvim-telescope/telescope-live-grep-args.nvim",
-	{ "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+	{
+		'f-person/git-blame.nvim',
+		config = function()
+			require('gitblame').setup {
+				enabled = false,
+			}
+		end,
+	},
+	{
+		"ellisonleao/glow.nvim",
+		config = true,
+		cmd = "Glow",
+	},
 	{
 		'nvim-telescope/telescope-ui-select.nvim',
 		config = function()
@@ -471,6 +484,7 @@ if ok then
 			['/']    = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 				"Search text" },
 			["."]    = { ":Telescope grep_string<CR>", "grep string" },
+			[";"]    = { ":Telescope resume<CR>", "resume" },
 			d        = { ":Telescope diagnostics<CR>", "diagnostics" },
 			q        = { "<CMD>copen<CR>", "quickfix" },
 			m        = { ':cnext<CR>', "cnext" },
@@ -504,6 +518,8 @@ if ok then
 			},
 			g        = {
 				g = { "<CMD>Neogit<CR>", "git" },
+				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
+				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
 				h = {
 					name = "+Github",
 					c = {
@@ -687,7 +703,7 @@ cmp.setup {
 		end,
 	},
 	sources = {
-		{ name = "copilot" },
+		{ name = "copilot", priority = 10 },
 		{ name = 'emoji' },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
