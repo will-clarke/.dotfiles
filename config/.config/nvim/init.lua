@@ -422,29 +422,27 @@ require("lazy").setup({
 -- }}}
 
 -- lsp {{{
-local lsp_zero = require('lsp-zero')
+local ok, lsp_zero = pcall(require, "lsp-zero")
+if ok then
+	lsp_zero.on_attach(function(client, bufnr)
+		lsp_zero.default_keymaps({ buffer = bufnr })
+	end)
 
-lsp_zero.on_attach(function(client, bufnr)
-	lsp_zero.default_keymaps({ buffer = bufnr })
-end)
-
-require('lspconfig').rust_analyzer.setup({})
-require 'lspconfig'.gopls.setup {}
-require('lspconfig').lua_ls.setup({
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { 'vim' },
+	require('lspconfig').rust_analyzer.setup({})
+	require 'lspconfig'.gopls.setup {}
+	require('lspconfig').lua_ls.setup({
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { 'vim' },
+				},
 			},
 		},
-	},
-})
+	})
+end
 
-
-
-local present, mason = pcall(require, "mason")
-
-if present then
+local ok, mason = pcall(require, "mason")
+if ok then
 	local packages = {
 		"gopls",
 		"rust-analyzer",
@@ -642,6 +640,10 @@ local kind_icons = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
+	preselect = 'item',
+	completion = {
+		completeopt = 'menu,menuone,noinsert'
+	},
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
 		["<C-j>"] = cmp.mapping.select_next_item(),
@@ -703,7 +705,7 @@ cmp.setup {
 		end,
 	},
 	sources = {
-		{ name = "copilot", priority = 10 },
+		{ name = "copilot", priority = 1000 },
 		{ name = 'emoji' },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
