@@ -19,46 +19,69 @@ vim.opt.rtp:prepend(lazypath)
 vim.api.nvim_set_option("clipboard", "unnamed")
 vim.g.mapleader = " "
 vim.opt.termguicolors = true
-vim.o.background = 'dark'
+vim.o.background = "dark"
 vim.opt.number = true
 vim.opt.smartcase = true
-vim.opt.noswapfile = true
+vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.g.gitblame_enabled = false
-vim.cmd [[set foldmethod=expr]]
-vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
-vim.cmd [[set nofoldenable]] -- Disable folding at startup.
+vim.cmd([[set foldmethod=expr]])
+vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
+vim.cmd([[set nofoldenable]]) -- Disable folding at startup.
 -- }}}
 
 -- autocmds {{{
-vim.cmd [[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]]
-vim.cmd [[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]]
-vim.cmd [[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float,qf,messages silent! nnoremap <buffer> q :close<CR>]]
-vim.cmd [[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
+vim.cmd([[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]])
+vim.cmd([[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]])
+vim.cmd(
+	[[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float,qf,messages silent! nnoremap <buffer> q :close<CR>]]
+)
+vim.cmd(
+	[[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
+)
 -- }}}
 
 -- plugins {{{
 require("lazy").setup({
 	"folke/which-key.nvim",
-	'tpope/vim-surround',
-	'tpope/vim-repeat',
+	"tpope/vim-surround",
+	"tpope/vim-repeat",
 	"tpope/vim-dispatch",
-	'tpope/vim-unimpaired', -- ]q ]a ]f ]< > ]e ]n ]ow ]ol
+	"tpope/vim-unimpaired", -- ]q ]a ]f ]< > ]e ]n ]ow ]ol
 	"folke/neodev.nvim",
-	'nvim-treesitter/nvim-treesitter',
-	'neovim/nvim-lspconfig',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/nvim-cmp',
-	'L3MON4D3/LuaSnip',
+	"nvim-treesitter/nvim-treesitter",
+	"neovim/nvim-lspconfig",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/nvim-cmp",
+	"L3MON4D3/LuaSnip",
 	"hrsh7th/cmp-emoji",
-	'nvim-treesitter/nvim-treesitter-context',
+	"nvim-treesitter/nvim-treesitter-context",
 	"nvim-telescope/telescope-live-grep-args.nvim",
 	{
-		'f-person/git-blame.nvim',
+		"nvimtools/none-ls.nvim",
 		config = function()
-			require('gitblame').setup {
+			-- linting formatting etc
+			local null_ls = require("null-ls")
+			-- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+			null_ls.setup({
+
+				sources = {
+					null_ls.builtins.formatting.autoflake,
+					null_ls.builtins.formatting.jq,
+					null_ls.builtins.diagnostics.mypy,
+					null_ls.builtins.code_actions.shellcheck,
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.diagnostics.jsonlint,
+				},
+			})
+		end,
+	},
+	{
+		"f-person/git-blame.nvim",
+		config = function()
+			require("gitblame").setup({
 				enabled = false,
-			}
+			})
 		end,
 	},
 	{
@@ -67,17 +90,17 @@ require("lazy").setup({
 		cmd = "Glow",
 	},
 	{
-		'nvim-telescope/telescope-ui-select.nvim',
+		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()
-			require("telescope").load_extension "ui-select"
+			require("telescope").load_extension("ui-select")
 		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		after = "nvim-treesitter",
-		dependencies = { "nvim-treesitter/nvim-treesitter", },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require 'nvim-treesitter.configs'.setup {
+			require("nvim-treesitter.configs").setup({
 				textobjects = {
 					select = {
 						enable = true,
@@ -95,7 +118,6 @@ require("lazy").setup({
 							["ic"] = { query = "@class.inner", desc =
 							"Select inner part of a class region" },
 
-
 							["ab"] = "@block.outer",
 							["ib"] = "@block.inner",
 							["ad"] = "@conditional.outer",
@@ -111,8 +133,6 @@ require("lazy").setup({
 							["it"] = "@attribute.inner",
 							["as"] = "@statement.outer",
 							["is"] = "@statement.outer",
-
-
 						},
 						-- You can choose the select mode (default is charwise 'v')
 						--
@@ -204,7 +224,7 @@ require("lazy").setup({
 						["[[E"] = "@scopename.inner",
 					},
 				},
-			}
+			})
 		end,
 	},
 	{
@@ -227,10 +247,10 @@ require("lazy").setup({
 			require("catppuccin").setup({
 				integrations = {
 					harpoon = true,
-				}
+				},
 			})
-			vim.cmd.colorscheme "catppuccin"
-		end
+			vim.cmd.colorscheme("catppuccin")
+		end,
 	},
 	{
 		"nvim-neotest/neotest",
@@ -239,8 +259,7 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-go",
-		}
-		,
+		},
 		config = function()
 			local neotest_ns = vim.api.nvim_create_namespace("neotest")
 			vim.diagnostic.config({
@@ -264,36 +283,38 @@ require("lazy").setup({
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 		opts = {},
-		config = function(_, opts) require 'lsp_signature'.setup(opts) end
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
 	},
 	{
-		'ldelossa/gh.nvim',
-		dependencies = { 'ldelossa/litee.nvim' },
+		"ldelossa/gh.nvim",
+		dependencies = { "ldelossa/litee.nvim" },
 		config = function()
-			require('litee.lib').setup()
-			require('litee.gh').setup()
-		end
+			require("litee.lib").setup()
+			require("litee.gh").setup()
+		end,
 	},
 	{
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
-		end
+		end,
 	},
 	{
 		"nvim-telescope/telescope-frecency.nvim",
 		config = function()
-			require("telescope").load_extension "frecency"
+			require("telescope").load_extension("frecency")
 		end,
 	},
 	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v3.x'
+		"VonHeikemen/lsp-zero.nvim",
+		branch = "v3.x",
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.4',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.4",
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
 		"knubie/vim-kitty-navigator",
@@ -306,7 +327,7 @@ require("lazy").setup({
 			"nvim-telescope/telescope.nvim", -- optional
 			"sindrets/diffview.nvim", -- optional
 		},
-		config = true
+		config = true,
 	},
 	{
 		"zbirenbaum/copilot-cmp",
@@ -323,23 +344,23 @@ require("lazy").setup({
 		"linty-org/readline.nvim",
 		-- Can we apply defaults?
 		config = function()
-			local readline = require 'readline'
-			vim.keymap.set('!', '<C-k>', readline.kill_line)
-			vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
-			vim.keymap.set('!', '<M-d>', readline.kill_word)
-			vim.keymap.set('!', '<M-BS>', readline.backward_kill_word)
-			vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
-			vim.keymap.set('!', '<C-d>', '<Delete>') -- delete-char
-			vim.keymap.set('!', '<C-h>', '<BS>') -- backward-delete-char
-			vim.keymap.set('!', '<C-a>', readline.beginning_of_line)
-			vim.keymap.set('!', '<C-e>', readline.end_of_line)
-			vim.keymap.set('!', '<M-f>', readline.forward_word)
-			vim.keymap.set('!', '<M-b>', readline.backward_word)
-			vim.keymap.set('!', '<C-f>', '<Right>') -- forward-char
-			vim.keymap.set('!', '<C-b>', '<Left>') -- backward-char
-			vim.keymap.set('!', '<C-n>', '<Down>') -- next-line
-			vim.keymap.set('!', '<C-p>', '<Up>') -- previous-line
-		end
+			local readline = require("readline")
+			vim.keymap.set("!", "<C-k>", readline.kill_line)
+			vim.keymap.set("!", "<C-u>", readline.backward_kill_line)
+			vim.keymap.set("!", "<M-d>", readline.kill_word)
+			vim.keymap.set("!", "<M-BS>", readline.backward_kill_word)
+			vim.keymap.set("!", "<C-w>", readline.unix_word_rubout)
+			vim.keymap.set("!", "<C-d>", "<Delete>") -- delete-char
+			vim.keymap.set("!", "<C-h>", "<BS>") -- backward-delete-char
+			vim.keymap.set("!", "<C-a>", readline.beginning_of_line)
+			vim.keymap.set("!", "<C-e>", readline.end_of_line)
+			vim.keymap.set("!", "<M-f>", readline.forward_word)
+			vim.keymap.set("!", "<M-b>", readline.backward_word)
+			vim.keymap.set("!", "<C-f>", "<Right>") -- forward-char
+			vim.keymap.set("!", "<C-b>", "<Left>") -- backward-char
+			vim.keymap.set("!", "<C-n>", "<Down>") -- next-line
+			vim.keymap.set("!", "<C-p>", "<Up>") -- previous-line
+		end,
 	},
 	{
 		"mickael-menu/zk-nvim",
@@ -375,12 +396,12 @@ require("lazy").setup({
 		end,
 	},
 	{
-		'numToStr/Comment.nvim',
+		"numToStr/Comment.nvim",
 		opts = {},
 		lazy = false,
 	},
 	{
-		'stevearc/oil.nvim',
+		"stevearc/oil.nvim",
 		lazy = false,
 		opts = {
 			win_options = {
@@ -419,7 +440,6 @@ require("lazy").setup({
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 	},
-
 })
 -- }}}
 
@@ -430,13 +450,14 @@ if ok then
 		lsp_zero.default_keymaps({ buffer = bufnr })
 	end)
 
-	require('lspconfig').rust_analyzer.setup({})
-	require 'lspconfig'.gopls.setup {}
-	require('lspconfig').lua_ls.setup({
+	require("lspconfig").rust_analyzer.setup({})
+	require("lspconfig").gopls.setup({})
+	require("lspconfig").pyright.setup({})
+	require("lspconfig").lua_ls.setup({
 		settings = {
 			Lua = {
 				diagnostics = {
-					globals = { 'vim' },
+					globals = { "vim" },
 				},
 			},
 		},
@@ -449,7 +470,7 @@ if ok then
 		"gopls",
 		"rust-analyzer",
 		"lua-language-server",
-		"stylua"
+		"stylua",
 	}
 
 	vim.api.nvim_create_user_command("MasonInstallAll", function()
@@ -478,25 +499,26 @@ if ok then
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
 		["<leader>"] = {
-			["?"]    = { "<CMD>Telescope keymaps<CR>", "keymaps" },
-			['<CR>'] = { "<CMD>Make<CR>", "make" },
-			[' ']    = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-			['/']    = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
+			["<CR>"] = { "<CMD>Make<CR>", "make" },
+			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
+			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
 				"Search text" },
-			["."]    = { ":Telescope grep_string<CR>", "grep string" },
-			[";"]    = { ":Telescope resume<CR>", "resume" },
-			d        = { ":Telescope diagnostics<CR>", "diagnostics" },
-			q        = { "<CMD>copen<CR>", "quickfix" },
-			m        = { ':cnext<CR>', "cnext" },
-			M        = { ':TSJToggle<CR>', "Join toggle" },
-			[","]    = { ':cprev<CR>', "cprev" },
-			s        = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
-			a        = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
-			j        = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
-			k        = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
-			["'"]    = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
-			r        = { "<CMD>Telescope frecency<CR>", "recent files" },
-			l        = {
+			["."] = { ":Telescope grep_string<CR>", "grep string" },
+			[";"] = { ":Telescope resume<CR>", "resume" },
+			d = { ":Telescope diagnostics<CR>", "diagnostics" },
+			q = { "<CMD>copen<CR>", "quickfix" },
+			m = { ":cnext<CR>", "cnext" },
+			M = { ":TSJToggle<CR>", "Join toggle" },
+			[","] = { ":cprev<CR>", "cprev" },
+			s = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
+			a = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
+			j = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
+			k = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
+			c = { ":e ~/.config/nvim/init.lua<CR>", "config" },
+			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
+			r = { "<CMD>Telescope frecency<CR>", "recent files" },
+			l = {
 				name = "LSP",
 				a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "codea action" },
 				f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
@@ -506,7 +528,7 @@ if ok then
 				n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
 			},
-			t        = {
+			t = {
 				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
 				f = { "<CMD>lua require('neotest').run.run(vim.fn.expand('%'))<CR>", "test file" },
 				a = { "<CMD>lua require('neotest').run.attach()<CR>", "attach" },
@@ -514,9 +536,8 @@ if ok then
 				O = { "<CMD>lua require('neotest').output.open({ enter = true })<CR>", "Output" },
 				s = { "<CMD>lua require('neotest').summary.toggle()<CR>", "summary" },
 				l = { "<CMD>lua require('neotest').run.run_last()<CR>", "last" },
-
 			},
-			g        = {
+			g = {
 				g = { "<CMD>Neogit<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
@@ -566,14 +587,16 @@ if ok then
 					},
 				},
 			},
-			N        = {
+			N = {
 				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',
-				"number toggle" },
-			W        = {
+				"number toggle",
+			},
+			W = {
 				"<CMD>execute 'set wrap!' | echo 'Wrap is now ' . ( &wrap ? 'enabled' : 'disabled' )<CR>",
-				"wrap" },
-			w        = { "<CMD>w<CR>", "write" },
-			f        = {
+				"wrap",
+			},
+			w = { "<CMD>w<CR>", "write" },
+			f = {
 				name = "Find",
 				f = { "<cmd>Telescope find_files<cr>", "Find File" },
 				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File", noremap = false },
@@ -604,10 +627,9 @@ end
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
-	local col = vim.fn.col "." - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+	local col = vim.fn.col(".") - 1
+	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
-
 
 local kind_icons = {
 	Text = "󰉿",
@@ -641,10 +663,10 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
-cmp.setup {
-	preselect = 'item',
+cmp.setup({
+	preselect = "item",
 	completion = {
-		completeopt = 'menu,menuone,noinsert'
+		completeopt = "menu,menuone,noinsert",
 	},
 	mapping = {
 		["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -653,13 +675,13 @@ cmp.setup {
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-		["<C-e>"] = cmp.mapping {
+		["<C-e>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
-		},
+		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
-		["<CR>"] = cmp.mapping.confirm { select = true },
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -708,7 +730,7 @@ cmp.setup {
 	},
 	sources = {
 		{ name = "copilot", priority = 1000 },
-		{ name = 'emoji' },
+		{ name = "emoji" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -727,24 +749,23 @@ cmp.setup {
 		ghost_text = false,
 		native_menu = false,
 	},
-}
+})
 -- }}}
 
 -- treesitter {{{
-require 'nvim-treesitter.configs'.setup {
+require("nvim-treesitter.configs").setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
 	ensure_installed = { "lua", "go" },
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
 
-
 	highlight = {
 		enable = true,
 	},
 
 	indent = {
-		enable = true
+		enable = true,
 	},
 
 	incremental_selection = {
@@ -756,7 +777,7 @@ require 'nvim-treesitter.configs'.setup {
 			node_decremental = "g<S-TAB>",
 		},
 	},
-}
+})
 -- }}}
 
 -- telescope {{{
@@ -766,7 +787,7 @@ if not lga_ok then
 	return
 end
 
-require('telescope').setup {
+require("telescope").setup({
 	defaults = {
 		layout_config = {
 			horizontal = {
@@ -792,14 +813,14 @@ require('telescope').setup {
 					local actions = require("telescope.actions")
 					actions.close(...)
 				end,
-			}
-		}
+			},
+		},
 	},
 	pickers = {},
 	extensions = {
 
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown {},
+			require("telescope.themes").get_dropdown({}),
 		},
 		live_grep_args = {
 			auto_quoting = true,
@@ -810,7 +831,7 @@ require('telescope').setup {
 					["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
 				},
 			},
-		}
-	}
-}
+		},
+	},
+})
 -- }}}
