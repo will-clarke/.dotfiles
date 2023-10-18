@@ -59,22 +59,6 @@ require("lazy").setup({
 	"nvim-telescope/telescope-live-grep-args.nvim",
 	{
 		"nvimtools/none-ls.nvim",
-		config = function()
-			-- linting formatting etc
-			local null_ls = require("null-ls")
-			-- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
-			null_ls.setup({
-
-				sources = {
-					null_ls.builtins.formatting.autoflake,
-					null_ls.builtins.formatting.jq,
-					null_ls.builtins.diagnostics.mypy,
-					null_ls.builtins.code_actions.shellcheck,
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.diagnostics.jsonlint,
-				},
-			})
-		end,
 	},
 	{
 		"f-person/git-blame.nvim",
@@ -115,8 +99,7 @@ require("lazy").setup({
 							["af"] = "@function.outer",
 							["if"] = "@function.inner",
 							["ac"] = "@class.outer",
-							["ic"] = { query = "@class.inner", desc =
-							"Select inner part of a class region" },
+							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 
 							["ab"] = "@block.outer",
 							["ib"] = "@block.inner",
@@ -266,8 +249,7 @@ require("lazy").setup({
 				virtual_text = {
 					format = function(diagnostic)
 						local message =
-						    diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " ")
-						    :gsub("^%s+", "")
+							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
 						return message
 					end,
 				},
@@ -383,10 +365,10 @@ require("lazy").setup({
 		cmd = { "ZkNew", "ZkNotes", "ZkTags" },
 		keys = {
 			{ "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "Zk New" },
-			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>",                  "Zk Work" },
-			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>",                 "Zk Diary" },
-			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",         "Zk Open" },
-			{ "<leader>zt", "<Cmd>ZkTags<CR>",                                    "Zk Tags" },
+			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", "Zk Work" },
+			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", "Zk Diary" },
+			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Zk Open" },
+			{ "<leader>zt", "<Cmd>ZkTags<CR>", "Zk Tags" },
 		},
 	},
 	{
@@ -464,14 +446,39 @@ if ok then
 	})
 end
 
-local ok, mason = pcall(require, "mason")
-if ok then
+-- linting formatting etc
+-- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+local null_ls_sources = {}
+local null_ls_ok, null_ls = pcall(require, "null-ls")
+if null_ls_ok then
+	null_ls_sources = {
+		null_ls.builtins.formatting.autoflake,
+		null_ls.builtins.formatting.jq,
+		null_ls.builtins.diagnostics.mypy,
+		null_ls.builtins.code_actions.shellcheck,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.diagnostics.jsonlint,
+	}
+	null_ls.setup({
+		sources = null_ls_sources,
+	})
+end
+
+local mason_ok, mason = pcall(require, "mason")
+if mason_ok then
 	local packages = {
 		"gopls",
 		"rust-analyzer",
 		"lua-language-server",
 		"stylua",
 	}
+	-- if null_ls_sources , append to packages
+	for _, source in ipairs(null_ls_sources) do
+		local name = source.name
+		if name then
+			table.insert(packages, name)
+		end
+	end
 
 	vim.api.nvim_create_user_command("MasonInstallAll", function()
 		vim.cmd("MasonInstall " .. table.concat(packages, " "))
@@ -502,8 +509,7 @@ if ok then
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
 			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
-				"Search text" },
+			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
 			["."] = { ":Telescope grep_string<CR>", "grep string" },
 			[";"] = { ":Telescope resume<CR>", "resume" },
 			d = { ":Telescope diagnostics<CR>", "diagnostics" },
