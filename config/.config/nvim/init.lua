@@ -22,6 +22,7 @@ vim.opt.termguicolors = true
 vim.o.background = 'dark'
 vim.opt.number = true
 vim.opt.smartcase = true
+vim.opt.noswapfile = true
 vim.opt.ignorecase = true
 vim.g.gitblame_enabled = false
 vim.cmd [[set foldmethod=expr]]
