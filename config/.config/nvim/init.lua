@@ -31,14 +31,16 @@ vim.cmd([[set nofoldenable]]) -- Disable folding at startup.
 -- }}}
 
 -- autocmds {{{
-vim.cmd([[autocmd BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]])
-vim.cmd([[autocmd BufWritePre *go,*lua lua vim.lsp.buf.format()]])
+vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]])
+vim.cmd([[autocmd! BufWritePre *go,*lua lua vim.lsp.buf.format()]])
 vim.cmd(
 	[[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float,qf,messages silent! nnoremap <buffer> q :close<CR>]]
 )
 vim.cmd(
-	[[autocmd BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
+	[[autocmd! BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
 )
+vim.cmd([[ autocmd! TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]])
+
 -- }}}
 
 -- plugins {{{
@@ -107,8 +109,8 @@ require("lazy").setup({
 							["id"] = "@conditional.inner",
 							["ao"] = "@loop.outer",
 							["io"] = "@loop.inner",
-							["ap"] = "@parameter.outer",
-							["ip"] = "@parameter.inner",
+							-- ["ap"] = "@parameter.outer",
+							-- ["ip"] = "@parameter.inner",
 							["a/"] = "@comment.outer",
 							["ar"] = "@frame.outer",
 							["ir"] = "@frame.inner",
