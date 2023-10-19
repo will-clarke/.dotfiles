@@ -14,14 +14,6 @@ return {
 	"nvim-treesitter/nvim-treesitter-context",
 	"nvim-telescope/telescope-live-grep-args.nvim",
 	{
-		"rest-nvim/rest.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("rest-nvim").setup({})
-		end,
-		cmd = {},
-	},
-	{
 		"f-person/git-blame.nvim",
 		config = function()
 			require("gitblame").setup({
@@ -39,6 +31,7 @@ return {
 		config = function()
 			require("telescope").load_extension("ui-select")
 		end,
+		event = "VeryLazy",
 	},
 	-- {
 	-- 	"PHSix/nvim-hybrid",
@@ -52,6 +45,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		after = "nvim-treesitter",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
@@ -257,6 +251,7 @@ return {
 		config = function()
 			require("telescope").load_extension("frecency")
 		end,
+		event = "VeryLazy",
 	},
 	-- {
 	-- 	"VonHeikemen/lsp-zero.nvim",

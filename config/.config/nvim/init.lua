@@ -359,106 +359,106 @@ cmp.setup({
 -- }}}
 
 -- treesitter {{{
-require("nvim-treesitter.configs").setup({
-	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "lua", "go" },
-
-	-- Install parsers synchronously (only applied to `ensure_installed`)
-	sync_install = false,
-
-	highlight = {
-		enable = true,
-	},
-
-	indent = {
-		enable = true,
-	},
-
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			-- init_selection = "gnn", -- set to `false` to disable one of the mappings
-			node_incremental = "g<TAB>",
-			-- scope_incremental = "grc",
-			node_decremental = "g<S-TAB>",
-		},
-	},
-})
+-- require("nvim-treesitter.configs").setup({
+-- 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
+-- 	ensure_installed = { "lua", "go" },
+--
+-- 	-- Install parsers synchronously (only applied to `ensure_installed`)
+-- 	sync_install = false,
+--
+-- 	highlight = {
+-- 		enable = true,
+-- 	},
+--
+-- 	indent = {
+-- 		enable = true,
+-- 	},
+--
+-- 	incremental_selection = {
+-- 		enable = true,
+-- 		keymaps = {
+-- 			-- init_selection = "gnn", -- set to `false` to disable one of the mappings
+-- 			node_incremental = "g<TAB>",
+-- 			-- scope_incremental = "grc",
+-- 			node_decremental = "g<S-TAB>",
+-- 		},
+-- 	},
+-- })
 -- }}}
 
 -- telescope {{{
-local lga_ok, lga_actions = pcall(require, "telescope-live-grep-args.actions")
-if not lga_ok then
-	print("lga not ok")
-	return
-end
+-- local lga_ok, lga_actions = pcall(require, "telescope-live-grep-args.actions")
+-- if not lga_ok then
+-- 	print("lga not ok")
+-- 	return
+-- end
 
-require("telescope").setup({
-	defaults = {
-		layout_config = {
-			horizontal = {
-				width = 0.99,
-				height = 0.99,
-			},
-		},
-		mappings = {
-			i = {
-				["<C-j>"] = function(...)
-					local actions = require("telescope.actions")
-					actions.move_selection_next(...)
-				end,
-				["<C-k>"] = function(...)
-					local actions = require("telescope.actions")
-					actions.move_selection_previous(...)
-				end,
-				["<C-g>"] = function(...)
-					local actions = require("telescope.actions")
-					actions.close(...)
-				end,
-				["<esc>"] = function(...)
-					local actions = require("telescope.actions")
-					actions.close(...)
-				end,
-			},
-		},
-	},
-	pickers = {},
-	extensions = {
-
-		["ui-select"] = {
-			require("telescope.themes").get_dropdown({}),
-		},
-		live_grep_args = {
-			auto_quoting = true,
-			mappings = {
-				i = {
-					["<C-y>"] = lga_actions.quote_prompt(),
-					["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
-					["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-				},
-			},
-		},
-	},
-})
+-- require("telescope").setup({
+-- 	defaults = {
+-- 		layout_config = {
+-- 			horizontal = {
+-- 				width = 0.99,
+-- 				height = 0.99,
+-- 			},
+-- 		},
+-- 		mappings = {
+-- 			i = {
+-- 				["<C-j>"] = function(...)
+-- 					local actions = require("telescope.actions")
+-- 					actions.move_selection_next(...)
+-- 				end,
+-- 				["<C-k>"] = function(...)
+-- 					local actions = require("telescope.actions")
+-- 					actions.move_selection_previous(...)
+-- 				end,
+-- 				["<C-g>"] = function(...)
+-- 					local actions = require("telescope.actions")
+-- 					actions.close(...)
+-- 				end,
+-- 				["<esc>"] = function(...)
+-- 					local actions = require("telescope.actions")
+-- 					actions.close(...)
+-- 				end,
+-- 			},
+-- 		},
+-- 	},
+-- 	pickers = {},
+-- 	extensions = {
+--
+-- 		["ui-select"] = {
+-- 			require("telescope.themes").get_dropdown({}),
+-- 		},
+-- 		live_grep_args = {
+-- 			auto_quoting = true,
+-- 			mappings = {
+-- 				i = {
+-- 					["<C-y>"] = lga_actions.quote_prompt(),
+-- 					["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
+-- 					["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- })
 -- }}}
 
-local rest_ok, rest = pcall(require, "rest-nvim")
-if not rest_ok then
-	vim.notify("RestNvim not loaded", 3)
-	return
-end
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = "*.http",
-	callback = function(opts)
-		vim.bo.filetype = "http"
-		wk.register({
-			["<leader>"] = {
-				["r"] = { rest.run, "Execute" },
-				["l"] = { rest.last, "Execute" },
-			},
-		})
-	end,
-})
+-- local rest_ok, rest = pcall(require, "rest-nvim")
+-- if not rest_ok then
+-- 	vim.notify("RestNvim not loaded", 3)
+-- 	return
+-- end
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	pattern = "*.http",
+-- 	callback = function(opts)
+-- 		vim.bo.filetype = "http"
+-- 		wk.register({
+-- 			["<leader>"] = {
+-- 				["r"] = { rest.run, "Execute" },
+-- 				["l"] = { rest.last, "Execute" },
+-- 			},
+-- 		})
+-- 	end,
+-- })
 
 -- autocmds {{{
 local aucmd_dict = {
@@ -510,6 +510,13 @@ local aucmd_dict = {
 		},
 	},
 }
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "*.http",
+	callback = function(opts)
+		vim.bo.filetype = "http"
+	end,
+})
 
 for event, opt_tbls in pairs(aucmd_dict) do
 	for _, opt_tbl in pairs(opt_tbls) do
