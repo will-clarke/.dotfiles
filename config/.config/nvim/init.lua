@@ -28,6 +28,17 @@ vim.g.gitblame_enabled = false
 vim.cmd([[set foldmethod=expr]])
 vim.cmd([[set foldexpr=nvim_treesitter#foldexpr()]])
 vim.cmd([[set nofoldenable]]) -- Disable folding at startup.
+
+-- persitent undo
+local undodir = vim.fn.stdpath("config") .. "/undodir"
+-- Create the undodir directory if it doesn't exist
+if vim.fn.isdirectory(undodir) == 0 then
+	vim.fn.mkdir(undodir, "p")
+end
+-- Set the undodir and enable undofile
+vim.cmd("set undodir=" .. undodir)
+vim.cmd("set undofile")
+
 -- }}}
 
 -- autocmds {{{
@@ -101,7 +112,8 @@ require("lazy").setup({
 							["af"] = "@function.outer",
 							["if"] = "@function.inner",
 							["ac"] = "@class.outer",
-							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+							["ic"] = { query = "@class.inner", desc =
+							"Select inner part of a class region" },
 
 							["ab"] = "@block.outer",
 							["ib"] = "@block.inner",
@@ -251,7 +263,8 @@ require("lazy").setup({
 				virtual_text = {
 					format = function(diagnostic)
 						local message =
-							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+						    diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " ")
+						    :gsub("^%s+", "")
 						return message
 					end,
 				},
@@ -367,10 +380,10 @@ require("lazy").setup({
 		cmd = { "ZkNew", "ZkNotes", "ZkTags" },
 		keys = {
 			{ "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "Zk New" },
-			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", "Zk Work" },
-			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", "Zk Diary" },
-			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Zk Open" },
-			{ "<leader>zt", "<Cmd>ZkTags<CR>", "Zk Tags" },
+			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>",                  "Zk Work" },
+			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>",                 "Zk Diary" },
+			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",         "Zk Open" },
+			{ "<leader>zt", "<Cmd>ZkTags<CR>",                                    "Zk Tags" },
 		},
 	},
 	{
@@ -501,21 +514,24 @@ end
 -- }}}
 
 -- which key {{{
-local ok, wk = pcall(require, "which-key")
-if ok then
+local wk_ok, wk = pcall(require, "which-key")
+if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
+		["M-c"] = { '"+y<ESC>', "yank" },
 		["<leader>"] = {
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
 			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
+			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+				"Search text" },
 			["."] = { ":Telescope grep_string<CR>", "grep string" },
 			[";"] = { ":Telescope resume<CR>", "resume" },
 			d = { ":Telescope diagnostics<CR>", "diagnostics" },
 			q = { "<CMD>copen<CR>", "quickfix" },
+			n = { ":enew<CR>", "cnext" },
 			m = { ":cnext<CR>", "cnext" },
 			M = { ":TSJToggle<CR>", "Join toggle" },
 			[","] = { ":cprev<CR>", "cprev" },
@@ -534,6 +550,7 @@ if ok then
 				w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
 				p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
 				n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
+				d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "diagnostic" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
 			},
 			t = {
