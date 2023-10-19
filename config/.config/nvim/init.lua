@@ -41,19 +41,6 @@ vim.cmd("set undofile")
 
 -- }}}
 
--- autocmds {{{
-vim.cmd([[autocmd! BufWinEnter COMMIT_EDITMSG,NeogitCommitMessage if getline(1) == '' | startinsert! | endif]])
-vim.cmd([[autocmd! BufWritePre *go,*lua lua vim.lsp.buf.format()]])
-vim.cmd(
-	[[autocmd! FileType help,lspinfo,man,git,neotest-*,dap-float,qf,messages silent! nnoremap <buffer> q :close<CR>]]
-)
-vim.cmd(
-	[[autocmd! BufWritePre *.go :silent! lua vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })]]
-)
-vim.cmd([[ autocmd! TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }]])
-
--- }}}
-
 -- plugins {{{
 require("lazy").setup({
 	"folke/which-key.nvim",
@@ -70,6 +57,14 @@ require("lazy").setup({
 	"hrsh7th/cmp-emoji",
 	"nvim-treesitter/nvim-treesitter-context",
 	"nvim-telescope/telescope-live-grep-args.nvim",
+	{
+		"rest-nvim/rest.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("rest-nvim").setup({})
+		end,
+		cmd = {},
+	},
 	{
 		"nvimtools/none-ls.nvim",
 	},
@@ -112,8 +107,7 @@ require("lazy").setup({
 							["af"] = "@function.outer",
 							["if"] = "@function.inner",
 							["ac"] = "@class.outer",
-							["ic"] = { query = "@class.inner", desc =
-							"Select inner part of a class region" },
+							["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 
 							["ab"] = "@block.outer",
 							["ib"] = "@block.inner",
@@ -263,8 +257,7 @@ require("lazy").setup({
 				virtual_text = {
 					format = function(diagnostic)
 						local message =
-						    diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " ")
-						    :gsub("^%s+", "")
+							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
 						return message
 					end,
 				},
@@ -380,10 +373,10 @@ require("lazy").setup({
 		cmd = { "ZkNew", "ZkNotes", "ZkTags" },
 		keys = {
 			{ "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", "Zk New" },
-			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>",                  "Zk Work" },
-			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>",                 "Zk Diary" },
-			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>",         "Zk Open" },
-			{ "<leader>zt", "<Cmd>ZkTags<CR>",                                    "Zk Tags" },
+			{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", "Zk Work" },
+			{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", "Zk Diary" },
+			{ "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", "Zk Open" },
+			{ "<leader>zt", "<Cmd>ZkTags<CR>", "Zk Tags" },
 		},
 	},
 	{
@@ -525,8 +518,7 @@ if wk_ok then
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
 			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
-			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
-				"Search text" },
+			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
 			["."] = { ":Telescope grep_string<CR>", "grep string" },
 			[";"] = { ":Telescope resume<CR>", "resume" },
 			d = { ":Telescope diagnostics<CR>", "diagnostics" },
@@ -859,4 +851,80 @@ require("telescope").setup({
 		},
 	},
 })
+-- }}}
+
+local rest_ok, rest = pcall(require, "rest-nvim")
+if not rest_ok then
+	vim.notify("RestNvim not loaded", 3)
+	return
+end
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "*.http",
+	callback = function(opts)
+		vim.bo.filetype = "http"
+		wk.register({
+			["<leader>"] = {
+				["r"] = { rest.run, "Execute" },
+				["l"] = { rest.last, "Execute" },
+			},
+		})
+	end,
+})
+
+-- autocmds {{{
+local aucmd_dict = {
+	TextYankPost = {
+		{
+			pattern = "*",
+			callback = function()
+				vim.highlight.on_yank({ higroup = "IncSearch", timeout = 120 })
+			end,
+		},
+	},
+	BufWinEnter = {
+		{
+			pattern = "COMMIT_EDITMSG,NeogitCommitMessage",
+			callback = function()
+				if vim.fn.getline(1) == "" then
+					vim.cmd("startinsert")
+				end
+			end,
+		},
+	},
+	BufWritePre = {
+		{
+			pattern = "*.lua",
+			callback = function()
+				vim.lsp.buf.format()
+			end,
+		},
+		{
+			pattern = "*.go",
+			callback = function()
+				vim.lsp.buf.format()
+				vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+			end,
+		},
+	},
+	FileType = {
+		{
+			pattern = "markdown,txt",
+			callback = function()
+				vim.api.nvim_win_set_option(0, "spell", true)
+			end,
+		},
+		{
+			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,startuptime",
+			callback = function()
+				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+			end,
+		},
+	},
+}
+
+for event, opt_tbls in pairs(aucmd_dict) do
+	for _, opt_tbl in pairs(opt_tbls) do
+		vim.api.nvim_create_autocmd(event, opt_tbl)
+	end
+end
 -- }}}
