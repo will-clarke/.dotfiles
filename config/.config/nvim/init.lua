@@ -130,14 +130,14 @@ if wk_ok then
 			},
 		},
 	})
+	-- text objects
+	wk.register({
+		ae = { ":<C-u>norm! mzggVG<CR>", "Entire buffer text object" },
+		ie = { ":<C-u>norm! mzggVG<CR>", "Entire buffer text object" },
+		al = { ":<C-u>norm! 0v$<cr>", "around line" },
+		il = { ":<C-u>norm! _vg_<cr>", "in line" },
+	}, { prefix = "", mode = "o" })
 end
-
-vim.keymap.set({ "x", "o" }, "al", ":<C-u>norm! 0v$<cr>", { desc = "Line text object" })
-vim.keymap.set({ "x", "o" }, "il", ":<C-u>norm! _vg_<cr>", { desc = "Line text object" })
-
-vim.keymap.set({ "x", "o" }, "ae", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
-vim.keymap.set({ "x", "o" }, "ie", ":<C-u>norm! mzggVG<CR>", { desc = "Entire buffer text object" })
--- }}}
 
 -- autocmds {{{
 local aucmd_dict = {
