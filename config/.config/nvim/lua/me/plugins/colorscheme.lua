@@ -12,13 +12,13 @@ return {
 			end
 
 			catppuccin.setup({
-				transparent_background = true,
+				-- transparent_background = true,
 				term_colors = true,
-				dim_inactive = {
-					enabled = true,
-					percentage = 0.5,
-				},
-				highliight = {
+				-- dim_inactive = {
+				-- 	enabled = true,
+				-- 	percentage = 0.5,
+				-- },
+				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = false,
 				},

@@ -17,19 +17,19 @@ return {
 		end,
 		event = "VeryLazy",
 	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			require("catppuccin").setup({
-				integrations = {
-					harpoon = true,
-				},
-			})
-			vim.cmd.colorscheme("catppuccin")
-		end,
-	},
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("catppuccin").setup({
+	-- 			integrations = {
+	-- 				harpoon = true,
+	-- 			},
+	-- 		})
+	-- 		vim.cmd.colorscheme("catppuccin")
+	-- 	end,
+	-- },
 	-- {
 	-- 	"ldelossa/gh.nvim",
 	-- 	dependencies = { "ldelossa/litee.nvim" },

@@ -1,12 +1,13 @@
 require("me")
 
+-- vim.cmd.colorscheme(vim.g.colorscheme)
+
 local wk_ok, wk = pcall(require, "which-key")
 if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
-		["M-c"] = { '"+y<ESC>', "yank" },
 		["<leader>"] = {
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
@@ -94,6 +95,7 @@ if wk_ok then
 						s = { "<cmd>GHSubmitReview<cr>", "Submit" },
 						z = { "<cmd>GHCollapseReview<cr>", "Collapse" },
 					},
+					-- z = { require("gitsigns").preview_hunk(), "preview hunk" },
 					p = {
 						name = "+Pull Request",
 						c = { "<cmd>GHClosePR<cr>", "Close" },
@@ -129,6 +131,38 @@ if wk_ok then
 				n = { "<cmd>e tmp<cr>", "New File" }, -- just a label. don't create any mapping
 			},
 		},
+		["["] = {
+			h = {
+				function()
+					if vim.wo.diff then
+						return "[c"
+					end
+					vim.schedule(function()
+						local gs = require("gitsigns")
+						gs.prev_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				{ expr = true },
+				"prev hunk",
+			},
+		},
+		["]"] = {
+			h = {
+				function()
+					if vim.wo.diff then
+						return "[c"
+					end
+					vim.schedule(function()
+						local gs = require("gitsigns")
+						gs.next_hunk()
+					end)
+					return "<Ignore>"
+				end,
+				{ expr = true },
+				"next hunk",
+			},
+		},
 	})
 	-- text objects
 	wk.register({
@@ -136,6 +170,7 @@ if wk_ok then
 		ie = { ":<C-u>norm! mzggVG<CR>", "Entire buffer text object" },
 		al = { ":<C-u>norm! 0v$<cr>", "around line" },
 		il = { ":<C-u>norm! _vg_<cr>", "in line" },
+		ih = { ":<C-U>Gitsigns select_hunk<CR>", "in hunk" },
 	}, { prefix = "", mode = "o" })
 end
 
