@@ -1,7 +1,5 @@
 require("me")
 
--- vim.cmd.colorscheme(vim.g.colorscheme)
-
 local wk_ok, wk = pcall(require, "which-key")
 if wk_ok then
 	wk.register({
