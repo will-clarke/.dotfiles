@@ -57,15 +57,15 @@ return {
 					harpoon = true,
 					bufferline = true,
 				},
-				highlight_overrides = {
-					all = function(_)
-						local colors = require("me.colorschemes.catppuccin")
-						return {
-							CursorLine = { bg = colors.darker_black },
-							ColorColumn = { bg = colors.darker_black },
-						}
-					end,
-				},
+				-- highlight_overrides = {
+				-- 	all = function(_)
+				-- 		local colors = require("me.colorschemes.catppuccin")
+				-- 		return {
+				-- 			CursorLine = { bg = colors.darker_black },
+				-- 			ColorColumn = { bg = colors.darker_black },
+				-- 		}
+				-- 	end,
+				-- },
 				compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 			})
 			vim.cmd.colorscheme(vim.g.colorscheme)

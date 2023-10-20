@@ -162,7 +162,8 @@ return {
 			},
 			pyright = true,
 			lua_ls = {
-				settings = { -- custom settings for lua
+				settings = {
+					-- custom settings for lua
 					Lua = {
 						-- make the language server recognize "vim" global
 						diagnostics = {
