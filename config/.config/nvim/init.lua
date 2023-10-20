@@ -1,57 +1,5 @@
 require("me")
--- linting formatting etc
--- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
--- local null_ls_sources = {}
--- local null_ls_ok, null_ls = pcall(require, "null-ls")
--- if null_ls_ok then
--- 	null_ls_sources = {
--- 		null_ls.builtins.formatting.autoflake,
--- 		null_ls.builtins.formatting.jq,
--- 		null_ls.builtins.diagnostics.mypy,
--- 		null_ls.builtins.code_actions.shellcheck,
--- 		null_ls.builtins.formatting.stylua,
--- 		null_ls.builtins.diagnostics.jsonlint,
--- 	}
--- 	null_ls.setup({
--- 		sources = null_ls_sources,
--- 	})
--- end
 
--- local mason_ok, mason = pcall(require, "mason")
--- if mason_ok then
--- 	local packages = {
--- 		"gopls",
--- 		"rust-analyzer",
--- 		"lua-language-server",
--- 		"stylua",
--- 	}
--- 	-- if null_ls_sources , append to packages
--- 	for _, source in ipairs(null_ls_sources) do
--- 		local name = source.name
--- 		if name then
--- 			table.insert(packages, name)
--- 		end
--- 	end
---
--- 	vim.api.nvim_create_user_command("MasonInstallAll", function()
--- 		vim.cmd("MasonInstall " .. table.concat(packages, " "))
--- 	end, {})
---
--- 	local reg_ok, registry = pcall(require, "mason-registry")
--- 	if reg_ok then
--- 		registry.refresh(function()
--- 			for _, pkg_name in ipairs(packages) do
--- 				local pkg = registry.get_package(pkg_name)
--- 				if not pkg:is_installed() then
--- 					pkg:install()
--- 				end
--- 			end
--- 		end)
--- 	end
--- end
--- }}}
-
--- which key {{{
 local wk_ok, wk = pcall(require, "which-key")
 if wk_ok then
 	wk.register({
@@ -78,7 +26,23 @@ if wk_ok then
 			k = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
 			c = { ":e ~/.config/nvim/init.lua<CR>", "config" },
 			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
-			r = { "<CMD>Telescope frecency<CR>", "recent files" },
+			r = {
+				function()
+					local buf = vim.api.nvim_get_current_buf()
+					local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+					if ft == "http" then
+						local rest_ok, rest = pcall(require, "rest-nvim")
+						if not rest_ok then
+							vim.notify("RestNvim not loaded", 3)
+							return
+						end
+						rest.run()
+					else
+						require("telescope.builtin").oldfiles()
+					end
+				end,
+				"do something",
+			},
 			l = {
 				name = "LSP",
 				a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "codea action" },
@@ -218,7 +182,7 @@ local aucmd_dict = {
 			end,
 		},
 		{
-			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,startuptime",
+			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime",
 			callback = function()
 				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			end,
@@ -226,12 +190,12 @@ local aucmd_dict = {
 	},
 }
 
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = "*.http",
-	callback = function(opts)
-		vim.bo.filetype = "http"
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	pattern = "*.http",
+-- 	callback = function(opts)
+-- 		vim.bo.filetype = "http"
+-- 	end,
+-- })
 
 for event, opt_tbls in pairs(aucmd_dict) do
 	for _, opt_tbl in pairs(opt_tbls) do
