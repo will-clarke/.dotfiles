@@ -22,6 +22,7 @@ if wk_ok then
 			s = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
 			a = { ":lua require('harpoon.mark').add_file()<CR>", "add harpoon" },
 			j = { ':lua require("harpoon.ui").nav_file(1)<CR>', "harpoon #1" },
+			h = { ':lua require("harpoon.ui").nav_file(3)<CR>', "harpoon #3" },
 			k = { ':lua require("harpoon.ui").nav_file(2)<CR>', "harpoon #2" },
 			c = { ":e ~/.config/nvim/init.lua<CR>", "config" },
 			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
