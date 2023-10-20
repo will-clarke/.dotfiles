@@ -4,17 +4,23 @@ return {
 		"zbirenbaum/copilot-cmp",
 		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-nvim-lsp",
-		"L3MON4D3/LuaSnip", -- << get this working!!
 		"zbirenbaum/copilot.lua",
+		{
+			"L3MON4D3/LuaSnip",
+			tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+			run = "make install_jsregexp", -- optional!
+		},
 	},
 	config = function()
 		local cmp_status_ok, cmp = pcall(require, "cmp")
 		if not cmp_status_ok then
+			vim.notify("cmp not loaded", 3)
 			return
 		end
 
 		local snip_status_ok, luasnip = pcall(require, "luasnip")
 		if not snip_status_ok then
+			vim.notify("luasnip not loaded", 3)
 			return
 		end
 
@@ -126,7 +132,7 @@ return {
 				{ name = "copilot", priority = 1000 },
 				{ name = "emoji" },
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
+				-- { name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
 			},
@@ -142,6 +148,11 @@ return {
 			experimental = {
 				ghost_text = false,
 				native_menu = false,
+			},
+			snippet = {
+				expand = function(args)
+					require("luasnip").lsp_expand(args.body)
+				end,
 			},
 		})
 
