@@ -139,13 +139,13 @@ return {
 					},
 				},
 			},
-			astro = true,
+			-- astro = true,
 			rust_analyzer = true,
-			svelte = true,
-			tailwindcss = true,
+			-- svelte = true,
+			-- tailwindcss = true,
 			cssls = true,
 			jsonls = true,
-			prismals = true,
+			-- prismals = true,
 			graphql = true,
 			emmet_ls = {
 				filetypes = {

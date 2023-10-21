@@ -34,7 +34,7 @@ return {
 			"lua-language-server",
 			"html-lsp",
 			"css-lsp",
-			"tailwindcss-language-server",
+			-- "tailwindcss-language-server",
 			"svelte-language-server",
 			"graphql-language-service-cli",
 			"emmet-ls",
