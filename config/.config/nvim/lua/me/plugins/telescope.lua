@@ -139,60 +139,9 @@ return {
 			},
 		})
 
-		-- for group, color in pairs(hlgroups) do
-		-- 	vim.api.nvim_set_hl(0, group, color)
-		-- end
-
 		telescope.load_extension("harpoon")
 		telescope.load_extension("frecency")
 		telescope.load_extension("ui-select")
-
-		local builtin = require("telescope.builtin")
-
-		local mappings = {
-			n = {
-				-- project files
-				["<leader>pf"] = {
-					builtin.find_files,
-					"Telescope find files",
-				},
-				-- git files
-				["<C-p>"] = {
-					builtin.git_files,
-					"Telescope find git files",
-				},
-				-- colorschemes
-				["<leader>th"] = {
-					builtin.colorscheme,
-					"Telescope show colorschemes",
-				},
-				-- find string
-				["<leader>ps"] = {
-					function()
-						builtin.grep_string({
-							search = vim.fn.input("Grep -> "),
-						})
-					end,
-					"Telescope grep string",
-				},
-				-- keymaps
-				["<leader>km"] = {
-					builtin.keymaps,
-					"Telescope show keymaps",
-				},
-				-- help tags
-				["<leader>ht"] = {
-					builtin.help_tags,
-					"Telescope show help tags",
-				},
-				-- commands
-				["<A-p>"] = {
-					builtin.commands,
-					"Telescope show commands",
-				},
-			},
-		}
-
-		require("me.core.utils").map_keys(mappings)
+		telescope.load_extension("yank_history")
 	end,
 }

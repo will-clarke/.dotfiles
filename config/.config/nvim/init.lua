@@ -6,6 +6,69 @@ if wk_ok then
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
+		["<c-n>"] = { "<Plug>(YankyCycleBackward)", "yank backward" },
+		["<c-p>"] = { "<Plug>(YankyCycleForward)", "yank forward" },
+		p = { "<Plug>(YankyPutAfter)", "put after" },
+		P = { "<Plug>(YankyPutBefore)", "put before" },
+		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
+		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
+
+		-- local mappings = {
+		-- 	n = {
+		-- 		["gR"] = {
+		-- 			telescope_builtin.lsp_references,
+		-- 			"LSP show references",
+		-- 		},
+		-- 		["gD"] = {
+		-- 			vim.lsp.buf.declaration,
+		-- 			"LSP go to declaration",
+		-- 		},
+		-- 		["gd"] = {
+		-- 			telescope_builtin.lsp_definitions,
+		-- 			"LSP show definitions",
+		-- 		},
+		-- 		["gi"] = {
+		-- 			telescope_builtin.lsp_implementations,
+		-- 			"LSP show implementations",
+		-- 		},
+		-- 		["gt"] = {
+		-- 			telescope_builtin.lsp_type_definitions,
+		-- 			"LSP show type definitions",
+		-- 		},
+		-- 		["<leader>la"] = {
+		-- 			vim.lsp.buf.code_action,
+		-- 			"LSP see available code actions",
+		-- 		},
+		-- 		["<leader>lr"] = {
+		-- 			vim.lsp.buf.rename,
+		-- 			"LSP rename",
+		-- 		},
+		-- 		["<leader>D"] = {
+		-- 			function()
+		-- 				telescope_builtin.diagnostics({ bufnr = bufnr })
+		-- 			end,
+		-- 			"LSP show buffer diagnostics",
+		-- 		},
+		-- 		["[d"] = {
+		-- 			vim.diagnostic.goto_prev,
+		-- 			"LSP go to previous diagnostic",
+		-- 		},
+		-- 		["]d"] = {
+		-- 			vim.diagnostic.goto_next,
+		-- 			"LSP go to next diagnostic",
+		-- 		},
+		-- 		["<leader>ld"] = {
+		-- 			vim.diagnostic.open_float,
+		-- 			"LSP show line diagnostic",
+		-- 		},
+		-- 		["K"] = {
+		-- 			vim.lsp.buf.hover,
+		-- 			"LSP show documentation under cursor",
+		-- 		},
+		-- 	},
+		-- }
+		-- require("me.core.utils").map_keys(mappings, opts)
+
 		["<leader>"] = {
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
@@ -13,6 +76,7 @@ if wk_ok then
 			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
 			["."] = { ":Telescope grep_string<CR>", "grep string" },
 			[";"] = { ":Telescope resume<CR>", "resume" },
+			p = { ":Telescope yank_history<CR>", "paste history" },
 			e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
 			b = { ":Telescope buffers<CR>", "buffers" },
 			q = { "<CMD>copen<CR>", "quickfix" },

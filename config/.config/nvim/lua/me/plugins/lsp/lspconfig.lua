@@ -36,67 +36,8 @@ return {
 
 		local opts = { noremap = true, silent = true }
 
-		-- Function that runs when server is attached to buffer
-		---@param _ table Client
-		---@param bufnr integer Number of buffer
 		local on_attach = function(_, bufnr)
 			opts.buffer = bufnr
-
-			local mappings = {
-				n = {
-					["gR"] = {
-						telescope_builtin.lsp_references,
-						"LSP show references",
-					},
-					["gD"] = {
-						vim.lsp.buf.declaration,
-						"LSP go to declaration",
-					},
-					["gd"] = {
-						telescope_builtin.lsp_definitions,
-						"LSP show definitions",
-					},
-					["gi"] = {
-						telescope_builtin.lsp_implementations,
-						"LSP show implementations",
-					},
-					["gt"] = {
-						telescope_builtin.lsp_type_definitions,
-						"LSP show type definitions",
-					},
-					["<leader>la"] = {
-						vim.lsp.buf.code_action,
-						"LSP see available code actions",
-					},
-					["<leader>lr"] = {
-						vim.lsp.buf.rename,
-						"LSP rename",
-					},
-					["<leader>D"] = {
-						function()
-							telescope_builtin.diagnostics({ bufnr = bufnr })
-						end,
-						"LSP show buffer diagnostics",
-					},
-					["[d"] = {
-						vim.diagnostic.goto_prev,
-						"LSP go to previous diagnostic",
-					},
-					["]d"] = {
-						vim.diagnostic.goto_next,
-						"LSP go to next diagnostic",
-					},
-					["<leader>ld"] = {
-						vim.diagnostic.open_float,
-						"LSP show line diagnostic",
-					},
-					["K"] = {
-						vim.lsp.buf.hover,
-						"LSP show documentation under cursor",
-					},
-				},
-			}
-			require("me.core.utils").map_keys(mappings, opts)
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
