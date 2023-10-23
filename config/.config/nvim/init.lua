@@ -1,5 +1,7 @@
 require("me")
 
+-- Plugin directory:
+-- ./lua/me/plugins/
 local wk_ok, wk = pcall(require, "which-key")
 
 if wk_ok then
@@ -224,6 +226,14 @@ local aucmd_dict = {
 			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime",
 			callback = function()
 				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+			end,
+		},
+	},
+	User = {
+		{
+			pattern = "GitConflictDetected",
+			callback = function()
+				vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
 			end,
 		},
 	},
