@@ -1,6 +1,7 @@
 require("me")
 
 local wk_ok, wk = pcall(require, "which-key")
+
 if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
@@ -13,62 +14,9 @@ if wk_ok then
 		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
 		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
 
-		-- local mappings = {
-		-- 	n = {
-		-- 		["gR"] = {
-		-- 			telescope_builtin.lsp_references,
-		-- 			"LSP show references",
-		-- 		},
-		-- 		["gD"] = {
-		-- 			vim.lsp.buf.declaration,
-		-- 			"LSP go to declaration",
-		-- 		},
-		-- 		["gd"] = {
-		-- 			telescope_builtin.lsp_definitions,
-		-- 			"LSP show definitions",
-		-- 		},
-		-- 		["gi"] = {
-		-- 			telescope_builtin.lsp_implementations,
-		-- 			"LSP show implementations",
-		-- 		},
-		-- 		["gt"] = {
-		-- 			telescope_builtin.lsp_type_definitions,
-		-- 			"LSP show type definitions",
-		-- 		},
-		-- 		["<leader>la"] = {
-		-- 			vim.lsp.buf.code_action,
-		-- 			"LSP see available code actions",
-		-- 		},
-		-- 		["<leader>lr"] = {
-		-- 			vim.lsp.buf.rename,
-		-- 			"LSP rename",
-		-- 		},
-		-- 		["<leader>D"] = {
-		-- 			function()
-		-- 				telescope_builtin.diagnostics({ bufnr = bufnr })
-		-- 			end,
-		-- 			"LSP show buffer diagnostics",
-		-- 		},
-		-- 		["[d"] = {
-		-- 			vim.diagnostic.goto_prev,
-		-- 			"LSP go to previous diagnostic",
-		-- 		},
-		-- 		["]d"] = {
-		-- 			vim.diagnostic.goto_next,
-		-- 			"LSP go to next diagnostic",
-		-- 		},
-		-- 		["<leader>ld"] = {
-		-- 			vim.diagnostic.open_float,
-		-- 			"LSP show line diagnostic",
-		-- 		},
-		-- 		["K"] = {
-		-- 			vim.lsp.buf.hover,
-		-- 			"LSP show documentation under cursor",
-		-- 		},
-		-- 	},
-		-- }
-		-- require("me.core.utils").map_keys(mappings, opts)
-
+		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
+		["]d"] = { vim.diagnostic.goto_next, "next diagnostic" },
+		K = { vim.lsp.buf.hover, "hover" },
 		["<leader>"] = {
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
@@ -116,8 +64,15 @@ if wk_ok then
 				w = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "workspace symbol" },
 				p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous diagnostic" },
 				n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
-				d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "diagnostic" },
 				o = { "<cmd>Telescope lsp_document_symbols<CR>", "outline" },
+				d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "diagnostic" },
+				D = {
+					function()
+						local bufnr = vim.api.nvim_get_current_buf()
+						require("telescope.builtin").diagnostics({ bufnr = bufnr })
+					end,
+					"LSP show buffer diagnostics",
+				},
 			},
 			t = {
 				t = { "<cmd>lua require('neotest').run.run({path, extra_args = {'-race'}})<CR>", "test" },
@@ -134,7 +89,7 @@ if wk_ok then
 			d = {
 				c = { "<CMD>lua require('dap').continue()<CR>", "continue" },
 				i = { "<CMD>lua require('dap').step_into()<CR>", "step into" },
-				O = { "<CMD>lua require('dap').step_over()<CR>", "step over" },
+				s = { "<CMD>lua require('dap').step_over()<CR>", "step over" },
 				o = { "<CMD>lua require('dap').step_out()<CR>", "step out" },
 				b = { "<CMD>lua require('dap').toggle_breakpoint()<CR>", "toggle breakpoint" },
 				B = { "<CMD>lua require('dap').set_breakpoint()<CR>", "set breakpoint" },
@@ -150,7 +105,11 @@ if wk_ok then
 					"<CMD>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').widgets.frames)<CR>",
 					"frames",
 				},
-				s = {
+				X = {
+					"<CMD>lua require('dap').disconnect({ terminateDebuggee = true }); require('dap').close()<CR>",
+					"exit",
+				},
+				S = {
 					"<CMD>lua require('dap.ui.widgets').centered_float(require('dap.ui.widgets').scopes)<CR>",
 					"scopes",
 				},
