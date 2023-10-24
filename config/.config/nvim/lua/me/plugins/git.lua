@@ -17,10 +17,11 @@ return {
 		event = "VeryLazy",
 	},
 	{
+		-- note this plugin only operates when the git repo is in a conflict state..
+		-- just git add won't work
 		"akinsho/git-conflict.nvim",
 		version = "*",
 		config = true,
 		event = "VeryLazy",
-		lazy = false,
 	},
 }

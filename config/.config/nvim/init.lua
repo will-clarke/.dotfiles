@@ -48,6 +48,8 @@ if wk_ok then
 		["[a"] = { ":previous<CR>", "previous" },
 		["]q"] = { ":cnext<CR>", "cnext" },
 		["[q"] = { ":cprevious<CR>", "cprevious" },
+		["[x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict" }, -- I think these are back to front
+		["]x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict" },
 		["]f"] = {
 			function()
 				editNextFile(1)
@@ -282,7 +284,7 @@ local aucmd_dict = {
 		{
 			pattern = "GitConflictDetected",
 			callback = function()
-				vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
+				vim.notify("Conflict detected!!")
 			end,
 		},
 	},
