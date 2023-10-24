@@ -1,5 +1,6 @@
 require("me")
 -- ./lua/me/plugins/
+-- ./lua/me/plugins/git.lua
 
 local wk_ok, wk = pcall(require, "which-key")
 
@@ -39,7 +40,10 @@ if wk_ok then
 		P = { "<Plug>(YankyPutBefore)", "put before" },
 		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
 		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
-
+		co = { "<Plug>(git-conflict-ours)", "conflict ours" },
+		ct = { "<Plug>(git-conflict-theirs)", "conflict theirs" },
+		cb = { "<Plug>(git-conflict-both)", "conflict both" },
+		["c0"] = { "<Plug>(git-conflict-none)", "conflict none" },
 		["]d"] = { vim.diagnostic.goto_next, "next diagnostic" },
 		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
 		["]b"] = { ":bnext<CR>", "bnext" },
@@ -48,8 +52,8 @@ if wk_ok then
 		["[a"] = { ":previous<CR>", "previous" },
 		["]q"] = { ":cnext<CR>", "cnext" },
 		["[q"] = { ":cprevious<CR>", "cprevious" },
-		["[x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict" }, -- I think these are back to front
-		["]x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict" },
+		["]x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict" },
+		["[x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict" },
 		["]f"] = {
 			function()
 				editNextFile(1)
@@ -164,7 +168,8 @@ if wk_ok then
 				},
 			},
 			g = {
-				g = { "<CMD>Neogit<CR>", "git" },
+				-- g = { "<CMD>Neogit<CR>", "git" },
+				g = { "<CMD>Git<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
 			},

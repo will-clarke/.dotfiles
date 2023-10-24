@@ -1,5 +1,8 @@
 return {
-
+	{
+		"tpope/vim-fugitive",
+		event = "VeryLazy",
+	},
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -21,7 +24,9 @@ return {
 		-- just git add won't work
 		"akinsho/git-conflict.nvim",
 		version = "*",
-		config = true,
+		config = {
+			default_mappings = false,
+		},
 		event = "VeryLazy",
 	},
 }
