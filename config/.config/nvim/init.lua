@@ -170,6 +170,8 @@ if wk_ok then
 			g = {
 				-- g = { "<CMD>Neogit<CR>", "git" },
 				g = { "<CMD>Git<CR>", "git" },
+				p = { "<CMD>Git pull<CR>", "git" },
+				P = { "<CMD>Git push<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
 			},
@@ -279,7 +281,7 @@ local aucmd_dict = {
 			end,
 		},
 		{
-			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime",
+			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime,fugitive",
 			callback = function()
 				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			end,
