@@ -30,6 +30,7 @@ return {
 			cancel_installation = "<C-c>",
 		},
 		ensure_installed = {
+			"vscode-json-language-server",
 			"typescript-language-server",
 			"lua-language-server",
 			"html-lsp",

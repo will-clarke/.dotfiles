@@ -21,8 +21,8 @@ return {
 						["ac"] = "@class.outer",
 						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 
-						["ab"] = "@block.outer",
-						["ib"] = "@block.inner",
+						-- ["ab"] = "@block.outer",
+						-- ["ib"] = "@block.inner",
 						["ad"] = "@conditional.outer",
 						["id"] = "@conditional.inner",
 						["ao"] = "@loop.outer",

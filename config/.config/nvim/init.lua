@@ -1,8 +1,32 @@
 require("me")
-
--- Plugin directory:
 -- ./lua/me/plugins/
+
 local wk_ok, wk = pcall(require, "which-key")
+
+-- ChangeToNextFile takes a num: 1 goes to the next, -1 to previous
+local function editNextFile(num)
+	local current_file = vim.fn.expand("%:p")
+	local current_dir = vim.fn.expand("%:p:h")
+	local files = vim.fn.readdir(current_dir)
+
+	-- Find the index of the current file in the directory
+	local current_index
+	for i, file in ipairs(files) do
+		if file == vim.fn.fnamemodify(current_file, ":t") then
+			current_index = i
+			break
+		end
+	end
+	print(current_index)
+
+	if current_index then
+		local next_index = (current_index % #files) + num
+		local next_file = current_dir .. "/" .. files[next_index]
+		vim.cmd("e " .. next_file)
+	else
+		print("Current file not found in the directory.")
+	end
+end
 
 if wk_ok then
 	wk.register({
@@ -16,9 +40,28 @@ if wk_ok then
 		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
 		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
 
-		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
 		["]d"] = { vim.diagnostic.goto_next, "next diagnostic" },
+		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
+		["]b"] = { ":bnext<CR>", "bnext" },
+		["[b"] = { ":bprevious<CR>", "bprevious" },
+		["]a"] = { ":next<CR>", "next" },
+		["[a"] = { ":previous<CR>", "previous" },
+		["]q"] = { ":cnext<CR>", "cnext" },
+		["[q"] = { ":cprevious<CR>", "cprevious" },
+		["]f"] = {
+			function()
+				editNextFile(1)
+			end,
+			"next file",
+		},
+		["[f"] = {
+			function()
+				editNextFile(-1)
+			end,
+			"previous file",
+		},
 		K = { vim.lsp.buf.hover, "hover" },
+
 		["<leader>"] = {
 			["?"] = { "<CMD>Telescope keymaps<CR>", "keymaps" },
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
@@ -29,6 +72,8 @@ if wk_ok then
 			p = { ":Telescope yank_history<CR>", "paste history" },
 			e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
 			b = { ":Telescope buffers<CR>", "buffers" },
+			o = { "<Plug>SnipRun", "SnipRun" },
+			O = { "<Plug>SnipRunOperator", "SnipRunOperator" },
 			q = { "<CMD>copen<CR>", "quickfix" },
 			n = { ":enew<CR>", "cnext" },
 			m = { ":cnext<CR>", "cnext" },
@@ -178,6 +223,10 @@ if wk_ok then
 		il = { ":<C-u>norm! _vg_<cr>", "in line" },
 		ih = { ":<C-U>Gitsigns select_hunk<CR>", "in hunk" },
 	}, { prefix = "", mode = "o" })
+	-- visual mode
+	wk.register({
+		o = { "<Plug>SnipRun", "SnipRun" },
+	}, { mode = "v" })
 end
 
 -- autocmds {{{
