@@ -170,8 +170,8 @@ if wk_ok then
 			g = {
 				-- g = { "<CMD>Neogit<CR>", "git" },
 				g = { "<CMD>Git<CR>", "git" },
-				p = { "<CMD>Git pull<CR>", "git" },
-				P = { "<CMD>Git push<CR>", "git" },
+				p = { "<CMD>Git! pull<CR>", "git" },
+				P = { "<CMD>Git! push<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
 			},
