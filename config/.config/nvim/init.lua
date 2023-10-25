@@ -170,6 +170,10 @@ if wk_ok then
 			g = {
 				-- g = { "<CMD>Neogit<CR>", "git" },
 				g = { "<CMD>Git<CR>", "git" },
+				l = {
+					"<CMD>Git log --pretty='%h %cd [%aN%d] %s' --graph --date=relative --date-order<CR>",
+					"git log",
+				},
 				p = { "<CMD>Git! pull<CR>", "git" },
 				P = { "<CMD>Git! push<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
