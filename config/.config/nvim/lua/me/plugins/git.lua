@@ -24,9 +24,7 @@ return {
 		-- just git add won't work
 		"akinsho/git-conflict.nvim",
 		version = "*",
-		config = {
-			default_mappings = false,
-		},
+		config = {},
 		event = "VeryLazy",
 	},
 }
