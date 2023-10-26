@@ -63,3 +63,4 @@ end
 if type -q starship
   starship init fish | source
 end
+abbr dbi python3 ~/bin/dbibackend
