@@ -4,6 +4,11 @@ require("me")
 
 local wk_ok, wk = pcall(require, "which-key")
 
+vim.api.nvim_create_user_command("CopyBufferPath", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+end, {})
+
 -- ChangeToNextFile takes a num: 1 goes to the next, -1 to previous
 local function editNextFile(num)
 	local current_file = vim.fn.expand("%:p")
@@ -75,8 +80,10 @@ if wk_ok then
 			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
 			["."] = { ":Telescope grep_string<CR>", "grep string" },
 			[";"] = { ":Telescope resume<CR>", "resume" },
+			y = { ":CopyBufferPath<CR>", "copy buffer path" },
 			p = { ":Telescope yank_history<CR>", "paste history" },
 			e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
+			v = { ":lua Toggle_venn()<CR>", "Venn - Drawing!" },
 			b = { ":Telescope buffers<CR>", "buffers" },
 			o = { "<Plug>SnipRun", "SnipRun" },
 			O = { "<Plug>SnipRunOperator", "SnipRunOperator" },
