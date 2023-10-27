@@ -5,6 +5,8 @@ return {
 		function _G.Toggle_venn()
 			local venn_enabled = vim.inspect(vim.b.venn_enabled)
 			if venn_enabled == "nil" then
+				-- notify that venn is enabled and give shortcuts
+				vim.notify("Venn-mode enabled. Keys: HJKL & <v>f", 2)
 				vim.b.venn_enabled = true
 				vim.cmd([[setlocal ve=all]])
 				-- draw a line on HJKL keystokes
@@ -15,6 +17,7 @@ return {
 				-- draw a box by pressing "f" with visual selection
 				vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
 			else
+				vim.notify("Venn-mode disabled", 2)
 				vim.cmd([[setlocal ve=]])
 				vim.cmd([[mapclear <buffer>]])
 				vim.b.venn_enabled = nil
