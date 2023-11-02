@@ -125,6 +125,7 @@ return {
 						i = {
 							["<C-y>"] = lga_actions.quote_prompt(),
 							["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
+							["<C-t>"] = lga_actions.quote_prompt({ postfix = " -g!vendor -g!*_test.go -g!*.gen.go" }),
 							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
 						},
 					},

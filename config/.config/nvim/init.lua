@@ -78,7 +78,10 @@ if wk_ok then
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
 			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
 			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
-			["."] = { ":Telescope grep_string<CR>", "grep string" },
+			["."] = {
+				":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({postfix='',quote=false})<CR>",
+				"grep word",
+			},
 			[";"] = { ":Telescope resume<CR>", "resume" },
 			y = { ":CopyBufferPath<CR>", "copy buffer path" },
 			p = { ":Telescope yank_history<CR>", "paste history" },
@@ -246,6 +249,12 @@ if wk_ok then
 	-- visual mode
 	wk.register({
 		o = { "<Plug>SnipRun", "SnipRun" },
+		["<leader>"] = {
+			["."] = {
+				":lua require('telescope-live-grep-args.shortcuts').grep_visual_selection()<CR>",
+				"grep word",
+			},
+		},
 	}, { mode = "v" })
 end
 
@@ -288,7 +297,7 @@ local aucmd_dict = {
 		{
 			pattern = "markdown,txt",
 			callback = function()
-				vim.api.nvim_win_set_option(0, "spell", true)
+				-- vim.api.nvim_win_set_option(0, "spell", true)
 			end,
 		},
 		{
