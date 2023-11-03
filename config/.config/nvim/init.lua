@@ -1,4 +1,5 @@
 require("me")
+-- ./lua/me/init.lua
 -- ./lua/me/plugins/
 -- ./lua/me/plugins/git.lua
 
@@ -9,33 +10,21 @@ vim.api.nvim_create_user_command("CopyBufferPath", function()
 	vim.fn.setreg("+", path)
 end, {})
 
--- ChangeToNextFile takes a num: 1 goes to the next, -1 to previous
-local function editNextFile(num)
-	local current_file = vim.fn.expand("%:p")
-	local current_dir = vim.fn.expand("%:p:h")
-	local files = vim.fn.readdir(current_dir)
-
-	-- Find the index of the current file in the directory
-	local current_index
-	for i, file in ipairs(files) do
-		if file == vim.fn.fnamemodify(current_file, ":t") then
-			current_index = i
-			break
-		end
-	end
-	print(current_index)
-
-	if current_index then
-		local next_index = (current_index % #files) + num
-		local next_file = current_dir .. "/" .. files[next_index]
-		vim.cmd("e " .. next_file)
-	else
-		print("Current file not found in the directory.")
-	end
-end
+-- function buf_vtext()
+-- 	local a_orig = vim.fn.getreg("a")
+-- 	local mode = vim.fn.mode()
+-- 	if mode ~= "v" and mode ~= "V" then
+-- 		vim.cmd([[normal! gv]])
+-- 	end
+-- 	vim.cmd([[silent! normal! "aygv]])
+-- 	local text = vim.fn.getreg("a")
+-- 	vim.fn.setreg("a", a_orig)
+-- 	return text
+-- end
 
 if wk_ok then
 	wk.register({
+		gq = { "<cmd>lua buf_vtext()<CR>", "definition" },
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
@@ -316,6 +305,20 @@ local aucmd_dict = {
 		},
 	},
 }
+
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	pattern = "*.http",
+-- 	callback = function(opts)
+-- 		vim.bo.filetype = "http"
+-- 	end,
+-- })
+
+for event, opt_tbls in pairs(aucmd_dict) do
+	for _, opt_tbl in pairs(opt_tbls) do
+		vim.api.nvim_create_autocmd(event, opt_tbl)
+	end
+end
+-- }}}
 
 -- vim.api.nvim_create_autocmd("BufRead", {
 -- 	pattern = "*.http",
