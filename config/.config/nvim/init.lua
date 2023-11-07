@@ -8,23 +8,11 @@ local wk_ok, wk = pcall(require, "which-key")
 vim.api.nvim_create_user_command("CopyBufferPath", function()
 	local path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
 end, {})
-
--- function buf_vtext()
--- 	local a_orig = vim.fn.getreg("a")
--- 	local mode = vim.fn.mode()
--- 	if mode ~= "v" and mode ~= "V" then
--- 		vim.cmd([[normal! gv]])
--- 	end
--- 	vim.cmd([[silent! normal! "aygv]])
--- 	local text = vim.fn.getreg("a")
--- 	vim.fn.setreg("a", a_orig)
--- 	return text
--- end
 
 if wk_ok then
 	wk.register({
-		gq = { "<cmd>lua buf_vtext()<CR>", "definition" },
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
 		gr = { "<cmd>Telescope lsp_references<CR>", "references" },
 		gi = { "<cmd>Telescope lsp_implementations<CR>", "implementations" },
@@ -34,10 +22,6 @@ if wk_ok then
 		P = { "<Plug>(YankyPutBefore)", "put before" },
 		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
 		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
-		-- co = { "<Plug>(git-conflict-ours)", "conflict ours" },
-		-- ct = { "<Plug>(git-conflict-theirs)", "conflict theirs" },
-		-- cb = { "<Plug>(git-conflict-both)", "conflict both" },
-		-- ["c0"] = { "<Plug>(git-conflict-none)", "conflict none" },
 		["]d"] = { vim.diagnostic.goto_next, "next diagnostic" },
 		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
 		["]b"] = { ":bnext<CR>", "bnext" },
@@ -177,6 +161,7 @@ if wk_ok then
 				P = { "<CMD>Git push<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
+				t = { "<CMD>0GlLog<CR>", "time machine" },
 			},
 			N = {
 				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',

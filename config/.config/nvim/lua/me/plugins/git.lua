@@ -3,6 +3,12 @@ return {
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
 	},
+	-- {
+	-- 	"fredeeb/tardis.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	config = true,
+	-- 	cmd = "Tardis",
+	-- },
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
