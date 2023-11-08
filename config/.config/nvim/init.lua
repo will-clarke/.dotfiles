@@ -277,7 +277,7 @@ local aucmd_dict = {
 		{
 			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime,fugitive",
 			callback = function()
-				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+				vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			end,
 		},
 	},
