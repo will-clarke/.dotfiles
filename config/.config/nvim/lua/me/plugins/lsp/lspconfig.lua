@@ -102,7 +102,17 @@ return {
 					"astro",
 				},
 			},
-			pyright = true,
+			pyright = {
+				settings = {
+					pyright = { disableLanguageServices = false },
+					disableLanguageServices = false,
+					Python = {
+						analysis = {
+							diagnosticMode = "workspace",
+						},
+					},
+				},
+			},
 			lua_ls = {
 				settings = {
 					-- custom settings for lua

@@ -1,7 +1,8 @@
 require("me")
--- ./lua/me/init.lua
 -- ./lua/me/plugins/
+-- ./lua/me/init.lua
 -- ./lua/me/plugins/git.lua
+-- ./lua/me/plugins/lsp/lspconfig.lua
 
 local wk_ok, wk = pcall(require, "which-key")
 

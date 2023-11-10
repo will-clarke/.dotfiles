@@ -119,6 +119,10 @@ return {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown({}),
 				},
+				frecency = {
+					db_validate_threshold = 200,
+					auto_validate = true,
+				},
 				live_grep_args = {
 					auto_quoting = true,
 					mappings = {
@@ -130,7 +134,6 @@ return {
 						},
 					},
 				},
-
 				fzf = {
 					fuzzy = true, -- false will only do exact matching
 					override_generic_sorter = true, -- override the generic sorter
