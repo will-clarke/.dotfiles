@@ -80,6 +80,12 @@ if wk_ok then
 			b = { ":Telescope buffers<CR>", "buffers" },
 			o = { "<Plug>SnipRun", "SnipRun" },
 			O = { "<Plug>SnipRunOperator", "SnipRunOperator" },
+			L = {
+				function()
+					require("sniprun.live_mode").toggle()
+				end,
+				"SnipRun Live",
+			},
 			q = { "<CMD>copen<CR>", "quickfix" },
 			n = { ":enew<CR>", "cnext" },
 			m = { ":cnext<CR>", "cnext" },
