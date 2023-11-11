@@ -3,6 +3,12 @@ return {
 		"tpope/vim-fugitive",
 		event = "VeryLazy",
 	},
+	-- {
+	-- 	"fredeeb/tardis.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	config = true,
+	-- 	cmd = "Tardis",
+	-- },
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -24,9 +30,7 @@ return {
 		-- just git add won't work
 		"akinsho/git-conflict.nvim",
 		version = "*",
-		config = {
-			default_mappings = false,
-		},
+		config = {},
 		event = "VeryLazy",
 	},
 }

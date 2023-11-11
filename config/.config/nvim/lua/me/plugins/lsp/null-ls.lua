@@ -24,7 +24,7 @@ return {
 			root_dir = null_ls_utils.root_pattern(".null-ls-root", "Makefile", ".git", "package.json"),
 			-- setup formatters & linters
 			sources = {
-				null_ls.builtins.formatting.autoflake,
+				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.jq,
 				null_ls.builtins.diagnostics.mypy,
 				null_ls.builtins.code_actions.shellcheck,
@@ -43,12 +43,14 @@ return {
 					end,
 				}), -- js/ts formatter
 				formatting.stylua, -- lua formatter
-				diagnostics.eslint_d.with({ -- js/ts linter
+				diagnostics.eslint_d.with({
+					-- js/ts linter
 					condition = function(utils)
 						return utils.root_has_file_matches(".eslintrc") -- only enable if root has .eslintrc.js or .eslintrc.cjs
 					end,
 				}),
-				formatting.eslint.with({ -- js/ts linter
+				formatting.eslint.with({
+					-- js/ts linter
 					condition = function(utils)
 						return utils.root_has_file_matches(".eslintrc") -- only enable if root has .eslintrc.js or .eslintrc.cjs
 					end,

@@ -1,33 +1,16 @@
 require("me")
 -- ./lua/me/plugins/
+-- ./lua/me/init.lua
 -- ./lua/me/plugins/git.lua
+-- ./lua/me/plugins/lsp/lspconfig.lua
 
 local wk_ok, wk = pcall(require, "which-key")
 
--- ChangeToNextFile takes a num: 1 goes to the next, -1 to previous
-local function editNextFile(num)
-	local current_file = vim.fn.expand("%:p")
-	local current_dir = vim.fn.expand("%:p:h")
-	local files = vim.fn.readdir(current_dir)
-
-	-- Find the index of the current file in the directory
-	local current_index
-	for i, file in ipairs(files) do
-		if file == vim.fn.fnamemodify(current_file, ":t") then
-			current_index = i
-			break
-		end
-	end
-	print(current_index)
-
-	if current_index then
-		local next_index = (current_index % #files) + num
-		local next_file = current_dir .. "/" .. files[next_index]
-		vim.cmd("e " .. next_file)
-	else
-		print("Current file not found in the directory.")
-	end
-end
+vim.api.nvim_create_user_command("CopyBufferPath", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify("Copied: " .. path)
+end, {})
 
 if wk_ok then
 	wk.register({
@@ -40,10 +23,6 @@ if wk_ok then
 		P = { "<Plug>(YankyPutBefore)", "put before" },
 		gp = { "<Plug>(YankyGPutAfter)", "gput after" },
 		gP = { "<Plug>(YankyGPutBefore)", "gput before" },
-		co = { "<Plug>(git-conflict-ours)", "conflict ours" },
-		ct = { "<Plug>(git-conflict-theirs)", "conflict theirs" },
-		cb = { "<Plug>(git-conflict-both)", "conflict both" },
-		["c0"] = { "<Plug>(git-conflict-none)", "conflict none" },
 		["]d"] = { vim.diagnostic.goto_next, "next diagnostic" },
 		["[d"] = { vim.diagnostic.goto_prev, "previous diagnostic" },
 		["]b"] = { ":bnext<CR>", "bnext" },
@@ -73,10 +52,15 @@ if wk_ok then
 			["<CR>"] = { "<CMD>Make<CR>", "make" },
 			[" "] = { ":Telescope frecency workspace=CWD<CR>", "Telescope frequency workspace=CWD" },
 			["/"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Search text" },
-			["."] = { ":Telescope grep_string<CR>", "grep string" },
+			["."] = {
+				":lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({postfix='',quote=false})<CR>",
+				"grep word",
+			},
 			[";"] = { ":Telescope resume<CR>", "resume" },
+			y = { ":CopyBufferPath<CR>", "copy buffer path" },
 			p = { ":Telescope yank_history<CR>", "paste history" },
 			e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
+			v = { ":lua Toggle_venn()<CR>", "Venn - Drawing!" },
 			b = { ":Telescope buffers<CR>", "buffers" },
 			o = { "<Plug>SnipRun", "SnipRun" },
 			O = { "<Plug>SnipRunOperator", "SnipRunOperator" },
@@ -180,10 +164,11 @@ if wk_ok then
 					"<CMD>Git log --pretty='%h %cd [%aN%d] %s' --graph --date=relative --date-order<CR>",
 					"git log",
 				},
-				p = { "<CMD>Git! pull<CR>", "git" },
-				P = { "<CMD>Git! push<CR>", "git" },
+				p = { "<CMD>Git pull<CR>", "git" },
+				P = { "<CMD>Git push<CR>", "git" },
 				b = { "<CMD>GitBlameToggle<CR>", "git blame" },
 				y = { "<CMD>GitBlameCopyFileURL<CR>", "yank" },
+				t = { "<CMD>0GlLog<CR>", "time machine" },
 			},
 			N = {
 				'<CMD>execute "set number!" | echo "Line numbers are now " . ( &number ? "enabled" : "disabled" )',
@@ -245,6 +230,12 @@ if wk_ok then
 	-- visual mode
 	wk.register({
 		o = { "<Plug>SnipRun", "SnipRun" },
+		["<leader>"] = {
+			["."] = {
+				":lua require('telescope-live-grep-args.shortcuts').grep_visual_selection()<CR>",
+				"grep word",
+			},
+		},
 	}, { mode = "v" })
 end
 
@@ -287,13 +278,13 @@ local aucmd_dict = {
 		{
 			pattern = "markdown,txt",
 			callback = function()
-				vim.api.nvim_win_set_option(0, "spell", true)
+				-- vim.api.nvim_win_set_option(0, "spell", true)
 			end,
 		},
 		{
 			pattern = "help,lspinfo,man,git,neotest-*,dap-float,qf,messages,httpResult,startuptime,fugitive",
 			callback = function()
-				vim.api.nvim_set_keymap("n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+				vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 			end,
 		},
 	},
@@ -306,6 +297,20 @@ local aucmd_dict = {
 		},
 	},
 }
+
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	pattern = "*.http",
+-- 	callback = function(opts)
+-- 		vim.bo.filetype = "http"
+-- 	end,
+-- })
+
+for event, opt_tbls in pairs(aucmd_dict) do
+	for _, opt_tbl in pairs(opt_tbls) do
+		vim.api.nvim_create_autocmd(event, opt_tbl)
+	end
+end
+-- }}}
 
 -- vim.api.nvim_create_autocmd("BufRead", {
 -- 	pattern = "*.http",

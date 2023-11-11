@@ -119,17 +119,21 @@ return {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown({}),
 				},
+				frecency = {
+					db_validate_threshold = 200,
+					auto_validate = true,
+				},
 				live_grep_args = {
 					auto_quoting = true,
 					mappings = {
 						i = {
 							["<C-y>"] = lga_actions.quote_prompt(),
 							["<C-v>"] = lga_actions.quote_prompt({ postfix = " -g!vendor " }),
+							["<C-t>"] = lga_actions.quote_prompt({ postfix = " -g!vendor -g!*_test.go -g!*.gen.go" }),
 							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
 						},
 					},
 				},
-
 				fzf = {
 					fuzzy = true, -- false will only do exact matching
 					override_generic_sorter = true, -- override the generic sorter
