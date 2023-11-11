@@ -46,6 +46,3 @@ echo "Congrats"
 echo "Created ~/secrets.tar.gz.gpg"
 echo
 echo "You can now move the encrypted ~/secrets.tar.gz.gpg file to a safe location"
-
-# To retrieve the key:
-# gpg --keyserver keyserver.ubuntu.com --recv-key FAC9C682056AADA1C28DDF2F9236EF59DDC42D53
