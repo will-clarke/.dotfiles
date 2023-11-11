@@ -30,13 +30,14 @@ fd . ~/.ssh | rg -v gpg | rg -v old | xargs -I "{}" sh -c 'cat {} | pass insert 
 
 # copy over entire pass store
 cp -r ~/.password-store/ ~/secrets/password-store
+rm -rf ~/secrets/password-store/.git
 
 # tar the secrets directory and encrypt it with a basic symmetrical password
-tar -czvf ~/secrets.tar.gz ~/secrets
+tar -czvf ~/secrets.tar.gz -C ~/secrets .
 
 gpg --symmetric --cipher-algo AES256 ~/secrets.tar.gz
 rm -rf ~/secrets
-rm secrets.tar.gz
+rm ~/secrets.tar.gz
 
 echo
 echo
