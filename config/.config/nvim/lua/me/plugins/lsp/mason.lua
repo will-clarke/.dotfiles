@@ -30,13 +30,12 @@ return {
 			cancel_installation = "<C-c>",
 		},
 		ensure_installed = {
-			"vscode-json-language-server",
 			"typescript-language-server",
 			"lua-language-server",
 			"html-lsp",
 			"css-lsp",
-			-- "tailwindcss-language-server",
 			"svelte-language-server",
+			"bash-language-server",
 			"graphql-language-service-cli",
 			"emmet-ls",
 			"prisma-language-server",
@@ -51,6 +50,8 @@ return {
 			"prettier", -- ts/js formatter
 			"stylua", -- lua formatter
 			"eslint_d", -- ts/js linter
+			"shellcheck",
+			"shfmt",
 		},
 		automatic_installation = true,
 		max_concurrent_installers = 10,

@@ -87,6 +87,7 @@ return {
 			-- tailwindcss = true,
 			cssls = true,
 			jsonls = true,
+			bashls = true,
 			-- prismals = true,
 			graphql = true,
 			emmet_ls = {
