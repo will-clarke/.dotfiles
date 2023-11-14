@@ -18,9 +18,11 @@ fi
 email=$1
 
 ### GPG
-keyID=$(gpg --list-secret-keys | grep -A 3 expires | grep -B 1 "$email" | head -n1 | sed 's/ //g')
+# keyID=$(gpg --list-secret-keys | grep -A 3 expires | grep -B 1 "$email" | head -n1 | sed 's/ //g')
+keyID=$(gpg --list-keys --keyid-format LONG "$email" | grep '^pub' | grep -v expired | awk '{print $2}' | sed 's/.*\/\(.*\)$/\1/')
 
 mkdir -p ~/secrets
+cp ~/bin/keys-* ~/secrets
 gpg --export-secret-key "$keyID" | paperkey --output-type raw | qrencode --8bit --output ~/secrets/gpg-secret-key.qr.png
 gpg --export-secret-key "$keyID" | paperkey --output ~/secrets/gpg-secret-key.txt
 
