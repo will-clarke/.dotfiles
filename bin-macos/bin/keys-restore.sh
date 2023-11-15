@@ -53,3 +53,6 @@ else
 	mkdir -p ~/.password-store
 	cp -r ~/secrets/password-store/* ~/.password-store/
 fi
+
+rm -rf ~/secrets
+rm -f "$encrypted_tar_file"
