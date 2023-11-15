@@ -55,4 +55,11 @@ else
 fi
 
 rm -rf ~/secrets
-rm -f "$encrypted_tar_file"
+
+echo "Do you want to remove the encrypted file? [y/N] " response
+read -r response
+case "$response" in
+y)
+	rm -f "$encrypted_tar_file"
+	;;
+esac
