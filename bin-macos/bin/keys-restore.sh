@@ -21,7 +21,7 @@ mkdir -p ~/secrets
 # if ~/secrets file isn't empty, raise an error
 
 if [ -n "$(ls -A ~/secrets 2>/dev/null)" ]; then
-	echo "~/secrets/ is not empty. Please delete it and try again"
+	echo "$HOME/secrets/ is not empty. Please delete it and try again"
 	exit 1
 fi
 
@@ -30,22 +30,26 @@ gpg --decrypt "$encrypted_tar_file" | tar -xzvf - -C ~/secrets
 
 echo "more stuff to do in $0 - have a look!"
 
-exit 0
+keys=$(find ~/secrets/keys/gpg/ -type f -name 'gpg-*' | sed -n 's/.*-\(0x[0-9A-Fa-f]\+\)\..*/\1/p' | sort | uniq)
+for key in $keys; do
+	# gpg --keyserver keyserver.ubuntu.com --recv-key "$key"
+	pubic_key_file="$HOME/secrets/keys/gpg/public-key-$key.asc"
+	secret_key_file="$HOME/secrets/keys/gpg/secret-key-$key.txt"
+	gpg --dearmor "$pubic_key_file"
+	dearmored_public_key="$pubic_key_file.gpg"
+	paperkey --pubring "$dearmored_public_key" --secrets "$secret_key_file" | gpg --import
+done
 
-# To retrieve the key:
-# gpg --keyserver keyserver.ubuntu.com --recv-key FAC9C682056AADA1C28DDF2F9236EF59DDC42D53
+mkdir -p ~/.ssh
+for ssh_key in ~/secrets/keys/ssh/*; do
+	cp -n "$ssh_key" ~/.ssh/ # n == no clobber
+done
 
-# Import GPG key
-gpg_secret_key_file=~/secrets/gpg-secret-key.txt
-gpg --import "$gpg_secret_key_file"
-
-# Import SSH keys to pass
-find ~/.ssh -type f -not -name "id_rsa*" -not -name "id_dsa*" -not -name "known_hosts" | xargs -I "{}" sh -c 'pass insert -m ssh/$(basename {}) < {}'
-
-echo
-echo
-echo
-echo "Congrats"
-echo "Imported GPG key, SSH keys, and pass store from $encrypted_tar_file"
-echo
-echo "You can now use your GPG key, SSH keys, and password store."
+if [ -n "$(ls -A ~/.password-store 2>/dev/null)" ]; then
+	echo "$HOME/.password-store/ is not empty."
+	echo "Copying password store to $HOME/.password-store2"
+	cp -r ~/secrets/password-store/* ~/.password-store2/
+else
+	mkdir -p ~/.password-store
+	cp -r ~/secrets/password-store/* ~/.password-store/
+fi
