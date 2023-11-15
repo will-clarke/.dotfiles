@@ -15,16 +15,38 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
+mkdir -p ~/secrets/keys
+
 email=$1
 
 ### GPG
 # keyID=$(gpg --list-secret-keys | grep -A 3 expires | grep -B 1 "$email" | head -n1 | sed 's/ //g')
-keyID=$(gpg --list-keys --keyid-format LONG "$email" | grep '^pub' | grep -v expired | awk '{print $2}' | sed 's/.*\/\(.*\)$/\1/')
+masterKeyID=$(gpg --list-keys --keyid-format LONG "$email" | grep '^pub' | grep -v expired | awk '{print $2}' | sed 's/.*\/\(.*\)$/\1/')
+allKeys=$(gpg --list-secret-keys "$masterKeyID" | awk '/sec|ssb/ {print $2}' | sed 's/.*\/\(.*\)$/\1/')
 
-mkdir -p ~/secrets
+keyservers="pgp.mit.edu pgp.surf.nl keys.openpgp.org keyserver.ubuntu.com"
+
+for key in $allKeys; do
+
+	echo "Backing up key: $key"
+	for keyserver in $keyservers; do
+		gpg --keyserver "$keyserver" --send-keys "$key"
+	done
+	gpg --export-secret-keys "$key" | paperkey --output "$HOME/secrets/keys/gpg-secret-key-$key.txt"
+	gpg --export-secret-keys "$key" | paperkey --output-type raw | qrencode --8bit --output "$HOME/secrets/keys/gpg-secret-key-$key.qr.png"
+	gpg --export --armor "$key" >"$HOME/secrets/keys/gpg-public-key-$key.asc"
+
+done
+
 cp ~/bin/keys-* ~/secrets
-gpg --export-secret-key "$keyID" | paperkey --output-type raw | qrencode --8bit --output ~/secrets/gpg-secret-key.qr.png
-gpg --export-secret-key "$keyID" | paperkey --output ~/secrets/gpg-secret-key.txt
+
+# pgp.mit.edu
+# pgp.surf.nl
+# keys.openpgp.org
+# keyserver.ubuntu.com
+#
+# gpg --keyserver keys.openpgp.org --send-keys 0x9236EF59DDC42D53 0x9A8A5C5E771783ED
+# gpg --keyserver keyserver.ubuntu.com --send-keys 0x9236EF59DDC42D53 0x9A8A5C5E771783ED
 
 # update pass ssh keys
 # shellcheck disable=SC2016
