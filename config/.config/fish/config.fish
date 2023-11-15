@@ -11,6 +11,10 @@ if status is-interactive
     if type -q fzf_configure_bindings
         fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
     end
+
+    set -x GPG_TTY (tty)
+    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
 end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin

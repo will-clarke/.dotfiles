@@ -15,7 +15,8 @@ if [ -z "$1" ]; then
 	exit 1
 fi
 
-mkdir -p ~/secrets/keys
+mkdir -p ~/secrets/keys/ssh
+mkdir -p ~/secrets/keys/gpg
 
 email=$1
 
@@ -28,25 +29,24 @@ keyservers="pgp.mit.edu pgp.surf.nl keys.openpgp.org keyserver.ubuntu.com"
 
 for key in $allKeys; do
 
-	echo "Backing up key: $key"
+	echo "Backing up public key on public keyservers: $key"
 	for keyserver in $keyservers; do
 		gpg --keyserver "$keyserver" --send-keys "$key"
 	done
-	gpg --export-secret-keys "$key" | paperkey --output "$HOME/secrets/keys/gpg-secret-key-$key.txt"
-	gpg --export-secret-keys "$key" | paperkey --output-type raw | qrencode --8bit --output "$HOME/secrets/keys/gpg-secret-key-$key.qr.png"
-	gpg --export --armor "$key" >"$HOME/secrets/keys/gpg-public-key-$key.asc"
+	echo "Exporting secret keys - will probably ask for two passwords"
+	gpg --export-secret-keys "$key" | paperkey --output "$HOME/secrets/keys/gpg/secret-key-$key.txt"
+	gpg --export-secret-keys "$key" | paperkey --output-type raw | qrencode --8bit --output "$HOME/secrets/keys/gpg/secret-key-$key.qr.png"
+	gpg --export --armor "$key" >"$HOME/secrets/keys/gpg/public-key-$key.asc"
 
 done
 
-cp ~/bin/keys-* ~/secrets
+# Backup all ssh keys - ENCRYPTED
+for key in ~/.ssh/*; do
+	echo "Backing up ssh key: $key"
+	cp "$key" ~/secrets/keys/ssh/
+done
 
-# pgp.mit.edu
-# pgp.surf.nl
-# keys.openpgp.org
-# keyserver.ubuntu.com
-#
-# gpg --keyserver keys.openpgp.org --send-keys 0x9236EF59DDC42D53 0x9A8A5C5E771783ED
-# gpg --keyserver keyserver.ubuntu.com --send-keys 0x9236EF59DDC42D53 0x9A8A5C5E771783ED
+cp ~/bin/keys-* ~/secrets
 
 # update pass ssh keys
 # shellcheck disable=SC2016
@@ -59,6 +59,7 @@ rm -rf ~/secrets/password-store/.git
 # tar the secrets directory and encrypt it with a basic symmetrical password
 tar -czvf ~/secrets.tar.gz -C ~/secrets .
 
+echo "Encrypting secrets.tar.gz.gpg - use a good symmetric password"
 gpg --symmetric --cipher-algo AES256 ~/secrets.tar.gz
 rm -rf ~/secrets
 rm ~/secrets.tar.gz
