@@ -8,6 +8,7 @@ if status is-interactive
     abbr --add --global gdc git diff --cached
     abbr --add --global nn nnn -e
     abbr --add --global n nvim
+    abbr --add --global e $EDITOR
     if type -q fzf_configure_bindings
         fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
     end
