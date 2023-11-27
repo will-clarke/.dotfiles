@@ -24,3 +24,10 @@ config/.config/tmux/plugins
 config/.config/helix/runtime/
 
 config/.config/nvim/undodir/
+
+bin-macos/bin/docker
+bin-macos/bin/docker-compose
+bin-macos/bin/docker-credential-osxkeychain
+bin-macos/bin/kubectl
+bin-macos/bin/orb
+bin-macos/bin/orbctl
