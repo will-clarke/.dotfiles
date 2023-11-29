@@ -83,21 +83,37 @@ if wk_ok then
 			c = { ":e ~/.config/nvim/init.lua<CR>", "config" },
 			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
 			r = {
-				function()
-					local buf = vim.api.nvim_get_current_buf()
-					local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-					if ft == "http" then
-						local rest_ok, rest = pcall(require, "rest-nvim")
-						if not rest_ok then
-							vim.notify("RestNvim not loaded", 3)
-							return
+				o = { ":KittyOpenRunner<CR>", "runner open" },
+				c = { ":KittyRunCommand<CR>", "runner command" },
+				s = { ":KittySendLines<CR>", "runner send" },
+				C = { ":KittyClearRunner<CR>", "runner Clear" },
+				k = { ":KittyKillRunner<CR>", "runner kill" },
+				l = { ":KittyReRunCommand<CR>", "runner last command" },
+
+				r = {
+					function()
+						local buf = vim.api.nvim_get_current_buf()
+						-- local ft = vim.api.nvim_buf_get_option(buf, "filetype") -- deprecated!
+						local ft = vim.fn.getbufvar(buf, "&filetype")
+						if ft == "http" then
+							local rest_ok, rest = pcall(require, "rest-nvim")
+							if not rest_ok then
+								vim.notify("RestNvim not loaded", 3)
+								return
+							end
+							rest.run()
+						else
+							vim.cmd("KittySendLines")
 						end
-						rest.run()
-					else
-						require("telescope.builtin").oldfiles()
-					end
+					end,
+					"run",
+				},
+			},
+			R = {
+				function()
+					require("telescope.builtin").oldfiles()
 				end,
-				"do something",
+				"recent files",
 			},
 			l = {
 				name = "LSP",
