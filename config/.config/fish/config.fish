@@ -9,6 +9,7 @@ if status is-interactive
     abbr --add --global nn nnn -e
     abbr --add --global n nvim
     abbr --add --global e $EDITOR
+    abbr --add --global kit 'kitty --listen-on=/tmp/kitty_"$(date +%s%N)"'
     if type -q fzf_configure_bindings
         fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
     end
@@ -19,7 +20,9 @@ if status is-interactive
 end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin
+set -x PYTHONPATH "$HOME/.config/kitty/mplbackend:$PYTHONPATH"
 
+set -x MPLBACKEND "module://matplotlib-backend-kitty"
 
 if type -q goenv
     status --is-interactive; and source (goenv init -|psub)
