@@ -251,8 +251,9 @@ if wk_ok then
 				":lua require('telescope-live-grep-args.shortcuts').grep_visual_selection()<CR>",
 				"grep word",
 			},
+			rr = { ":KittySendLines<cr>", "runner send" },
 		},
-	}, { mode = "v" })
+	}, { mode = "x" })
 end
 
 -- autocmds {{{
