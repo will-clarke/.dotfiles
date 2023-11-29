@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
 query=$(echo "$*" | sed 's/ /%20/g')
-curl -s "https://api.giphy.com/v1/gifs/search?api_key=wEDgFiFwxErhKAGpamjiJxag1Yf1nTEQ&q=$query" \
-    | jq '.data[].images.original.url' | sort -R | head -n 1 | sed 's/^"/![](/' | sed 's/"$/)/' | pbcopy
-
+curl -s "https://api.giphy.com/v1/gifs/search?api_key=$GIPHY_API_KEY&q=$query" |
+	jq '.data[].images.original.url' | sort -R | head -n 1 | sed 's/^"/![](/' | sed 's/"$/)/' | pbcopy
