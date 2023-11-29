@@ -8,22 +8,14 @@ On Linux I like Arch & Sway as a window manager.
 
 ## 🛠 Installation 🛠
 
-Grab a copy of [GNU Stow](http://www.gnu.org/software/stow/)
-One of these should work:
-
-- `sudo apt install git stow`
-- `sudo pacman -S git stow`
-- `brew install stow`
-- `git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim`
-
-Then
-
-1. `git clone` this repo
-2. `stow config` and anything else you may want
+1. Grab a copy of [GNU Stow](http://www.gnu.org/software/stow/)
+2. `git clone` this repo
+3. `stow config` and anything else you may want
 
 ## 🔒 Git leaks 🔒
 
 Probs makes sense to install gitleaks (`brew install gitleaks`) and use it as a pre-commit hook:
+
 ```sh
 echo "gitleaks protect" > .git/hooks/pre-commit
 ```
