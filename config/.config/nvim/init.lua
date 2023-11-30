@@ -12,6 +12,22 @@ vim.api.nvim_create_user_command("CopyBufferPath", function()
 	vim.notify("Copied: " .. path)
 end, {})
 
+function Kitty_run_lines()
+	local old_func = vim.go.operatorfunc
+	_G.kitty_operatorfunc = function()
+		local start = vim.api.nvim_buf_get_mark(0, "[")
+		local finish = vim.api.nvim_buf_get_mark(0, "]")
+
+		require("kitty-runner").run_command({ start[1], finish[1] })
+		vim.go.operatorfunc = old_func
+		_G.kitty_operatorfunc = nil
+	end
+	vim.go.operatorfunc = "v:lua.kitty_operatorfunc"
+	vim.api.nvim_feedkeys("g@", "n", false)
+end
+
+vim.api.nvim_set_keymap("n", "gm", "<cmd>lua Kitty_run_lines()<CR>", { noremap = true })
+
 if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
@@ -72,7 +88,7 @@ if wk_ok then
 			},
 			q = { "<CMD>copen<CR>", "quickfix" },
 			n = { ":enew<CR>", "cnext" },
-			m = { ":cnext<CR>", "cnext" },
+			-- m = { ":cnext<CR>", "cnext" },
 			J = { ":TSJToggle<CR>", "Join toggle" },
 			[","] = { ":cprev<CR>", "cprev" },
 			s = { ":lua require('harpoon.ui').toggle_quick_menu()<CR>", "harpoon" },
@@ -89,6 +105,53 @@ if wk_ok then
 				C = { ":KittyClearRunner<CR>", "runner Clear" },
 				k = { ":KittyKillRunner<CR>", "runner kill" },
 				l = { ":KittyReRunCommand<CR>", "runner last command" },
+				a = {
+
+					function() -- # operatorfunc
+						vim.o.operatorfunc = "v:lua.my_operatorfunc"
+
+						-- print("hey")
+						-- vim.o.operatorfunc = "v:lua.require'jghauser/kitty-runner.nvim'.KittySendLines"
+						-- print("operatorfunc set")
+						--
+						-- local old_func = vim.go.operatorfunc -- backup previous reference
+						-- -- set a globally callable object/function
+						-- _G.op_func_formatting = function()
+						-- 	-- the content covered by the motion is between the [ and ] marks, so get those
+						-- 	local start = vim.api.nvim_buf_get_mark(0, "[")
+						-- 	local finish = vim.api.nvim_buf_get_mark(0, "]")
+						-- 	-- vim.lsp.buf.range_formatting({}, start, finish)
+						-- 	vim.lsp.buf.format({ range = { start, finish } })
+						-- 	vim.go.operatorfunc = old_func -- restore previous opfunc
+						-- 	_G.op_func_formatting = nil -- deletes itself from global namespace
+						-- end
+						-- vim.go.operatorfunc = "v:lua.op_func_formatting"
+						-- vim.api.nvim_feedkeys("g@", "n", false)
+						-- run_command(vim.region(0, vim.fn.getpos("'<"), vim.fn.getpos("'>"), "l", false)[0])
+						-- -- vim.o.operatorfunc = "v:lua.require'name.of.yor.module'.paren_wrap()"
+						-- -- want the operatorfunc to call KittySendLines
+						-- -- vim.o.operatorfunc = "KittySendLines"
+						-- -- local l = vim.api.nvim_buf_get_mark(0, "[")
+						-- -- local r = vim.api.nvim_buf_get_mark(0, "]")
+						-- -- -- vim.o.operatorfunc = "v:lua.print('hey')"
+						-- --
+						-- --
+						-- local start = vim.api.nvim_buf_get_mark(0, "[")
+						-- local finish = vim.api.nvim_buf_get_mark(0, "]")
+						--
+						-- -- Set the cursor to the start mark
+						-- vim.api.nvim_win_set_cursor(0, { start[1], start[2] })
+						--
+						-- -- Enter visual mode
+						-- vim.cmd("normal! gv")
+						--
+						-- -- Move the cursor to the finish mark
+						-- vim.api.nvim_win_set_cursor(0, { finish[1], finish[2] })
+						-- -- vim.o.operatorfunc = "KittySendLines"
+						-- return "g@"
+					end,
+					"send lines textobj",
+				},
 
 				r = {
 					function()
@@ -109,7 +172,7 @@ if wk_ok then
 					"run",
 				},
 			},
-			R = {
+			b = {
 				function()
 					require("telescope.builtin").oldfiles()
 				end,
