@@ -5,6 +5,7 @@ return {
 		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-nvim-lsp",
 		"zbirenbaum/copilot.lua",
+		"jmbuhr/otter.nvim",
 		{
 			"L3MON4D3/LuaSnip",
 			tag = "*",
@@ -132,7 +133,7 @@ return {
 				{ name = "copilot", priority = 1000 },
 				{ name = "emoji" },
 				{ name = "nvim_lsp" },
-				-- { name = "luasnip" },
+				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
 				{ name = "otter" },

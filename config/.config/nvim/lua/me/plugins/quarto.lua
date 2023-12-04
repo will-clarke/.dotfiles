@@ -3,10 +3,29 @@ return {
 	lazy = false,
 	dependencies = {
 		"quarto-dev/quarto-nvim",
-		"jmbuhr/otter.nvim",
 		"hrsh7th/nvim-cmp",
 		"neovim/nvim-lspconfig",
 		"nvim-treesitter/nvim-treesitter",
+		{
+			"jmbuhr/otter.nvim",
+			dev = false,
+			dependencies = {
+				{ "neovim/nvim-lspconfig" },
+			},
+			opts = {
+				-- lsp = {
+				-- 	hover = {
+				-- 		-- border = require("misc.style").border,
+				-- 	},
+				-- },
+				buffers = {
+					-- if set to true, the filetype of the otterbuffers will be set.
+					-- otherwise only the autocommand of lspconfig that attaches
+					-- the language server will be executed without setting the filetype
+					set_filetype = true,
+				},
+			},
+		},
 	},
 	cmd = {
 		"QuartoPreview",
@@ -37,7 +56,7 @@ return {
 			},
 		},
 		codeRunner = {
-			enabled = false,
+			enabled = true,
 			default_method = "molten", -- 'molten' or 'slime'
 			ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
 			-- Takes precedence over `default_method`

@@ -38,6 +38,11 @@ local harpoon_ok, harpoon = pcall(require, "harpoon")
 if not harpoon_ok then
 	vim.notify("Harpoon not loaded", 3)
 end
+
+local quarto_runner_ok, quarto_runner = pcall(require, "quarto.runner")
+if not quarto_runner_ok then
+	vim.notify("Quarto runner not loaded", 3)
+end
 if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
@@ -136,13 +141,22 @@ if wk_ok then
 			M = { "<cmd>MoltenEvaluateOperator<CR>", "Evaluate the text given by some operator." },
 			m = {
 				name = "Molten",
+				c = { quarto_runner.run_cell, "run cell" },
+				a = { quarto_runner.run_above, "run cell and above" },
+				A = { quarto_runner.run_all, "run all cells" },
+				l = { quarto_runner.run_line, "run line" },
+				e = {
+					function()
+						quarto_runner.run_all(true)
+					end,
+					"run everything",
+				},
 				n = { "<cmd>MoltenNext<CR>", "next" },
 				p = { "<cmd>MoltenPrev<CR>", "previous" },
 				i = { "<cmd>MoltenInit<CR>", "initializes Magma" },
 				o = { "<cmd>MoltenShowOutput<CR>", "Output" },
-				l = { "<cmd>MoltenEvaluateLine<CR>", "Evaluate the current line." },
+				L = { "<cmd>MoltenEvaluateLine<CR>", "Evaluate the current line." },
 				v = { "<cmd>MoltenEvaluateVisual<CR>", "Evaluate the selected text." },
-				c = { "<cmd>MoltenEvaluateOperator<CR>", "Reevaluate the currently selected cell." },
 				r = { "<cmd>MoltenRestart!<CR>", "Shuts down and restarts the current kernel." },
 				x = { "<cmd>MoltenInterrupt<CR>", "Interrupts " },
 			},
@@ -323,6 +337,7 @@ if wk_ok then
 				"grep word",
 			},
 			rr = { ":KittySendLines<cr>", "runner send" },
+			m = { quarto_runner.run_range, "run range" },
 		},
 	}, { mode = "x" })
 end
