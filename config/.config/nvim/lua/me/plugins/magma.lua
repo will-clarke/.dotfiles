@@ -1,7 +1,7 @@
 return {
     "dccsillag/magma-nvim",
     version = "*",
-    build = "UpdateRemotePlugins",
+    run = "UpdateRemotePlugins",
     keys = {
 
         -- { "<leader>mi", "<cmd>MagmaInit<CR>", desc = "This command initializes a runtime for the current buffer." },
