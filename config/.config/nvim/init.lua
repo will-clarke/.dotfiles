@@ -2,6 +2,7 @@ require("me")
 -- ./lua/me/plugins/
 -- ./lua/me/init.lua
 -- ./lua/me/plugins/git.lua
+-- ./lua/me/plugins/molten.lua
 -- ./lua/me/plugins/lsp/lspconfig.lua
 
 local wk_ok, wk = pcall(require, "which-key")
@@ -11,6 +12,11 @@ vim.g.python3_host_prog = vim.fn.expand("$HOME/.virtualenvs/nvim/bin/python")
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
 package.path = package.path .. ";~/.luarocks.share/lua/5.1/?/init.lua;"
+
+vim.opt.foldmethod = "expr"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- but open all by default
+vim.opt.foldlevel = 99
 
 vim.api.nvim_create_user_command("CopyBufferPath", function()
 	local path = vim.fn.expand("%:p")
@@ -379,8 +385,12 @@ local aucmd_dict = {
 	},
 	FileType = {
 		{
-			pattern = "markdown,txt",
+			pattern = "markdown,txt,qmd",
 			callback = function()
+				vim.wo.wrap = true
+				vim.wo.linebreak = true
+				vim.wo.breakindent = true
+				vim.wo.showbreak = "|"
 				-- vim.api.nvim_win_set_option(0, "spell", true)
 			end,
 		},
