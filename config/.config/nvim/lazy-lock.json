@@ -13,20 +13,16 @@
   "git-conflict.nvim": { "branch": "main", "commit": "4e0191c9a0ae05d7fbdcdc7f15cd358f56d23bfb" },
   "gitsigns.nvim": { "branch": "main", "commit": "6ef8c54fb526bf3a0bc4efb0b2fe8e6d9a7daed2" },
   "glow.nvim": { "branch": "main", "commit": "5b38fb7b6e806cac62707a4aba8c10c5f14d5bb5" },
-<<<<<<< Updated upstream
   "harpoon": { "branch": "harpoon2", "commit": "581da797f9d66485f841525af596255270c2bcf5" },
+  "image.nvim": { "branch": "master", "commit": "41f0f2643a09631bc0d8e2837b514667d423e440" },
   "indent-blankline.nvim": { "branch": "master", "commit": "dbd90bb689ff10d21fee6792eb8928f0584b5860" },
   "kitty-runner.nvim": { "branch": "main", "commit": "e2f2a4739a323e6cd23b8b302a5c89f1b2102141" },
-=======
-  "harpoon": { "branch": "harpoon2", "commit": "867e212ac153e793f95b316d1731f3ca1894625e" },
-  "indent-blankline.nvim": { "branch": "master", "commit": "dbd90bb689ff10d21fee6792eb8928f0584b5860" },
->>>>>>> Stashed changes
   "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
   "lsp_signature.nvim": { "branch": "master", "commit": "fed2c8389c148ff1dfdcdca63c2b48d08a50dea0" },
-  "magma-nvim": { "branch": "main", "commit": "ff3deba8a879806a51c005e50782130246143d06" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "4eb8e15e3c0757303d4c6dea64d2981fc679e990" },
   "mason-null-ls.nvim": { "branch": "main", "commit": "d1f7258f80867f718d643d88eee66959671a4bef" },
   "mason.nvim": { "branch": "main", "commit": "41e75af1f578e55ba050c863587cffde3556ffa6" },
+  "molten-nvim": { "branch": "main", "commit": "93f2f168e77cbd82a881e07030cdbd45a48ed070" },
   "neodev.nvim": { "branch": "main", "commit": "1676d2c24186fc30005317e0306d20c639b2351b" },
   "neogit": { "branch": "master", "commit": "d0e87541130b2cf62d7f8a54487ef99560232fb6" },
   "neotest": { "branch": "master", "commit": "d424d262d01bccc1e0b038c9a7220a755afd2a1f" },
@@ -35,11 +31,9 @@
   "nvim-cmp": { "branch": "main", "commit": "0b751f6beef40fd47375eaf53d3057e0bfa317e4" },
   "nvim-dap": { "branch": "master", "commit": "d7749eb3d9933a75d2244820308ce442f646c7ae" },
   "nvim-dap-go": { "branch": "main", "commit": "a5cc8dcad43f0732585d4793deb02a25c4afb766" },
-  "nvim-dap-python": { "branch": "master", "commit": "e0be843877e7ae756ef1ee7a441ca0b9e1677da9" },
   "nvim-dap-ui": { "branch": "master", "commit": "34160a7ce6072ef332f350ae1d4a6a501daf0159" },
   "nvim-lsp-file-operations": { "branch": "master", "commit": "1e0ffa0acc92f88f9f2b68df47ccbe1917653a42" },
   "nvim-lspconfig": { "branch": "master", "commit": "694aaec65733e2d54d393abf80e526f86726c988" },
-<<<<<<< Updated upstream
   "nvim-treesitter": { "branch": "master", "commit": "67536f4057e4901e37805708bcfdd3d9abacfd26" },
   "nvim-treesitter-context": { "branch": "master", "commit": "bf4d15ee4e96ff5201f16a4ed14443670662eb90" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "ec1c5bdb3d87ac971749fa6c7dbc2b14884f1f6a" },
@@ -68,5 +62,3 @@
   "yanky.nvim": { "branch": "main", "commit": "6bb9ffd3cad4c9876bda54e19d0659de28a4f84f" },
   "zk-nvim": { "branch": "main", "commit": "142625638d2fad464939c6ee1775571aba6379c6" }
 }
-=======
->>>>>>> Stashed changes
