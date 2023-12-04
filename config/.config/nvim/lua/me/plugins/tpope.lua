@@ -1,11 +1,19 @@
 return {
-	"tpope/vim-surround",
-	dependencies = {
-		"tpope/vim-repeat",
-		"tpope/vim-dispatch",
-		-- "tpope/vim-unimpaired", -- ]q ]a ]f ]< > ]e ]n ]ow ]ol
-		-- TODO: Add these in manually ٩◔̯◔۶️
-		-- "folke/neodev.nvim",
+	{
+		"tpope/vim-surround",
+		event = "VeryLazy",
 	},
-	event = "VeryLazy",
+	{
+		"tpope/vim-rsi",
+		event = "VeryLazy",
+	},
+	{
+		"tpope/vim-repeat",
+		event = "VeryLazy",
+	},
+	{
+		"tpope/vim-dispatch",
+		event = "VeryLazy",
+	},
+	-- "tpope/vim-unimpaired", -- ]q ]a ]f ]< > ]e ]n ]ow ]ol
 }
