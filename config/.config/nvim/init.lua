@@ -385,7 +385,7 @@ local aucmd_dict = {
 	},
 	FileType = {
 		{
-			pattern = "markdown,txt,qmd",
+			pattern = "markdown,txt,quarto",
 			callback = function()
 				vim.wo.wrap = true
 				vim.wo.linebreak = true
