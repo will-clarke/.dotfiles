@@ -8,6 +8,10 @@ local wk_ok, wk = pcall(require, "which-key")
 
 vim.g.python3_host_prog = vim.fn.expand("$HOME/.virtualenvs/nvim/bin/python")
 
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+package.path = package.path .. ";~/.luarocks.share/lua/5.1/?/init.lua;"
+
 vim.api.nvim_create_user_command("CopyBufferPath", function()
 	local path = vim.fn.expand("%:p")
 	vim.fn.setreg("+", path)

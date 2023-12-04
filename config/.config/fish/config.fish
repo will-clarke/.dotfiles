@@ -1,5 +1,12 @@
 set fish_greeting #disable welcome
 
+abbr --add --global lua lua5.1
+set -gx DYLD_LIBRARY_PATH  /usr/local/Cellar/imagemagick/7.1.1-22/lib
+
+if type -q luarocks
+    eval "$(luarocks path --bin)"
+end
+
 if status is-interactive
     abbr --add --global gco git checkout
     abbr --add --global ga git add
@@ -60,6 +67,10 @@ if test -f /opt/homebrew/anaconda3/bin/conda
 end
 # <<< conda initialize <<<
 
+
+if test -f ~/.luaver/luaver.fish
+    # source ~/.luaver/luaver.fish
+end
 
 # PREFIX=/usr/local/anaconda3
 
