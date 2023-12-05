@@ -17,6 +17,7 @@ vim.opt.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- but open all by default
 vim.opt.foldlevel = 99
+vim.opt.conceallevel = 2
 
 vim.api.nvim_create_user_command("CopyBufferPath", function()
 	local path = vim.fn.expand("%:p")
