@@ -35,7 +35,7 @@ local options = {
 
 		termguicolors = true,
 
-		scrolloff = 13,
+		scrolloff = 5,
 		signcolumn = "yes",
 
 		winblend = 0,

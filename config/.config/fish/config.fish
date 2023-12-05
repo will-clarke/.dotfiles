@@ -5,7 +5,9 @@ set -gx DYLD_LIBRARY_PATH  /usr/local/Cellar/imagemagick/7.1.1-22/lib
 
 if type -q luarocks
     eval "$(luarocks path --bin)"
+
 end
+
 
 if status is-interactive
     abbr --add --global gco git checkout
@@ -28,9 +30,8 @@ if status is-interactive
 end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin
-set -x PYTHONPATH "$HOME/.config/kitty/mplbackend:$PYTHONPATH"
-
-set -x MPLBACKEND "module://matplotlib-backend-kitty"
+# set -x PYTHONPATH "$HOME/.config/kitty/mplbackend:$PYTHONPATH"
+# set -x MPLBACKEND "module://matplotlib-backend-kitty"
 
 if type -q goenv
     status --is-interactive; and source (goenv init -|psub)

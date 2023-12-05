@@ -142,7 +142,9 @@ if wk_ok then
 				end,
 				"harpoon #2",
 			},
-			c = { ":e ~/.config/nvim/init.lua<CR>", "config" },
+			C = { ":e ~/.config/nvim/init.lua<CR>", "config" },
+
+			c = { quarto_runner.run_cell, "run cell" },
 			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
 			M = { "<cmd>MoltenEvaluateOperator<CR>", "Evaluate the text given by some operator." },
 			m = {
