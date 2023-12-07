@@ -2,7 +2,7 @@
 
 The aim is these should work both on MacOS & Linux.
 
-I try to keep my tools simple. At the moment I like Doom emacs, the fish shell & tmux.
+I try to keep my tools simple. At the moment I like [nvim](config/.config/nvim), the [fish shell](config/.config/fish) & [kitty](config/.config/kitty)
 On MacOS, I use Karabiner for some better shortcuts / customisability.
 On Linux I like Arch & Sway as a window manager.
 
@@ -26,11 +26,10 @@ Since MacOS and Linux are slightly different, I've got two sets of executables.
 
 ## ⚡ TL;DR ⚡
 
-```
-cd $HOME
-git clone https://git.sr.ht/will-clarke/.dotfiles
-#  OR via ssh;
-#  git clone git@git.sr.ht:~will-clarke/.dotfiles
+```sh
+cd $HOME && git clone git@git.sr.ht:~will-clarke/.dotfiles
+#  OR via https;
+#  cd && git clone https://git.sr.ht/will-clarke/.dotfiles
 cd .dotfiles && stow bin-mac config git
 
 # Apply mac-specific settings
