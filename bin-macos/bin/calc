@@ -1,5 +1,0 @@
-#!/bin/bash
-
-function calc () {
-    bc -l <<< "$@"
-}

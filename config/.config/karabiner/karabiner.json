@@ -316,7 +316,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"🤦\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤦\""
                   }
                 ],
                 "type": "basic"
@@ -336,7 +336,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"🙄\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🙄\""
                   }
                 ],
                 "type": "basic"
@@ -356,7 +356,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"😂\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"😂\""
                   }
                 ],
                 "type": "basic"
@@ -376,7 +376,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"🤔\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤔\""
                   }
                 ],
                 "type": "basic"
@@ -396,7 +396,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"👍\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"👍\""
                   }
                 ],
                 "type": "basic"
@@ -416,7 +416,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"👎\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"👎\""
                   }
                 ],
                 "type": "basic"
@@ -436,7 +436,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
                   }
                 ],
                 "type": "basic"
@@ -456,7 +456,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
                   }
                 ],
                 "type": "basic"
@@ -476,7 +476,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"╭∩╮（︶_︶）╭∩╮\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"╭∩╮（︶_︶）╭∩╮\""
                   }
                 ],
                 "type": "basic"
@@ -496,7 +496,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"( う-´)づ︻╦̵̵̿╤──   \\(˚☐˚”)/\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"( う-´)づ︻╦̵̵̿╤──   \\(˚☐˚”)/\""
                   }
                 ],
                 "type": "basic"
@@ -516,7 +516,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"(ง'̀-'́)ง\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(ง'̀-'́)ง\""
                   }
                 ],
                 "type": "basic"
@@ -536,7 +536,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"❤\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"❤\""
                   }
                 ],
                 "type": "basic"
@@ -556,7 +556,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
                   }
                 ],
                 "type": "basic"
@@ -576,7 +576,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"❤️\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"❤️\""
                   }
                 ],
                 "type": "basic"
@@ -596,7 +596,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_shrug.scpt"
+                    "shell_command": "osascript $HOME/bin/,insert_shrug.scpt"
                   }
                 ],
                 "type": "basic"
@@ -616,7 +616,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"٩◔̯◔۶️\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"٩◔̯◔۶️\""
                   }
                 ],
                 "type": "basic"
@@ -636,7 +636,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
                   }
                 ],
                 "type": "basic"
@@ -656,7 +656,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"\\( ﾟ◡ﾟ)/\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"\\( ﾟ◡ﾟ)/\""
                   }
                 ],
                 "type": "basic"
@@ -676,7 +676,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"ᕕ( ᐛ )ᕗ\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"ᕕ( ᐛ )ᕗ\""
                   }
                 ],
                 "type": "basic"
@@ -696,7 +696,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "osascript $HOME/bin/insert_argument.scpt \"🤞\""
+                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤞\""
                   }
                 ],
                 "type": "basic"
