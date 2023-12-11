@@ -296,7 +296,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "XDG_CONFIG_HOME=$HOME/.config PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/:$HOME/.goenv/shims $HOME/bin/kitteh.sh"
+                    "shell_command": "XDG_CONFIG_HOME=$HOME/.config PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/:$HOME/.goenv/shims $HOME/bin/,kitteh.sh"
                   }
                 ],
                 "type": "basic"
