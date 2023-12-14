@@ -8,7 +8,6 @@ return {
 		"jmbuhr/otter.nvim",
 		{
 			"L3MON4D3/LuaSnip",
-			tag = "*",
 			run = "make install_jsregexp", -- optional!
 		},
 	},

@@ -164,6 +164,7 @@ if wk_ok then
 				n = { "<cmd>MoltenNext<CR>", "next" },
 				p = { "<cmd>MoltenPrev<CR>", "previous" },
 				i = { "<cmd>MoltenInit<CR>", "initializes Magma" },
+				I = { "<cmd>MoltenDeinit<CR>", "deinitializes Magma" },
 				o = { "<cmd>MoltenShowOutput<CR>", "Output" },
 				O = { "<CMD>noautocmd MoltenEnterOutput<CR>", "Enter Output" },
 				L = { "<cmd>MoltenEvaluateLine<CR>", "Evaluate the current line." },
