@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+open "https://en.wikipedia.org/wiki/$(date +%B_%d)"

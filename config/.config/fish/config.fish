@@ -36,6 +36,7 @@ set PATH $PATH ~/.local/bin ~/.ghcup/bin
 if type -q goenv
     status --is-interactive; and source (goenv init -|psub)
 end
+set -x GO111MODULE on
 
 if type -q zoxide
     zoxide init fish | source

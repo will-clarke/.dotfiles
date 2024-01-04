@@ -18,6 +18,8 @@ return {
 	end,
 	cmd = { "ZkNew", "ZkNotes", "ZkTags" },
 	keys = {
+		{ "<leader>zf", ":Telescope find_files search_dirs={'~/notes'}<CR>", desc = "Zk find" },
+		{ "<leader>z/", ":Telescope grep_string search_dirs={'~/notes'}<CR>", desc = "Zk grep" },
 		{ "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", desc = "Zk New" },
 		{ "<leader>zw", "<Cmd>ZkNew { group = 'work' }<CR>", desc = "Zk Work" },
 		{ "<leader>zd", "<Cmd>ZkNew { group = 'diary' }<CR>", desc = "Zk Diary" },
