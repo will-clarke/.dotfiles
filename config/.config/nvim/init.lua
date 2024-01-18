@@ -1,4 +1,5 @@
 require("me")
+
 -- ./lua/me/plugins/
 -- ./lua/me/init.lua
 -- ./lua/me/plugins/git.lua
@@ -50,6 +51,7 @@ local quarto_runner_ok, quarto_runner = pcall(require, "quarto.runner")
 if not quarto_runner_ok then
 	vim.notify("Quarto runner not loaded", 3)
 end
+
 if wk_ok then
 	wk.register({
 		gd = { "<cmd>Telescope lsp_definitions<CR>", "definition" },
@@ -126,6 +128,7 @@ if wk_ok then
 				end,
 				"add harpoon",
 			},
+
 			j = {
 				function()
 					harpoon:list():select(1)
@@ -134,13 +137,13 @@ if wk_ok then
 			},
 			h = {
 				function()
-					harpoon:list():select(2)
+					harpoon:list():select(3)
 				end,
 				"harpoon #3",
 			},
 			k = {
 				function()
-					harpoon:list():select(3)
+					harpoon:list():select(2)
 				end,
 				"harpoon #2",
 			},
@@ -174,6 +177,7 @@ if wk_ok then
 			},
 			r = {
 				name = "Runner",
+				-- NOTE: 'gm+{text object}' should work
 				o = { ":KittyOpenRunner<CR>", "runner open" },
 				c = { ":KittyRunCommand<CR>", "runner command" },
 				s = { ":KittySendLines<CR>", "runner send" },

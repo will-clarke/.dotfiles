@@ -86,3 +86,10 @@ if type -q starship
   starship init fish | source
 end
 abbr dbi python3 ~/bin/dbibackend
+
+if status --is-interactive && type -q ssh-agent
+    eval (ssh-agent -c) > /dev/null
+    if test -f ~/.ssh/tumelo
+        ssh-add -q ~/.ssh/tumelo
+    end
+end
