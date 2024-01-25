@@ -31,3 +31,4 @@ bin-macos/bin/docker-credential-osxkeychain
 bin-macos/bin/kubectl
 bin-macos/bin/orb
 bin-macos/bin/orbctl
+bin-macos/bin/golangci-lint

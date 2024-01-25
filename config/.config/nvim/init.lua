@@ -129,23 +129,23 @@ if wk_ok then
 				"add harpoon",
 			},
 
-			j = {
+			u = {
 				function()
 					harpoon:list():select(1)
 				end,
 				"harpoon #1",
+			},
+			i = {
+				function()
+					harpoon:list():select(2)
+				end,
+				"harpoon #2",
 			},
 			h = {
 				function()
 					harpoon:list():select(3)
 				end,
 				"harpoon #3",
-			},
-			k = {
-				function()
-					harpoon:list():select(2)
-				end,
-				"harpoon #2",
 			},
 			C = { ":e ~/.config/nvim/init.lua<CR>", "config" },
 
@@ -397,6 +397,8 @@ local aucmd_dict = {
 		{
 			pattern = "markdown,txt,quarto",
 			callback = function()
+				vim.wo.foldmethod = "marker"
+				vim.wo.foldlevel = 0
 				vim.wo.wrap = true
 				vim.wo.linebreak = true
 				vim.wo.breakindent = true

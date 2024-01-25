@@ -93,3 +93,7 @@ if status --is-interactive && type -q ssh-agent
         ssh-add -q ~/.ssh/tumelo
     end
 end
+
+if test -d ~/.colima
+    export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+end

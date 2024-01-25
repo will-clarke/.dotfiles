@@ -166,6 +166,7 @@ return {
 
 				settings = {
 					gopls = {
+						gofumpt = true,
 						codelenses = { test = true },
 						hints = {
 							assignVariableTypes = true,
