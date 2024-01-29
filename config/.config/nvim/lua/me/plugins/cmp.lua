@@ -26,6 +26,8 @@ return {
 
 		require("luasnip/loaders/from_vscode").lazy_load()
 
+		local types = require("cmp.types")
+
 		local check_backspace = function()
 			local col = vim.fn.col(".") - 1
 			return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -64,10 +66,16 @@ return {
 		-- find more here: https://www.nerdfonts.com/cheat-sheet
 
 		cmp.setup({
-			preselect = "item",
+			-- preselect = "item",
 			completion = {
-				completeopt = "menu,menuone,noinsert",
+				-- completeopt = "menu,menuone,noinsert,noselect",
+				completeopt = "menu,menuone",
 			},
+			-- select = {
+			-- 	behavior = cmp.SelectBehavior.Insert,
+			-- 	-- Ensure the first item is always selected
+			-- 	select_first = true,
+			-- },
 			mapping = {
 				["<C-k>"] = cmp.mapping.select_prev_item(),
 				["<C-j>"] = cmp.mapping.select_next_item(),
@@ -81,7 +89,7 @@ return {
 				}),
 				-- Accept currently selected item. If none selected, `select` first item.
 				-- Set `select` to `false` to only confirm explicitly selected items.
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -128,6 +136,8 @@ return {
 					return vim_item
 				end,
 			},
+
+			preselect = types.cmp.PreselectMode.None,
 			sources = {
 				{ name = "copilot", priority = 1000 },
 				{ name = "emoji" },

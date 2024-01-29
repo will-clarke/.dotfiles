@@ -1,3 +1,3 @@
 function json
-string escape (jsonify $argv)
+    escape_special_characters (jsonify $argv)
 end
