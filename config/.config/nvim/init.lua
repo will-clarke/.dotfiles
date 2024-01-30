@@ -101,7 +101,8 @@ if wk_ok then
 			Z = { "<CMD>ZenMode<CR>", "zenMode" },
 			y = { ":CopyBufferPath<CR>", "copy buffer path" },
 			p = { ":Telescope yank_history<CR>", "paste history" },
-			e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
+			-- e = { ":Telescope diagnostics<CR>", "diagnostics / errors" },
+			e = { ":TroubleToggle<CR>", "diagnostics / errors" },
 			v = { ":lua Toggle_venn()<CR>", "Venn - Drawing!" },
 			b = { ":Telescope buffers<CR>", "buffers" },
 			o = { "<Plug>SnipRun", "SnipRun" },
@@ -179,6 +180,7 @@ if wk_ok then
 			r = {
 				name = "Runner",
 				-- NOTE: 'gm+{text object}' should work
+				q = { ":lua require('replacer').run(opts)<cr>", "replacer for quickfix" },
 				o = { ":KittyOpenRunner<CR>", "runner open" },
 				c = { ":KittyRunCommand<CR>", "runner command" },
 				s = { ":KittySendLines<CR>", "runner send" },
@@ -210,12 +212,6 @@ if wk_ok then
 					end,
 					"run",
 				},
-			},
-			b = {
-				function()
-					require("telescope.builtin").oldfiles()
-				end,
-				"recent files",
 			},
 			l = {
 				name = "LSP",

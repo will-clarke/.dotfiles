@@ -25,13 +25,15 @@ return {
 		local actions = require("telescope.actions")
 		telescope.setup({
 			defaults = {
+				wrap_results = true,
 				mappings = {
 					i = {
 						["<C-j>"] = actions.move_selection_next,
 						["<C-k>"] = actions.move_selection_previous,
 						["<C-t>"] = actions.select_tab,
-						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
 						["<esc>"] = actions.close,
+						["<C-w>"] = actions.send_selected_to_qflist,
+						["<C-q>"] = actions.send_to_qflist,
 					},
 					n = {
 						["q"] = actions.close,
