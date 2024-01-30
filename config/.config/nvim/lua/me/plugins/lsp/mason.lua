@@ -53,6 +53,8 @@ return {
 			"shellcheck",
 			"shfmt",
 			"mypy",
+			"buf", -- protobuf linter / formatter
+			"buf-language-server", -- protobuf lsp
 		},
 		automatic_installation = true,
 		max_concurrent_installers = 10,

@@ -62,6 +62,8 @@ return {
 						return utils.root_has_file_matches(".eslintrc") -- only enable if root has .eslintrc.js or .eslintrc.cjs
 					end,
 				}),
+				null_ls.builtins.diagnostics.buf, -- protobuf
+				null_ls.builtins.formatting.buf,
 			},
 			-- configure format on save
 			on_attach = function(current_client, bufnr)

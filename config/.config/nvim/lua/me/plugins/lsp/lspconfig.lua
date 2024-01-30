@@ -180,6 +180,7 @@ return {
 					},
 				},
 			},
+			bufls = {}, -- protobuf
 		}
 
 		---Setup given server with given configuration, adding on_attach and

@@ -1,6 +1,7 @@
 require("me")
 
 -- ./lua/me/plugins/
+-- ./lua/me/plugins/lsp/
 -- ./lua/me/init.lua
 -- ./lua/me/plugins/git.lua
 -- ./lua/me/plugins/molten.lua
