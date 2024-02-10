@@ -101,3 +101,7 @@ end
 if test -f ~/.asdf/asdf.fish
     source ~/.asdf/asdf.fish
 end
+
+if test -f ~/.config/fish/z.fish
+    source ~/.config/fish/z.fish
+end
