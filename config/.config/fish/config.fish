@@ -97,3 +97,7 @@ end
 if test -d ~/.colima
     export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
 end
+
+if test -f ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
+end
