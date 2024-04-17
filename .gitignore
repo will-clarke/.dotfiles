@@ -32,3 +32,5 @@ bin-macos/bin/kubectl
 bin-macos/bin/orb
 bin-macos/bin/orbctl
 bin-macos/bin/golangci-lint
+bin-macos/bin/chezmoi
+bin/chezmoi
