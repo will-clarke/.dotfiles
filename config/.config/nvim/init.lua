@@ -9,11 +9,11 @@ require("me")
 
 local wk_ok, wk = pcall(require, "which-key")
 
-vim.g.python3_host_prog = vim.fn.expand("$HOME/.virtualenvs/nvim/bin/python")
+-- vim.g.python3_host_prog = vim.fn.expand("$HOME/.virtualenvs/nvim/bin/python")
+-- package.path = package.path .. ";~/.luarocks.share/lua/5.1/?/init.lua;"
 
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
 package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
-package.path = package.path .. ";~/.luarocks.share/lua/5.1/?/init.lua;"
 
 vim.opt.foldmethod = "expr"
 vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -43,14 +43,20 @@ end
 
 vim.api.nvim_set_keymap("n", "gm", "<cmd>lua Kitty_run_lines()<CR>", { noremap = true })
 
-local harpoon_ok, harpoon = pcall(require, "harpoon")
-if not harpoon_ok then
-	vim.notify("Harpoon not loaded", 3)
+local function get_harpoon()
+	local harpoon_ok, harpoon = pcall(require, "harpoon")
+	if not harpoon_ok then
+		vim.notify("Harpoon not loaded", 3)
+	end
+	return harpoon
 end
 
-local quarto_runner_ok, quarto_runner = pcall(require, "quarto.runner")
-if not quarto_runner_ok then
-	vim.notify("Quarto runner not loaded", 3)
+local function get_quarto_runner()
+	local quarto_runner_ok, quarto_runner = pcall(require, "quarto.runner")
+	if not quarto_runner_ok then
+		vim.notify("Quarto runner not loaded", 3)
+	end
+	return quarto_runner
 end
 
 if wk_ok then
@@ -120,12 +126,14 @@ if wk_ok then
 			[","] = { ":cprev<CR>", "cprev" },
 			s = {
 				function()
+					local harpoon = get_harpoon()
 					harpoon.ui:toggle_quick_menu(harpoon:list())
 				end,
 				"harpoon",
 			},
 			a = {
 				function()
+					local harpoon = get_harpoon()
 					harpoon:list():append()
 				end,
 				"add harpoon",
@@ -133,35 +141,68 @@ if wk_ok then
 
 			u = {
 				function()
+					local harpoon = get_harpoon()
 					harpoon:list():select(1)
 				end,
 				"harpoon #1",
 			},
 			i = {
 				function()
+					local harpoon = get_harpoon()
 					harpoon:list():select(2)
 				end,
 				"harpoon #2",
 			},
 			h = {
 				function()
-					harpoon:list():select(3)
+					get_harpoon():list():select(3)
 				end,
 				"harpoon #3",
 			},
 			C = { ":e ~/.config/nvim/init.lua<CR>", "config" },
 
-			c = { quarto_runner.run_cell, "run cell" },
+			c = {
+				function()
+					local quarto_runner = get_quarto_runner()
+					quarto_runner.run_cell()
+				end,
+				"run cell",
+			},
 			["'"] = { ':lua require("harpoon.term").gotoTerminal(1)<CR>', "harpoon term" },
 			M = { "<cmd>MoltenEvaluateOperator<CR>", "Evaluate the text given by some operator." },
 			m = {
 				name = "Molten",
-				c = { quarto_runner.run_cell, "run cell" },
-				a = { quarto_runner.run_above, "run cell and above" },
-				A = { quarto_runner.run_all, "run all cells" },
-				l = { quarto_runner.run_line, "run line" },
+				c = {
+					function()
+						local quarto_runner = get_quarto_runner()
+						quarto_runner.run_cell()
+					end,
+					"run cell",
+				},
+				a = {
+					function()
+						local quarto_runner = get_quarto_runner()
+						quarto_runner.run_above()
+					end,
+					"run cell and above",
+				},
+				A = {
+					function()
+						local quarto_runner = get_quarto_runner()
+						quarto_runner.run_all()
+					end,
+					"run all cells",
+				},
+				l = {
+					function()
+						local quarto_runner = get_quarto_runner()
+						quarto_runner.run_line()
+					end,
+					"run line",
+				},
 				e = {
 					function()
+						local quarto_runner = get_quarto_runner()
 						quarto_runner.run_all(true)
 					end,
 					"run everything",
@@ -350,7 +391,13 @@ if wk_ok then
 				"grep word",
 			},
 			rr = { ":KittySendLines<cr>", "runner send" },
-			m = { quarto_runner.run_range, "run range" },
+			m = {
+				function()
+					local quarto_runner = get_quarto_runner()
+					quarto_runner.run_range()
+				end,
+				"run range",
+			},
 		},
 	}, { mode = "x" })
 end

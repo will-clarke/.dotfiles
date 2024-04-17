@@ -18,7 +18,7 @@ if status is-interactive
     abbr --add --global gdc git diff --cached
     abbr --add --global nn nnn -e
     abbr --add --global n nvim
-    abbr --add --global e $EDITOR
+    abbr --add --global e nvim
     abbr --add --global kit 'kitty --listen-on=/tmp/kitty_"$(date +%s%N)"'
     if type -q fzf_configure_bindings
         fzf_configure_bindings --variables # C-V is an annoying default shortcut to use so we should disable it
@@ -89,6 +89,9 @@ abbr dbi python3 ~/bin/dbibackend
 
 if status --is-interactive && type -q ssh-agent
     eval (ssh-agent -c) > /dev/null
+    if test -f ~/.ssh/id_srht
+        ssh-add -q ~/.ssh/id_srht
+    end
     if test -f ~/.ssh/tumelo
         ssh-add -q ~/.ssh/tumelo
     end
@@ -96,4 +99,12 @@ end
 
 if test -d ~/.colima
     export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+end
+
+if test -f ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
+end
+
+if test -f ~/.config/fish/z.fish
+    source ~/.config/fish/z.fish
 end
