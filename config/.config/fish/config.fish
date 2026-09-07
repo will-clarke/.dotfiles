@@ -1,13 +1,12 @@
 set fish_greeting #disable welcome
 
 abbr --add --global lua lua5.1
-set -gx DYLD_LIBRARY_PATH  /usr/local/Cellar/imagemagick/7.1.1-22/lib
+set -gx DYLD_LIBRARY_PATH /usr/local/Cellar/imagemagick/7.1.1-22/lib
 
 if type -q luarocks
     eval "$(luarocks path --bin)"
 
 end
-
 
 if status is-interactive
     abbr --add --global gco git checkout
@@ -25,8 +24,11 @@ if status is-interactive
     end
 
     set -x GPG_TTY (tty)
-    set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-    gpgconf --launch gpg-agent
+
+    if type -q goenv
+        set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+        gpgconf --launch gpg-agent
+    end
 end
 
 set PATH $PATH ~/.local/bin ~/.ghcup/bin
@@ -58,18 +60,16 @@ set -a fish_function_path ~/.config/fish/functions.local/
 test -f ~/.config/fisher/functions/init.fish && source ~/.config/fisher/functions/init.fish
 test -f ~/.config/fish/config-local.fish && source ~/.config/fish/config-local.fish
 
-
 type -q starship && starship init fish | source
 
-set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk/include"
+set -gx CPPFLAGS -I/opt/homebrew/opt/openjdk/include
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /opt/homebrew/anaconda3/bin/conda
-    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+    eval /opt/homebrew/anaconda3/bin/conda "shell.fish" hook $argv | source
 end
 # <<< conda initialize <<<
-
 
 if test -f ~/.luaver/luaver.fish
     # source ~/.luaver/luaver.fish
@@ -78,17 +78,16 @@ end
 # PREFIX=/usr/local/anaconda3
 
 if type -q direnv
-  direnv hook fish | source
+    direnv hook fish | source
 end
 
-
 if type -q starship
-  starship init fish | source
+    starship init fish | source
 end
 abbr dbi python3 ~/bin/dbibackend
 
 if status --is-interactive && type -q ssh-agent
-    eval (ssh-agent -c) > /dev/null
+    eval (ssh-agent -c) >/dev/null
     if test -f ~/.ssh/id_srht
         ssh-add -q ~/.ssh/id_srht
     end

@@ -1,941 +1,231 @@
 {
-  "global": {
-    "check_for_updates_on_startup": true,
-    "show_in_menu_bar": true,
-    "show_profile_name_in_menu_bar": false
-  },
-  "profiles": [
-    {
-      "complex_modifications": {
-        "parameters": {
-          "basic.simultaneous_threshold_milliseconds": 50,
-          "basic.to_delayed_action_delay_milliseconds": 500,
-          "basic.to_if_alone_timeout_milliseconds": 1000,
-          "basic.to_if_held_down_threshold_milliseconds": 500,
-          "mouse_motion_to_scroll.speed": 100
-        },
-        "rules": [
-          {
-            "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "caps_lock",
-                  "modifiers": {
-                    "optional": ["any"]
-                  }
-                },
-                "to": [
-                  {
-                    "key_code": "left_control"
-                  }
-                ],
-                "to_if_alone": [
-                  {
-                    "key_code": "escape"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-space to terminal",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "spacebar",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option", "command"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "XDG_CONFIG_HOME=$HOME/.config PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/ open -a kitty"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-' to personal diary",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "quote",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option", "command"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch nvim ~/notes/diary/$(gdate --rfc-3339=date).md; open -a kitty"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-; to work todos",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option", "command"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "export PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/; kitty @ --to unix:$(ls /tmp/mykitty* | head -n1) launch nvim ~/notes/work/$(gdate --rfc-3339=date).md; open -a kitty"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-d to draw.io",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'draw.io'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-f to firefox",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'firefox'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-s to spotify",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'spotify'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-t to slack",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a 'slack'"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-c to chrome",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "c",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Google Chrome\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-p to preview",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"preview\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-r to notes",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "r",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"nuclino\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-q to hoppscotch",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"hoppscotch\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-w to wally",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "w",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_alt",
-                      "left_control",
-                      "left_gui",
-                      "left_shift",
-                      "command",
-                      "shift",
-                      "control",
-                      "option"
-                    ],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"wally\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-v to zoom (video)",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "v",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"zoom.us\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-a to kitty omg",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "XDG_CONFIG_HOME=$HOME/.config PATH=$PATH:/opt/homebrew/bin:/usr/local/bin/:$HOME/.goenv/shims $HOME/bin/,kitteh.sh"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-p to facepalm",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤦\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-r to rolleyes",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "r",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🙄\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-j to joy",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "j",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"😂\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-t to thinking",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "t",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤔\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-u to thumb up",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "u",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"👍\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-d to thumb up",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"👎\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-f to flip",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-f to flip",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(╯°□°）╯︵ ┻━┻\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-! to middle finger",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "1",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"╭∩╮（︶_︶）╭∩╮\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-b to bang",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "f",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"( う-´)づ︻╦̵̵̿╤──   \\(˚☐˚”)/\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-a to angry - (ง'̀-'́)ง",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "a",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(ง'̀-'́)ง\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-l to love (heart)",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "l",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"❤\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-g to sunglasses",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "g",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"(•_•)\n( •_•)>⌐■-■\n(⌐■_■)\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-h to ❤️ heart",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "h",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"❤️\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-s to shrug",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "s",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_shrug.scpt"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-w to wahoo ٩◔̯◔۶",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "w",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"٩◔̯◔۶️\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-~ to sparkles",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "~",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-c to \\( ﾟ◡ﾟ)/ celebrate",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "c",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"\\( ﾟ◡ﾟ)/\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-q to ᕕ( ᐛ )ᕗ",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "q",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"ᕕ( ᐛ )ᕗ\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "meh-x to fingerscrossed🤞",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "x",
-                  "modifiers": {
-                    "mandatory": ["shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript $HOME/bin/,insert_argument.scpt \"🤞\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-e to code",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a \"Visual Studio Code.app\""
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "hyper-y to nvim everywhere",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "y",
-                  "modifiers": {
-                    "mandatory": ["command", "shift", "control", "option"],
-                    "optional": ["caps_lock"]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "open -a kitty"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          }
-        ]
-      },
-      "devices": [
+    "profiles": [
         {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "identifiers": {
-            "is_keyboard": true,
-            "is_pointing_device": true,
-            "product_id": 4871,
-            "vendor_id": 65261
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": false,
-          "simple_modifications": []
-        },
-        {
-          "disable_built_in_keyboard_if_exists": false,
-          "fn_function_keys": [],
-          "identifiers": {
-            "is_keyboard": true,
-            "is_pointing_device": true,
-            "product_id": 18806,
-            "vendor_id": 12951
-          },
-          "ignore": false,
-          "manipulate_caps_lock_led": false,
-          "simple_modifications": []
+            "complex_modifications": {
+
+
+
+            "parameters": {
+              "basic.simultaneous_threshold_milliseconds": 50,
+              "basic.to_delayed_action_delay_milliseconds": 500,
+              "basic.to_if_alone_timeout_milliseconds": 1000,
+              "basic.to_if_held_down_threshold_milliseconds": 500,
+              "mouse_motion_to_scroll.speed": 100
+            },
+                
+                "rules": [
+                    {
+                        "description": "Better Keyboard Map: Shift+Esc -> Caps; Caps -> Esc (alone),L_CTRL (chorded); CTRL+i/j/k/l -> arrows; L_SHIFT -> ( (alone),L_SHIFT (chorded) & R_SHIFT -> ) (alone), R_SHIFT (chorded)",
+                        "manipulators": [
+                            {
+                                "description": "Map Left Shift + Esc -> Caps Lock",
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": {
+                                        "mandatory": ["left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 61029,
+                                                "vendor_id": 1240
+                                            },
+                                            {
+                                                "product_id": 2400,
+                                                "vendor_id": 13364
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "description": "Map Caps -> Esc (when alone), L_Ctrl (when chorded)",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 61029,
+                                                "vendor_id": 1240
+                                            },
+                                            {
+                                                "product_id": 2400,
+                                                "vendor_id": 13364
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "description": "QMK LS( => L_SHIFT -> ( (alone), L_SHIFT (chorded)",
+                                "from": {
+                                    "key_code": "left_shift",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": "left_shift"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 61029,
+                                                "vendor_id": 1240
+                                            },
+                                            {
+                                                "product_id": 2400,
+                                                "vendor_id": 13364
+                                            }
+                                        ],
+                                        "type": "device_unless"
+                                    }
+                                ],
+                                "description": "QMK RS) => R_SHIFT -> ) (alone), R_SHIFT(chorded)",
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": {
+                                        "mandatory": [],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_shift",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "0",
+                                        "modifiers": "right_shift"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.apple\\.Terminal$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "description": "Ctrl + i to Up Arrow",
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "up_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.apple\\.Terminal$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "description": "Ctrl + j to Left Arrow",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "left_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.apple\\.Terminal$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "description": "Ctrl + k to Down Arrow",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "down_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.googlecode\\.iterm2$",
+                                            "^com\\.apple\\.Terminal$"
+                                        ],
+                                        "type": "frontmost_application_unless"
+                                    }
+                                ],
+                                "description": "Ctrl + l to Up Arrow",
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": ["left_control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "key_code": "right_arrow" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
-      ],
-      "fn_function_keys": [
-        {
-          "from": {
-            "key_code": "f1"
-          },
-          "to": [
-            {
-              "consumer_key_code": "display_brightness_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f2"
-          },
-          "to": [
-            {
-              "consumer_key_code": "display_brightness_increment"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f3"
-          },
-          "to": [
-            {
-              "key_code": "mission_control"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f4"
-          },
-          "to": [
-            {
-              "key_code": "launchpad"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f5"
-          },
-          "to": [
-            {
-              "key_code": "illumination_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f6"
-          },
-          "to": [
-            {
-              "key_code": "illumination_increment"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f7"
-          },
-          "to": [
-            {
-              "consumer_key_code": "rewind"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f8"
-          },
-          "to": [
-            {
-              "consumer_key_code": "play_or_pause"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f9"
-          },
-          "to": [
-            {
-              "consumer_key_code": "fastforward"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f10"
-          },
-          "to": [
-            {
-              "consumer_key_code": "mute"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f11"
-          },
-          "to": [
-            {
-              "consumer_key_code": "volume_decrement"
-            }
-          ]
-        },
-        {
-          "from": {
-            "key_code": "f12"
-          },
-          "to": [
-            {
-              "consumer_key_code": "volume_increment"
-            }
-          ]
-        }
-      ],
-      "name": "Default profile",
-      "parameters": {
-        "delay_milliseconds_before_open_device": 1000
-      },
-      "selected": true,
-      "simple_modifications": [
-        {
-          "from": {
-            "key_code": "right_option"
-          },
-          "to": [
-            {
-              "key_code": "left_option"
-            }
-          ]
-        }
-      ],
-      "virtual_hid_keyboard": {
-        "country_code": 0,
-        "indicate_sticky_modifier_keys_state": true,
-        "mouse_key_xy_scale": 100
-      }
-    }
-  ]
+    ]
 }
